@@ -54,7 +54,29 @@ async def _run_job(message, state):
         mode = "clip" if state.get("clips") else "full"
         quality = video.selected_quality or state["quality"]
         title = video.title or "Video"
-        await status.edit_text(f"✅ Completed\n\n🎬 {title}\n📦 Uploads: {len(results)}\n🎚 Quality: {quality}\n✂️ Mode: {mode}")
+        duration = video.duration
+        if duration:
+            duration = int(duration)
+            hours, remainder = divmod(duration, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            duration_text = (
+                f"{hours:02d}:{minutes:02d}:{seconds:02d}"
+                if hours else f"{minutes:02d}:{seconds:02d}"
+            )
+        else:
+            duration_text = "Unknown"
+
+        upload_word = "upload" if len(results) == 1 else "uploads"
+        await status.edit_text(
+            f"✅ **Upload Complete**\n\n"
+            f"🎬 **{title}**\n"
+            f"🎚 **Quality:** {quality}\n"
+            f"⏱ **Duration:** {duration_text}\n"
+            f"📦 **Files:** {len(results)} {upload_word}\n"
+            f"✂️ **Mode:** {mode.title()}\n"
+            f"📤 **Destination:** Telegram\n\n"
+            f"✨ Your video is ready!"
+        )
     except Exception as exc:
         await status.edit_text(f"❌ Pipeline failed\n\n{type(exc).__name__}: {exc}")
 
