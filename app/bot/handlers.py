@@ -24,7 +24,7 @@ def _quality_keyboard(qualities):
 
 
 def _mode_keyboard():
-    return InlineKeyboardMarkup([[InlineKeyboardButton("▶️ Full Video", callback_data="mode|full"), InlineKeyboardButton("✂️ Clip Video", callback_data="mode|clip")]])
+    return InlineKeyboardMarkup([[InlineKeyboardButton("⬇️ Download Full Video", callback_data="mode|full"), InlineKeyboardButton("✂️ Download Clip", callback_data="mode|clip")]])
 
 
 def _valid_time(value):
