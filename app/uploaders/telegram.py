@@ -93,8 +93,11 @@ class TelegramUploader:
             subprocess.run(
                 [
                     "ffmpeg", "-y", "-i", raw_path,
-                    "-vf", "scale=320:-2:force_original_aspect_ratio=decrease",
-                    "-frames:v", "1", "-q:v", "5", jpg_path,
+                    "-vf",
+                    "scale=if(gt(iw,ih),320,-2):if(gt(iw,ih),-2,320)",
+                    "-frames:v", "1",
+                    "-q:v", "10",
+                    jpg_path,
                 ],
                 check=True,
                 stdout=subprocess.DEVNULL,
