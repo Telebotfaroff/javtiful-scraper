@@ -218,4 +218,17 @@ The crawler is **manual-only**. Open **Actions â†’ Full scraper database sync â†
 
 The workflow checks out the current database, runs the crawler, then commits and pushes changed `database/` files automatically. No push/PR trigger is configured for the full crawler.
 
+#### Resume and checkpointing
+
+The GitHub Actions crawler supports resumable runs:
+
+- Enter a **Specific URL** to crawl one actress, studio/channel, category, or listing.
+- Enable **Resume** to continue from `database/crawler_state.json`.
+- A checkpoint is saved after each successfully completed listing page.
+- Failed video-detail requests are retried before being recorded as errors.
+- Progress is printed after every completed page.
+- The final workflow step uses `always()` and commits both database and checkpoint changes, so a failed run can be continued by running the workflow again.
+
+For a fresh crawl, disable **Resume** or remove the saved checkpoint.
+
 For the first test, use a small `max_pages` value. A full `all` crawl can make a large number of detail-page requests.
