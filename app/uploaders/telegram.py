@@ -135,7 +135,12 @@ class TelegramUploader:
             jpg.close()
             jpg_path = jpg.name
 
-            for quality in (10, 20, 30, 40, 50):
+            # Telegram video thumbnails must stay below 200 KB. Use the
+            # largest JPEG quality that fits instead of accepting the first
+            # low-quality encode that happens to fit.
+            best_path = None
+            best_size = 0
+            for quality in range(2, 32, 2):
                 subprocess.run(
                     [
                         "ffmpeg", "-y", "-i", raw_path,
@@ -155,9 +160,22 @@ class TelegramUploader:
                     quality,
                     size,
                 )
-                if size <= 200_000:
-                    logger.info("THUMBNAIL: ready: %s (%d bytes)", jpg_path, size)
-                    return jpg_path
+                if size <= 200_000 and size >= best_size:
+                    if best_path:
+                        Path(best_path).unlink(missing_ok=True)
+                    best_path = jpg_path
+                    best_size = size
+                    jpg = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
+                    jpg.close()
+                    jpg_path = jpg.name
+
+            if best_path:
+                logger.info(
+                    "THUMBNAIL: selected highest-quality encode: %s (%d bytes)",
+                    best_path,
+                    best_size,
+                )
+                return best_path
 
             logger.warning("THUMBNAIL: converted image is still over 200 KB")
 
@@ -185,7 +203,9 @@ class TelegramUploader:
             jpg.close()
             jpg_path = jpg.name
 
-            for quality in (10, 20, 30, 40, 50):
+            best_path = None
+            best_size = 0
+            for quality in range(2, 32, 2):
                 subprocess.run(
                     [
                         "ffmpeg", "-y", "-ss", "1", "-i", str(video_path),
@@ -205,9 +225,22 @@ class TelegramUploader:
                     quality,
                     size,
                 )
-                if size <= 200_000:
-                    logger.info("THUMBNAIL FALLBACK: ready: %s", jpg_path)
-                    return jpg_path
+                if size <= 200_000 and size >= best_size:
+                    if best_path:
+                        Path(best_path).unlink(missing_ok=True)
+                    best_path = jpg_path
+                    best_size = size
+                    jpg = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
+                    jpg.close()
+                    jpg_path = jpg.name
+
+            if best_path:
+                logger.info(
+                    "THUMBNAIL FALLBACK: selected highest-quality encode: %s (%d bytes)",
+                    best_path,
+                    best_size,
+                )
+                return best_path
 
         except Exception as exc:
             logger.exception("THUMBNAIL FALLBACK: FFmpeg failed: %s", exc)
