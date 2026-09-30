@@ -1,0 +1,87 @@
+name: Crawl Categories
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_page:
+        description: "First page to scrape"
+        required: false
+        default: "1"
+        type: string
+      end_page:
+        description: "Last page to scrape (0 = all remaining pages)"
+        required: false
+        default: "0"
+        type: string
+      delay:
+        description: "Seconds between video detail requests"
+        required: false
+        default: "1"
+        type: string
+      timeout:
+        description: "HTTP timeout in seconds"
+        required: false
+        default: "30"
+        type: string
+      retries:
+        description: "HTTP retries"
+        required: false
+        default: "2"
+        type: string
+      resume:
+        description: "Resume from the saved crawler checkpoint"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: category-crawler
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile check
+        run: python -m py_compile javtiful_scraper.py crawler.py database.py providers/*.py
+      - name: Crawl
+        env:
+          START_PAGE: ${{ inputs.start_page }}
+          END_PAGE: ${{ inputs.end_page }}
+          DELAY: ${{ inputs.delay }}
+          TIMEOUT: ${{ inputs.timeout }}
+          RETRIES: ${{ inputs.retries }}
+          RESUME: ${{ inputs.resume }}
+        run: |
+          CMD=(python crawler.py --scope categories
+            --start-page "$START_PAGE" --end-page "$END_PAGE"
+            --delay "$DELAY" --timeout "$TIMEOUT" --retries "$RETRIES")
+          if [ "$RESUME" = "true" ]; then CMD+=(--resume); fi
+          "${CMD[@]}"
+      - name: Commit database and checkpoint changes
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add database/
+          if git diff --cached --quiet; then
+            echo "No database changes to commit."
+            exit 0
+          fi
+          git commit -m "Update category scraper database"
+          git push
