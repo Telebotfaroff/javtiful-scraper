@@ -72,16 +72,16 @@ class TelegramProgress:
             percent = min(100.0, max(0.0, current / total * 100))
             bar = self._bar(percent)
             text = (
-                f"**{name}**\n\n"
-                f"{bar} **{percent:.1f}%**\n"
+                f"{name}\n\n"
+                f"{bar} {percent:.1f}%\n"
                 f"📦 {self._size(current)} / {self._size(total)}\n"
                 f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
             )
         else:
             text = (
-                f"**{name}**\n\n"
+                f"{name}\n\n"
                 f"📦 {self._size(current)}\n"
                 f"⚡ {self._speed(speed)}"
             )
 
-        await self.message.edit_text(text, parse_mode="markdown")
+        await self.message.edit_text(text)
