@@ -101,23 +101,19 @@ def register_handlers(app: Client):
 
             # Show the post preview immediately after extraction, before the
             # user chooses quality/download mode.
-            preview = await telegram_uploader.send_preview(
+            preview = await asyncio.to_thread(
+                telegram_uploader.send_preview,
                 message.chat.id,
-                thumbnail=video.thumbnail,
-                title=title,
-                referer=video.source_url or text,
+                video.thumbnail,
+                title,
+                video.source_url or text,
             )
-            if preview:
-                await status.delete()
-                await preview.edit_caption(
-                    f"🎬 {title}\n\n⏱ Duration: {duration}\n\nChoose a quality:",
-                    reply_markup=_quality_keyboard(video.qualities),
-                )
-            else:
-                await status.edit_text(
-                    f"🎬 {title}\n\n⏱ Duration: {duration}\nChoose a quality:",
-                    reply_markup=_quality_keyboard(video.qualities),
-                )
+            await status.edit_text(
+                f"🎬 {title}\n\n⏱ Duration: {duration}\n\n"
+                + ("🖼 Preview uploaded.\n\n" if preview else "")
+                + "Choose a quality:",
+                reply_markup=_quality_keyboard(video.qualities),
+            )
         except Exception as exc:
             await status.edit_text(f"❌ Extraction failed\n\n{type(exc).__name__}: {exc}")
 
