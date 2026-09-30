@@ -13,7 +13,8 @@ from app.extractor.javtiful import JavtifulExtractor
 
 extractor = JavtifulExtractor()
 uploads = UploadManager()
-pipeline = Pipeline(extractor=extractor, uploaders={"telegram": uploads.get("telegram"), "gofile": uploads.get("gofile")})
+telegram_uploader = uploads.get("telegram")
+pipeline = Pipeline(extractor=extractor, uploaders={"telegram": telegram_uploader, "gofile": uploads.get("gofile")})
 pending = {}
 
 
@@ -97,7 +98,26 @@ def register_handlers(app: Client):
             pending[message.from_user.id] = {"url": text, "qualities": list(video.qualities)}
             title = video.title or "Video"
             duration = video.duration or "unknown"
-            await status.edit_text(f"🎬 {title}\n\n⏱ Duration: {duration}\nChoose a quality:", reply_markup=_quality_keyboard(video.qualities))
+
+            # Show the post preview immediately after extraction, before the
+            # user chooses quality/download mode.
+            preview = await telegram_uploader.send_preview(
+                message.chat.id,
+                thumbnail=video.thumbnail,
+                title=title,
+                referer=video.source_url or text,
+            )
+            if preview:
+                await status.delete()
+                await preview.edit_caption(
+                    f"🎬 {title}\n\n⏱ Duration: {duration}\n\nChoose a quality:",
+                    reply_markup=_quality_keyboard(video.qualities),
+                )
+            else:
+                await status.edit_text(
+                    f"🎬 {title}\n\n⏱ Duration: {duration}\nChoose a quality:",
+                    reply_markup=_quality_keyboard(video.qualities),
+                )
         except Exception as exc:
             await status.edit_text(f"❌ Extraction failed\n\n{type(exc).__name__}: {exc}")
 
