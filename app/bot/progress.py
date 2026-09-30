@@ -8,6 +8,8 @@ class TelegramProgress:
         self.last = 0.0
         self.last_current = 0.0
         self.last_time = time.monotonic()
+        self.speed_ema = 0.0
+        self.stage = None
 
     @staticmethod
     def _bar(percent, width=14):
@@ -60,13 +62,23 @@ class TelegramProgress:
 
         elapsed = now - self.last_time
         delta = current - self.last_current
-        speed = delta / elapsed if elapsed > 0 and delta >= 0 else 0
+        instant_speed = delta / elapsed if elapsed > 0 and delta >= 0 else 0
+        if instant_speed > 0:
+            self.speed_ema = (self.speed_ema * 0.75) + (instant_speed * 0.25)
+        speed = self.speed_ema
 
         self.last = now
         self.last_time = now
         self.last_current = current
 
         name = str(stage).replace("_", " ").title()
+
+        # Reset the speed window when moving between download/upload stages.
+        if stage != self.stage:
+            self.stage = stage
+            self.last_current = current
+            self.last_time = now
+            self.speed_ema = 0.0
 
         if total > 0:
             percent = min(100.0, max(0.0, current / total * 100))
