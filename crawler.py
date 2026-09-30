@@ -90,13 +90,29 @@ class Crawler:
             self.pause()
 
     def crawl_directory(self, kind, start_page=1, end_page=0):
+        # /categories is a single directory page. The page range applies to
+        # each /category/<slug> video listing discovered there.
+        if kind == "category":
+            directory = urljoin(BASE_URL, "/categories")
+            result = self.provider.scrape_categories(directory, 1)
+            self.stats["pages"] += 1
+            entries = result.get("categories", [])
+
+            for entry in entries:
+                videos_url = entry.get("url") or urljoin(
+                    BASE_URL + "/", f"category/{entry['slug']}"
+                )
+                self.crawl_listing(
+                    videos_url,
+                    f"category:{entry['slug']}",
+                    start_page=start_page,
+                    end_page=end_page,
+                )
+            return
+
         directory = urljoin(
             BASE_URL,
-            {
-                "actress": "/actresses",
-                "studio": "/channels",
-                "category": "/categories",
-            }[kind],
+            "/actresses" if kind == "actress" else "/channels",
         )
         page = max(1, start_page)
         seen = set()
@@ -106,22 +122,18 @@ class Crawler:
                 break
 
             print(f"[{kind}-directory] page {page}", flush=True)
-            if kind == "actress":
-                result = self.provider.scrape_actresses(directory, page)
-                entry_key = "actresses"
-            elif kind == "studio":
-                result = self.provider.scrape_studios(directory, page)
-                entry_key = "studios"
-            else:
-                result = self.provider.scrape_categories(directory, page)
-                entry_key = "categories"
-
+            result = (
+                self.provider.scrape_actresses(directory, page)
+                if kind == "actress"
+                else self.provider.scrape_studios(directory, page)
+            )
             self.stats["pages"] += 1
-            entries = result.get(entry_key, [])
 
-            # A directory entry may appear on multiple pages. Keep the
-            # directory range moving even when a page contains only entries
-            # already discovered.
+            entries = result.get(
+                "actresses" if kind == "actress" else "studios",
+                [],
+            )
+
             new_entries = [
                 x for x in entries
                 if x.get("slug") and x["slug"] not in seen
@@ -139,20 +151,12 @@ class Crawler:
                             BASE_URL + "/",
                             f"actress/{entry['slug']}",
                         )
-                    elif kind == "studio":
+                    else:
                         videos_url = urljoin(
                             BASE_URL + "/",
                             f"channel/{entry['slug']}",
                         )
-                    else:
-                        videos_url = urljoin(
-                            BASE_URL + "/",
-                            f"category/{entry['slug']}",
-                        )
 
-                # IMPORTANT: the directory range controls which actresses/
-                # studios are discovered. Once discovered, crawl ALL of that
-                # entity's video pages unless the site's pagination ends.
                 self.crawl_listing(
                     videos_url,
                     f"{kind}:{entry['slug']}",
