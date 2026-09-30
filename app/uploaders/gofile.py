@@ -1,6 +1,10 @@
-import requests
+import mimetypes
 from pathlib import Path
+
+import requests
+
 from .base import BaseUploader
+
 
 class GoFileUploader(BaseUploader):
     name = "gofile"
@@ -10,35 +14,47 @@ class GoFileUploader(BaseUploader):
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": "JAVDL/1.0"})
 
-    def _server(self):
-        r = self.session.get("https://api.gofile.io/servers", timeout=self.timeout)
-        r.raise_for_status()
-        data = r.json()
-        if data.get("status") != "ok":
-            raise RuntimeError(f"GoFile server lookup failed: {data}")
-        servers = data.get("data", {}).get("servers", [])
-        if not servers:
-            raise RuntimeError("GoFile returned no upload servers")
-        return servers[0].get("name") or servers[0].get("server")
-
     def upload(self, file_path, **kwargs):
         path = Path(file_path)
         if not path.is_file():
             raise FileNotFoundError(path)
-        server = self._server()
-        endpoint = f"https://{server}.gofile.io/contents/upload"
+
+        # GoFile's current guest-upload API uses the global upload endpoint.
+        # No API token is required; omitting folderId creates a guest folder.
+        endpoint = "https://upload.gofile.io/uploadfile"
+        content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+
         with path.open("rb") as fh:
-            response = self.session.post(endpoint, files={"file": (path.name, fh, "video/mp4")}, timeout=self.timeout)
+            response = self.session.post(
+                endpoint,
+                files={"file": (path.name, fh, content_type)},
+                timeout=self.timeout,
+            )
+
         response.raise_for_status()
-        data = response.json()
+
+        try:
+            data = response.json()
+        except ValueError as exc:
+            raise RuntimeError(
+                f"GoFile returned non-JSON response (HTTP {response.status_code}): "
+                f"{response.text[:500]}"
+            ) from exc
+
         if data.get("status") != "ok":
             raise RuntimeError(f"GoFile upload failed: {data}")
+
         result = data.get("data", {})
         return {
             "provider": self.name,
-            "file_id": result.get("fileId"),
+            "file_id": result.get("id") or result.get("fileId"),
             "parent_folder": result.get("parentFolder"),
-            "download_url": result.get("downloadPage") or result.get("directLink") or result.get("downloadUrl"),
+            "guest_token": result.get("guestToken"),
+            "download_url": (
+                result.get("downloadPage")
+                or result.get("downloadUrl")
+                or result.get("directLink")
+            ),
             "raw": result,
         }
 
