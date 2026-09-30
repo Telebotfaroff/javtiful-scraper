@@ -397,6 +397,42 @@ class JavtifulScraper:
             "video_sources": self.video_sources(final_url, soup),
         }
 
+    def genres(self, soup):
+        genres = []
+        seen = set()
+        for link in soup.select('a[href*="/genre/"]'):
+            name = self.clean(link.get_text())
+            slug = self.slug_from_href(link.get("href", ""), "/genre/")
+            value = name or slug
+            if value and value.lower() not in seen:
+                seen.add(value.lower())
+                genres.append(value)
+        if genres:
+            return genres
+
+        for item in soup.select(".genre, .genres a, [class*='genre'] a"):
+            value = self.clean(item.get_text())
+            if value and value.lower() not in seen:
+                seen.add(value.lower())
+                genres.append(value)
+        return genres
+
+    def video_sources(self, base, soup):
+        sources = []
+        seen = set()
+        for tag in soup.select("video source, video[src], source[src], a[href]"):
+            value = tag.get("src") or tag.get("href")
+            if not value:
+                continue
+            absolute = self.absolute(base, value)
+            if not absolute or absolute in seen:
+                continue
+            lower = absolute.lower()
+            if any(ext in lower for ext in (".mp4", ".m3u8", ".webm", ".mkv")) or tag.name in ("source", "video"):
+                seen.add(absolute)
+                sources.append(absolute)
+        return sources
+
     def scrape_listing(self, url, page=1, enrich=False, max_enrich=None):
         requested_url = self.page_url(url, page)
         final_url, html = self.fetch(requested_url)
