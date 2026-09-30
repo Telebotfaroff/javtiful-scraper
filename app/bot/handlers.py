@@ -24,6 +24,15 @@ def _quality_keyboard(qualities):
     return InlineKeyboardMarkup([buttons[i:i+2] for i in range(0, len(buttons), 2)])
 
 
+def _destination_keyboard():
+    return InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("📱 Telegram", callback_data="dest|telegram"),
+            InlineKeyboardButton("☁️ GoFile", callback_data="dest|gofile"),
+        ]
+    ])
+
+
 def _mode_keyboard():
     return InlineKeyboardMarkup([[InlineKeyboardButton("⬇️ Download Full Video", callback_data="mode|full"), InlineKeyboardButton("✂️ Download Clip", callback_data="mode|clip")]])
 
@@ -49,7 +58,16 @@ def _progress_callback(progress_obj):
 async def _run_job(message, state):
     status = await message.reply_text("⏳ Starting download…")
     progress = TelegramProgress(status)
-    job = Job(id=f"TG-{uuid.uuid4().hex[:10]}", url=state["url"], quality=state["quality"], uploader="telegram", target=message.chat.id, clips=state.get("clips"))
+    destination = state.get("destination", "telegram")
+    target = message.chat.id if destination == "telegram" else None
+    job = Job(
+        id=f"TG-{uuid.uuid4().hex[:10]}",
+        url=state["url"],
+        quality=state["quality"],
+        uploader=destination,
+        target=target,
+        clips=state.get("clips"),
+    )
     try:
         video, results = await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
         mode = "clip" if state.get("clips") else "full"
@@ -68,16 +86,29 @@ async def _run_job(message, state):
             duration_text = "Unknown"
 
         upload_word = "upload" if len(results) == 1 else "uploads"
-        await status.edit_text(
-            f"✅ **Upload Complete**\n\n"
-            f"🎬 **{title}**\n"
-            f"🎚 **Quality:** {quality}\n"
-            f"⏱ **Duration:** {duration_text}\n"
-            f"📦 **Files:** {len(results)} {upload_word}\n"
-            f"✂️ **Mode:** {mode.title()}\n"
-            f"📤 **Destination:** Telegram\n\n"
-            f"✨ Your video is ready!"
-        )
+        destination_name = "Telegram" if destination == "telegram" else "GoFile"
+        lines = [
+            "✅ **Upload Complete**",
+            "",
+            f"🎬 **{title}**",
+            f"🎚 **Quality:** {quality}",
+            f"⏱ **Duration:** {duration_text}",
+            f"📦 **Files:** {len(results)} {upload_word}",
+            f"✂️ **Mode:** {mode.title()}",
+            f"📤 **Destination:** {destination_name}",
+        ]
+
+        if destination == "gofile":
+            links = [
+                item.get("download_url")
+                for item in results
+                if isinstance(item, dict) and item.get("download_url")
+            ]
+            if links:
+                lines.extend(["", "🔗 **Download:**", *links])
+
+        lines.extend(["", "✨ Your video is ready!"])
+        await status.edit_text("\n".join(lines))
     except Exception as exc:
         await status.edit_text(f"❌ Pipeline failed\n\n{type(exc).__name__}: {exc}")
 
@@ -126,7 +157,31 @@ def register_handlers(app: Client):
         quality = query.data.split("|",1)[1]
         state["quality"] = quality
         await query.answer(f"Quality: {quality}")
-        await query.message.edit_text(f"🎚 Quality: {quality}\n\nChoose upload mode:", reply_markup=_mode_keyboard())
+        await query.message.edit_text(
+            f"🎚 Quality: {quality}\n\nChoose upload destination:",
+            reply_markup=_destination_keyboard(),
+        )
+
+
+    @app.on_callback_query(filters.regex(r"^dest\|"))
+    async def destination_handler(client, query):
+        state = pending.get(query.from_user.id)
+        if not state or "quality" not in state:
+            return await query.answer("Choose a quality first.", show_alert=True)
+
+        destination = query.data.split("|", 1)[1]
+        if destination not in {"telegram", "gofile"}:
+            return await query.answer("Invalid destination.", show_alert=True)
+
+        state["destination"] = destination
+        label = "Telegram" if destination == "telegram" else "GoFile"
+        await query.answer(f"Destination: {label}")
+        await query.message.edit_text(
+            f"🎚 Quality: {state['quality']}\n"
+            f"📤 Destination: {label}\n\n"
+            "Choose download mode:",
+            reply_markup=_mode_keyboard(),
+        )
 
 
     @app.on_callback_query(filters.regex(r"^mode\|"))
@@ -134,6 +189,8 @@ def register_handlers(app: Client):
         state = pending.get(query.from_user.id)
         if not state or "quality" not in state:
             return await query.answer("Choose a quality first.", show_alert=True)
+        if "destination" not in state:
+            return await query.answer("Choose an upload destination first.", show_alert=True)
         mode = query.data.split("|",1)[1]
         if mode == "full":
             state.pop("clips", None)
