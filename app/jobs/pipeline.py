@@ -50,7 +50,7 @@ class Pipeline:
                     "duration": video.duration,
                     "progress": (
                         lambda current, total, stage: (
-                            progress(stage, current, total) if progress else None
+                            progress(current, total, stage) if progress else None
                         )
                     ),
                 }
