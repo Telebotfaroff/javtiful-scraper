@@ -8,10 +8,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f78fbb9614033814692df049855e4a8f.jpg",
       "total_videos": 693,
       "total_pages": 29,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 29,
+      "videos_crawled": 664,
+      "last_crawled_at": 1790792166
     },
     "iioka-kanako": {
       "name": "Iioka Kanako",
