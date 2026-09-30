@@ -1,10 +1,6 @@
 name: Test scraper
 
 on:
-  push:
-    branches: ["main"]
-  pull_request:
-    branches: ["main"]
   workflow_dispatch:
     inputs:
       javtiful_url:
