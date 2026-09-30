@@ -24,6 +24,13 @@ HEADERS = {
 class JavtifulProvider:
     """Javtiful provider implementation for the provider-based scraper."""
 
+    name = "javtiful"
+    HEADERS = HEADERS
+
+    def supports(self, url):
+        parsed = urlparse(url)
+        return parsed.netloc.lower().endswith("javtiful.com")
+
     def __init__(self, timeout=30, retries=2):
         self.timeout = timeout
         self.retries = retries
