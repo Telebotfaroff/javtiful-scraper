@@ -2,6 +2,7 @@
 """Full Javtiful metadata crawler and database synchronizer."""
 
 import argparse
+import json
 import re
 import time
 from urllib.parse import urljoin, urlparse
@@ -14,12 +15,17 @@ BASE_URL = "https://javtiful.com"
 
 
 class Crawler:
-    def __init__(self, provider, db, delay=0.0, start_page=1, end_page=0):
+    def __init__(self, provider, db, delay=0.0, start_page=1, end_page=0, state_path=None, resume=False, retries=2):
         self.provider = provider
         self.db = db
         self.delay = max(0.0, delay)
         self.start_page = max(1, start_page)
         self.end_page = max(0, end_page)
+        self.state_path = state_path
+        self.resume = resume
+        self.retries = max(0, retries)
+        self.state = self._load_state() if self.resume else {}
+        self.failed_items = []
         self.stats = {
             "pages": 0,
             "videos_seen": 0,
@@ -29,11 +35,48 @@ class Crawler:
             "errors": 0,
         }
 
+    def _load_state(self):
+        if not self.state_path:
+            return {}
+        try:
+            with open(self.state_path, "r", encoding="utf-8") as fh:
+                value = json.load(fh)
+            return value if isinstance(value, dict) else {}
+        except (FileNotFoundError, json.JSONDecodeError, OSError):
+            return {}
+
+    def _save_state(self):
+        if not self.state_path:
+            return
+        import os
+        os.makedirs(os.path.dirname(self.state_path) or ".", exist_ok=True)
+        temp = self.state_path + ".tmp"
+        with open(temp, "w", encoding="utf-8") as fh:
+            json.dump(self.state, fh, ensure_ascii=False, indent=2)
+            fh.write("\n")
+        os.replace(temp, self.state_path)
+
+    def _state_key(self, label, url):
+        return f"{label}|{url.rstrip('/').lower()}"
+
+    def _checkpoint(self, label, url, page):
+        if not self.state_path:
+            return
+        key = self._state_key(label, url)
+        self.state[key] = {"label": label, "url": url, "last_completed_page": page, "updated_at": int(time.time())}
+        self._save_state()
+
+    def _clear_checkpoint(self, label, url):
+        if not self.state_path:
+            return
+        self.state.pop(self._state_key(label, url), None)
+        self._save_state()
+
     def pause(self):
         if self.delay:
             time.sleep(self.delay)
 
-    def save_video(self, raw, context):
+    def save_video(self, raw, context, retry_count=0):
         self.stats["videos_seen"] += 1
         try:
             # Listing cards do not contain all post metadata, so enrich before persistence.
@@ -53,7 +96,12 @@ class Crawler:
                 flush=True,
             )
         except Exception as exc:
+            if retry_count < self.retries:
+                print(f"[{context}] retry {retry_count + 1}/{self.retries}: {raw.get('post_url')}", flush=True)
+                self.pause()
+                return self.save_video(raw, context, retry_count + 1)
             self.stats["errors"] += 1
+            self.failed_items.append({"post_url": raw.get("post_url"), "context": context, "error": str(exc)})
             print(
                 f"[{context}] ERROR: {raw.get('post_url')}: {exc}",
                 flush=True,
@@ -64,6 +112,9 @@ class Crawler:
         """Crawl a listing with explicit bounds and duplicate-page protection."""
         page = max(1, start_page)
         seen_posts = set()
+        if self.resume:
+            checkpoint = self.state.get(self._state_key(label, url), {})
+            page = max(page, int(checkpoint.get("last_completed_page", 0)) + 1)
 
         while True:
             if end_page and page > end_page:
@@ -92,7 +143,16 @@ class Crawler:
                 seen_posts.add(item["post_url"])
                 self.save_video(item, f"{label} p{page}")
 
+            self._checkpoint(label, url, page)
+            print(
+                f"[{label}] page {page} complete | items={len(items)} new={len(new_items)} "
+                f"added={self.stats['added']} duplicates={self.stats['duplicates']} "
+                f"errors={self.stats['errors']}",
+                flush=True,
+            )
+
             if not items or not new_items:
+                self._clear_checkpoint(label, url)
                 break
 
             pagination = result.get("pagination", {})
@@ -269,6 +329,8 @@ def main():
     parser.add_argument("--timeout", type=int, default=30)
     parser.add_argument("--retries", type=int, default=2)
     parser.add_argument("--database", default="database")
+    parser.add_argument("--state-file", default="database/crawler_state.json")
+    parser.add_argument("--resume", action="store_true", help="Resume from the saved checkpoint")
     args = parser.parse_args()
 
     # Default manual mode: ask for one URL and its page range.
@@ -298,7 +360,7 @@ def main():
         provider.timeout = args.timeout
         provider.retries = args.retries
 
-        crawler = Crawler(provider, JsonDatabase(args.database), delay=args.delay)
+        crawler = Crawler(provider, JsonDatabase(args.database), delay=args.delay, state_path=args.state_file, resume=args.resume, retries=args.retries)
         crawler.crawl_url(url, max(1, start_page), max(0, end_page))
         crawler.db.finalize(crawler.stats)
         print("\nCrawl complete:", crawler.stats, flush=True)
@@ -325,6 +387,9 @@ def main():
         delay=args.delay,
         start_page=start_page,
         end_page=end_page,
+        state_path=args.state_file,
+        resume=args.resume,
+        retries=args.retries,
     )
     crawler.run(args.scope)
 
