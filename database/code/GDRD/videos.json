@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "GDRD-007": {
       "title": "GDRD-007 Red Dragon Hibiki Otsuki Yui Hatano",
@@ -10,6 +10,18 @@
       "actresses": [
         "Hatano Yui",
         "Ootsuki Hibiki"
+      ],
+      "studio": "GOLD / Mousozoku",
+      "genres": []
+    },
+    "GDRD-001": {
+      "title": "GDRD-001 Red Dragon Kana Morisawa",
+      "url": "https://javtiful.com/video/34472/gdrd-001",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/06/10/31e9d38365493100ad5b21d94ee37f93.jpg",
+      "duration": "02:13:15",
+      "date": "2023-06-10",
+      "actresses": [
+        "Iioka Kanako"
       ],
       "studio": "GOLD / Mousozoku",
       "genres": []

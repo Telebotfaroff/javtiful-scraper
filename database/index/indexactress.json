@@ -20,10 +20,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e23b5c9ea6e2c30970c1695cd38112d4.jpg",
       "total_videos": 623,
       "total_pages": 26,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 26,
+      "videos_crawled": 591,
+      "last_crawled_at": 1790794216
     },
     "misono-waka": {
       "name": "Misono Waka",
