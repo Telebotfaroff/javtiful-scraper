@@ -162,19 +162,41 @@ The scraper extracts metadata present in the fetched HTML. It does not persist t
 6. Write the compact grouped JSON database
 7. Rebuild database indexes and run statistics
 
-Run locally:
+Run locally in interactive single-URL mode:
+
+    python crawler.py
+
+The crawler will ask:
+
+    Enter actress/studio/category/listing URL:
+    Start page [1]:
+    End page [auto]:
+
+Examples:
+
+    https://javtiful.com/actress/ACTRESS-SLUG
+    https://javtiful.com/channel/CHANNEL-SLUG
+    https://javtiful.com/category/CATEGORY-SLUG
+
+If the real last page is 31, you can enter:
+
+    Start page [1]: 1
+    End page [auto]: 31
+
+Or let the crawler detect the end automatically by stopping when a page
+contains only entries/posts already seen. This protects against sites that
+return the last valid page again for out-of-range page numbers.
+
+Non-interactive mode is also supported:
+
+    python crawler.py --url "https://javtiful.com/actress/ACTRESS-SLUG" --start-page 1 --end-page 31 --delay 1
+
+Legacy full-scope mode remains available:
 
     python crawler.py --scope all --delay 1
-
-Other scopes:
-
     python crawler.py --scope main
     python crawler.py --scope actresses
     python crawler.py --scope studios
-
-`--max-pages 0` means unlimited pagination. A non-zero value is useful for a controlled test:
-
-    python crawler.py --scope all --max-pages 2 --delay 0
 
 ### Database layout
 
