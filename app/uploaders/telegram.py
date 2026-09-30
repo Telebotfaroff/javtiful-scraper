@@ -17,12 +17,39 @@ TELEGRAM_LIMIT = 2_000_000_000
 class TelegramUploader:
     name = "telegram"
 
-    def __init__(self, api_id=None, api_hash=None, session="javdl", bot_token=None):
+    def __init__(
+        self,
+        api_id=None,
+        api_hash=None,
+        session=None,
+        bot_token=None,
+        max_concurrent_transmissions=None,
+    ):
+        # Dedicated upload session: bot updates and large file transfers
+        # do not share the same Pyrogram client/session.
+        upload_session = (
+            session
+            or os.getenv("TELEGRAM_UPLOAD_SESSION", "javdl_uploads")
+        )
+        concurrency = int(
+            max_concurrent_transmissions
+            or os.getenv("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS", "4")
+        )
+        if concurrency < 1:
+            raise ValueError("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS must be >= 1")
+
+        self.max_concurrent_transmissions = concurrency
         self.app = Client(
-            session,
+            upload_session,
             api_id=int(api_id or os.environ["TELEGRAM_API_ID"]),
             api_hash=api_hash or os.environ["TELEGRAM_API_HASH"],
             bot_token=bot_token or os.getenv("TELEGRAM_BOT_TOKEN"),
+            max_concurrent_transmissions=concurrency,
+        )
+        logger.info(
+            "TELEGRAM UPLOAD: dedicated session=%s max_concurrent_transmissions=%d",
+            upload_session,
+            concurrency,
         )
 
     @staticmethod
@@ -222,31 +249,35 @@ class TelegramUploader:
         )
 
         try:
-            with self.app:
-                for index, path in enumerate(paths, 1):
-                    part_caption = (
-                        caption
-                        if len(paths) == 1
-                        else f"{caption}\n\n📦 Part {index}/{len(paths)}"
-                    )
+            # Keep the dedicated upload client alive across jobs.
+            if not self.app.is_connected:
+                self.app.start()
+                logger.info("TELEGRAM UPLOAD: dedicated upload client started")
 
-                    results.append(
-                        self.app.send_video(
-                            chat_id,
-                            path,
-                            caption=part_caption,
-                            thumb=prepared_thumbnail,
-                            duration=int(duration or 0),
-                            supports_streaming=True,
-                            progress=self._progress(progress),
-                        )
-                    )
+            for index, path in enumerate(paths, 1):
+                part_caption = (
+                    caption
+                    if len(paths) == 1
+                    else f"{caption}\n\n📦 Part {index}/{len(paths)}"
+                )
 
-                    logger.info(
-                        "TELEGRAM UPLOAD: part %d/%d sent successfully",
-                        index,
-                        len(paths),
+                results.append(
+                    self.app.send_video(
+                        chat_id,
+                        path,
+                        caption=part_caption,
+                        thumb=prepared_thumbnail,
+                        duration=int(duration or 0),
+                        supports_streaming=True,
+                        progress=self._progress(progress),
                     )
+                )
+
+                logger.info(
+                    "TELEGRAM UPLOAD: part %d/%d sent successfully",
+                    index,
+                    len(paths),
+                )
         except Exception:
             logger.exception("TELEGRAM UPLOAD: send_video failed")
             raise
