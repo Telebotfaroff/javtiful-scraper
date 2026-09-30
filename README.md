@@ -1,6 +1,27 @@
-# Javtiful Scraper
+# Provider-based Metadata Scraper
 
-A Python CLI scraper for extracting structured Javtiful post and catalog metadata.
+A Python CLI scraper with a pluggable provider architecture. Javtiful is the first provider; additional providers can be added without changing the database layer.
+
+## Provider architecture
+
+```
+CLI / API
+   |
+ProviderManager
+   |
++-- JavtifulProvider
++-- FutureProvider
++-- FutureProvider
+```
+
+Every provider converts its website into the same normalized metadata format. The core application does not depend on Javtiful-specific selectors.
+
+Provider files:
+
+- `providers/base.py` — provider interface
+- `providers/javtiful.py` — Javtiful implementation
+- `providers/__init__.py` — provider exports
+- `javtiful_scraper.py` — CLI + provider manager facade
 
 ## Architecture
 
@@ -41,7 +62,8 @@ Javtiful page
 - Optional enrichment by opening individual video pages
 - JSON-LD and OpenGraph/meta extraction on individual posts
 - Release/upload date extraction
-- Description, genres and referenced video/iframe sources on post pages
+- Description and genre extraction on post pages
+- Persistent metadata only: no temporary/IP-locked video-source URLs are stored or returned
 - Retry and timeout handling
 - JSON output suitable for APIs or database ingestion
 
@@ -62,6 +84,12 @@ python javtiful_scraper.py "https://javtiful.com/actress/ACTRESS-SLUG"
 python javtiful_scraper.py "https://javtiful.com/channels"
 python javtiful_scraper.py "https://javtiful.com/channel/CHANNEL-SLUG"
 python javtiful_scraper.py "https://javtiful.com/video/12345/example-code"
+
+Force a provider explicitly:
+
+```bash
+python javtiful_scraper.py "https://javtiful.com/main" --provider javtiful
+```
 ```
 
 Save JSON:
@@ -119,4 +147,4 @@ The workflow accepts optional enrichment controls and validates the result accor
 
 ## Notes
 
-The scraper extracts information present in the fetched HTML. It does not require a browser for normal card/post metadata. If a player or field is populated only after JavaScript execution, a Playwright/network-capture layer can be added separately.
+The scraper extracts metadata present in the fetched HTML. It does not persist temporary/IP-locked player URLs. If a future provider needs JavaScript for metadata, that provider can implement its own extraction layer.
