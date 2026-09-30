@@ -1,16 +1,81 @@
 from app.extractor.javtiful import JavtifulExtractor
 from app.downloader.downloader import Downloader
+from app.clipping.clipper import clip_video
 from app.storage.cleanup import cleanup
+
 
 class Pipeline:
     def __init__(self, extractor=None, downloader=None, uploaders=None):
-        self.extractor=extractor or JavtifulExtractor(); self.downloader=downloader or Downloader(); self.uploaders=uploaders or {}
-    def run(self,job,progress=None):
-        video=self.extractor.extract(job.url)
-        self.downloader.download(video,job.quality,lambda c,t,s: progress(s,c,t) if progress else None)
+        self.extractor = extractor or JavtifulExtractor()
+        self.downloader = downloader or Downloader()
+        self.uploaders = uploaders or {}
+
+    def run(self, job, progress=None):
+        video = self.extractor.extract(job.url)
+
+        if progress:
+            progress("extract", 0, 0)
+
+        self.downloader.download(
+            video,
+            job.quality,
+            lambda current, total, stage: (
+                progress(stage, current, total) if progress else None
+            ),
+        )
+
+        source_path = video.local_path
+        upload_paths = [source_path]
+        temporary_paths = []
+
         try:
-            uploader=self.uploaders[job.uploader]
-            result=uploader.upload(video.local_path,job.target,caption=video.title,thumbnail=video.thumbnail,duration=video.duration,progress=lambda c,t,s: progress(s,c,t) if progress else None)
-            return video,result
+            # Clipping is strictly opt-in. None/empty means upload the full video.
+            if job.clips:
+                if progress:
+                    progress("clip", 0, len(job.clips))
+
+                upload_paths = clip_video(source_path, job.clips)
+                temporary_paths.extend(upload_paths)
+
+                if progress:
+                    progress("clip", len(upload_paths), len(job.clips))
+
+            uploader = self.uploaders[job.uploader]
+            results = []
+
+            for index, path in enumerate(upload_paths, 1):
+                kwargs = {
+                    "caption": video.title,
+                    "thumbnail": video.thumbnail,
+                    "duration": video.duration,
+                    "progress": (
+                        lambda current, total, stage: (
+                            progress(stage, current, total) if progress else None
+                        )
+                    ),
+                }
+
+                # TelegramUploader expects chat_id; cloud uploaders simply ignore
+                # unrelated kwargs.
+                if job.target is not None:
+                    kwargs["chat_id"] = job.target
+
+                result = uploader.upload(path, **kwargs)
+
+                if hasattr(uploader, "verify") and not uploader.verify(result):
+                    raise RuntimeError(
+                        f"{job.uploader} upload verification failed for {path}"
+                    )
+
+                results.append(result)
+
+                if progress:
+                    progress("upload", index, len(upload_paths))
+
+            return video, results
+
         finally:
-            if video.local_path: cleanup([video.local_path])
+            # Never delete the source/clip files before a successful upload.
+            # If upload raises, the files remain available for retry/debugging.
+            if 'results' in locals() and results:
+                cleanup([source_path, *temporary_paths])
