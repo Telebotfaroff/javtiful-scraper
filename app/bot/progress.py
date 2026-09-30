@@ -60,6 +60,15 @@ class TelegramProgress:
         ):
             return
 
+        name = str(stage).replace("_", " ").title()
+
+        # Reset the speed window when moving between download/upload stages.
+        if stage != self.stage:
+            self.stage = stage
+            self.last_current = current
+            self.last_time = now
+            self.speed_ema = 0.0
+
         elapsed = now - self.last_time
         delta = current - self.last_current
         instant_speed = delta / elapsed if elapsed > 0 and delta >= 0 else 0
@@ -70,15 +79,6 @@ class TelegramProgress:
         self.last = now
         self.last_time = now
         self.last_current = current
-
-        name = str(stage).replace("_", " ").title()
-
-        # Reset the speed window when moving between download/upload stages.
-        if stage != self.stage:
-            self.stage = stage
-            self.last_current = current
-            self.last_time = now
-            self.speed_ema = 0.0
 
         if total > 0:
             percent = min(100.0, max(0.0, current / total * 100))
