@@ -500,6 +500,44 @@ class JavtifulProvider(BaseProvider):
             "pagination": self.parse_pagination(soup, page),
         }
 
+    def scrape_categories(self, url, page=1):
+        requested_url = self.page_url(url, page)
+        final_url, html = self.fetch(requested_url)
+        soup = self.soup(html)
+        categories = []
+        seen = set()
+
+        # Category directory links are expected to point to /category/<slug>.
+        for link in soup.select('a[href*="/category/"]'):
+            href = link.get("href", "")
+            slug = self.slug_from_href(href, "/category/")
+            if not slug or slug in seen or slug == "categories":
+                continue
+            seen.add(slug)
+
+            text = self.clean(link.get_text()) or slug
+            count_match = re.search(r"(\d+)\s+Videos?", text, re.I)
+            count = int(count_match.group(1)) if count_match else None
+            name = self.clean(
+                re.sub(r"\d+\s+Videos?", "", text, flags=re.I)
+            ) or slug
+
+            categories.append({
+                "name": name,
+                "slug": slug,
+                "video_count": count,
+                "url": self.absolute(final_url, href),
+            })
+
+        return {
+            "type": "category_directory",
+            "url": final_url,
+            "page": page,
+            "total_found": len(categories),
+            "categories": categories,
+            "pagination": self.parse_pagination(soup, page),
+        }
+
     def scrape_studios(self, url, page=1):
         requested_url = self.page_url(url, page)
         final_url, html = self.fetch(requested_url)
@@ -547,6 +585,8 @@ class JavtifulProvider(BaseProvider):
             return self.scrape_actresses(url)
         if re.fullmatch(r"/channels", path):
             return self.scrape_studios(url)
+        if re.fullmatch(r"/categories", path):
+            return self.scrape_categories(url)
         if re.fullmatch(r"/actress/[^/]+", path):
             return self.scrape_listing(url, enrich=enrich, max_enrich=max_enrich)
         if re.fullmatch(r"/channel/[^/]+", path):
@@ -582,6 +622,8 @@ def main():
             path = parsed.path.rstrip("/").lower()
             if path == "/actresses":
                 result = scraper.scrape_actresses(args.url, args.page)
+            elif path == "/categories":
+                result = scraper.scrape_categories(args.url, args.page)
             elif path == "/channels":
                 result = scraper.scrape_studios(args.url, args.page)
             else:
