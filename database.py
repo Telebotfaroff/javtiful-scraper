@@ -112,6 +112,32 @@ class JsonDatabase:
             "genres": list(dict.fromkeys(str(x).strip() for x in (raw.get("genres") or []) if str(x).strip())),
         }
 
+    def register_actress(self, entry):
+        slug = self.safe_slug(entry.get("slug"), "")
+        if not slug:
+            return
+        existing = self.index_actress["actresses"].get(slug, {})
+        self.index_actress["actresses"][slug] = {
+            "name": entry.get("name") or existing.get("name") or slug,
+            "slug": slug,
+            "url": entry.get("url") or existing.get("url") or f"https://javtiful.com/actress/{slug}",
+            "thumbnail": entry.get("thumbnail") or existing.get("thumbnail"),
+            "total_videos": existing.get("total_videos", 0),
+        }
+
+    def register_studio(self, entry):
+        slug = self.safe_slug(entry.get("slug"), "")
+        if not slug:
+            return
+        existing = self.index_studio["studios"].get(slug, {})
+        self.index_studio["studios"][slug] = {
+            "name": entry.get("name") or existing.get("name") or slug,
+            "slug": slug,
+            "url": entry.get("url") or existing.get("url") or f"https://javtiful.com/channel/{slug}",
+            "thumbnail": entry.get("thumbnail") or existing.get("thumbnail"),
+            "total_videos": existing.get("total_videos", 0),
+        }
+
     def add_video(self, raw):
         video = self.normalize_video(raw)
         code = video["code"]
