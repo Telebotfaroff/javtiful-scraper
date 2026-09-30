@@ -2,8 +2,9 @@
 """Full Javtiful metadata crawler and database synchronizer."""
 
 import argparse
+import re
 import time
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 from database import JsonDatabase
 from javtiful_scraper import ProviderManager
@@ -60,30 +61,42 @@ class Crawler:
         self.pause()
 
     def crawl_listing(self, url, label, start_page=1, end_page=0):
-        """Crawl a listing between explicit page bounds.
-
-        end_page=0 means continue until the site's pagination ends.
-        """
+        """Crawl a listing with explicit bounds and duplicate-page protection."""
         page = max(1, start_page)
+        seen_posts = set()
 
         while True:
             if end_page and page > end_page:
                 break
 
             print(f"[{label}] page {page}", flush=True)
-            result = self.provider.scrape_listing(
-                url,
-                page=page,
-                enrich=False,
-            )
+            result = self.provider.scrape_listing(url, page=page, enrich=False)
             self.stats["pages"] += 1
-
             items = result.get("items", [])
-            for item in items:
+
+            new_items = [
+                item for item in items
+                if item.get("post_url") and item["post_url"] not in seen_posts
+            ]
+
+            # Some sites return the last valid page for out-of-range pages.
+            if items and not new_items:
+                print(
+                    f"[{label}] page {page} contains only previously seen posts; "
+                    "stopping pagination.",
+                    flush=True,
+                )
+                break
+
+            for item in new_items:
+                seen_posts.add(item["post_url"])
                 self.save_video(item, f"{label} p{page}")
 
+            if not items or not new_items:
+                break
+
             pagination = result.get("pagination", {})
-            if not pagination.get("has_next") or not items:
+            if not pagination.get("has_next"):
                 break
 
             page += 1
@@ -165,11 +178,48 @@ class Crawler:
                 )
 
             pagination = result.get("pagination", {})
-            if not pagination.get("has_next") or not entries:
+            if not entries or not new_entries:
+                if entries and not new_entries:
+                    print(
+                        f"[{kind}-directory] page {page} contains only previously "
+                        "seen entries; stopping pagination.",
+                        flush=True,
+                    )
+                break
+            if not pagination.get("has_next"):
                 break
 
             page += 1
             self.pause()
+
+    def crawl_url(self, url, start_page=1, end_page=0):
+        """Crawl one user-selected URL with automatic page-type detection."""
+        parsed = urlparse(url)
+        path = parsed.path.rstrip("/").lower()
+
+        if re.fullmatch(r"/actress/[^/]+", path):
+            self.crawl_listing(url, f"actress:{path.rsplit('/', 1)[-1]}", start_page, end_page)
+            return
+        if re.fullmatch(r"/channel/[^/]+", path):
+            self.crawl_listing(url, f"studio:{path.rsplit('/', 1)[-1]}", start_page, end_page)
+            return
+        if re.fullmatch(r"/category/[^/]+", path):
+            self.crawl_listing(url, f"category:{path.rsplit('/', 1)[-1]}", start_page, end_page)
+            return
+        if path in ("/main", "/search"):
+            self.crawl_listing(url, path.strip("/"), start_page, end_page)
+            return
+        if path == "/actresses":
+            self.crawl_directory("actress", start_page, end_page)
+            return
+        if path == "/channels":
+            self.crawl_directory("studio", start_page, end_page)
+            return
+        if path == "/categories":
+            self.crawl_directory("category", start_page, end_page)
+            return
+
+        self.crawl_listing(url, "listing", start_page, end_page)
 
     def run(self, scope="all"):
         if scope in ("all", "main"):
@@ -210,49 +260,59 @@ def main():
     parser = argparse.ArgumentParser(
         description="Crawl Javtiful into grouped JSON database"
     )
-    parser.add_argument(
-        "--scope",
-        choices=("all", "main", "actresses", "studios", "categories"),
-        default="all",
-    )
-    parser.add_argument(
-        "--delay",
-        type=float,
-        default=0.0,
-        help="Seconds between video requests",
-    )
-    parser.add_argument(
-        "--start-page",
-        type=int,
-        default=1,
-        help="First directory/listing page to process",
-    )
-    parser.add_argument(
-        "--end-page",
-        type=int,
-        default=0,
-        help="Last directory/listing page to process (0 = until pagination ends)",
-    )
-    # Keep the old option for compatibility with existing manual runs.
-    parser.add_argument(
-        "--max-pages",
-        type=int,
-        default=None,
-        help="Deprecated compatibility option; use --start-page/--end-page",
-    )
+    parser.add_argument("--scope", choices=("all", "main", "actresses", "studios", "categories"), default=None)
+    parser.add_argument("--url", help="Specific actress, studio, category, or listing URL")
+    parser.add_argument("--delay", type=float, default=0.0)
+    parser.add_argument("--start-page", type=int, default=None)
+    parser.add_argument("--end-page", type=int, default=None)
+    parser.add_argument("--max-pages", type=int, default=None)
     parser.add_argument("--timeout", type=int, default=30)
     parser.add_argument("--retries", type=int, default=2)
     parser.add_argument("--database", default="database")
     args = parser.parse_args()
 
-    start_page = max(1, args.start_page)
-    end_page = max(0, args.end_page)
+    # Default manual mode: ask for one URL and its page range.
+    if not args.scope:
+        url = args.url or input("Enter actress/studio/category/listing URL: ").strip()
+        if not url:
+            parser.error("A URL is required")
 
-    if args.max_pages is not None and args.end_page == 0:
+        start_page = args.start_page
+        if start_page is None:
+            raw = input("Start page [1]: ").strip()
+            start_page = int(raw) if raw else 1
+
+        end_page = args.end_page
+        if end_page is None:
+            raw = input("End page [auto]: ").strip()
+            end_page = int(raw) if raw else 0
+
+        if args.max_pages is not None and end_page == 0:
+            end_page = start_page + args.max_pages - 1 if args.max_pages > 0 else 0
+
+        if end_page and end_page < start_page:
+            parser.error("End page must be greater than or equal to start page")
+
+        manager = ProviderManager()
+        provider = manager.resolve(BASE_URL)
+        provider.timeout = args.timeout
+        provider.retries = args.retries
+
+        crawler = Crawler(provider, JsonDatabase(args.database), delay=args.delay)
+        crawler.crawl_url(url, max(1, start_page), max(0, end_page))
+        crawler.db.finalize(crawler.stats)
+        print("\nCrawl complete:", crawler.stats, flush=True)
+        return
+
+    # Legacy multi-scope mode remains available for Actions/automation.
+    start_page = max(1, args.start_page if args.start_page is not None else 1)
+    end_page = max(0, args.end_page if args.end_page is not None else 0)
+
+    if args.max_pages is not None and end_page == 0:
         end_page = start_page + args.max_pages - 1 if args.max_pages > 0 else 0
 
     if end_page and end_page < start_page:
-        parser.error("--end-page must be greater than or equal to --start-page")
+        parser.error("End page must be greater than or equal to start page")
 
     manager = ProviderManager()
     provider = manager.resolve(BASE_URL)
