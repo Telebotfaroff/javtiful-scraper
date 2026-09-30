@@ -84,4 +84,8 @@ class TelegramProgress:
                 f"⚡ {self._speed(speed)}"
             )
 
-        await self.message.edit_text(text)
+        try:
+            await self.message.edit_text(text)
+        except Exception:
+            # Progress updates are best-effort and must never interrupt the job.
+            return
