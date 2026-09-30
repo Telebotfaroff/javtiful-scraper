@@ -113,7 +113,7 @@ class TelegramUploader:
                     [
                         "ffmpeg", "-y", "-i", raw_path,
                         "-vf",
-                        "scale=if(gt(iw,ih),320,-2):if(gt(iw,ih),-2,320)",
+                        "scale=320:320:force_original_aspect_ratio=decrease",
                         "-frames:v", "1",
                         "-q:v", str(quality),
                         jpg_path,
@@ -164,7 +164,7 @@ class TelegramUploader:
                         "ffmpeg", "-y", "-ss", "1", "-i", str(video_path),
                         "-frames:v", "1",
                         "-vf",
-                        "scale=if(gt(iw,ih),320,-2):if(gt(iw,ih),-2,320)",
+                        "scale=320:320:force_original_aspect_ratio=decrease",
                         "-q:v", str(quality),
                         jpg_path,
                     ],
