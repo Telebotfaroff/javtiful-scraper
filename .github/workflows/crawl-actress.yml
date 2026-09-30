@@ -1,0 +1,72 @@
+name: Crawl Actress
+
+on:
+  workflow_dispatch:
+    inputs:
+      actress:
+        description: "Actress slug (blank = next pending/failed)"
+        required: false
+        default: ""
+        type: string
+      limit:
+        description: "Number to process when no slug is supplied"
+        required: false
+        default: "1"
+        type: string
+      delay:
+        description: "Seconds between video detail requests"
+        required: false
+        default: "1"
+        type: string
+      timeout:
+        description: "HTTP timeout in seconds"
+        required: false
+        default: "30"
+        type: string
+      retries:
+        description: "Retries for video detail requests"
+        required: false
+        default: "2"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: actress-crawler
+  cancel-in-progress: false
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Compile check
+        run: python -m py_compile actress_index.py actress_crawler.py javtiful_scraper.py crawler.py database.py providers/*.py
+      - name: Crawl actress
+        env:
+          ACTRESS: ${{ inputs.actress }}
+          LIMIT: ${{ inputs.limit }}
+          DELAY: ${{ inputs.delay }}
+          TIMEOUT: ${{ inputs.timeout }}
+          RETRIES: ${{ inputs.retries }}
+        run: |
+          python actress_crawler.py --actress "$ACTRESS" --limit "$LIMIT"             --delay "$DELAY" --timeout "$TIMEOUT" --retries "$RETRIES"
+      - name: Commit database and actress progress
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add database/
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Crawl actress and update database"
+          git push
