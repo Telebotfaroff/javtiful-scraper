@@ -6,6 +6,11 @@ on:
   pull_request:
     branches: ["main"]
   workflow_dispatch:
+    inputs:
+      javtiful_url:
+        description: "Javtiful page URL to scrape"
+        required: true
+        type: string
 
 jobs:
   test:
@@ -35,13 +40,14 @@ jobs:
 
       - name: Live scraper test
         env:
-          JAVTIFUL_TEST_URL: ${{ vars.JAVTIFUL_TEST_URL }}
+          JAVTIFUL_TEST_URL: ${{ inputs.javtiful_url || vars.JAVTIFUL_TEST_URL }}
         run: |
           if [ -z "$JAVTIFUL_TEST_URL" ]; then
-            echo "JAVTIFUL_TEST_URL is not configured."
-            echo "Skipping live-site test. Set the repository variable to enable it."
-            exit 0
+            echo "No Javtiful URL provided."
+            exit 1
           fi
+
+          echo "Testing scraper with the supplied Javtiful URL..."
 
           python javtiful_scraper.py "$JAVTIFUL_TEST_URL" -o result.json
 
@@ -70,6 +76,15 @@ jobs:
           if missing:
               raise SystemExit(f"Missing fields: {missing}")
 
+          print("\n=== SCRAPER RESULT ===")
           print(json.dumps(data, indent=2, ensure_ascii=False))
-          print("Live scraper test passed.")
+          print("\nLive scraper test passed.")
           PY
+
+      - name: Upload scraper result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: scraper-result
+          path: result.json
+          if-no-files-found: ignore
