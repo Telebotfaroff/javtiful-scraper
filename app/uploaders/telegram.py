@@ -218,7 +218,7 @@ class TelegramUploader:
         logger.error("THUMBNAIL: no usable thumbnail could be created")
         return None
 
-    async def send_preview(self, chat_id, thumbnail=None, title="Video", referer=None):
+    def send_preview(self, chat_id, thumbnail=None, title="Video", referer=None):
         """Send the extracted post thumbnail and title before the download starts."""
         if not thumbnail:
             logger.warning("TELEGRAM PREVIEW: no thumbnail available")
