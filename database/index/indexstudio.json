@@ -1,0 +1,12 @@
+{
+  "total": 1,
+  "studios": {
+    "sod-create": {
+      "name": "SOD Create",
+      "slug": "sod-create",
+      "url": "https://javtiful.com/channel/sod-create",
+      "thumbnail": null,
+      "total_videos": 46
+    }
+  }
+}
