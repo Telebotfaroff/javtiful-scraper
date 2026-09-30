@@ -1,7 +1,11 @@
+import logging
+
 from app.extractor.javtiful import JavtifulExtractor
 from app.downloader.downloader import Downloader
 from app.clipping.clipper import clip_video
 from app.storage.cleanup import cleanup
+
+logger = logging.getLogger(__name__)
 
 
 class Pipeline:
@@ -11,7 +15,15 @@ class Pipeline:
         self.uploaders = uploaders or {}
 
     def run(self, job, progress=None):
+        logger.info("PIPELINE: extracting %s", job.url)
         video = self.extractor.extract(job.url)
+        logger.info(
+            "PIPELINE: extracted title=%r thumbnail=%s duration=%s qualities=%s",
+            video.title,
+            video.thumbnail or "NONE",
+            video.duration or "UNKNOWN",
+            ", ".join(video.qualities) or "NONE",
+        )
 
         if progress:
             progress(0, 0, "extract")
@@ -25,16 +37,17 @@ class Pipeline:
         )
 
         source_path = video.local_path
+        logger.info("PIPELINE: download complete: %s", source_path)
         upload_paths = [source_path]
         temporary_paths = []
         results = []
 
         try:
-            # Clipping is strictly opt-in. None/empty means upload the full video.
             if job.clips:
                 if progress:
                     progress(0, len(job.clips), "clip")
 
+                logger.info("PIPELINE: creating %d clip(s)", len(job.clips))
                 upload_paths = clip_video(source_path, job.clips)
                 temporary_paths.extend(upload_paths)
 
@@ -44,6 +57,12 @@ class Pipeline:
             uploader = self.uploaders[job.uploader]
 
             for index, path in enumerate(upload_paths, 1):
+                logger.info(
+                    "PIPELINE: uploading part %d/%d via %s",
+                    index,
+                    len(upload_paths),
+                    job.uploader,
+                )
                 kwargs = {
                     "caption": video.title,
                     "thumbnail": video.thumbnail,
@@ -55,7 +74,9 @@ class Pipeline:
                     ),
                 }
 
-                # TelegramUploader expects chat_id; cloud uploaders accept **kwargs.
+                if job.uploader == "telegram":
+                    kwargs["referer"] = video.source_url
+
                 if job.target is not None:
                     kwargs["chat_id"] = job.target
 
@@ -71,10 +92,9 @@ class Pipeline:
                 if progress:
                     progress(index, len(upload_paths), "upload")
 
+            logger.info("PIPELINE: all uploads completed")
             return video, results
 
         finally:
-            # Cleanup happens only after every requested upload completed and
-            # verified. A partial/failed job keeps the files for retry/debugging.
             if len(results) == len(upload_paths) and upload_paths:
                 cleanup([source_path, *temporary_paths])
