@@ -51,7 +51,7 @@ def select_actresses(data, requested_slug, limit):
         return [(slug, actresses[slug])]
 
     selected = []
-    for status in ("pending", "failed"):
+    for status in ("pending", "failed", "in_progress"):
         for slug, entry in actresses.items():
             if entry.get("status") == status:
                 selected.append((slug, entry))
@@ -147,6 +147,9 @@ def main():
     for slug, entry in selected:
         crawl_actress(provider, db, args.index, data, slug, entry, max(0.0, args.delay), max(0, args.retries))
 
+    # Reload the checkpointed index so finalize() cannot overwrite the
+    # page/status progress with JsonDatabase's older in-memory copy.
+    db.index_actress = load_json(args.index, {"total": 0, "actresses": {}})
     db.finalize({"source": "actress", "actresses_processed": len(selected)})
     return 0
 
