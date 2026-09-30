@@ -1,3 +1,4 @@
+import logging
 import math
 import os
 import subprocess
@@ -7,6 +8,8 @@ from pathlib import Path
 import requests
 from pyrogram import Client
 from app.storage.cleanup import cleanup
+
+logger = logging.getLogger(__name__)
 
 TELEGRAM_LIMIT = 2_000_000_000
 
@@ -59,25 +62,40 @@ class TelegramUploader:
         return parts
 
     @staticmethod
-    def _prepare_thumbnail(thumbnail):
-        """Download a remote poster and normalize it to a Telegram-friendly JPEG."""
+    def _prepare_thumbnail(thumbnail, video_path=None, referer=None):
+        """Download/normalize a poster, with a video-frame fallback."""
         if not thumbnail:
-            return None
+            logger.warning("THUMBNAIL: crawler returned no thumbnail URL")
+            return TelegramUploader._fallback_thumbnail(video_path)
 
         value = str(thumbnail).strip()
         if not value:
-            return None
+            logger.warning("THUMBNAIL: crawler returned an empty thumbnail URL")
+            return TelegramUploader._fallback_thumbnail(video_path)
 
         if not value.startswith(("http://", "https://")):
-            return value if Path(value).exists() else None
+            path = Path(value)
+            if path.exists():
+                logger.info("THUMBNAIL: using existing local file: %s", path)
+                return str(path)
+            logger.warning("THUMBNAIL: local file does not exist: %s", value)
+            return TelegramUploader._fallback_thumbnail(video_path)
 
         raw_path = None
         jpg_path = None
+        logger.info("THUMBNAIL: found URL: %s", value)
+
         try:
-            response = requests.get(
-                value,
-                timeout=20,
-                headers={"User-Agent": "Mozilla/5.0"},
+            headers = {"User-Agent": "Mozilla/5.0"}
+            if referer:
+                headers["Referer"] = str(referer)
+
+            response = requests.get(value, timeout=20, headers=headers)
+            logger.info(
+                "THUMBNAIL: HTTP %s, content-type=%s, bytes=%s",
+                response.status_code,
+                response.headers.get("content-type", "unknown"),
+                len(response.content),
             )
             response.raise_for_status()
 
@@ -90,32 +108,118 @@ class TelegramUploader:
             jpg.close()
             jpg_path = jpg.name
 
-            subprocess.run(
-                [
-                    "ffmpeg", "-y", "-i", raw_path,
-                    "-vf",
-                    "scale=if(gt(iw,ih),320,-2):if(gt(iw,ih),-2,320)",
-                    "-frames:v", "1",
-                    "-q:v", "10",
-                    jpg_path,
-                ],
-                check=True,
-                stdout=subprocess.DEVNULL,
-                stderr=subprocess.DEVNULL,
-            )
-            return jpg_path
-        except Exception:
-            if jpg_path:
-                Path(jpg_path).unlink(missing_ok=True)
-            return None
+            for quality in (10, 20, 30, 40, 50):
+                subprocess.run(
+                    [
+                        "ffmpeg", "-y", "-i", raw_path,
+                        "-vf",
+                        "scale=if(gt(iw,ih),320,-2):if(gt(iw,ih),-2,320)",
+                        "-frames:v", "1",
+                        "-q:v", str(quality),
+                        jpg_path,
+                    ],
+                    check=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.PIPE,
+                )
+                size = Path(jpg_path).stat().st_size
+                logger.info(
+                    "THUMBNAIL: FFmpeg quality=%s -> %d bytes",
+                    quality,
+                    size,
+                )
+                if size <= 200_000:
+                    logger.info("THUMBNAIL: ready: %s (%d bytes)", jpg_path, size)
+                    return jpg_path
+
+            logger.warning("THUMBNAIL: converted image is still over 200 KB")
+
+        except Exception as exc:
+            logger.exception("THUMBNAIL: download/conversion failed: %s", exc)
         finally:
             if raw_path:
                 Path(raw_path).unlink(missing_ok=True)
 
-    def upload(self, file_path, chat_id, caption="", thumbnail=None, duration=None, progress=None):
+        if jpg_path:
+            Path(jpg_path).unlink(missing_ok=True)
+
+        logger.warning("THUMBNAIL: website thumbnail failed; trying video frame fallback")
+        return TelegramUploader._fallback_thumbnail(video_path)
+
+    @staticmethod
+    def _fallback_thumbnail(video_path):
+        if not video_path or not Path(video_path).exists():
+            logger.warning("THUMBNAIL FALLBACK: video file unavailable")
+            return None
+
+        jpg_path = None
+        try:
+            jpg = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
+            jpg.close()
+            jpg_path = jpg.name
+
+            for quality in (10, 20, 30, 40, 50):
+                subprocess.run(
+                    [
+                        "ffmpeg", "-y", "-ss", "1", "-i", str(video_path),
+                        "-frames:v", "1",
+                        "-vf",
+                        "scale=if(gt(iw,ih),320,-2):if(gt(iw,ih),-2,320)",
+                        "-q:v", str(quality),
+                        jpg_path,
+                    ],
+                    check=True,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.PIPE,
+                )
+                size = Path(jpg_path).stat().st_size
+                logger.info(
+                    "THUMBNAIL FALLBACK: quality=%s -> %d bytes",
+                    quality,
+                    size,
+                )
+                if size <= 200_000:
+                    logger.info("THUMBNAIL FALLBACK: ready: %s", jpg_path)
+                    return jpg_path
+
+        except Exception as exc:
+            logger.exception("THUMBNAIL FALLBACK: FFmpeg failed: %s", exc)
+
+        if jpg_path:
+            Path(jpg_path).unlink(missing_ok=True)
+
+        logger.error("THUMBNAIL: no usable thumbnail could be created")
+        return None
+
+    def upload(
+        self,
+        file_path,
+        chat_id,
+        caption="",
+        thumbnail=None,
+        duration=None,
+        progress=None,
+        referer=None,
+    ):
         paths = self.split_if_needed(file_path)
         results = []
-        prepared_thumbnail = self._prepare_thumbnail(thumbnail)
+
+        logger.info(
+            "TELEGRAM UPLOAD: file=%s size=%d bytes parts=%d",
+            file_path,
+            Path(file_path).stat().st_size,
+            len(paths),
+        )
+
+        prepared_thumbnail = self._prepare_thumbnail(
+            thumbnail,
+            video_path=file_path,
+            referer=referer,
+        )
+        logger.info(
+            "TELEGRAM UPLOAD: final thumbnail=%s",
+            prepared_thumbnail or "NONE",
+        )
 
         try:
             with self.app:
@@ -125,6 +229,7 @@ class TelegramUploader:
                         if len(paths) == 1
                         else f"{caption}\n\n📦 Part {index}/{len(paths)}"
                     )
+
                     results.append(
                         self.app.send_video(
                             chat_id,
@@ -136,11 +241,24 @@ class TelegramUploader:
                             progress=self._progress(progress),
                         )
                     )
+
+                    logger.info(
+                        "TELEGRAM UPLOAD: part %d/%d sent successfully",
+                        index,
+                        len(paths),
+                    )
+        except Exception:
+            logger.exception("TELEGRAM UPLOAD: send_video failed")
+            raise
         finally:
-            if prepared_thumbnail and str(prepared_thumbnail).startswith(tempfile.gettempdir()):
+            if (
+                prepared_thumbnail
+                and str(prepared_thumbnail).startswith(tempfile.gettempdir())
+            ):
                 Path(prepared_thumbnail).unlink(missing_ok=True)
 
         cleanup([path for path in paths if Path(path) != Path(file_path)])
+        logger.info("TELEGRAM UPLOAD: completed successfully")
         return results
 
     @staticmethod
