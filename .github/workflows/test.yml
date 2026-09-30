@@ -41,9 +41,9 @@ jobs:
         run: python javtiful_scraper.py --help
       - name: Live scraper test
         env:
-          JAVTIFUL_TEST_URL: \${{ inputs.javtiful_url || vars.JAVTIFUL_TEST_URL }}
-          ENRICH: \${{ inputs.enrich }}
-          MAX_ENRICH: \${{ inputs.max_enrich }}
+          JAVTIFUL_TEST_URL: ${{ inputs.javtiful_url || vars.JAVTIFUL_TEST_URL }}
+          ENRICH: ${{ inputs.enrich }}
+          MAX_ENRICH: ${{ inputs.max_enrich }}
         run: |
           if [ -z "$JAVTIFUL_TEST_URL" ]; then
             echo "No Javtiful URL provided."
@@ -54,7 +54,7 @@ jobs:
           if [ "$ENRICH" != "true" ]; then
             ARGS="$ARGS --no-enrich"
           fi
-          if [ "\${MAX_ENRICH:-0}" != "0" ]; then
+          if [ "${MAX_ENRICH:-0}" != "0" ]; then
             ARGS="$ARGS --max-enrich $MAX_ENRICH"
           fi
 
@@ -92,7 +92,7 @@ jobs:
               raise SystemExit(f"Unknown scraper result type: {data['type']}")
 
           print(json.dumps(data, indent=2, ensure_ascii=False))
-          print("\\nLive scraper test passed.")
+          print("\nLive scraper test passed.")
           PY
 
       - name: Upload scraper result
