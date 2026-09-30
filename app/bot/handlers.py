@@ -117,6 +117,25 @@ def register_handlers(app: Client):
     @app.on_message(filters.private & filters.text)
     async def link_handler(client, message):
         text = message.text.strip()
+
+        # Clip ranges are also private text messages. Handle them here before
+        # the URL validation so the URL handler does not swallow the range.
+        state = pending.get(message.from_user.id)
+        if state and state.get("clip_waiting"):
+            match = re.fullmatch(r"\\s*([^\\-]+)\\s*-\\s*([^\\-]+)\\s*", text)
+            if not match:
+                return await message.reply_text("Invalid range. Use 00:00-01:30.")
+            start, end = match.group(1).strip(), match.group(2).strip()
+            if not (_valid_time(start) and _valid_time(end)):
+                return await message.reply_text("Invalid time. Use SS, MM:SS, or HH:MM:SS.")
+            if _seconds(end) <= _seconds(start):
+                return await message.reply_text("End time must be after start time.")
+            state["clips"] = [(start, end)]
+            state.pop("clip_waiting", None)
+            await message.reply_text("✂️ Clip selected. Starting pipeline…")
+            await _run_job(message, state)
+            pending.pop(message.from_user.id, None)
+            return
         if text.startswith("/start"):
             return await message.reply_text("JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
         if not text.startswith(("https://javtiful.com/","http://javtiful.com/")):
@@ -203,22 +222,3 @@ def register_handlers(app: Client):
         await query.answer("Clip mode selected")
         await query.message.edit_text("✂️ Send one clip range like 00:00-01:30. You can use SS, MM:SS, or HH:MM:SS.")
 
-
-    @app.on_message(filters.private & filters.text)
-    async def clip_handler(client, message):
-        state = pending.get(message.from_user.id)
-        if not state or not state.get("clip_waiting"):
-            return
-        match = re.fullmatch(r"\s*([^\-]+)\s*-\s*([^\-]+)\s*", message.text)
-        if not match:
-            return await message.reply_text("Invalid range. Use 00:00-01:30.")
-        start, end = match.group(1).strip(), match.group(2).strip()
-        if not (_valid_time(start) and _valid_time(end)):
-            return await message.reply_text("Invalid time. Use SS, MM:SS, or HH:MM:SS.")
-        if _seconds(end) <= _seconds(start):
-            return await message.reply_text("End time must be after start time.")
-        state["clips"] = [(start, end)]
-        state.pop("clip_waiting", None)
-        await message.reply_text("✂️ Clip selected. Starting pipeline…")
-        await _run_job(message, state)
-        pending.pop(message.from_user.id, None)
