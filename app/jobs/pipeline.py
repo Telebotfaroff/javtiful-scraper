@@ -14,13 +14,13 @@ class Pipeline:
         video = self.extractor.extract(job.url)
 
         if progress:
-            progress("extract", 0, 0)
+            progress(0, 0, "extract")
 
         self.downloader.download(
             video,
             job.quality,
             lambda current, total, stage: (
-                progress(stage, current, total) if progress else None
+                progress(current, total, stage) if progress else None
             ),
         )
 
@@ -33,13 +33,13 @@ class Pipeline:
             # Clipping is strictly opt-in. None/empty means upload the full video.
             if job.clips:
                 if progress:
-                    progress("clip", 0, len(job.clips))
+                    progress(0, len(job.clips), "clip")
 
                 upload_paths = clip_video(source_path, job.clips)
                 temporary_paths.extend(upload_paths)
 
                 if progress:
-                    progress("clip", len(upload_paths), len(job.clips))
+                    progress(len(upload_paths), len(job.clips), "clip")
 
             uploader = self.uploaders[job.uploader]
 
@@ -69,7 +69,7 @@ class Pipeline:
                 results.append(result)
 
                 if progress:
-                    progress("upload", index, len(upload_paths))
+                    progress(index, len(upload_paths), "upload")
 
             return video, results
 
