@@ -33,7 +33,7 @@ class JavtifulExtractor(BaseExtractor):
 
         soup = BeautifulSoup(response.text, "html.parser")
         title = self._title(soup)
-        thumbnail = self._thumbnail(soup)
+        thumbnail = self._thumbnail(soup, url)
         duration = self._find_duration(soup)
         qualities = {}
 
@@ -57,6 +57,9 @@ class JavtifulExtractor(BaseExtractor):
         if not self._has_real_media_url(qualities):
             self._add_runtime_media_urls(url, qualities)
 
+        if not thumbnail:
+            thumbnail = self._runtime_thumbnail(url)
+
         if not duration:
             duration = self._runtime_duration(url)
 
@@ -78,9 +81,42 @@ class JavtifulExtractor(BaseExtractor):
         return node.get("content", "").strip() if node else ""
 
     @staticmethod
-    def _thumbnail(soup):
-        node = soup.find("meta", property="og:image")
-        return node.get("content") if node else None
+    def _thumbnail(soup, page_url):
+        selectors = [
+            ("meta", {"property": "og:image"}),
+            ("meta", {"property": "og:image:url"}),
+            ("meta", {"name": "twitter:image"}),
+            ("meta", {"name": "twitter:image:src"}),
+        ]
+        for tag_name, attrs in selectors:
+            node = soup.find(tag_name, attrs=attrs)
+            if node and node.get("content"):
+                return urljoin(page_url, node["content"].strip())
+        for tag in soup.find_all(["video", "source", "img"]):
+            for attr in ("poster", "data-poster", "data-thumbnail", "data-thumb", "data-image"):
+                value = tag.get(attr)
+                if value:
+                    return urljoin(page_url, str(value).strip())
+        node = soup.find("link", rel=lambda value: value and "image_src" in value)
+        if node and node.get("href"):
+            return urljoin(page_url, node["href"].strip())
+        for script in soup.find_all("script", type="application/ld+json"):
+            try:
+                data = json.loads(script.string or script.get_text())
+            except (TypeError, ValueError):
+                continue
+            candidates = data if isinstance(data, list) else [data]
+            for item in candidates:
+                if not isinstance(item, dict):
+                    continue
+                image = item.get("image") or item.get("thumbnailUrl")
+                if isinstance(image, list):
+                    image = image[0] if image else None
+                if isinstance(image, dict):
+                    image = image.get("url")
+                if image:
+                    return urljoin(page_url, str(image).strip())
+        return None
 
     def _add_front_watch_config(self, soup, qualities):
         config_tag = soup.find("script", id="frontWatchConfig")
@@ -274,6 +310,32 @@ class JavtifulExtractor(BaseExtractor):
                     self._quality_from_url(candidate) or "source",
                     candidate,
                 )
+
+    def _runtime_thumbnail(self, page_url):
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            return None
+        try:
+            with sync_playwright() as p:
+                browser = p.chromium.launch(headless=True, args=["--no-sandbox", "--disable-dev-shm-usage"])
+                page = browser.new_page(user_agent=self._HEADERS["User-Agent"])
+                page.goto(page_url, wait_until="domcontentloaded", timeout=45_000)
+                page.wait_for_timeout(2_000)
+                value = page.evaluate("""() => {
+                    const v = document.querySelector("video");
+                    if (v?.poster) return v.poster;
+                    for (const selector of ['meta[property="og:image"]', 'meta[name="twitter:image"]', "img[data-poster]", "img[data-thumbnail]", "[data-poster]"]) {
+                        const el = document.querySelector(selector);
+                        const value = el?.content || el?.getAttribute("data-poster") || el?.getAttribute("data-thumbnail");
+                        if (value) return value;
+                    }
+                    return null;
+                }""")
+                browser.close()
+                return urljoin(page_url, str(value).strip()) if value else None
+        except Exception:
+            return None
 
     def _runtime_duration(self, page_url):
         try:
