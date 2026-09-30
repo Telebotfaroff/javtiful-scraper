@@ -13,15 +13,20 @@ on:
           - main
           - actresses
           - studios
+      start_page:
+        description: "First page to scrape"
+        required: false
+        default: "1"
+        type: string
+      end_page:
+        description: "Last page to scrape (0 = all remaining pages)"
+        required: false
+        default: "0"
+        type: string
       delay:
         description: "Seconds between video detail requests"
         required: false
         default: "1"
-        type: string
-      pages:
-        description: "How many pages to scrape (0 = all pages)"
-        required: false
-        default: "0"
         type: string
       timeout:
         description: "HTTP timeout in seconds"
@@ -62,11 +67,12 @@ jobs:
       - name: Crawl and synchronize database
         run: |
           python crawler.py \
-            --scope "${{ inputs.source }}" \
-            --delay "${{ inputs.delay }}" \
-            --max-pages "${{ inputs.pages }}" \
-            --timeout "${{ inputs.timeout }}" \
-            --retries "${{ inputs.retries }}"
+            --scope "${{ inputs.source }} \
+            --start-page "${{ inputs.start_page }} \
+            --end-page "${{ inputs.end_page }} \
+            --delay "${{ inputs.delay }} \
+            --timeout "${{ inputs.timeout }} \
+            --retries "${{ inputs.retries }}
 
       - name: Commit database changes
         run: |
