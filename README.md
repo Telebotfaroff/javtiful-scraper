@@ -148,3 +148,52 @@ The workflow accepts optional enrichment controls and validates the result accor
 ## Notes
 
 The scraper extracts metadata present in the fetched HTML. It does not persist temporary/IP-locked player URLs. If a future provider needs JavaScript for metadata, that provider can implement its own extraction layer.
+
+
+## Full crawler
+
+`crawler.py` turns the provider into a full database crawler. A single run can:
+
+1. Crawl every page of `/main`
+2. Crawl the `/actresses` directory and every actress video page
+3. Crawl the `/channels` directory and every studio video page
+4. Open each discovered video page for complete metadata
+5. Deduplicate using **video ID → normalized code → canonical URL**
+6. Write the compact grouped JSON database
+7. Rebuild database indexes and run statistics
+
+Run locally:
+
+    python crawler.py --scope all --delay 1
+
+Other scopes:
+
+    python crawler.py --scope main
+    python crawler.py --scope actresses
+    python crawler.py --scope studios
+
+`--max-pages 0` means unlimited pagination. A non-zero value is useful for a controlled test:
+
+    python crawler.py --scope all --max-pages 2 --delay 0
+
+### Database layout
+
+    database/
+    ├── actress/<slug>/videos.json
+    ├── studio/<slug>/videos.json
+    ├── code/<CODE>/videos.json
+    └── index/
+        ├── indexactress.json
+        ├── indexstudio.json
+        ├── indexcode.json
+        └── database.json
+
+Video records contain persistent metadata only. Temporary/IP-locked video-source URLs are never stored.
+
+### GitHub Actions crawler
+
+The crawler is **manual-only**. Open **Actions → Full scraper database sync → Run workflow** and choose a scope.
+
+The workflow checks out the current database, runs the crawler, then commits and pushes changed `database/` files automatically. No push/PR trigger is configured for the full crawler.
+
+For the first test, use a small `max_pages` value. A full `all` crawl can make a large number of detail-page requests.
