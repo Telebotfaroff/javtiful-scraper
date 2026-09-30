@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "total_videos": 46,
-  "total_actresses": 24,
-  "total_studios": 1,
-  "total_code_categories": 8,
+  "total_videos": 92,
+  "total_actresses": 53,
+  "total_studios": 2,
+  "total_code_categories": 14,
   "last_run": {
     "pages": 2,
     "videos_seen": 46,

@@ -1,5 +1,5 @@
 {
-  "total": 24,
+  "total": 53,
   "actresses": {
     "honjou-suzu": {
       "name": "Honjou Suzu",
@@ -166,6 +166,209 @@
       "name": "Aine Homura",
       "slug": "aine-homura",
       "url": "https://javtiful.com/actress/aine-homura",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "ninomiya-hikari": {
+      "name": "Ninomiya Hikari",
+      "slug": "ninomiya-hikari",
+      "url": "https://javtiful.com/actress/ninomiya-hikari",
+      "thumbnail": null,
+      "total_videos": 3
+    },
+    "amakawa-sora": {
+      "name": "Amakawa Sora",
+      "slug": "amakawa-sora",
+      "url": "https://javtiful.com/actress/amakawa-sora",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "misono-waka": {
+      "name": "Misono Waka",
+      "slug": "misono-waka",
+      "url": "https://javtiful.com/actress/misono-waka",
+      "thumbnail": null,
+      "total_videos": 3
+    },
+    "tachibana-hina": {
+      "name": "Tachibana Hina",
+      "slug": "tachibana-hina",
+      "url": "https://javtiful.com/actress/tachibana-hina",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "shiromine-miu": {
+      "name": "Shiromine Miu",
+      "slug": "shiromine-miu",
+      "url": "https://javtiful.com/actress/shiromine-miu",
+      "thumbnail": null,
+      "total_videos": 3
+    },
+    "kawakita-meisa": {
+      "name": "Kawakita Meisa",
+      "slug": "kawakita-meisa",
+      "url": "https://javtiful.com/actress/kawakita-meisa",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "ebisaki-ao": {
+      "name": "Ebisaki Ao",
+      "slug": "ebisaki-ao",
+      "url": "https://javtiful.com/actress/ebisaki-ao",
+      "thumbnail": null,
+      "total_videos": 3
+    },
+    "sakura-mio": {
+      "name": "Sakura Mio",
+      "slug": "sakura-mio",
+      "url": "https://javtiful.com/actress/sakura-mio",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "ono-rinka": {
+      "name": "Ono Rinka",
+      "slug": "ono-rinka",
+      "url": "https://javtiful.com/actress/ono-rinka",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "natsume-iroha": {
+      "name": "Natsume Iroha",
+      "slug": "natsume-iroha",
+      "url": "https://javtiful.com/actress/natsume-iroha",
+      "thumbnail": null,
+      "total_videos": 3
+    },
+    "azusa-hikari": {
+      "name": "Azusa Hikari",
+      "slug": "azusa-hikari",
+      "url": "https://javtiful.com/actress/azusa-hikari",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "hoshino-nami": {
+      "name": "Hoshino Nami",
+      "slug": "hoshino-nami",
+      "url": "https://javtiful.com/actress/hoshino-nami",
+      "thumbnail": null,
+      "total_videos": 3
+    },
+    "hoshimiya-ichika": {
+      "name": "Hoshimiya Ichika",
+      "slug": "hoshimiya-ichika",
+      "url": "https://javtiful.com/actress/hoshimiya-ichika",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "hanazawa-himari": {
+      "name": "Hanazawa Himari",
+      "slug": "hanazawa-himari",
+      "url": "https://javtiful.com/actress/hanazawa-himari",
+      "thumbnail": null,
+      "total_videos": 2
+    },
+    "hazuki-mayu": {
+      "name": "Hazuki Mayu",
+      "slug": "hazuki-mayu",
+      "url": "https://javtiful.com/actress/hazuki-mayu",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "iinari-nao": {
+      "name": "Iinari Nao",
+      "slug": "iinari-nao",
+      "url": "https://javtiful.com/actress/iinari-nao",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "nakamori-nanami": {
+      "name": "Nakamori Nanami",
+      "slug": "nakamori-nanami",
+      "url": "https://javtiful.com/actress/nakamori-nanami",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "hinata-yuna": {
+      "name": "Hinata Yuna",
+      "slug": "hinata-yuna",
+      "url": "https://javtiful.com/actress/hinata-yuna",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "kashiwagi-konatsu": {
+      "name": "Kashiwagi Konatsu",
+      "slug": "kashiwagi-konatsu",
+      "url": "https://javtiful.com/actress/kashiwagi-konatsu",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "nikaidou-rei": {
+      "name": "Nikaidou Rei",
+      "slug": "nikaidou-rei",
+      "url": "https://javtiful.com/actress/nikaidou-rei",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "kotou-mariko": {
+      "name": "Kotou Mariko",
+      "slug": "kotou-mariko",
+      "url": "https://javtiful.com/actress/kotou-mariko",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "nishino-emi": {
+      "name": "Nishino Emi",
+      "slug": "nishino-emi",
+      "url": "https://javtiful.com/actress/nishino-emi",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "noau-ika": {
+      "name": "Noau Ika",
+      "slug": "noau-ika",
+      "url": "https://javtiful.com/actress/noau-ika",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "ibuki-kanon": {
+      "name": "Ibuki Kanon",
+      "slug": "ibuki-kanon",
+      "url": "https://javtiful.com/actress/ibuki-kanon",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "sannomiya-tsubaki": {
+      "name": "Sannomiya Tsubaki",
+      "slug": "sannomiya-tsubaki",
+      "url": "https://javtiful.com/actress/sannomiya-tsubaki",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "hirose-yuri": {
+      "name": "Hirose Yuri",
+      "slug": "hirose-yuri",
+      "url": "https://javtiful.com/actress/hirose-yuri",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "hasumi-kurea": {
+      "name": "Hasumi Kurea",
+      "slug": "hasumi-kurea",
+      "url": "https://javtiful.com/actress/hasumi-kurea",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "sasahara-yuri": {
+      "name": "Sasahara Yuri",
+      "slug": "sasahara-yuri",
+      "url": "https://javtiful.com/actress/sasahara-yuri",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "mito-kana": {
+      "name": "Mito Kana",
+      "slug": "mito-kana",
+      "url": "https://javtiful.com/actress/mito-kana",
       "thumbnail": null,
       "total_videos": 1
     }

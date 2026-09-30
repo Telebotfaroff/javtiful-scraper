@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 14,
   "codes": {
     "START": 31,
     "SDJS": 2,
@@ -8,6 +8,12 @@
     "SDDE": 1,
     "SDAB": 4,
     "STARS": 1,
-    "SDNM": 2
+    "SDNM": 2,
+    "ADN": 20,
+    "ATID": 12,
+    "SHKD": 1,
+    "YUJ": 6,
+    "SAME": 4,
+    "RBK": 3
   }
 }
