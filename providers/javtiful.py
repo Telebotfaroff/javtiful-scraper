@@ -9,6 +9,8 @@ from urllib.parse import parse_qs, urlencode, urljoin, urlparse, urlunparse
 import requests
 from bs4 import BeautifulSoup
 
+from providers.base import BaseProvider
+
 
 BASE_URL = "https://javtiful.com"
 
@@ -21,7 +23,7 @@ HEADERS = {
 }
 
 
-class JavtifulProvider:
+class JavtifulProvider(BaseProvider):
     """Javtiful provider implementation for the provider-based scraper."""
 
     name = "javtiful"
