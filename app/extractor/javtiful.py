@@ -1,3 +1,4 @@
+import json
 import re
 from urllib.parse import urljoin
 
@@ -16,32 +17,43 @@ class JavtifulExtractor(BaseExtractor):
         r"https?://[^\s"'<>\\]+(?:\.m3u8(?:\?[^\s"'<>\\]*)?|\.mp4(?:\?[^\s"'<>\\]*)?|\.webm(?:\?[^\s"'<>\\]*)?|/p/[A-Za-z0-9._~:/?#[\]@!$&()*+,;=%-]+)",
         re.I,
     )
+    _HEADERS = {
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/131.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.9,ja;q=0.8",
+    }
 
     def extract(self, url: str) -> Video:
-        response = requests.get(
-            url,
-            timeout=30,
-            headers={
-                "User-Agent": (
-                    "Mozilla/5.0 (X11; Linux x86_64) "
-                    "AppleWebKit/537.36 (KHTML, like Gecko) "
-                    "Chrome/131.0 Safari/537.36"
-                )
-            },
-        )
+        response = requests.get(url, timeout=30, headers=self._HEADERS)
         response.raise_for_status()
 
         soup = BeautifulSoup(response.text, "html.parser")
         title = self._title(soup)
         thumbnail = self._thumbnail(soup)
         duration = self._find_duration(soup)
-        qualities = self._static_sources(soup, url)
+        qualities = {}
 
-        # Some Javtiful pages expose a placeholder/source element while the
-        # real signed media URL is created by JavaScript. Search the raw HTML
-        # for URLs before falling back to a browser/network probe.
-        self._add_raw_media_urls(response.text, qualities)
+        # Primary: Javtiful's player configuration.
+        self._add_front_watch_config(soup, qualities)
 
+        # Fallback 1: inline playerSources JSON.
+        if not self._has_real_media_url(qualities):
+            self._add_inline_player_sources(response.text, qualities)
+
+        # Fallback 2: regular HTML5 video/source elements.
+        if not self._has_real_media_url(qualities):
+            self._add_dom_sources(soup, url, qualities)
+
+        # Last static fallback: media URLs embedded elsewhere in HTML/JS.
+        if not self._has_real_media_url(qualities):
+            self._add_raw_media_urls(response.text, qualities)
+
+        # Runtime fallback for pages that only create the final signed stream
+        # after JavaScript initializes the player.
         if not self._has_real_media_url(qualities):
             self._add_runtime_media_urls(url, qualities)
 
@@ -70,30 +82,117 @@ class JavtifulExtractor(BaseExtractor):
         node = soup.find("meta", property="og:image")
         return node.get("content") if node else None
 
-    def _find_duration(self, soup):
-        # Prefer actual video metadata when present.
-        for tag in soup.find_all(["video", "source"]):
-            value = tag.get("duration") or tag.get("data-duration")
-            if value:
-                parsed = self._duration(str(value))
-                if parsed is not None:
-                    return parsed
+    def _add_front_watch_config(self, soup, qualities):
+        config_tag = soup.find("script", id="frontWatchConfig")
+        if not config_tag:
+            return
 
-        for tag in soup.find_all(attrs={"class": re.compile("duration|time", re.I)}):
-            parsed = self._duration(tag.get_text(" ", strip=True))
-            if parsed is not None:
-                return parsed
+        raw = config_tag.string or config_tag.get_text()
+        if not raw:
+            return
 
-        for tag in soup.find_all(attrs={"data-duration": True}):
-            parsed = self._duration(str(tag.get("data-duration")))
-            if parsed is not None:
-                return parsed
+        try:
+            config = json.loads(raw.strip())
+        except (TypeError, ValueError):
+            return
 
-        return None
+        sources = config.get("playerSources")
+        if not isinstance(sources, list):
+            return
 
-    def _static_sources(self, soup, page_url):
-        qualities = {}
+        for source in sources:
+            if not isinstance(source, dict):
+                continue
+            self._add_player_source(source, qualities)
 
+    def _add_inline_player_sources(self, html, qualities):
+        # The guide's fallback is based on an inline "playerSources" array.
+        # Use a small balanced-array scanner so nested objects don't break
+        # parsing when source metadata contains additional fields.
+        marker = '"playerSources"'
+        start = 0
+
+        while True:
+            marker_pos = html.find(marker, start)
+            if marker_pos < 0:
+                return
+
+            array_start = html.find("[", marker_pos + len(marker))
+            if array_start < 0:
+                return
+
+            array_end = self._balanced_json_end(html, array_start)
+            if array_end < 0:
+                return
+
+            raw = html[array_start:array_end + 1]
+            try:
+                sources = json.loads(raw)
+            except (TypeError, ValueError):
+                start = array_start + 1
+                continue
+
+            if isinstance(sources, list):
+                for source in sources:
+                    if isinstance(source, dict):
+                        self._add_player_source(source, qualities)
+
+                if self._has_real_media_url(qualities):
+                    return
+
+            start = array_end + 1
+
+    @staticmethod
+    def _balanced_json_end(text, start):
+        depth = 0
+        in_string = False
+        escaped = False
+
+        for index in range(start, len(text)):
+            char = text[index]
+
+            if in_string:
+                if escaped:
+                    escaped = False
+                elif char == "\\":
+                    escaped = True
+                elif char == '"':
+                    in_string = False
+                continue
+
+            if char == '"':
+                in_string = True
+            elif char == "[":
+                depth += 1
+            elif char == "]":
+                depth -= 1
+                if depth == 0:
+                    return index
+
+        return -1
+
+    def _add_player_source(self, source, qualities):
+        src = source.get("src")
+        if not src:
+            return
+
+        src = str(src).strip()
+        if not self._looks_like_media(src):
+            return
+
+        quality = source.get("size") or source.get("quality") or source.get("label")
+        if isinstance(quality, (int, float)):
+            key = f"{int(quality)}p"
+        elif quality:
+            quality_text = str(quality).strip()
+            match = self._QUALITY_RE.search(quality_text)
+            key = f"{match.group(1)}p" if match else quality_text
+        else:
+            key = self._quality_from_url(src) or "source"
+
+        qualities.setdefault(key, src)
+
+    def _add_dom_sources(self, soup, page_url, qualities):
         for tag in soup.find_all(["video", "source"]):
             src = (
                 tag.get("src")
@@ -105,35 +204,28 @@ class JavtifulExtractor(BaseExtractor):
                 continue
 
             absolute = urljoin(page_url, src)
-            q = (
+            if not self._looks_like_media(absolute):
+                continue
+
+            quality = (
                 tag.get("label")
                 or tag.get("res")
                 or tag.get("data-quality")
                 or self._quality_from_url(absolute)
                 or "source"
             )
-            qualities[str(q)] = absolute
-
-        for tag in soup.find_all("a", href=True):
-            text = tag.get_text(" ", strip=True)
-            match = self._QUALITY_RE.search(text)
-            if match:
-                qualities[match.group(1) + "p"] = urljoin(page_url, tag["href"])
-
-        return qualities
+            qualities.setdefault(str(quality), absolute)
 
     def _add_raw_media_urls(self, html, qualities):
-        # HTML/inline JS may contain escaped URLs generated before the player
-        # starts. Decode common JSON/HTML escaping first.
         raw = (
-            html.replace("\\/", "/")
+            html.replace("\\/","/")
             .replace("&amp;", "&")
             .replace("\\u002F", "/")
             .replace("\\u003A", ":")
         )
 
         for match in self._MEDIA_RE.finditer(raw):
-            candidate = match.group(0).rstrip("\\.,);]}"'")
+            candidate = match.group(0).rstrip("\\.,);]}'")
             if self._looks_like_media(candidate):
                 qualities.setdefault(
                     self._quality_from_url(candidate) or "source",
@@ -141,8 +233,6 @@ class JavtifulExtractor(BaseExtractor):
                 )
 
     def _add_runtime_media_urls(self, page_url, qualities):
-        # Runtime-generated/signed URLs are not visible to requests/BeautifulSoup.
-        # Playwright observes the same network responses a normal browser uses.
         try:
             from playwright.sync_api import sync_playwright
         except ImportError:
@@ -156,13 +246,7 @@ class JavtifulExtractor(BaseExtractor):
                     headless=True,
                     args=["--no-sandbox", "--disable-dev-shm-usage"],
                 )
-                page = browser.new_page(
-                    user_agent=(
-                        "Mozilla/5.0 (X11; Linux x86_64) "
-                        "AppleWebKit/537.36 (KHTML, like Gecko) "
-                        "Chrome/131.0 Safari/537.36"
-                    )
-                )
+                page = browser.new_page(user_agent=self._HEADERS["User-Agent"])
 
                 def on_response(response):
                     candidate = response.url
@@ -170,17 +254,15 @@ class JavtifulExtractor(BaseExtractor):
                         media_urls.append(candidate)
 
                 page.on("response", on_response)
-                page.goto(url=page_url, wait_until="domcontentloaded", timeout=45_000)
+                page.goto(page_url, wait_until="domcontentloaded", timeout=45_000)
                 page.wait_for_timeout(6_000)
 
-                # Read already-created media resources too.
                 resources = page.evaluate(
                     """() => performance.getEntriesByType('resource')
                     .map(x => x.name)
                     .filter(x => /\\.(m3u8|mp4|webm)(\\?|$)|\\/p\\//i.test(x))"""
                 )
                 media_urls.extend(resources)
-
                 browser.close()
         except Exception:
             return
@@ -205,8 +287,8 @@ class JavtifulExtractor(BaseExtractor):
                     headless=True,
                     args=["--no-sandbox", "--disable-dev-shm-usage"],
                 )
-                page = browser.new_page()
-                page.goto(url=page_url, wait_until="domcontentloaded", timeout=45_000)
+                page = browser.new_page(user_agent=self._HEADERS["User-Agent"])
+                page.goto(page_url, wait_until="domcontentloaded", timeout=45_000)
                 page.wait_for_timeout(3_000)
                 value = page.evaluate(
                     """() => {
@@ -219,6 +301,26 @@ class JavtifulExtractor(BaseExtractor):
         except Exception:
             return None
 
+    def _find_duration(self, soup):
+        for tag in soup.find_all(["video", "source"]):
+            value = tag.get("duration") or tag.get("data-duration")
+            if value:
+                parsed = self._duration(str(value))
+                if parsed is not None:
+                    return parsed
+
+        for tag in soup.find_all(attrs={"class": re.compile("duration|time", re.I)}):
+            parsed = self._duration(tag.get_text(" ", strip=True))
+            if parsed is not None:
+                return parsed
+
+        for tag in soup.find_all(attrs={"data-duration": True}):
+            parsed = self._duration(str(tag.get("data-duration")))
+            if parsed is not None:
+                return parsed
+
+        return None
+
     @staticmethod
     def _quality_from_url(url):
         match = re.search(r"(?<!\d)(2160|1440|1080|720|480|360)p", url, re.I)
@@ -226,7 +328,7 @@ class JavtifulExtractor(BaseExtractor):
 
     @classmethod
     def _looks_like_media(cls, url):
-        lowered = url.lower()
+        lowered = str(url).lower()
         return (
             ".m3u8" in lowered
             or ".mp4" in lowered
@@ -236,13 +338,12 @@ class JavtifulExtractor(BaseExtractor):
 
     @classmethod
     def _has_real_media_url(cls, qualities):
-        return any(cls._looks_like_media(value) for value in qualities.values())
+        return any(cls._looks_like_media_url(value) for value in qualities.values())
 
     @staticmethod
     def _duration(value):
         value = str(value).strip()
 
-        # Plain seconds.
         if re.fullmatch(r"\d+(?:\.\d+)?", value):
             return int(float(value))
 
