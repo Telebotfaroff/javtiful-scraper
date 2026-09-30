@@ -67,12 +67,12 @@ jobs:
       - name: Crawl and synchronize database
         run: |
           python crawler.py \
-            --scope "${{ inputs.source }} \
-            --start-page "${{ inputs.start_page }} \
-            --end-page "${{ inputs.end_page }} \
-            --delay "${{ inputs.delay }} \
-            --timeout "${{ inputs.timeout }} \
-            --retries "${{ inputs.retries }}
+            --scope "${{ inputs.source }}" \
+            --start-page "${{ inputs.start_page }}" \
+            --end-page "${{ inputs.end_page }}" \
+            --delay "${{ inputs.delay }}" \
+            --timeout "${{ inputs.timeout }}" \
+            --retries "${{ inputs.retries }}"
 
       - name: Commit database changes
         run: |
