@@ -214,9 +214,30 @@ Video records contain persistent metadata only. Temporary/IP-locked video-source
 
 ### GitHub Actions crawler
 
-The crawler is **manual-only**. Open **Actions → Full scraper database sync → Run workflow** and choose a scope.
+All crawler workflows are **manual-only** (`workflow_dispatch`).
 
-The workflow checks out the current database, runs the crawler, then commits and pushes changed `database/` files automatically. No push/PR trigger is configured for the full crawler.
+Available workflows:
+
+- **Actress Index** — refreshes the actress directory and stores `total_pages`, status, and crawl progress.
+- **Crawl Actress** — processes one actress by slug, or the next pending/failed/in-progress actress when no slug is supplied. It uses `total_pages` as the hard page boundary and checkpoints after each completed page.
+- **Crawl Main** — crawls `/main`.
+- **Crawl Studios** — crawls the studio/channel directory and listings.
+- **Crawl Categories** — crawls the category directory and listings.
+- **Test scraper** — manual scraper validation.
+
+The actress crawler uses a dedicated concurrency group so two actress-crawler runs do not execute simultaneously.
+
+The workflows commit and push changed `database/` files automatically. The actress queue is stored in:
+
+    database/index/indexactress.json
+
+Each actress record tracks:
+
+    status
+    total_pages
+    last_crawled_page
+    videos_crawled
+    last_crawled_at
 
 #### Resume and checkpointing
 
