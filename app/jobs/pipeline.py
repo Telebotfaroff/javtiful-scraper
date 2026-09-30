@@ -27,6 +27,7 @@ class Pipeline:
         source_path = video.local_path
         upload_paths = [source_path]
         temporary_paths = []
+        results = []
 
         try:
             # Clipping is strictly opt-in. None/empty means upload the full video.
@@ -41,7 +42,6 @@ class Pipeline:
                     progress("clip", len(upload_paths), len(job.clips))
 
             uploader = self.uploaders[job.uploader]
-            results = []
 
             for index, path in enumerate(upload_paths, 1):
                 kwargs = {
@@ -55,8 +55,7 @@ class Pipeline:
                     ),
                 }
 
-                # TelegramUploader expects chat_id; cloud uploaders simply ignore
-                # unrelated kwargs.
+                # TelegramUploader expects chat_id; cloud uploaders accept **kwargs.
                 if job.target is not None:
                     kwargs["chat_id"] = job.target
 
@@ -75,7 +74,7 @@ class Pipeline:
             return video, results
 
         finally:
-            # Never delete the source/clip files before a successful upload.
-            # If upload raises, the files remain available for retry/debugging.
-            if 'results' in locals() and results:
+            # Cleanup happens only after every requested upload completed and
+            # verified. A partial/failed job keeps the files for retry/debugging.
+            if len(results) == len(upload_paths) and upload_paths:
                 cleanup([source_path, *temporary_paths])
