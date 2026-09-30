@@ -14,7 +14,7 @@ class JavtifulExtractor(BaseExtractor):
 
     _QUALITY_RE = re.compile(r"(?<!\d)(2160|1440|1080|720|480|360)p", re.I)
     _MEDIA_RE = re.compile(
-        r"https?://[^\s"'<>\\]+(?:\.m3u8(?:\?[^\s"'<>\\]*)?|\.mp4(?:\?[^\s"'<>\\]*)?|\.webm(?:\?[^\s"'<>\\]*)?|/p/[A-Za-z0-9._~:/?#[\]@!$&()*+,;=%-]+)",
+        r'''https?://[^\s"'<>\\]+(?:\.m3u8(?:\?[^\s"'<>\\]*)?|\.mp4(?:\?[^\s"'<>\\]*)?|\.webm(?:\?[^^\s"'<>\\]*)?|/p/[A-Za-z0-9._~:/?#[\]@!$&()*+,;=%-]+)''',
         re.I,
     )
     _HEADERS = {
@@ -338,7 +338,7 @@ class JavtifulExtractor(BaseExtractor):
 
     @classmethod
     def _has_real_media_url(cls, qualities):
-        return any(cls._looks_like_media_url(value) for value in qualities.values())
+        return any(cls._looks_like_media(value) for value in qualities.values())
 
     @staticmethod
     def _duration(value):
