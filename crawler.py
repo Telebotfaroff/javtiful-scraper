@@ -125,6 +125,18 @@ class Crawler:
             self.stats["pages"] += 1
             items = result.get("items", [])
 
+            page_urls = [item.get("post_url") for item in items if item.get("post_url")]
+            checkpoint = self.state.get(self._state_key(label, url), {}) if self.resume else {}
+            previous_page_urls = checkpoint.get("last_page_urls", [])
+            if previous_page_urls and page_urls and page_urls == previous_page_urls:
+                print(
+                    f"[{label}] page {page} repeats the checkpointed last page; "
+                    "stopping pagination.",
+                    flush=True,
+                )
+                self._clear_checkpoint(label, url)
+                break
+
             new_items = [
                 item for item in items
                 if item.get("post_url") and item["post_url"] not in seen_posts
@@ -137,6 +149,7 @@ class Crawler:
                     "stopping pagination.",
                     flush=True,
                 )
+                self._clear_checkpoint(label, url)
                 break
 
             for item in new_items:
@@ -144,6 +157,12 @@ class Crawler:
                 self.save_video(item, f"{label} p{page}")
 
             self._checkpoint(label, url, page)
+            if self.state_path:
+                key = self._state_key(label, url)
+                self.state[key]["last_page_urls"] = [
+                    item.get("post_url") for item in items if item.get("post_url")
+                ]
+                self._save_state()
             print(
                 f"[{label}] page {page} complete | items={len(items)} new={len(new_items)} "
                 f"added={self.stats['added']} duplicates={self.stats['duplicates']} "
