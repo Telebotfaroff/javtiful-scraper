@@ -1,16 +1,21 @@
+import logging
 import mimetypes
+import time
 from pathlib import Path
 
 import requests
 
 from .base import BaseUploader
 
+logger = logging.getLogger(__name__)
+
 
 class GoFileUploader(BaseUploader):
     name = "gofile"
 
-    def __init__(self, timeout=120):
+    def __init__(self, timeout=120, retries=3):
         self.timeout = timeout
+        self.retries = max(1, int(retries))
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": "JAVDL/1.0"})
 
@@ -19,19 +24,59 @@ class GoFileUploader(BaseUploader):
         if not path.is_file():
             raise FileNotFoundError(path)
 
-        # GoFile's current guest-upload API uses the global upload endpoint.
-        # No API token is required; omitting folderId creates a guest folder.
         endpoint = "https://upload.gofile.io/uploadfile"
         content_type = mimetypes.guess_type(path.name)[0] or "application/octet-stream"
+        last_error = None
 
-        with path.open("rb") as fh:
-            response = self.session.post(
-                endpoint,
-                files={"file": (path.name, fh, content_type)},
-                timeout=self.timeout,
-            )
+        for attempt in range(1, self.retries + 1):
+            try:
+                logger.info(
+                    "GOFILE UPLOAD: attempt %d/%d file=%s size=%d",
+                    attempt,
+                    self.retries,
+                    path.name,
+                    path.stat().st_size,
+                )
 
-        response.raise_for_status()
+                # Re-open the file for every attempt. A failed HTTP transfer
+                # may leave the previous stream partially consumed.
+                with path.open("rb") as fh:
+                    response = self.session.post(
+                        endpoint,
+                        files={"file": (path.name, fh, content_type)},
+                        timeout=self.timeout,
+                    )
+
+                response.raise_for_status()
+                break
+
+            except (
+                requests.exceptions.ChunkedEncodingError,
+                requests.exceptions.ConnectionError,
+                requests.exceptions.Timeout,
+            ) as exc:
+                last_error = exc
+                logger.warning(
+                    "GOFILE UPLOAD: transient connection failure on attempt %d/%d: %s",
+                    attempt,
+                    self.retries,
+                    exc,
+                )
+
+                if attempt >= self.retries:
+                    raise RuntimeError(
+                        f"GoFile upload failed after {self.retries} attempts: {exc}"
+                    ) from exc
+
+                # Throw away the connection pool so a broken keep-alive
+                # connection is not reused for the retry.
+                self.session.close()
+                self.session = requests.Session()
+                self.session.headers.update({"User-Agent": "JAVDL/1.0"})
+                time.sleep(min(2 ** (attempt - 1), 5))
+
+        else:
+            raise RuntimeError(f"GoFile upload failed: {last_error}")
 
         try:
             data = response.json()
