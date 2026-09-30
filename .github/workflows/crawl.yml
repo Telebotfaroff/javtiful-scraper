@@ -3,8 +3,8 @@ name: Full scraper database sync
 on:
   workflow_dispatch:
     inputs:
-      scope:
-        description: "What to crawl"
+      source:
+        description: "What do you want to scrape?"
         required: true
         default: all
         type: choice
@@ -18,8 +18,8 @@ on:
         required: false
         default: "1"
         type: string
-      max_pages:
-        description: "Maximum pages per listing/directory (0 = unlimited)"
+      pages:
+        description: "How many pages to scrape (0 = all pages)"
         required: false
         default: "0"
         type: string
@@ -62,9 +62,9 @@ jobs:
       - name: Crawl and synchronize database
         run: |
           python crawler.py \
-            --scope "${{ inputs.scope }}" \
+            --scope "${{ inputs.source }}" \
             --delay "${{ inputs.delay }}" \
-            --max-pages "${{ inputs.max_pages }}" \
+            --max-pages "${{ inputs.pages }}" \
             --timeout "${{ inputs.timeout }}" \
             --retries "${{ inputs.retries }}"
 
