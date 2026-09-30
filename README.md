@@ -30,4 +30,6 @@ Pyrogram uses `TELEGRAM_API_ID` and `TELEGRAM_API_HASH`. A bot token may be supp
 
 Run `python scripts/colab.py` to check GPU and FFmpeg availability.
 
+The full interactive test/runner is available in [`colab/javdl.ipynb`](https://github.com/Telebotfaroff/javtiful-scraper/blob/javdl/colab/javdl.ipynb).
+
 Use only with content you are authorized to download and redistribute.
