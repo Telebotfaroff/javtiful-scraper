@@ -13,6 +13,21 @@ on:
         required: false
         default: "2"
         type: string
+      start_page:
+        description: "First actress directory page"
+        required: false
+        default: "1"
+        type: string
+      end_page:
+        description: "Last actress directory page"
+        required: false
+        default: "25"
+        type: string
+      page_delay:
+        description: "Delay between pages in seconds"
+        required: false
+        default: "0.5"
+        type: string
 
 permissions:
   contents: write
@@ -41,7 +56,10 @@ jobs:
         env:
           TIMEOUT: ${{ inputs.timeout }}
           RETRIES: ${{ inputs.retries }}
-        run: python actress_index.py --timeout "$TIMEOUT" --retries "$RETRIES"
+          START_PAGE: ${{ inputs.start_page }}
+          END_PAGE: ${{ inputs.end_page }}
+          PAGE_DELAY: ${{ inputs.page_delay }}
+        run: python actress_index.py --timeout "$TIMEOUT" --retries "$RETRIES" --start-page "$START_PAGE" --end-page "$END_PAGE" --page-delay "$PAGE_DELAY"
       - name: Commit actress index
         if: always()
         run: |
