@@ -123,6 +123,11 @@ class JsonDatabase:
             "url": entry.get("url") or existing.get("url") or f"https://javtiful.com/actress/{slug}",
             "thumbnail": entry.get("thumbnail") or existing.get("thumbnail"),
             "total_videos": existing.get("total_videos", 0),
+            "total_pages": existing.get("total_pages", 0),
+            "status": existing.get("status", "pending"),
+            "last_crawled_page": existing.get("last_crawled_page", 0),
+            "videos_crawled": existing.get("videos_crawled", 0),
+            "last_crawled_at": existing.get("last_crawled_at"),
         }
 
     def register_studio(self, entry):
@@ -163,12 +168,18 @@ class JsonDatabase:
             data.setdefault("videos", {})[code] = self._actress_record(video)
             data["total"] = len(data["videos"])
             self._write(path, data)
+            existing_index = self.index_actress["actresses"].get(slug, {})
             self.index_actress["actresses"][slug] = {
                 "name": actress["name"],
                 "slug": slug,
-                "url": f"https://javtiful.com/actress/{slug}",
-                "thumbnail": self.index_actress["actresses"].get(slug, {}).get("thumbnail"),
+                "url": existing_index.get("url") or f"https://javtiful.com/actress/{slug}",
+                "thumbnail": existing_index.get("thumbnail"),
                 "total_videos": data["total"],
+                "total_pages": existing_index.get("total_pages", 0),
+                "status": existing_index.get("status", "pending"),
+                "last_crawled_page": existing_index.get("last_crawled_page", 0),
+                "videos_crawled": existing_index.get("videos_crawled", 0),
+                "last_crawled_at": existing_index.get("last_crawled_at"),
             }
 
         # Studio-specific files omit the redundant studio field.
