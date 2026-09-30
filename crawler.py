@@ -92,7 +92,11 @@ class Crawler:
     def crawl_directory(self, kind, start_page=1, end_page=0):
         directory = urljoin(
             BASE_URL,
-            "/actresses" if kind == "actress" else "/channels",
+            {
+                "actress": "/actresses",
+                "studio": "/channels",
+                "category": "/categories",
+            }[kind],
         )
         page = max(1, start_page)
         seen = set()
@@ -102,17 +106,18 @@ class Crawler:
                 break
 
             print(f"[{kind}-directory] page {page}", flush=True)
-            result = (
-                self.provider.scrape_actresses(directory, page)
-                if kind == "actress"
-                else self.provider.scrape_studios(directory, page)
-            )
-            self.stats["pages"] += 1
+            if kind == "actress":
+                result = self.provider.scrape_actresses(directory, page)
+                entry_key = "actresses"
+            elif kind == "studio":
+                result = self.provider.scrape_studios(directory, page)
+                entry_key = "studios"
+            else:
+                result = self.provider.scrape_categories(directory, page)
+                entry_key = "categories"
 
-            entries = result.get(
-                "actresses" if kind == "actress" else "studios",
-                [],
-            )
+            self.stats["pages"] += 1
+            entries = result.get(entry_key, [])
 
             # A directory entry may appear on multiple pages. Keep the
             # directory range moving even when a page contains only entries
@@ -134,10 +139,15 @@ class Crawler:
                             BASE_URL + "/",
                             f"actress/{entry['slug']}",
                         )
-                    else:
+                    elif kind == "studio":
                         videos_url = urljoin(
                             BASE_URL + "/",
                             f"channel/{entry['slug']}",
+                        )
+                    else:
+                        videos_url = urljoin(
+                            BASE_URL + "/",
+                            f"category/{entry['slug']}",
                         )
 
                 # IMPORTANT: the directory range controls which actresses/
@@ -180,6 +190,13 @@ class Crawler:
                 end_page=self.end_page,
             )
 
+        if scope in ("all", "categories"):
+            self.crawl_directory(
+                "category",
+                start_page=self.start_page,
+                end_page=self.end_page,
+            )
+
         self.db.finalize(self.stats)
         print("\nCrawl complete:", self.stats, flush=True)
         return self.stats
@@ -191,7 +208,7 @@ def main():
     )
     parser.add_argument(
         "--scope",
-        choices=("all", "main", "actresses", "studios"),
+        choices=("all", "main", "actresses", "studios", "categories"),
         default="all",
     )
     parser.add_argument(
