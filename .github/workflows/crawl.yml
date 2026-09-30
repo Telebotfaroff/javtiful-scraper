@@ -39,6 +39,16 @@ on:
         required: false
         default: "2"
         type: string
+      url:
+        description: "Specific actress/studio/category/listing URL (leave blank for scope mode)"
+        required: false
+        default: ""
+        type: string
+      resume:
+        description: "Resume from the saved crawler checkpoint"
+        required: false
+        default: true
+        type: boolean
 
 permissions:
   contents: write
@@ -67,15 +77,25 @@ jobs:
 
       - name: Crawl and synchronize database
         run: |
-          python crawler.py \
-            --scope "${{ inputs.source }}" \
-            --start-page "${{ inputs.start_page }}" \
-            --end-page "${{ inputs.end_page }}" \
-            --delay "${{ inputs.delay }}" \
-            --timeout "${{ inputs.timeout }}" \
-            --retries "${{ inputs.retries }}"
+          set -o pipefail
+          CMD=(python crawler.py
+            --start-page "${{ inputs.start_page }}"
+            --end-page "${{ inputs.end_page }}"
+            --delay "${{ inputs.delay }}"
+            --timeout "${{ inputs.timeout }}"
+            --retries "${{ inputs.retries }}")
+          if [ -n "${{ inputs.url }}" ]; then
+            CMD+=(--url "${{ inputs.url }}")
+          else
+            CMD+=(--scope "${{ inputs.source }}")
+          fi
+          if [ "${{ inputs.resume }}" = "true" ]; then
+            CMD+=(--resume)
+          fi
+          "${CMD[@]}"
 
-      - name: Commit database changes
+      - name: Commit database and checkpoint changes
+        if: always()
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -84,5 +104,5 @@ jobs:
             echo "No database changes to commit."
             exit 0
           fi
-          git commit -m "Update scraper database"
+          git commit -m "Update scraper database and crawler checkpoint"
           git push
