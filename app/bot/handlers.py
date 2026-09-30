@@ -4,7 +4,6 @@ import re
 
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-
 from app.bot.progress import TelegramProgress
 from app.jobs.pipeline import Pipeline
 from app.jobs.queue import Job
@@ -52,7 +51,10 @@ async def _run_job(message, state):
     job = Job(id=f"TG-{uuid.uuid4().hex[:10]}", url=state["url"], quality=state["quality"], uploader="telegram", target=message.chat.id, clips=state.get("clips"))
     try:
         video, results = await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
-        await status.edit_text(f"✅ Completed\n\n🎬 {video.title or "Video"}\n📦 Uploads: {len(results)}\n🎚 Quality: {video.selected_quality or state["quality"]}\n✂️ Mode: {"clip" if state.get("clips") else "full"}")
+        mode = "clip" if state.get("clips") else "full"
+        quality = video.selected_quality or state["quality"]
+        title = video.title or "Video"
+        await status.edit_text(f"✅ Completed\n\n🎬 {title}\n📦 Uploads: {len(results)}\n🎚 Quality: {quality}\n✂️ Mode: {mode}")
     except Exception as exc:
         await status.edit_text(f"❌ Pipeline failed\n\n{type(exc).__name__}: {exc}")
 
@@ -61,14 +63,19 @@ def register_handlers(app: Client):
     @app.on_message(filters.private & filters.text)
     async def link_handler(client, message):
         text = message.text.strip()
-        if text.startswith("/start"): return await message.reply_text("JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
-        if not text.startswith(("https://javtiful.com/","http://javtiful.com/")): return await message.reply_text("Send a supported Javtiful URL.")
+        if text.startswith("/start"):
+            return await message.reply_text("JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
+        if not text.startswith(("https://javtiful.com/","http://javtiful.com/")):
+            return await message.reply_text("Send a supported Javtiful URL.")
         status = await message.reply_text("🔎 Extracting video information…")
         try:
             video = extractor.extract(text)
-            if not video.qualities: return await status.edit_text("❌ No downloadable source/quality was exposed by the page.")
+            if not video.qualities:
+                return await status.edit_text("❌ No downloadable source/quality was exposed by the page.")
             pending[message.from_user.id] = {"url": text, "qualities": list(video.qualities)}
-            await status.edit_text(f"🎬 {video.title or "Video"}\n\n⏱ Duration: {video.duration or "unknown"}\nChoose a quality:", reply_markup=_quality_keyboard(video.qualities))
+            title = video.title or "Video"
+            duration = video.duration or "unknown"
+            await status.edit_text(f"🎬 {title}\n\n⏱ Duration: {duration}\nChoose a quality:", reply_markup=_quality_keyboard(video.qualities))
         except Exception as exc:
             await status.edit_text(f"❌ Extraction failed\n\n{type(exc).__name__}: {exc}")
 
@@ -76,8 +83,10 @@ def register_handlers(app: Client):
     @app.on_callback_query(filters.regex(r"^q\|"))
     async def quality_handler(client, query):
         state = pending.get(query.from_user.id)
-        if not state: return await query.answer("Session expired. Send the URL again.", show_alert=True)
-        quality = query.data.split("|",1)[1]; state["quality"] = quality
+        if not state:
+            return await query.answer("Session expired. Send the URL again.", show_alert=True)
+        quality = query.data.split("|",1)[1]
+        state["quality"] = quality
         await query.answer(f"Quality: {quality}")
         await query.message.edit_text(f"🎚 Quality: {quality}\n\nChoose upload mode:", reply_markup=_mode_keyboard())
 
@@ -85,25 +94,36 @@ def register_handlers(app: Client):
     @app.on_callback_query(filters.regex(r"^mode\|"))
     async def mode_handler(client, query):
         state = pending.get(query.from_user.id)
-        if not state or "quality" not in state: return await query.answer("Choose a quality first.", show_alert=True)
+        if not state or "quality" not in state:
+            return await query.answer("Choose a quality first.", show_alert=True)
         mode = query.data.split("|",1)[1]
         if mode == "full":
-            state.pop("clips", None); await query.answer("Full video selected")
+            state.pop("clips", None)
+            await query.answer("Full video selected")
             await query.message.edit_text("▶️ Full video selected. Starting pipeline…")
-            await _run_job(query.message, state); pending.pop(query.from_user.id, None); return
-        state["clip_waiting"] = True; await query.answer("Clip mode selected")
+            await _run_job(query.message, state)
+            pending.pop(query.from_user.id, None)
+            return
+        state["clip_waiting"] = True
+        await query.answer("Clip mode selected")
         await query.message.edit_text("✂️ Send one clip range like 00:00-01:30. You can use SS, MM:SS, or HH:MM:SS.")
 
 
     @app.on_message(filters.private & filters.text)
     async def clip_handler(client, message):
         state = pending.get(message.from_user.id)
-        if not state or not state.get("clip_waiting"): return
+        if not state or not state.get("clip_waiting"):
+            return
         match = re.fullmatch(r"\s*([^\-]+)\s*-\s*([^\-]+)\s*", message.text)
-        if not match: return await message.reply_text("Invalid range. Use 00:00-01:30.")
+        if not match:
+            return await message.reply_text("Invalid range. Use 00:00-01:30.")
         start, end = match.group(1).strip(), match.group(2).strip()
-        if not (_valid_time(start) and _valid_time(end)): return await message.reply_text("Invalid time. Use SS, MM:SS, or HH:MM:SS.")
-        if _seconds(end) <= _seconds(start): return await message.reply_text("End time must be after start time.")
-        state["clips"] = [(start,end)]; state.pop("clip_waiting", None)
+        if not (_valid_time(start) and _valid_time(end)):
+            return await message.reply_text("Invalid time. Use SS, MM:SS, or HH:MM:SS.")
+        if _seconds(end) <= _seconds(start):
+            return await message.reply_text("End time must be after start time.")
+        state["clips"] = [(start, end)]
+        state.pop("clip_waiting", None)
         await message.reply_text("✂️ Clip selected. Starting pipeline…")
-        await _run_job(message, state); pending.pop(message.from_user.id, None)
+        await _run_job(message, state)
+        pending.pop(message.from_user.id, None)
