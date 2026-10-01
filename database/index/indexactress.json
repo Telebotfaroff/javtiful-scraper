@@ -524,10 +524,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/0c6a6c54b3d5dfb94c71ad94bece598a.jpg",
       "total_videos": 244,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 222,
+      "last_crawled_at": 1790875532
     },
     "sayama-ai": {
       "name": "Sayama Ai",
