@@ -272,10 +272,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/30c03adaf55182ae2862397fd375b23f.jpg",
       "total_videos": 320,
       "total_pages": 14,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 14,
+      "videos_crawled": 293,
+      "last_crawled_at": 1790859910
     },
     "tsubaki-rika": {
       "name": "Tsubaki Rika",

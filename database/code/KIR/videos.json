@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "KIR-016": {
       "title": "KIR-016 Mischievous Life With Niece Who Came To Tokyo From Hakata Mizuki Yayoi",
@@ -11,6 +11,18 @@
         "Yayoi Mizuki"
       ],
       "studio": "Star Paradise",
+      "genres": []
+    },
+    "KIR-005": {
+      "title": "KIR-005 My Wife Started A Housekeeper",
+      "url": "https://javtiful.com/video/6148/kir-005",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/03/21/5d7220535741a9d0b1c615227be47306.jpg",
+      "duration": "01:28:48",
+      "date": "2020-03-21",
+      "actresses": [
+        "Aramura Akari"
+      ],
+      "studio": null,
       "genres": []
     }
   }
