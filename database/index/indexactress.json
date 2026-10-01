@@ -344,10 +344,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7ab36db04c7a944bc56519c2609bbd61.jpg",
       "total_videos": 286,
       "total_pages": 12,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 12,
+      "videos_crawled": 272,
+      "last_crawled_at": 1790864599
     },
     "alice-otsu": {
       "name": "Alice Otsu",
