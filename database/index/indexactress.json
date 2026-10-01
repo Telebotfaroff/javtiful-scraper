@@ -548,10 +548,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/ef77ff4e106622cf96a1597fda68ad40.jpg",
       "total_videos": 239,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 211,
+      "last_crawled_at": 1790876925
     },
     "aizawa-miyu": {
       "name": "Aizawa Miyu",
