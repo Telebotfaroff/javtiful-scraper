@@ -1,0 +1,23 @@
+{
+  "total": 2,
+  "videos": {
+    "STAR-995-REDUCING": {
+      "title": "STAR-995 The sweet taste of lilies and honey",
+      "url": "https://javtiful.com/video/103220/star-995-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/02/17/ef9a8a3b0b09347b797eac348e52a3cd.jpg",
+      "duration": "02:04:55",
+      "date": "2026-02-17",
+      "studio": "sod-create",
+      "genres": []
+    },
+    "STAR-995": {
+      "title": "STAR-995 The Sweet Taste Of Lily And Honey",
+      "url": "https://javtiful.com/video/1327/star-995",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2018/11/12/b3c458f007477d578ea1983a7e08e910.jpg",
+      "duration": "02:05:00",
+      "date": "2018-11-12",
+      "studio": "sod-create",
+      "genres": []
+    }
+  }
+}

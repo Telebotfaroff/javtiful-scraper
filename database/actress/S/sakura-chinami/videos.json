@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "GVH-128": {
       "title": "GVH-128 Plump General Hospital",
@@ -107,6 +107,15 @@
       "duration": "03:38:39",
       "date": "2025-09-14",
       "studio": "kmproduce",
+      "genres": []
+    },
+    "DANDY-580": {
+      "title": "DANDY-580 I Wanted To Take A Bath Together With My Sister",
+      "url": "https://javtiful.com/video/7362/dandy-580",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/08/15/fce94eb0c3e68d0a246f4f9e74805acc.jpg",
+      "duration": "03:27:30",
+      "date": "2020-08-15",
+      "studio": null,
       "genres": []
     }
   }
