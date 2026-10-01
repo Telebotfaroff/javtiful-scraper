@@ -284,10 +284,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/ab3a095d3f6910283edf76dae4c76a33.jpg",
       "total_videos": 310,
       "total_pages": 13,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 13,
+      "videos_crawled": 264,
+      "last_crawled_at": 1790860722
     },
     "misaki-kanna": {
       "name": "Misaki Kanna",

@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "AARM-090": {
       "title": "AARM-090 Can't Take It Off Because It's Cute Clothes",
@@ -26,6 +26,15 @@
       "duration": "03:28:29",
       "date": "2024-08-29",
       "studio": "hiyoko",
+      "genres": []
+    },
+    "HUNTB-064": {
+      "title": "HUNTB-064 A Cool Girls Group Sets Up A Pool",
+      "url": "https://javtiful.com/video/11310/huntb-064",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/07/30/7651e883788789bcf5e9ac1da8b958da.jpg",
+      "duration": "02:49:21",
+      "date": "2021-07-30",
+      "studio": "hunter",
       "genres": []
     }
   }
