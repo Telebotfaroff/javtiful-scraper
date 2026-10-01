@@ -201,7 +201,7 @@ Legacy full-scope mode remains available:
 ### Database layout
 
     database/
-    ├── actress/<slug>/videos.json
+    ├── actress/<A-Z>/<slug>/videos.json
     ├── studio/<slug>/videos.json
     ├── code/<CODE>/videos.json
     └── index/
