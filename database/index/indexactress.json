@@ -620,10 +620,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/09de335a007187a2ccfb69269920102a.jpg",
       "total_videos": 232,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 229,
+      "last_crawled_at": 1790882227
     },
     "oshikawa-yuuri": {
       "name": "Oshikawa Yuuri",
