@@ -128,10 +128,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/acc2559b8ffc38a11673aee619c39815.jpg",
       "total_videos": 379,
       "total_pages": 16,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 16,
+      "videos_crawled": 365,
+      "last_crawled_at": 1790849521
     },
     "kashiwagi-konatsu": {
       "name": "Kashiwagi Konatsu",

@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "SILK-187": {
       "title": "SILK-187 RE:PLAY vol.2 Fate draws the two together again",
@@ -26,6 +26,15 @@
       "duration": "02:47:07",
       "date": "2024-11-01",
       "studio": "deeps",
+      "genres": []
+    },
+    "MIRD-279": {
+      "title": "MIRD-279 Oma-1 Grand Prix 2026",
+      "url": "https://javtiful.com/video/102028/mird-279",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/01/29/703dc814aaebde830415b635d87f31af.jpg",
+      "duration": "03:05:16",
+      "date": "2026-01-29",
+      "studio": "moodyz",
       "genres": []
     }
   }

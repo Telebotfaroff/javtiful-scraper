@@ -1,5 +1,5 @@
 {
-  "total": 10,
+  "total": 11,
   "videos": {
     "NHDTC-202-REDUCING": {
       "title": "NHDTC-202 A Beautiful Librarian",
@@ -89,6 +89,15 @@
       "duration": "02:22:17",
       "date": "2026-03-07",
       "studio": "alice-japan",
+      "genres": []
+    },
+    "MIRD-279": {
+      "title": "MIRD-279 Oma-1 Grand Prix 2026",
+      "url": "https://javtiful.com/video/102028/mird-279",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/01/29/703dc814aaebde830415b635d87f31af.jpg",
+      "duration": "03:05:16",
+      "date": "2026-01-29",
+      "studio": "moodyz",
       "genres": []
     }
   }

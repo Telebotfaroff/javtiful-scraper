@@ -1,5 +1,5 @@
 {
-  "total": 16,
+  "total": 17,
   "videos": {
     "SEVEN-008": {
       "title": "SEVEN-008 Tokyo Yarender 2",
@@ -178,6 +178,17 @@
       "date": "2022-06-26",
       "actresses": [
         "Shinoda Yuu"
+      ],
+      "genres": []
+    },
+    "VOTAN-001": {
+      "title": "VOTAN-001 Two People Who Can't Go Home Even If The Rising Sun Rises",
+      "url": "https://javtiful.com/video/19055/votan-001",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/05/27/32eb35c0008788617752130bc7684933.jpg",
+      "duration": "02:09:43",
+      "date": "2022-05-27",
+      "actresses": [
+        "Kitano Mina"
       ],
       "genres": []
     }
