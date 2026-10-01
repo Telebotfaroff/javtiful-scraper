@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 5,
   "videos": {
     "MIRD-187": {
       "title": "MIRD-187 A King Who Lives With Ten Obedient Maids",
@@ -35,6 +35,15 @@
       "duration": "03:38:24",
       "date": "2020-08-16",
       "studio": "hunter",
+      "genres": []
+    },
+    "RCTD-239": {
+      "title": "RCTD-239 I Am A Doppelgen Girl",
+      "url": "https://javtiful.com/video/3152/rctd-239",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/06/21/5900d7ffa201ee61836fde10ddf4b797.jpg",
+      "duration": "02:15:27",
+      "date": "2019-06-21",
+      "studio": null,
       "genres": []
     }
   }

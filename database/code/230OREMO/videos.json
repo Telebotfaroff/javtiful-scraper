@@ -1,5 +1,5 @@
 {
-  "total": 11,
+  "total": 12,
   "videos": {
     "230OREMO-055": {
       "title": "230OREMO-055 Women's 1500m walk out K",
@@ -131,6 +131,18 @@
       "date": "2024-03-05",
       "actresses": [
         "Tsubaki Rika"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "230OREMO-010": {
+      "title": "230OREMO-010 Hashikan",
+      "url": "https://javtiful.com/video/41428/230oremo-010",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/09/05/5b1fa526e3f03a32895436c883c06cda.jpg",
+      "duration": "01:05:06",
+      "date": "2023-09-05",
+      "actresses": [
+        "Misaki Kanna"
       ],
       "studio": null,
       "genres": []
