@@ -56,10 +56,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1fd2d87504598fb2b17967fa19b5bc2b.jpg",
       "total_videos": 402,
       "total_pages": 17,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 17,
+      "videos_crawled": 387,
+      "last_crawled_at": 1790838125
     },
     "shinoda-yuu": {
       "name": "Shinoda Yuu",
