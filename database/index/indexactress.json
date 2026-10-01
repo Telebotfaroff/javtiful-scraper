@@ -656,10 +656,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/ea0864cc4f1819d85fa2a464f013f751.jpg",
       "total_videos": 228,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 221,
+      "last_crawled_at": 1790884301
     },
     "totsuki-ruisa": {
       "name": "Totsuki Ruisa",
