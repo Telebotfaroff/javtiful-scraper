@@ -32,10 +32,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/98812d7da491cc47be014a8ae0ecb20b.jpg",
       "total_videos": 537,
       "total_pages": 23,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 23,
+      "videos_crawled": 524,
+      "last_crawled_at": 1790825933
     },
     "yayoi-mizuki": {
       "name": "Yayoi Mizuki",

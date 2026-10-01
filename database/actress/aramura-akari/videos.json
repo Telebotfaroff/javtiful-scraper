@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "MKMP-537-REDUCING": {
       "title": "MKMP-537 Whether they're masochists, uncool guys, or just playboys, they just want to have sex with men!",
@@ -44,6 +44,15 @@
       "duration": "01:51:57",
       "date": "2025-11-06",
       "studio": "rookie",
+      "genres": []
+    },
+    "MIRD-254": {
+      "title": "MIRD-254 MOODYZ Fan Appreciation Festival: Backroom Bus Tour 2025 - Rescue the Substitutes? Samba Carnival!!!",
+      "url": "https://javtiful.com/video/82726/mird-254",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/04/10/7348f93de28fa01e004a3717fb847f5e.jpg",
+      "duration": "03:58:13",
+      "date": "2025-04-10",
+      "studio": "moodyz",
       "genres": []
     }
   }
