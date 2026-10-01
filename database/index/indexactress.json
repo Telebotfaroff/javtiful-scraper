@@ -164,10 +164,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/84cb85d34f4ff54a3d8e363361c460c2.jpg",
       "total_videos": 368,
       "total_pages": 16,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 16,
+      "videos_crawled": 362,
+      "last_crawled_at": 1790852235
     },
     "hana-himesaki": {
       "name": "Hana Himesaki",
