@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "HGOT-019": {
       "title": "HGOT-019 The Neighbor Of The Apartment",
@@ -65,6 +65,18 @@
       "date": "2020-07-11",
       "actresses": [
         "Yamamoto Shuri"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "HGOT-063": {
+      "title": "HGOT-063 A Wife Who Was Taken Down By Another Man",
+      "url": "https://javtiful.com/video/8429/hgot-063",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/12/12/9f416884f732636c07ca2ce7eefbb0bb.jpg",
+      "duration": "02:33:55",
+      "date": "2020-12-12",
+      "actresses": [
+        "Tsujii Honoka"
       ],
       "studio": null,
       "genres": []

@@ -1,5 +1,5 @@
 {
-  "total": 18,
+  "total": 19,
   "videos": {
     "CESD-921": {
       "title": "CESD-921 Three Beautiful Sisters We've Started Personal Delivery Health Yui Hatano Momoka Kato Aishichi Shinkawa",
@@ -161,6 +161,15 @@
       "duration": "02:28:02",
       "date": "2023-11-15",
       "studio": "sod-create",
+      "genres": []
+    },
+    "DASD-613": {
+      "title": "DASD-613 The Sister Who Was Stopped For A While",
+      "url": "https://javtiful.com/video/4952/dasd-613",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/12/20/c359dd2b68462a2bb024aa1ffca80843.jpg",
+      "duration": "02:08:05",
+      "date": "2019-12-20",
+      "studio": null,
       "genres": []
     }
   }

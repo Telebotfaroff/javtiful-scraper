@@ -416,10 +416,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/06682a16005255cb22558846e3728e58.jpg",
       "total_videos": 266,
       "total_pages": 12,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 12,
+      "videos_crawled": 224,
+      "last_crawled_at": 1790869041
     },
     "fukada-eimi": {
       "name": "Fukada Eimi",
