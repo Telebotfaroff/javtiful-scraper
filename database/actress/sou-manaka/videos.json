@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "IBW-755Z": {
       "title": "IBW-755z Drenched Short Stature",
@@ -8,6 +8,15 @@
       "duration": "02:00:14",
       "date": "2023-04-17",
       "studio": "ibworks",
+      "genres": []
+    },
+    "DASD-626": {
+      "title": "DASD-626 Lonely Customs Men's Esthetic",
+      "url": "https://javtiful.com/video/5367/dasd-626",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/01/20/d109573faaabe370a1d5c8663700337d.jpg",
+      "duration": "02:07:50",
+      "date": "2020-01-20",
+      "studio": null,
       "genres": []
     }
   }

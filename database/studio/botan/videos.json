@@ -1,5 +1,5 @@
 {
-  "total": 15,
+  "total": 16,
   "videos": {
     "SEVEN-008": {
       "title": "SEVEN-008 Tokyo Yarender 2",
@@ -167,6 +167,17 @@
       "date": "2024-02-29",
       "actresses": [
         "Minatsuki Hikaru"
+      ],
+      "genres": []
+    },
+    "VOTAN-005": {
+      "title": "VOTAN-005 Why Don't You Take A Bath With Yu Shinoda?",
+      "url": "https://javtiful.com/video/20121/votan-005",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/06/26/13d25e524cc258d6e02199096ba689f5.jpg",
+      "duration": "01:50:17",
+      "date": "2022-06-26",
+      "actresses": [
+        "Shinoda Yuu"
       ],
       "genres": []
     }
