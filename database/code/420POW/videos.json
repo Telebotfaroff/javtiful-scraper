@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "420POW-046": {
       "title": "420POW-046 Techi Ultimate Weapon Of The Raccoon Face World",
@@ -9,6 +9,18 @@
       "date": "2022-01-10",
       "actresses": [
         "Hana Himesaki"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "420POW-089": {
+      "title": "420POW-089 Something like this",
+      "url": "https://javtiful.com/video/77048/420pow-089",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/01/26/0cf6ee51e25d3be32c71075e71e238c9.jpg",
+      "duration": "01:51:16",
+      "date": "2025-01-26",
+      "actresses": [
+        "Suehiro Jun"
       ],
       "studio": null,
       "genres": []
