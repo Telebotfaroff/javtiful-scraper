@@ -428,10 +428,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/37ec2030f67b46540c6b69f538ad9c4e.jpg",
       "total_videos": 264,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 248,
+      "last_crawled_at": 1790869763
     },
     "jinguuji-nao": {
       "name": "Jinguuji Nao",
