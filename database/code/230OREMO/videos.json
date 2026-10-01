@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "230OREMO-055": {
       "title": "230OREMO-055 Women's 1500m walk out K",
@@ -9,6 +9,18 @@
       "date": "2023-11-07",
       "actresses": [
         "Kuramoto Sumire"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "230OREMO-060": {
+      "title": "230OREMO-060 Yuiyui",
+      "url": "https://javtiful.com/video/46044/230oremo-060",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/11/09/a562fb10150c7b45b7e62bd0b98468bc.jpg",
+      "duration": "00:49:22",
+      "date": "2023-11-09",
+      "actresses": [
+        "Tenma Yui"
       ],
       "studio": null,
       "genres": []

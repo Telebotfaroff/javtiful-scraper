@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 10,
   "videos": {
     "NHDTC-202-REDUCING": {
       "title": "NHDTC-202 A Beautiful Librarian",
@@ -71,6 +71,24 @@
       "duration": "02:23:12",
       "date": "2025-09-04",
       "studio": "hsoda",
+      "genres": []
+    },
+    "DVAJ-731-REDUCING": {
+      "title": "DVAJ-731 A relaxing, lovey-dovey, and sexy holiday with a female friend (live-action version)",
+      "url": "https://javtiful.com/video/104285/dvaj-731-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/03/09/d07c7e2a94b691d855543f1e4e280154.jpg",
+      "duration": "02:22:17",
+      "date": "2026-03-09",
+      "studio": "alice-japan",
+      "genres": []
+    },
+    "DVAJ-731": {
+      "title": "DVAJ-731 A relaxing, lovey-dovey, and sexy holiday with a female friend (live-action version)",
+      "url": "https://javtiful.com/video/104155/dvaj-731",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/03/07/0a6a5bf0030e18f0117a30c3886f9505.jpg",
+      "duration": "02:22:17",
+      "date": "2026-03-07",
+      "studio": "alice-japan",
       "genres": []
     }
   }

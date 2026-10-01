@@ -104,10 +104,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8f8be92015d7c57341484a6e860e77f7.jpg",
       "total_videos": 385,
       "total_pages": 17,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 17,
+      "videos_crawled": 347,
+      "last_crawled_at": 1790847746
     },
     "yoshine-yuria": {
       "name": "Yoshine Yuria",
