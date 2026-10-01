@@ -488,10 +488,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/3011a22f3d0bbcb89a6111f112f847fe.jpg",
       "total_videos": 259,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 231,
+      "last_crawled_at": 1790873373
     },
     "arai-rima": {
       "name": "Arai Rima",
