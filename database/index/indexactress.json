@@ -644,10 +644,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/b5901bb32020fa8cdf5c0b370f137733.jpg",
       "total_videos": 230,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 195,
+      "last_crawled_at": 1790883611
     },
     "haruna-hana": {
       "name": "Haruna Hana",
