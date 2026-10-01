@@ -57,6 +57,13 @@ class JsonDatabase:
         return value or fallback
 
     @staticmethod
+    def actress_category(name, slug=""):
+        """Return the alphabet bucket for an actress."""
+        value = str(name or slug or "").strip()
+        first = value[:1].upper()
+        return first if first in "ABCDEFGHIJKLMNOPQRSTUVWXYZ" else "OTHER"
+
+    @staticmethod
     def code_category(code):
         return str(code).split("-", 1)[0].upper()
 
@@ -163,7 +170,8 @@ class JsonDatabase:
         # Actress-specific files omit the redundant actresses field.
         for actress in video["actresses"]:
             slug = actress["slug"]
-            path = self.root / "actress" / slug / "videos.json"
+            category = self.actress_category(actress["name"], slug)
+            path = self.root / "actress" / category / slug / "videos.json"
             data = self._load(path, {"total": 0, "videos": {}})
             data.setdefault("videos", {})[code] = self._actress_record(video)
             data["total"] = len(data["videos"])
