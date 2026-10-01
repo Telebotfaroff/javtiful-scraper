@@ -260,10 +260,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fb8797894b2f5da92e675dd49984fdc8.jpg",
       "total_videos": 321,
       "total_pages": 14,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 14,
+      "videos_crawled": 253,
+      "last_crawled_at": 1790859095
     },
     "aramura-akari": {
       "name": "Aramura Akari",

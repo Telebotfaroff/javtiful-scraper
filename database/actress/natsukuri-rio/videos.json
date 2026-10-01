@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "HUNBL-150": {
       "title": "HUNBL-150 \"Big brother...isn't this a bad thing?\" \"Be sure to peel off the skin and wash it\" \"It's getting big...\" \"When the white stuff comes out, drink it all\"...2",
@@ -26,6 +26,15 @@
       "duration": "02:03:39",
       "date": "2025-10-05",
       "studio": "office-ks",
+      "genres": []
+    },
+    "HSODA-008": {
+      "title": "HSODA-008 A day at the Ushio Announcer College. There seems to be a school in Tokyo that trains announcers who can handle the tides, and because of the nature of their profession,",
+      "url": "https://javtiful.com/video/52798/hsoda-008",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/02/09/309a5e1fde317188413a132a384e9cde.jpg",
+      "duration": "01:39:08",
+      "date": "2024-02-09",
+      "studio": "hsoda",
       "genres": []
     }
   }
