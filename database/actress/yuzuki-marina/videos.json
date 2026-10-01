@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 4,
   "videos": {
     "SCPX-345": {
       "title": "SCPX-345 My Sister Who Works Seriously",
@@ -17,6 +17,24 @@
       "duration": "01:49:21",
       "date": "2023-12-16",
       "studio": null,
+      "genres": []
+    },
+    "HUNTA-462-REDUCING": {
+      "title": "HUNTA-462 Only Two People At Hot Spring",
+      "url": "https://javtiful.com/video/111184/hunta-462-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/07/20/98696828e757b4f1261484cfcfc53b0f.jpg",
+      "duration": "04:00:32",
+      "date": "2026-07-19",
+      "studio": "hunter",
+      "genres": []
+    },
+    "HUNTA-462": {
+      "title": "HUNTA-462 Only Two People At Hot Spring",
+      "url": "https://javtiful.com/video/3216/hunta-462",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/06/27/a2d574d09cc68ad56111f9e6ef496362.jpg",
+      "duration": "04:00:12",
+      "date": "2019-06-27",
+      "studio": "hunter",
       "genres": []
     }
   }

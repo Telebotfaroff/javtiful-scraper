@@ -1,5 +1,5 @@
 {
-  "total": 597,
+  "total": 598,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -5372,6 +5372,15 @@
       "duration": "02:28:49",
       "date": "2020-09-14",
       "studio": null,
+      "genres": []
+    },
+    "GVH-072": {
+      "title": "GVH-072 Female Teacher And Evil Son Student Council",
+      "url": "https://javtiful.com/video/6881/gvh-072",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/06/11/bcf87e84fb4345b56549a094b6e2d66b.jpg",
+      "duration": "02:16:46",
+      "date": "2020-06-11",
+      "studio": "glory-quest",
       "genres": []
     }
   }

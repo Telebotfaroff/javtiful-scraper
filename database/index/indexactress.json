@@ -152,10 +152,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7914ee553f37a64583cdf15387ade655.jpg",
       "total_videos": 372,
       "total_pages": 16,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 16,
+      "videos_crawled": 343,
+      "last_crawled_at": 1790851372
     },
     "julia": {
       "name": "Julia",
