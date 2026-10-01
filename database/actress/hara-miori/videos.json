@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "SILK-164": {
       "title": "SILK-164 More than friends, more than you can imagine. 1",
@@ -8,6 +8,15 @@
       "duration": "03:19:19",
       "date": "2024-08-07",
       "studio": "silk-labo",
+      "genres": []
+    },
+    "GAPL-037": {
+      "title": "GAPL-037 Sneaking in! A men's beauty salon that's rumored to be a good place to get laid! She massages your whole body in a thin, see-through outfit, and even gives you a gentle ma",
+      "url": "https://javtiful.com/video/72961/gapl-037",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/12/05/51d987aecbf299c6df3f0eb673915287.jpg",
+      "duration": "03:52:45",
+      "date": "2024-12-05",
+      "studio": null,
       "genres": []
     }
   }

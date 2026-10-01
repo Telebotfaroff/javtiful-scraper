@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 6,
   "videos": {
     "SEVEN-008": {
       "title": "SEVEN-008 Tokyo Yarender 2",
@@ -45,6 +45,30 @@
       "date": "2024-07-07",
       "actresses": [
         "Misono Waka"
+      ],
+      "studio": "BOTAN",
+      "genres": []
+    },
+    "SEVEN-012": {
+      "title": "SEVEN-012 Osaka Love Story Mao Hamasaki",
+      "url": "https://javtiful.com/video/75250/seven-012",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/01/05/dccf5ca8703b986e228b370a146a731f.jpg",
+      "duration": "01:26:42",
+      "date": "2025-01-05",
+      "actresses": [
+        "Hamasaki Mao"
+      ],
+      "studio": "BOTAN",
+      "genres": []
+    },
+    "SEVEN-010": {
+      "title": "SEVEN-010 Hamasaki Walker",
+      "url": "https://javtiful.com/video/74378/seven-010",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/12/22/d617ac7ec866a9b6dd7b73b1e303d72e.jpg",
+      "duration": "01:11:30",
+      "date": "2024-12-22",
+      "actresses": [
+        "Hamasaki Mao"
       ],
       "studio": "BOTAN",
       "genres": []

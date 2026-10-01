@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "FTHTD-075": {
       "title": "FTHTD-075 The Book of XX: Fallen Swimming Club Members - Ruthless Psychopaths - A live-action adaptation of a light novel",
@@ -17,6 +17,15 @@
       "duration": "02:59:40",
       "date": "2024-06-23",
       "studio": "botan",
+      "genres": []
+    },
+    "IKUNA-006": {
+      "title": "IKUNA-006 Hamasaki Mao vs Hinata Hikage The entire sexy world's GAMANKO ultimate leg showdown. The industry's most insanely beautiful R-class legs showdown!",
+      "url": "https://javtiful.com/video/56780/ikuna-006",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/04/07/fe5bca4ed909bbb2521e13cbd8b0b4d6.jpg",
+      "duration": "02:14:56",
+      "date": "2024-04-07",
+      "studio": null,
       "genres": []
     }
   }
