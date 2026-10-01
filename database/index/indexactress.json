@@ -908,10 +908,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/4478ebe9869cffc9c2c7746b35a2cdc0.jpg",
       "total_videos": 194,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 176,
+      "last_crawled_at": 1790897939
     },
     "mizukawa-sumire": {
       "name": "Mizukawa Sumire",
