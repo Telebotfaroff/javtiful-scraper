@@ -80,10 +80,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/4ecd906b63c2069170fb83dc69ceafe7.jpg",
       "total_videos": 385,
       "total_pages": 17,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 17,
+      "videos_crawled": 371,
+      "last_crawled_at": 1790840749
     },
     "kuramoto-sumire": {
       "name": "Kuramoto Sumire",
