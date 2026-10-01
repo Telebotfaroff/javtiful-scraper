@@ -728,10 +728,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/06ec4c8ef3b1cdc43f8557eefe861f8d.jpg",
       "total_videos": 221,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 202,
+      "last_crawled_at": 1790888338
     },
     "arimura-nozomi": {
       "name": "Arimura Nozomi",
