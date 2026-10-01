@@ -47,6 +47,9 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Migrate actress database layout
+        run: python migrate_actress_database.py
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -57,7 +60,7 @@ jobs:
 
       - name: Compile check
         run: |
-          python -m py_compile actress_index.py actress_crawler.py javtiful_scraper.py crawler.py database.py providers/*.py
+          python -m py_compile actress_index.py actress_crawler.py javtiful_scraper.py crawler.py database.py migrate_actress_database.py providers/*.py
 
       - name: Crawl actress
         env:
