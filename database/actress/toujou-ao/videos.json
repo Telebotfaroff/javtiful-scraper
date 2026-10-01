@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "SABA-718": {
       "title": "SABA-718 In A Shared Room With A Drunken Colleague Who Missed The Last Train",
@@ -8,6 +8,15 @@
       "duration": "02:34:45",
       "date": "2021-08-08",
       "studio": null,
+      "genres": []
+    },
+    "HUNTA-956": {
+      "title": "HUNTA-956 A girl who is like a male friend, who talks and looks like a man, goes to a drinking party full of men by herself. And then...",
+      "url": "https://javtiful.com/video/71940/hunta-956",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/11/20/5c529451de1a4bfe165387fdd15cb2e8.jpg",
+      "duration": "03:45:20",
+      "date": "2024-11-20",
+      "studio": "hunter",
       "genres": []
     }
   }

@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "DFE-069": {
       "title": "DFE-069 I'm having my daughter feed me",
@@ -11,6 +11,18 @@
         "Kashiwagi Konatsu"
       ],
       "studio": "Waap Entertainment",
+      "genres": []
+    },
+    "DFE-046": {
+      "title": "DFE-046 Acme Salon Tanaka Nene",
+      "url": "https://javtiful.com/video/7725/dfe-046",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/09/26/5111011a1dd059eeb82e61f3b1b8f4c9.jpg",
+      "duration": "02:02:35",
+      "date": "2020-09-26",
+      "actresses": [
+        "Tanaka Nene"
+      ],
+      "studio": null,
       "genres": []
     }
   }

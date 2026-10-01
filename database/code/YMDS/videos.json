@@ -1,5 +1,5 @@
 {
-  "total": 19,
+  "total": 20,
   "videos": {
     "YMDS-124": {
       "title": "YMDS-124 The Day Yui Hatano Became Her Girlfriend",
@@ -227,6 +227,18 @@
         "Suehiro Jun"
       ],
       "studio": "Momotarou Eizou Shuppan",
+      "genres": []
+    },
+    "YMDS-120": {
+      "title": "YMDS-120 The Day Nene Tanaka Became A Girlfriend",
+      "url": "https://javtiful.com/video/24600/ymds-120",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/10/29/345f97fe510bf3029de9830cc0505916.jpg",
+      "duration": "02:12:02",
+      "date": "2022-10-29",
+      "actresses": [
+        "Tanaka Nene"
+      ],
+      "studio": null,
       "genres": []
     }
   }
