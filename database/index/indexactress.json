@@ -368,10 +368,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/b928553589ccfdd3d33c8542d22dfc56.jpg",
       "total_videos": 275,
       "total_pages": 12,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 12,
+      "videos_crawled": 233,
+      "last_crawled_at": 1790866111
     },
     "yura-kana": {
       "name": "Yura Kana",
