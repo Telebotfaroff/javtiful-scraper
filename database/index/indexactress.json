@@ -380,10 +380,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/d0b89bf187f1d54db643f28845446639.jpg",
       "total_videos": 269,
       "total_pages": 12,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 12,
+      "videos_crawled": 216,
+      "last_crawled_at": 1790866841
     },
     "itsukaichi-mei": {
       "name": "Itsukaichi Mei",

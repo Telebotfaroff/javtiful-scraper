@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "XVSR-651": {
       "title": "XVSR-651 MAX-A 30th Anniversary Work 18 Ban Harlem House",
@@ -26,6 +26,15 @@
       "duration": "02:06:46",
       "date": "2026-08-21",
       "studio": "tma",
+      "genres": []
+    },
+    "SPSD-47": {
+      "title": "SPSD-47 Indecent Magical Equipment 3 Light Running Squadron Golanger Golan Yellow",
+      "url": "https://javtiful.com/video/91715/spsd-47",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/08/21/298fa1b8d4778fc7f03e6c2b5ed3737a.jpg",
+      "duration": "01:43:45",
+      "date": "2025-08-21",
+      "studio": null,
       "genres": []
     }
   }

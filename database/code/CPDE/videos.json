@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "CPDE-064": {
       "title": "CPDE-064 Strongest Attribute 64 Kashiwagi Konatsu",
@@ -11,6 +11,18 @@
         "Kashiwagi Konatsu"
       ],
       "studio": "PRESTIGE",
+      "genres": []
+    },
+    "CPDE-060": {
+      "title": "CPDE-060 Strongest Attribute 60 Kana Yura",
+      "url": "https://javtiful.com/video/39956/cpde-060",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/08/18/d812c832f3a67e106863620f0eddcbe6.jpg",
+      "duration": "02:33:21",
+      "date": "2023-08-18",
+      "actresses": [
+        "Yura Kana"
+      ],
+      "studio": "Saikyou Zokusei",
       "genres": []
     }
   }
