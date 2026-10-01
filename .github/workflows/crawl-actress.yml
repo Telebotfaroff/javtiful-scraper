@@ -2,7 +2,7 @@ name: Crawl Actress
 
 on:
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "*/20 * * * *"
   workflow_dispatch:
     inputs:
       actress:
@@ -62,7 +62,7 @@ jobs:
           TIMEOUT: ${{ inputs.timeout }}
           RETRIES: ${{ inputs.retries }}
         run: |
-          python actress_crawler.py --actress "$ACTRESS" --limit "$LIMIT"             --delay "$DELAY" --timeout "$TIMEOUT" --retries "$RETRIES"
+          python actress_crawler.py --actress "$ACTRESS" --limit "$LIMIT" --delay "$DELAY" --timeout "$TIMEOUT" --retries "$RETRIES"
       - name: Commit database and actress progress
         if: always()
         run: |
