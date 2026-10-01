@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "HUNTB-500": {
       "title": "HUNTB-500 Used Car Dealer Edition As Long As You Pay A Fixed Monthly Fee, You Can Ride As Many People (female) As You Like At The Used Car Dealer!",
@@ -107,6 +107,15 @@
       "duration": "03:32:02",
       "date": "2023-12-06",
       "studio": "silk-labo",
+      "genres": []
+    },
+    "HUNTB-406": {
+      "title": "HUNTB-406 Runaway Son Who Was Picked Up By His Sisters And Became A Pet",
+      "url": "https://javtiful.com/video/24755/huntb-406",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/11/04/2db1ffa155cf50cf807219fb57290cd0.jpg",
+      "duration": "03:30:52",
+      "date": "2022-11-04",
+      "studio": "hunter",
       "genres": []
     }
   }

@@ -308,10 +308,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e102d699bdd50fabb6b5e3ff24c04adf.jpg",
       "total_videos": 295,
       "total_pages": 13,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 13,
+      "videos_crawled": 236,
+      "last_crawled_at": 1790862292
     },
     "ohana-non": {
       "name": "Ohana Non",
