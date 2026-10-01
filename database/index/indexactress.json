@@ -860,10 +860,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/c1c80e889e21e625aac9259ed7c76cd8.jpg",
       "total_videos": 199,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 157,
+      "last_crawled_at": 1790895443
     },
     "haruhi-moka": {
       "name": "Haruhi Moka",

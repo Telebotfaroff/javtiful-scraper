@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 3,
   "videos": {
     "ZMAR-063": {
       "title": "ZMAR-063 Marutto! Nagisa Mitsuki",
@@ -9,6 +9,30 @@
       "date": "2022-05-22",
       "actresses": [
         "Nagisa Mitsuki"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "ZMAR-113": {
+      "title": "ZMAR-113 All together! AIKA2",
+      "url": "https://javtiful.com/video/60713/zmar-113",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/04/38e064f4f188b713081726726c4e6afa.jpg",
+      "duration": "04:00:42",
+      "date": "2024-06-04",
+      "actresses": [
+        "AIKA"
+      ],
+      "studio": "Planet Plus",
+      "genres": []
+    },
+    "ZMAR-053": {
+      "title": "ZMAR-053 Marutto Series! AIKA",
+      "url": "https://javtiful.com/video/13660/zmar-053",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/12/01/895d702b5644414ff3eb4df9aa1e4a99.jpg",
+      "duration": "04:07:26",
+      "date": "2021-12-01",
+      "actresses": [
+        "AIKA"
       ],
       "studio": null,
       "genres": []
