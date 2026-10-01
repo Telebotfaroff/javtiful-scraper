@@ -452,10 +452,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/9bc28a9db10f12b0bc8629a35fe1c83d.jpg",
       "total_videos": 263,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 246,
+      "last_crawled_at": 1790871205
     },
     "haruna-noa": {
       "name": "Haruna Noa",
