@@ -1,5 +1,5 @@
 {
-  "total": 10,
+  "total": 12,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -137,6 +137,30 @@
         "Tenma Yui"
       ],
       "studio": "Rocket",
+      "genres": []
+    },
+    "RCTD-392": {
+      "title": "RCTD-392 Arbitrarily King Game Kit Yuria Yoshine",
+      "url": "https://javtiful.com/video/9585/rctd-392",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/03/29/75b525cba9a46e9c17b6cb238c06e674.jpg",
+      "duration": "02:00:32",
+      "date": "2021-03-29",
+      "actresses": [
+        "Yoshine Yuria"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "RCTD-368": {
+      "title": "RCTD-368 True Time Stops Watch Part 20 Yuria Yoshine",
+      "url": "https://javtiful.com/video/8420/rctd-368",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/12/11/43c7833585555c493efbd68e3f04e8e5.jpg",
+      "duration": "02:30:23",
+      "date": "2020-12-11",
+      "actresses": [
+        "Yoshine Yuria"
+      ],
+      "studio": null,
       "genres": []
     }
   }
