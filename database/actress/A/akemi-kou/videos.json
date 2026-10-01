@@ -1,5 +1,5 @@
 {
-  "total": 10,
+  "total": 11,
   "videos": {
     "HUNTA-948": {
       "title": "HUNTA-948 I thought it would be a meetup full of guys, but everyone around me was a girl and I was the only guy! I went to a hotpot meetup for game lovers for the first time. Contr",
@@ -89,6 +89,15 @@
       "duration": "02:51:12",
       "date": "2023-10-19",
       "studio": "natural-high",
+      "genres": []
+    },
+    "HUNTA-984": {
+      "title": "HUNTA-984 She seems to be weak to pressure, so when I asked her repeatedly, she couldn't refuse and let me do it. She's a bad... no, she's the best.",
+      "url": "https://javtiful.com/video/74034/hunta-984",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/12/18/d19be49492176582ebf462e252175c01.jpg",
+      "duration": "03:56:28",
+      "date": "2024-12-18",
+      "studio": "hunter",
       "genres": []
     }
   }

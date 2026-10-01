@@ -1,5 +1,5 @@
 {
-  "total": 60,
+  "total": 62,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -795,6 +795,34 @@
         "Takarada Arisa"
       ],
       "studio": null,
+      "genres": []
+    },
+    "RCTD-597-REDUCING": {
+      "title": "RCTD-597 Ignore your presence! An unnoticed office",
+      "url": "https://javtiful.com/video/92480/rctd-597-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/01/5072dbe927a853624d20edbe162ef161.jpg",
+      "duration": "02:03:07",
+      "date": "2025-09-01",
+      "actresses": [
+        "Aoi Yurika",
+        "Konno Miina",
+        "Sakura Mahiru"
+      ],
+      "studio": "Rocket",
+      "genres": []
+    },
+    "RCTD-597": {
+      "title": "RCTD-597 Ignored! An unnoticed office",
+      "url": "https://javtiful.com/video/61295/rctd-597",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/11/c1630bb2ef00f89d8e17645ae07a1d41.jpg",
+      "duration": "02:03:06",
+      "date": "2024-06-11",
+      "actresses": [
+        "Aoi Yurika",
+        "Konno Miina",
+        "Sakura Mahiru"
+      ],
+      "studio": "Rocket",
       "genres": []
     }
   }
