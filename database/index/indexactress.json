@@ -584,10 +584,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/42e8f2e1404ccac4644cdc2b9feb0d0f.jpg",
       "total_videos": 235,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 196,
+      "last_crawled_at": 1790880177
     },
     "tsuno-miho": {
       "name": "Tsuno Miho",
