@@ -776,10 +776,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/3ee13adf1a571371eecfa840bababd84.jpg",
       "total_videos": 212,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 166,
+      "last_crawled_at": 1790890954
     },
     "yuzuriha-karen": {
       "name": "Yuzuriha Karen",
