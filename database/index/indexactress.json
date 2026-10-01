@@ -692,10 +692,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/b211f419e64d49514540e4a867acea38.jpg",
       "total_videos": 225,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 183,
+      "last_crawled_at": 1790886295
     },
     "koume-ena": {
       "name": "Koume Ena",
