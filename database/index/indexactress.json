@@ -476,10 +476,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a92633f7fd5064dbbdbd738f48375fb3.jpg",
       "total_videos": 259,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 226,
+      "last_crawled_at": 1790872674
     },
     "satsuki-mei": {
       "name": "Satsuki Mei",

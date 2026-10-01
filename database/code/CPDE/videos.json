@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "CPDE-064": {
       "title": "CPDE-064 Strongest Attribute 64 Kashiwagi Konatsu",
@@ -23,6 +23,18 @@
         "Yura Kana"
       ],
       "studio": "Saikyou Zokusei",
+      "genres": []
+    },
+    "CPDE-058": {
+      "title": "CPDE-058 Strongest Attribute 58 Mitsuki Nagisa",
+      "url": "https://javtiful.com/video/26431/cpde-058",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/12/22/2c5dfb867e2dceb1cb827e2d33a175a8.jpg",
+      "duration": "02:03:26",
+      "date": "2022-12-22",
+      "actresses": [
+        "Nagisa Mitsuki"
+      ],
+      "studio": null,
       "genres": []
     }
   }
