@@ -896,10 +896,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/92cb01c6742500d1d2af184bb96e36eb.jpg",
       "total_videos": 195,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 179,
+      "last_crawled_at": 1790897308
     },
     "kawakita-meisa": {
       "name": "Kawakita Meisa",
