@@ -740,10 +740,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/153b1863a547d89fc1a134bb2a1d77e8.jpg",
       "total_videos": 219,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 189,
+      "last_crawled_at": 1790889017
     },
     "aoi-yurika": {
       "name": "Aoi Yurika",

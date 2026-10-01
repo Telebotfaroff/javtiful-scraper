@@ -1,19 +1,19 @@
 {
-  "total": 219,
+  "total": 220,
   "studios": {
     "yama-to-sora": {
       "name": "Yama To Sora",
       "slug": "yama-to-sora",
       "url": "https://javtiful.com/channel/yama-to-sora",
       "thumbnail": null,
-      "total_videos": 64
+      "total_videos": 65
     },
     "wanz-factory": {
       "name": "WANZ FACTORY",
       "slug": "wanz-factory",
       "url": "https://javtiful.com/channel/wanz-factory",
       "thumbnail": null,
-      "total_videos": 397
+      "total_videos": 401
     },
     "kaguya-hime-pt-mousozoku": {
       "name": "Kaguya Hime Pt / Mousozoku",
@@ -27,42 +27,42 @@
       "slug": "max-a",
       "url": "https://javtiful.com/channel/max-a",
       "thumbnail": null,
-      "total_videos": 134
+      "total_videos": 138
     },
     "switch": {
       "name": "SWITCH",
       "slug": "switch",
       "url": "https://javtiful.com/channel/switch",
       "thumbnail": null,
-      "total_videos": 105
+      "total_videos": 109
     },
     "jet-eizou": {
       "name": "JET Eizou",
       "slug": "jet-eizou",
       "url": "https://javtiful.com/channel/jet-eizou",
       "thumbnail": null,
-      "total_videos": 227
+      "total_videos": 228
     },
     "maza": {
       "name": "Maza",
       "slug": "maza",
       "url": "https://javtiful.com/channel/maza",
       "thumbnail": null,
-      "total_videos": 47
+      "total_videos": 49
     },
     "kmproduce": {
       "name": "K.M.Produce",
       "slug": "kmproduce",
       "url": "https://javtiful.com/channel/kmproduce",
       "thumbnail": null,
-      "total_videos": 410
+      "total_videos": 413
     },
     "moodyz": {
       "name": "MOODYZ",
       "slug": "moodyz",
       "url": "https://javtiful.com/channel/moodyz",
       "thumbnail": null,
-      "total_videos": 1051
+      "total_videos": 1054
     },
     "premium": {
       "name": "Premium",
@@ -76,7 +76,7 @@
       "slug": "planet-plus",
       "url": "https://javtiful.com/channel/planet-plus",
       "thumbnail": null,
-      "total_videos": 205
+      "total_videos": 208
     },
     "rocket": {
       "name": "Rocket",
@@ -111,21 +111,21 @@
       "slug": "miru",
       "url": "https://javtiful.com/channel/miru",
       "thumbnail": null,
-      "total_videos": 46
+      "total_videos": 47
     },
     "maxing": {
       "name": "MAXING",
       "slug": "maxing",
       "url": "https://javtiful.com/channel/maxing",
       "thumbnail": null,
-      "total_videos": 103
+      "total_videos": 106
     },
     "glory-quest": {
       "name": "Glory Quest",
       "slug": "glory-quest",
       "url": "https://javtiful.com/channel/glory-quest",
       "thumbnail": null,
-      "total_videos": 339
+      "total_videos": 341
     },
     "dandy": {
       "name": "Dandy",
@@ -167,7 +167,7 @@
       "slug": "das",
       "url": "https://javtiful.com/channel/das",
       "thumbnail": null,
-      "total_videos": 613
+      "total_videos": 614
     },
     "ruby": {
       "name": "Ruby",
@@ -181,7 +181,7 @@
       "slug": "falenotube",
       "url": "https://javtiful.com/channel/falenotube",
       "thumbnail": null,
-      "total_videos": 38
+      "total_videos": 40
     },
     "misesu-no-sugao-emanuel": {
       "name": "Misesu No Sugao / Emanuel",
@@ -195,14 +195,14 @@
       "slug": "tma",
       "url": "https://javtiful.com/channel/tma",
       "thumbnail": null,
-      "total_videos": 63
+      "total_videos": 66
     },
     "hitodzuma-hanazono-gekijou": {
       "name": "Hitodzuma Hanazono Gekijou",
       "slug": "hitodzuma-hanazono-gekijou",
       "url": "https://javtiful.com/channel/hitodzuma-hanazono-gekijou",
       "thumbnail": null,
-      "total_videos": 44
+      "total_videos": 46
     },
     "smoke-films-mousouzoku": {
       "name": "Smoke Films / Mousouzoku",
@@ -216,21 +216,21 @@
       "slug": "crystal-eizou",
       "url": "https://javtiful.com/channel/crystal-eizou",
       "thumbnail": null,
-      "total_videos": 165
+      "total_videos": 168
     },
     "attackers": {
       "name": "Attackers",
       "slug": "attackers",
       "url": "https://javtiful.com/channel/attackers",
       "thumbnail": null,
-      "total_videos": 310
+      "total_videos": 311
     },
     "lunatics": {
       "name": "LUNATICS",
       "slug": "lunatics",
       "url": "https://javtiful.com/channel/lunatics",
       "thumbnail": null,
-      "total_videos": 163
+      "total_videos": 164
     },
     "global-media-entertainment": {
       "name": "Global Media Entertainment",
@@ -265,7 +265,7 @@
       "slug": "bi",
       "url": "https://javtiful.com/channel/bi",
       "thumbnail": null,
-      "total_videos": 159
+      "total_videos": 162
     },
     "kira-kira": {
       "name": "Kira ★ Kira",
@@ -279,7 +279,7 @@
       "slug": "deeps",
       "url": "https://javtiful.com/channel/deeps",
       "thumbnail": null,
-      "total_videos": 162
+      "total_videos": 164
     },
     "nagae-style": {
       "name": "Nagae Style",
@@ -307,7 +307,7 @@
       "slug": "venus",
       "url": "https://javtiful.com/channel/venus",
       "thumbnail": null,
-      "total_videos": 257
+      "total_videos": 259
     },
     "olga": {
       "name": "Olga",
@@ -321,7 +321,7 @@
       "slug": "first-star",
       "url": "https://javtiful.com/channel/first-star",
       "thumbnail": null,
-      "total_videos": 52
+      "total_videos": 53
     },
     "oppai": {
       "name": "Oppai",
@@ -377,7 +377,7 @@
       "slug": "ie-nergy",
       "url": "https://javtiful.com/channel/ie-nergy",
       "thumbnail": null,
-      "total_videos": 76
+      "total_videos": 79
     },
     "takara-eizou": {
       "name": "Takara Eizou",
@@ -391,7 +391,7 @@
       "slug": "hmp",
       "url": "https://javtiful.com/channel/hmp",
       "thumbnail": null,
-      "total_videos": 111
+      "total_videos": 112
     },
     "bermuda-mousouzoku": {
       "name": "Bermuda / Mousouzoku",
@@ -482,7 +482,7 @@
       "slug": "momotarou-eizou-shuppan",
       "url": "https://javtiful.com/channel/momotarou-eizou-shuppan",
       "thumbnail": null,
-      "total_videos": 129
+      "total_videos": 132
     },
     "ksb-kikaku-emmanuelle": {
       "name": "KSB Kikaku / Emmanuelle",
@@ -496,14 +496,14 @@
       "slug": "befree",
       "url": "https://javtiful.com/channel/befree",
       "thumbnail": null,
-      "total_videos": 56
+      "total_videos": 57
     },
     "sod-create": {
       "name": "SOD Create",
       "slug": "sod-create",
       "url": "https://javtiful.com/channel/sod-create",
       "thumbnail": null,
-      "total_videos": 128
+      "total_videos": 130
     },
     "yonaka": {
       "name": "YONAKA",
@@ -538,7 +538,7 @@
       "slug": "sadistic-village",
       "url": "https://javtiful.com/channel/sadistic-village",
       "thumbnail": null,
-      "total_videos": 42
+      "total_videos": 43
     },
     "idea-pocket": {
       "name": "IDEA POCKET",
@@ -559,7 +559,7 @@
       "slug": "oyaji-no-kosatsu",
       "url": "https://javtiful.com/channel/oyaji-no-kosatsu",
       "thumbnail": null,
-      "total_videos": 38
+      "total_videos": 39
     },
     "aegean": {
       "name": "AEGEAN",
@@ -580,7 +580,7 @@
       "slug": "prestige",
       "url": "https://javtiful.com/channel/prestige",
       "thumbnail": null,
-      "total_videos": 48
+      "total_videos": 49
     },
     "dream-ticket": {
       "name": "Dream Ticket",
@@ -601,21 +601,21 @@
       "slug": "hunter",
       "url": "https://javtiful.com/channel/hunter",
       "thumbnail": null,
-      "total_videos": 368
+      "total_videos": 376
     },
     "natural-high": {
       "name": "Natural High",
       "slug": "natural-high",
       "url": "https://javtiful.com/channel/natural-high",
       "thumbnail": null,
-      "total_videos": 209
+      "total_videos": 212
     },
     "alice-japan": {
       "name": "Alice Japan",
       "slug": "alice-japan",
       "url": "https://javtiful.com/channel/alice-japan",
       "thumbnail": null,
-      "total_videos": 89
+      "total_videos": 90
     },
     "ms-video-group": {
       "name": "M's Video Group",
@@ -636,7 +636,7 @@
       "slug": "rookie",
       "url": "https://javtiful.com/channel/rookie",
       "thumbnail": null,
-      "total_videos": 77
+      "total_videos": 79
     },
     "shigeki": {
       "name": "SHIGEKI",
@@ -650,7 +650,7 @@
       "slug": "radix",
       "url": "https://javtiful.com/channel/radix",
       "thumbnail": null,
-      "total_videos": 9
+      "total_videos": 10
     },
     "mrmichiru": {
       "name": "Mr.michiru",
@@ -692,7 +692,7 @@
       "slug": "marrion",
       "url": "https://javtiful.com/channel/marrion",
       "thumbnail": null,
-      "total_videos": 25
+      "total_videos": 26
     },
     "hitodzumaengokai-emanuel": {
       "name": "Hitodzumaengokai/Emanuel",
@@ -748,7 +748,7 @@
       "slug": "fc2ppv",
       "url": "https://javtiful.com/channel/fc2ppv",
       "thumbnail": null,
-      "total_videos": 94
+      "total_videos": 96
     },
     "mugon-mousou-zoku": {
       "name": "Mugon / Mousou Zoku",
@@ -776,7 +776,7 @@
       "slug": "shirouto-39",
       "url": "https://javtiful.com/channel/shirouto-39",
       "thumbnail": null,
-      "total_videos": 14
+      "total_videos": 15
     },
     "mellow-moon": {
       "name": "Mellow Moon",
@@ -790,7 +790,7 @@
       "slug": "doc",
       "url": "https://javtiful.com/channel/doc",
       "thumbnail": null,
-      "total_videos": 88
+      "total_videos": 89
     },
     "maruka-ano-mousozoku": {
       "name": "Maruka Ano / Mousozoku",
@@ -825,7 +825,7 @@
       "slug": "teppan",
       "url": "https://javtiful.com/channel/teppan",
       "thumbnail": null,
-      "total_videos": 17
+      "total_videos": 18
     },
     "ke-toraibu": {
       "name": "Ke- . Toraibu",
@@ -839,7 +839,7 @@
       "slug": "materiall",
       "url": "https://javtiful.com/channel/materiall",
       "thumbnail": null,
-      "total_videos": 70
+      "total_videos": 71
     },
     "peters-max": {
       "name": "Peters MAX",
@@ -881,14 +881,14 @@
       "slug": "emumusume-lab",
       "url": "https://javtiful.com/channel/emumusume-lab",
       "thumbnail": null,
-      "total_videos": 3
+      "total_videos": 4
     },
     "fechi-me": {
       "name": "Fechi Me",
       "slug": "fechi-me",
       "url": "https://javtiful.com/channel/fechi-me",
       "thumbnail": null,
-      "total_videos": 7
+      "total_videos": 8
     },
     "tsukuzuku-onna-wa-tsurai-yo": {
       "name": "Tsukuzuku Onna Wa Tsurai Yo",
@@ -923,7 +923,7 @@
       "slug": "non",
       "url": "https://javtiful.com/channel/non",
       "thumbnail": null,
-      "total_videos": 39
+      "total_videos": 40
     },
     "pakopakodan-to-yukaina-nakamatachi": {
       "name": "Pakopakodan To Yukaina Nakamatachi",
@@ -937,7 +937,7 @@
       "slug": "office-ks",
       "url": "https://javtiful.com/channel/office-ks",
       "thumbnail": null,
-      "total_videos": 30
+      "total_videos": 32
     },
     "center-village": {
       "name": "Center Village",
@@ -958,7 +958,7 @@
       "slug": "hiyoko",
       "url": "https://javtiful.com/channel/hiyoko",
       "thumbnail": null,
-      "total_videos": 32
+      "total_videos": 33
     },
     "tsubakihoin": {
       "name": "Tsubakihoin",
@@ -972,7 +972,7 @@
       "slug": "digital-ark",
       "url": "https://javtiful.com/channel/digital-ark",
       "thumbnail": null,
-      "total_videos": 17
+      "total_videos": 18
     },
     "kawaii": {
       "name": "Kawaii",
@@ -986,7 +986,7 @@
       "slug": "aroma-kikaku",
       "url": "https://javtiful.com/channel/aroma-kikaku",
       "thumbnail": null,
-      "total_videos": 12
+      "total_videos": 14
     },
     "unfinished": {
       "name": "Unfinished",
@@ -1021,14 +1021,14 @@
       "slug": "mercury",
       "url": "https://javtiful.com/channel/mercury",
       "thumbnail": null,
-      "total_videos": 37
+      "total_videos": 41
     },
     "babylon-mousozoku": {
       "name": "Babylon / Mousozoku",
       "slug": "babylon-mousozoku",
       "url": "https://javtiful.com/channel/babylon-mousozoku",
       "thumbnail": null,
-      "total_videos": 11
+      "total_videos": 12
     },
     "harassment": {
       "name": "Harassment",
@@ -1063,7 +1063,7 @@
       "slug": "milk",
       "url": "https://javtiful.com/channel/milk",
       "thumbnail": null,
-      "total_videos": 46
+      "total_videos": 47
     },
     "erotic-time": {
       "name": "Erotic Time",
@@ -1196,7 +1196,7 @@
       "slug": "geinko-pore-shon",
       "url": "https://javtiful.com/channel/geinko-pore-shon",
       "thumbnail": null,
-      "total_videos": 12
+      "total_videos": 13
     },
     "muchimutchi-mousozoku": {
       "name": "Muchimutchi / Mousozoku",
@@ -1231,7 +1231,7 @@
       "slug": "mako-ginkou",
       "url": "https://javtiful.com/channel/mako-ginkou",
       "thumbnail": null,
-      "total_videos": 18
+      "total_videos": 20
     },
     "doujin-av-kurabu-mousozoku": {
       "name": "Doujin AV kurabu/ Mousozoku",
@@ -1273,7 +1273,7 @@
       "slug": "atagoya-emanuel",
       "url": "https://javtiful.com/channel/atagoya-emanuel",
       "thumbnail": null,
-      "total_videos": 7
+      "total_videos": 8
     },
     "gentleman-mousouzoku": {
       "name": "Gentleman / Mousouzoku",
@@ -1294,7 +1294,7 @@
       "slug": "olympus",
       "url": "https://javtiful.com/channel/olympus",
       "thumbnail": null,
-      "total_videos": 7
+      "total_videos": 8
     },
     "murikurieiteibu": {
       "name": "Murikurieiteibu",
@@ -1336,7 +1336,7 @@
       "slug": "shark",
       "url": "https://javtiful.com/channel/shark",
       "thumbnail": null,
-      "total_videos": 6
+      "total_videos": 7
     },
     "shin-sekai-mousozoku": {
       "name": "Shin Sekai / Mousozoku",
@@ -1434,7 +1434,7 @@
       "slug": "sun",
       "url": "https://javtiful.com/channel/sun",
       "thumbnail": null,
-      "total_videos": 3
+      "total_videos": 4
     },
     "himemix-joy-mousouzoku": {
       "name": "HimeMix joy / Mousouzoku",
@@ -1531,6 +1531,13 @@
       "name": "SUKESUKE",
       "slug": "sukesuke",
       "url": "https://javtiful.com/channel/sukesuke",
+      "thumbnail": null,
+      "total_videos": 1
+    },
+    "mismatch-emanuel": {
+      "name": "Mismatch / Emanuel",
+      "slug": "mismatch-emanuel",
+      "url": "https://javtiful.com/channel/mismatch-emanuel",
       "thumbnail": null,
       "total_videos": 1
     }
