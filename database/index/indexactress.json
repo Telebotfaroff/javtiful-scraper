@@ -392,10 +392,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/5f8e8a6de8eaa50432838ccab6c4b63d.jpg",
       "total_videos": 267,
       "total_pages": 12,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 12,
+      "videos_crawled": 265,
+      "last_crawled_at": 1790867557
     },
     "takarada-monami": {
       "name": "Takarada Monami",
