@@ -500,10 +500,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/51d7dd6496e73d13a4b908e80025639a.jpg",
       "total_videos": 254,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 227,
+      "last_crawled_at": 1790874106
     },
     "oda-mako": {
       "name": "Oda Mako",
