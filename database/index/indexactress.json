@@ -572,10 +572,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/32287331c090b6c3e12b4d2482d538a6.jpg",
       "total_videos": 236,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "in_progress",
+      "last_crawled_page": 7,
+      "videos_crawled": 147,
+      "last_crawled_at": 1790878176
     },
     "tsukino-kasumi": {
       "name": "Tsukino Kasumi",
