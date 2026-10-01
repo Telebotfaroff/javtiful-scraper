@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "FTHTD-075": {
       "title": "FTHTD-075 The Book of XX: Fallen Swimming Club Members - Ruthless Psychopaths - A live-action adaptation of a light novel",
@@ -8,6 +8,15 @@
       "duration": "02:59:09",
       "date": "2024-12-29",
       "studio": "falenotube",
+      "genres": []
+    },
+    "VOBB-041": {
+      "title": "VOBB-041 [Just for you Hayashi] Super popular actor Frankfurt Hayashi's useful feeling technique special BEST",
+      "url": "https://javtiful.com/video/62151/vobb-041",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/23/420eb6d60a58985a832ae58022c58764.jpg",
+      "duration": "02:59:40",
+      "date": "2024-06-23",
+      "studio": "botan",
       "genres": []
     }
   }

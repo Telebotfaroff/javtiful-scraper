@@ -1,5 +1,5 @@
 {
-  "total": 9,
+  "total": 10,
   "videos": {
     "HUNTB-304": {
       "title": "HUNTB-304 I'm An Aunt Unmarried After 30 Years Old",
@@ -80,6 +80,15 @@
       "duration": "03:28:52",
       "date": "2021-07-06",
       "studio": "sod-create",
+      "genres": []
+    },
+    "HUNTC-067-REDUCING": {
+      "title": "HUNTC-067 Alone in the office late at night with my colleague who becomes a monster when he gets drunk! My colleague who usually makes fun of me for not being able to do my job, wi",
+      "url": "https://javtiful.com/video/61013/huntc-067-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/08/df27e13727146881896e50005c26b6a2.jpg",
+      "duration": "02:40:14",
+      "date": "2024-06-08",
+      "studio": "hunter",
       "genres": []
     }
   }

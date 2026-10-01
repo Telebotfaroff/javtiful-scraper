@@ -188,10 +188,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2408f0845300cd4d8c9066c3b3d942ce.jpg",
       "total_videos": 360,
       "total_pages": 15,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 15,
+      "videos_crawled": 286,
+      "last_crawled_at": 1790853966
     },
     "hamasaki-mao": {
       "name": "Hamasaki Mao",

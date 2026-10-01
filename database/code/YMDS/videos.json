@@ -1,5 +1,5 @@
 {
-  "total": 16,
+  "total": 17,
   "videos": {
     "YMDS-124": {
       "title": "YMDS-124 The Day Yui Hatano Became Her Girlfriend",
@@ -191,6 +191,18 @@
         "Tachibana Mary"
       ],
       "studio": "Momotarou Eizou Shuppan",
+      "genres": []
+    },
+    "YMDS-101": {
+      "title": "YMDS-101 Amateur Observation Survey",
+      "url": "https://javtiful.com/video/19199/ymds-101",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/06/01/12964247636e1675f9c969d215ce1844.jpg",
+      "duration": "01:28:18",
+      "date": "2022-06-01",
+      "actresses": [
+        "Satsuki Ena"
+      ],
+      "studio": null,
       "genres": []
     }
   }
