@@ -704,10 +704,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1e23b9ffbec695f15ef73b06e7d4053c.jpg",
       "total_videos": 224,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 182,
+      "last_crawled_at": 1790886976
     },
     "yuki-rino": {
       "name": "Yuki Rino",

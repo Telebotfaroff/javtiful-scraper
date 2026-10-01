@@ -1,5 +1,5 @@
 {
-  "total": 17,
+  "total": 18,
   "videos": {
     "230OREMO-055": {
       "title": "230OREMO-055 Women's 1500m walk out K",
@@ -204,6 +204,18 @@
       "date": "2023-11-06",
       "actresses": [
         "Minase Akari"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "230OREMO-052": {
+      "title": "230OREMO-052 Sakagamiena",
+      "url": "https://javtiful.com/video/45857/230oremo-052",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/11/05/57cd5a6cfb48b773279723bd5251be39.jpg",
+      "duration": "01:08:29",
+      "date": "2023-11-05",
+      "actresses": [
+        "Koume Ena"
       ],
       "studio": null,
       "genres": []
