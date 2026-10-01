@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "HUNTB-304": {
       "title": "HUNTB-304 I'm An Aunt Unmarried After 30 Years Old",
@@ -8,6 +8,15 @@
       "duration": "03:49:36",
       "date": "2022-06-24",
       "studio": "hunter",
+      "genres": []
+    },
+    "AARM-107": {
+      "title": "AARM-107 Knee-high Boots Thighs",
+      "url": "https://javtiful.com/video/21135/aarm-107",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/07/28/dc5fefd1946f49b8ab89d71a21299093.jpg",
+      "duration": "01:59:22",
+      "date": "2022-07-28",
+      "studio": null,
       "genres": []
     }
   }

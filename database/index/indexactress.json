@@ -44,10 +44,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e71a5a40ae5175015c46d74745d5f2ef.jpg",
       "total_videos": 432,
       "total_pages": 18,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 18,
+      "videos_crawled": 385,
+      "last_crawled_at": 1790828333
     },
     "minatsuki-hikaru": {
       "name": "Minatsuki Hikaru",
