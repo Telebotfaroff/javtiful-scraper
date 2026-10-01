@@ -848,10 +848,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/63e2efa6cd82439dfb97f6f2647518c3.jpg",
       "total_videos": 201,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 165,
+      "last_crawled_at": 1790894801
     },
     "aika": {
       "name": "AIKA",
