@@ -1,5 +1,5 @@
 {
-  "total": 10,
+  "total": 11,
   "videos": {
     "GVH-128": {
       "title": "GVH-128 Plump General Hospital",
@@ -89,6 +89,15 @@
       "duration": "02:57:54",
       "date": "2023-07-20",
       "studio": "madonna",
+      "genres": []
+    },
+    "GEBB-018": {
+      "title": "GEBB-018 What happens when a man and a woman who meet for the first time at a matchmaking party change into micro bikinis and join a private bath?",
+      "url": "https://javtiful.com/video/86094/gebb-018",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/05/30/e97817c085b4f7d0d967641118e9bfa4.jpg",
+      "duration": "02:27:03",
+      "date": "2025-05-30",
+      "studio": "get-bonbon-mousozoku",
       "genres": []
     }
   }

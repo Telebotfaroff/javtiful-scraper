@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 9,
   "videos": {
     "NHDTC-203": {
       "title": "NHDTC-203 A Music Student Is Blackmailed By A Sleazy Guy",
@@ -71,6 +71,15 @@
       "duration": "03:26:21",
       "date": "2026-02-14",
       "studio": "sekimenjoshi",
+      "genres": []
+    },
+    "IENF-451": {
+      "title": "IENF-451 Seriously?! Is This Practical Training? I Enrolled In A Beauty School And It's All Girls And I'm The Only Guy!",
+      "url": "https://javtiful.com/video/110633/ienf-451",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/07/08/ece1375c2b0be9dd8b6e363c900e5e8e.jpg",
+      "duration": "02:22:36",
+      "date": "2026-07-07",
+      "studio": "ie-nergy",
       "genres": []
     }
   }

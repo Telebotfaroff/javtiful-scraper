@@ -464,10 +464,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/0a1a17eba126e913d5953c43ac44f309.jpg",
       "total_videos": 262,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 235,
+      "last_crawled_at": 1790871938
     },
     "nagisa-mitsuki": {
       "name": "Nagisa Mitsuki",
