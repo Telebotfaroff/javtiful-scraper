@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 5,
   "videos": {
     "NHDTC-203": {
       "title": "NHDTC-203 A Music Student Is Blackmailed By A Sleazy Guy",
@@ -35,6 +35,15 @@
       "duration": "02:51:08",
       "date": "2024-11-23",
       "studio": "glory-quest",
+      "genres": []
+    },
+    "MKMP-727": {
+      "title": "MKMP-727 I Was Dragged To A Hotel After School By Two Mischievous Students",
+      "url": "https://javtiful.com/video/107577/mkmp-727",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/05/09/6523668063fd33c658aed3e1a566ebaf.jpg",
+      "duration": "02:20:09",
+      "date": "2026-05-08",
+      "studio": null,
       "genres": []
     }
   }
