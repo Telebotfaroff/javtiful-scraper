@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "BGN-046": {
       "title": "BGN-046 Newcomer Prestige Exclusive Debut Kurokawa Sarina",
@@ -21,6 +21,18 @@
       "date": "2024-05-15",
       "actresses": [
         "Arimura Nozomi"
+      ],
+      "studio": "PRESTIGE",
+      "genres": []
+    },
+    "BGN-035": {
+      "title": "BGN-035 Newcomer Prestige Exclusive Debut Mizuki Miri",
+      "url": "https://javtiful.com/video/58556/bgn-035",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/05/06/4fb14583fdd4922333a338a3d84e124d.jpg",
+      "duration": "03:12:32",
+      "date": "2024-05-06",
+      "actresses": [
+        "Mizukawa Sumire"
       ],
       "studio": "PRESTIGE",
       "genres": []
