@@ -884,10 +884,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fa4dc212dbdded487821f6416363b18f.jpg",
       "total_videos": 197,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 184,
+      "last_crawled_at": 1790896690
     },
     "shishido-riho": {
       "name": "Shishido Riho",
