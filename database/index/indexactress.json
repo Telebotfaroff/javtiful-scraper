@@ -248,10 +248,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7790d22d1460f990184342a10f3ddc00.jpg",
       "total_videos": 322,
       "total_pages": 14,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 14,
+      "videos_crawled": 283,
+      "last_crawled_at": 1790858247
     },
     "ootsuki-hibiki": {
       "name": "Ootsuki Hibiki",
