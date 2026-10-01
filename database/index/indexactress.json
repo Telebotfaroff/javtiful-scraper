@@ -320,10 +320,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8f982e04592f5f1aa9f65f885199e97c.jpg",
       "total_videos": 292,
       "total_pages": 13,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 13,
+      "videos_crawled": 266,
+      "last_crawled_at": 1790863062
     },
     "yamamoto-shuri": {
       "name": "Yamamoto Shuri",
