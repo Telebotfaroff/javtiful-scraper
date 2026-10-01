@@ -668,10 +668,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/da4b35418353d4b755d7ab23786c6cf3.jpg",
       "total_videos": 227,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 212,
+      "last_crawled_at": 1790884983
     },
     "miyanishi-hikaru": {
       "name": "Miyanishi Hikaru",
