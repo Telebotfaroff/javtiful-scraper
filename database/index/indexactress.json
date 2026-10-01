@@ -332,10 +332,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/cdadec41d5ce3700d3ee875794c1622d.jpg",
       "total_videos": 292,
       "total_pages": 13,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 13,
+      "videos_crawled": 271,
+      "last_crawled_at": 1790863817
     },
     "mitani-akari": {
       "name": "Mitani Akari",

@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 5,
   "videos": {
     "BDA-090": {
       "title": "BDA-090 Brainwashing Undercover Investigator Kana Morisawa",
@@ -35,6 +35,15 @@
       "duration": "03:19:43",
       "date": "2020-11-19",
       "studio": null,
+      "genres": []
+    },
+    "SW-686": {
+      "title": "SW-686 Let's Wash Together",
+      "url": "https://javtiful.com/video/5765/sw-686",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/21/11f59f2045db2b4c4b45c4e30c1bed88.jpg",
+      "duration": "02:59:23",
+      "date": "2020-02-21",
+      "studio": "switch",
       "genres": []
     }
   }

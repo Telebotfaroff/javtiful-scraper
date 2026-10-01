@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 5,
   "videos": {
     "REAL-935-REDUCING": {
       "title": "REAL-935 Breaking news! Rape has just been legalized!!",
@@ -26,6 +26,24 @@
       "duration": "02:53:32",
       "date": "2025-09-02",
       "studio": "office-ks",
+      "genres": []
+    },
+    "T38-068-REDUCING": {
+      "title": "T38-068 For Business Owners And Executives: You Can Commit This Crime Without Getting Caught.",
+      "url": "https://javtiful.com/video/112663/t38-068-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/08/23/5d647fa30afadcb7402841fbb6451729.jpg",
+      "duration": "02:06:46",
+      "date": "2026-08-23",
+      "studio": "tma",
+      "genres": []
+    },
+    "T38-068": {
+      "title": "T38-068 For Business Owners And Executives: You Can Commit This Crime Without Getting Caught.",
+      "url": "https://javtiful.com/video/112632/t38-068",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/08/22/671ae31c87a722e338ad804887890ccc.jpg",
+      "duration": "02:06:46",
+      "date": "2026-08-21",
+      "studio": "tma",
       "genres": []
     }
   }

@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 3,
   "videos": {
     "XVSR-651": {
       "title": "XVSR-651 MAX-A 30th Anniversary Work 18 Ban Harlem House",
@@ -8,6 +8,24 @@
       "duration": "02:00:18",
       "date": "2022-04-30",
       "studio": null,
+      "genres": []
+    },
+    "T38-068-REDUCING": {
+      "title": "T38-068 For Business Owners And Executives: You Can Commit This Crime Without Getting Caught.",
+      "url": "https://javtiful.com/video/112663/t38-068-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/08/23/5d647fa30afadcb7402841fbb6451729.jpg",
+      "duration": "02:06:46",
+      "date": "2026-08-23",
+      "studio": "tma",
+      "genres": []
+    },
+    "T38-068": {
+      "title": "T38-068 For Business Owners And Executives: You Can Commit This Crime Without Getting Caught.",
+      "url": "https://javtiful.com/video/112632/t38-068",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/08/22/671ae31c87a722e338ad804887890ccc.jpg",
+      "duration": "02:06:46",
+      "date": "2026-08-21",
+      "studio": "tma",
       "genres": []
     }
   }
