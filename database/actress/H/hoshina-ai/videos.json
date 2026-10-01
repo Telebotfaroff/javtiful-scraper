@@ -1,5 +1,5 @@
 {
-  "total": 9,
+  "total": 10,
   "videos": {
     "SCPX-345": {
       "title": "SCPX-345 My Sister Who Works Seriously",
@@ -80,6 +80,15 @@
       "duration": "02:35:54",
       "date": "2023-12-26",
       "studio": "serebu-no-tomo",
+      "genres": []
+    },
+    "UMD-710": {
+      "title": "UMD-710 Two Days And Two Nights Couple Exchange",
+      "url": "https://javtiful.com/video/4375/umd-710",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/11/09/4c14b2e58faaa9c0623445f32b970a21.jpg",
+      "duration": "02:59:27",
+      "date": "2019-11-09",
+      "studio": null,
       "genres": []
     }
   }

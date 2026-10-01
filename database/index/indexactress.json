@@ -800,10 +800,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f9774ca08ec511638caa3b0ead5510af.jpg",
       "total_videos": 210,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 187,
+      "last_crawled_at": 1790892242
     },
     "kurumi-sakura": {
       "name": "Kurumi Sakura",
