@@ -812,10 +812,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/eb27f781602590f0deb8537f0cbafd47.jpg",
       "total_videos": 209,
       "total_pages": 9,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 9,
+      "videos_crawled": 161,
+      "last_crawled_at": 1790892890
     },
     "okuda-saki": {
       "name": "Okuda Saki",
