@@ -536,10 +536,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7ea31a3c87e0d6e42f2659992a80cd8b.jpg",
       "total_videos": 243,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 237,
+      "last_crawled_at": 1790876238
     },
     "yurai-chitose": {
       "name": "Yurai Chitose",
