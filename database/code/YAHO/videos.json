@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "YAHO-024": {
       "title": "YAHO-024 Ryo",
@@ -9,6 +9,18 @@
       "date": "2022-01-10",
       "actresses": [
         "Arai Rima"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "YAHO-012": {
+      "title": "YAHO-012 Miyukichi",
+      "url": "https://javtiful.com/video/14665/yaho-012",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/01/10/ceee6054744655d4a7aec18a4b019ba8.jpg",
+      "duration": "02:00:29",
+      "date": "2022-01-10",
+      "actresses": [
+        "Yuzuriha Karen"
       ],
       "studio": null,
       "genres": []
