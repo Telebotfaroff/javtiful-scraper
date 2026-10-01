@@ -716,10 +716,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/4f41749f3f46fa1297c77d50d27fa55a.jpg",
       "total_videos": 223,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 202,
+      "last_crawled_at": 1790887667
     },
     "kitaoka-karin": {
       "name": "Kitaoka Karin",
