@@ -596,10 +596,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/cde49c593e04da8c7079da053f30888f.jpg",
       "total_videos": 235,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 207,
+      "last_crawled_at": 1790880852
     },
     "minase-akari": {
       "name": "Minase Akari",
