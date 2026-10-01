@@ -1,0 +1,23 @@
+{
+  "total": 2,
+  "videos": {
+    "CKCK-002-REDUCING": {
+      "title": "CKCK-002 Dopyumentary",
+      "url": "https://javtiful.com/video/94701/ckck-002-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/29/c09ec870e64b720695f857fc4698685d.jpg",
+      "duration": "03:24:23",
+      "date": "2025-09-29",
+      "studio": "hsoda",
+      "genres": []
+    },
+    "CKCK-002": {
+      "title": "CKCK-002 Dopyumentary",
+      "url": "https://javtiful.com/video/94479/ckck-002",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/25/27ec8f70f764774fa19ee620521d6834.jpg",
+      "duration": "03:24:23",
+      "date": "2025-09-25",
+      "studio": "hsoda",
+      "genres": []
+    }
+  }
+}

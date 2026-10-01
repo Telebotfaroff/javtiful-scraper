@@ -680,10 +680,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/f57c9012028bd3c91318f8f41519706d.jpg",
       "total_videos": 226,
       "total_pages": 10,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 10,
+      "videos_crawled": 204,
+      "last_crawled_at": 1790885638
     },
     "mizuhara-misono": {
       "name": "Mizuhara Misono",
