@@ -176,10 +176,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/66a06b9862d7956d45585e8e527dddf0.jpg",
       "total_videos": 360,
       "total_pages": 15,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 15,
+      "videos_crawled": 327,
+      "last_crawled_at": 1790853062
     },
     "satsuki-ena": {
       "name": "Satsuki Ena",

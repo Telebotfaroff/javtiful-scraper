@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "total_videos": 5756,
+  "total_videos": 6083,
   "total_actresses": 2400,
-  "total_studios": 179,
-  "total_code_categories": 664,
+  "total_studios": 180,
+  "total_code_categories": 685,
   "last_run": {
     "source": "actress",
     "actresses_processed": 1
