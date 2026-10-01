@@ -440,10 +440,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f42abf74f3b2873c99bd66260e915975.jpg",
       "total_videos": 263,
       "total_pages": 11,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 11,
+      "videos_crawled": 247,
+      "last_crawled_at": 1790870469
     },
     "kobayakawa-reiko": {
       "name": "Kobayakawa Reiko",

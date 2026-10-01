@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "KTRA-662": {
       "title": "KTRA-662 Will this solve the declining birthrate problem?! The work of the Seeding Committee, Waka Misono",
@@ -147,6 +147,18 @@
         "Takarada Monami"
       ],
       "studio": null,
+      "genres": []
+    },
+    "KTRA-065": {
+      "title": "KTRA-065 Little Sister Love Jinguji Nao",
+      "url": "https://javtiful.com/video/82901/ktra-065",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/04/12/d67146980344adfb3c58bd32b1cbe285.jpg",
+      "duration": "02:08:58",
+      "date": "2025-04-12",
+      "actresses": [
+        "Jinguuji Nao"
+      ],
+      "studio": "Ke- . Toraibu",
       "genres": []
     }
   }
