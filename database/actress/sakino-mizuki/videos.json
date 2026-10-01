@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "XVSR-651": {
       "title": "XVSR-651 MAX-A 30th Anniversary Work 18 Ban Harlem House",
@@ -44,6 +44,15 @@
       "duration": "04:03:29",
       "date": "2025-02-19",
       "studio": null,
+      "genres": []
+    },
+    "RCTD-619": {
+      "title": "RCTD-619 TSF Female Body: The Lonely Me and the Bitch Me",
+      "url": "https://javtiful.com/video/67083/rctd-619",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/09/09/9bf81a906cdfacebd29b80e37f8c79dc.jpg",
+      "duration": "02:06:29",
+      "date": "2024-09-09",
+      "studio": "rocket",
       "genres": []
     }
   }

@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "589AGCN-013": {
       "title": "589AGCN-013 Yui And Aoi",
@@ -107,6 +107,15 @@
       "duration": "00:58:34",
       "date": "2023-07-16",
       "studio": null,
+      "genres": []
+    },
+    "HUNTA-466": {
+      "title": "HUNTA-466 The Breath Of The Girls' Rhythmic Gymnastics Club During Training Camp Is Only My Sonfriend!",
+      "url": "https://javtiful.com/video/26312/hunta-466",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/12/19/58e7651462f68bc5052dbbf807d42dc6.jpg",
+      "duration": "02:53:37",
+      "date": "2022-12-19",
+      "studio": "hunter",
       "genres": []
     }
   }

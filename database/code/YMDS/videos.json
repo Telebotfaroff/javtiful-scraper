@@ -1,5 +1,5 @@
 {
-  "total": 31,
+  "total": 32,
   "videos": {
     "YMDS-124": {
       "title": "YMDS-124 The Day Yui Hatano Became Her Girlfriend",
@@ -369,6 +369,18 @@
       "date": "2026-01-30",
       "actresses": [
         "Yamamoto Shuri"
+      ],
+      "studio": "Momotarou Eizou Shuppan",
+      "genres": []
+    },
+    "YMDS-132": {
+      "title": "YMDS-132 The Day Alice Became Her",
+      "url": "https://javtiful.com/video/30668/ymds-132",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/04/01/3d2b1a7ca2fcaaacafdf1880e781bb39.jpg",
+      "duration": "02:17:45",
+      "date": "2023-04-01",
+      "actresses": [
+        "Alice Otsu"
       ],
       "studio": "Momotarou Eizou Shuppan",
       "genres": []

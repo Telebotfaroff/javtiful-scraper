@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "RBK-063": {
       "title": "RBK-063 Secret Investigator, Until You Fall... Storm Of Violence Mizuki Yayoi",
@@ -84,6 +84,19 @@
         "Ohana Non"
       ],
       "studio": null,
+      "genres": []
+    },
+    "RBK-076": {
+      "title": "RBK-076 Undercover Investigator, Until You Fall... Moko Sakura",
+      "url": "https://javtiful.com/video/36061/rbk-076",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/06/30/380340ffea239debfb5665c8fa008f0a.jpg",
+      "duration": "02:16:28",
+      "date": "2023-06-30",
+      "actresses": [
+        "Alice Otsu",
+        "Sakura Moko"
+      ],
+      "studio": "Attackers",
       "genres": []
     }
   }

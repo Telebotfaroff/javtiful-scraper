@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 5,
   "videos": {
     "FTHTD-075": {
       "title": "FTHTD-075 The Book of XX: Fallen Swimming Club Members - Ruthless Psychopaths - A live-action adaptation of a light novel",
@@ -35,6 +35,15 @@
       "duration": "02:56:55",
       "date": "2024-09-12",
       "studio": "dandy",
+      "genres": []
+    },
+    "VOBB-040": {
+      "title": "VOBB-040 Sexy actor's practical techniques special best!",
+      "url": "https://javtiful.com/video/59464/vobb-040",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/05/19/ce65ccda2f0e5548e69214af1b17d503.jpg",
+      "duration": "03:42:45",
+      "date": "2024-05-19",
+      "studio": "botan",
       "genres": []
     }
   }
