@@ -226,8 +226,11 @@ def _destination_keyboard():
     return InlineKeyboardMarkup([
         [
             InlineKeyboardButton("📱 Telegram", callback_data="dest|telegram"),
+            InlineKeyboardButton("📢 Channel", callback_data="dest|telegram_channel"),
+        ],
+        [
             InlineKeyboardButton("☁️ GoFile", callback_data="dest|gofile"),
-        ]
+        ],
     ])
 
 
@@ -261,14 +264,29 @@ async def _run_job(message, state):
     status = await message.reply_text("⏳ Starting download…")
     progress = TelegramProgress(status)
     destination = state.get("destination", "telegram")
-    target = message.chat.id if destination == "telegram" else None
+
+    if destination == "telegram_channel":
+        target = os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
+        if not target:
+            await status.edit_text(
+                "❌ Channel posting is not configured.\n\n"
+                "Set **TELEGRAM_POST_CHANNEL_ID** to your channel username "
+                "(for example `@mychannel`) or numeric channel ID, then restart the bot."
+            )
+            return
+        uploader = "telegram"
+    else:
+        target = message.chat.id if destination == "telegram" else None
+        uploader = destination
+
     job = Job(
         id=f"TG-{uuid.uuid4().hex[:10]}",
         url=state["url"],
         quality=state["quality"],
-        uploader=destination,
+        uploader=uploader,
         target=target,
         clips=state.get("clips"),
+        caption=state.get("caption"),
     )
     try:
         video, results = await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
@@ -288,7 +306,10 @@ async def _run_job(message, state):
             duration_text = "Unknown"
 
         upload_word = "upload" if len(results) == 1 else "uploads"
-        destination_name = "Telegram" if destination == "telegram" else "GoFile"
+        destination_name = (
+            "Telegram Channel" if destination == "telegram_channel"
+            else ("Telegram" if destination == "telegram" else "GoFile")
+        )
         lines = [
             "✅ **Upload Complete**",
             "",
@@ -457,11 +478,22 @@ def register_handlers(app: Client):
             return await query.answer("Session expired. Send the URL again.", show_alert=True)
 
         destination = query.data.split("|", 1)[1]
-        if destination not in {"telegram", "gofile"}:
+        if destination not in {"telegram", "telegram_channel", "gofile"}:
             return await query.answer("Invalid destination.", show_alert=True)
 
+        if destination == "telegram_channel":
+            channel_id = os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
+            if not channel_id:
+                return await query.answer(
+                    "Channel posting is not configured. Set TELEGRAM_POST_CHANNEL_ID.",
+                    show_alert=True,
+                )
+
         state["destination"] = destination
-        label = "Telegram" if destination == "telegram" else "GoFile"
+        label = (
+            "Telegram Channel" if destination == "telegram_channel"
+            else ("Telegram" if destination == "telegram" else "GoFile")
+        )
         await query.answer(f"Destination: {label}")
         await query.message.edit_text(
             f"🎚 Quality: 720p\n"
