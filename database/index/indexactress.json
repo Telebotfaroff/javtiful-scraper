@@ -2000,10 +2000,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fe451868b89c0a369c078527f9b5be86.jpg",
       "total_videos": 124,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 112,
+      "last_crawled_at": 1790948906
     },
     "katou-ayano": {
       "name": "Katou Ayano",
