@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "URE-013": {
       "title": "URE-013 The Live-action Story Rolled Spear With Men And Married Woman",
@@ -44,6 +44,15 @@
       "duration": "02:55:52",
       "date": "2025-11-28",
       "studio": "e-body",
+      "genres": []
+    },
+    "BDSR-404": {
+      "title": "BDSR-404 How Much Does It Cost Me?",
+      "url": "https://javtiful.com/video/4591/bdsr-404",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/11/23/2ebc497f6f69d15a0ef16f4fd8c52379.jpg",
+      "duration": "01:58:44",
+      "date": "2019-11-23",
+      "studio": null,
       "genres": []
     }
   }
