@@ -1220,10 +1220,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e42f62620860c891cbc7baca7fab0ace.jpg",
       "total_videos": 161,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 154,
+      "last_crawled_at": 1790913452
     },
     "kojima-minami": {
       "name": "Kojima Minami",

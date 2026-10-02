@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "ZMAR-063": {
       "title": "ZMAR-063 Marutto! Nagisa Mitsuki",
@@ -33,6 +33,18 @@
       "date": "2021-12-01",
       "actresses": [
         "AIKA"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "ZMAR-074": {
+      "title": "ZMAR-074 Marutto! Yumi Kazama (2)",
+      "url": "https://javtiful.com/video/24200/zmar-074",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/10/20/7ea61155041542231034b1241338bdad.jpg",
+      "duration": "04:05:27",
+      "date": "2022-10-20",
+      "actresses": [
+        "Kazama Yumi"
       ],
       "studio": null,
       "genres": []
