@@ -1232,10 +1232,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/862e9ee6698066223c7228a9e3c42131.jpg",
       "total_videos": 161,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 157,
+      "last_crawled_at": 1790914017
     },
     "itou-mayuki": {
       "name": "Itou Mayuki",
