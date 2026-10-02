@@ -381,6 +381,7 @@ class TelegramUploader:
         duration=None,
         progress=None,
         referer=None,
+        separate_thumbnail=False,
     ):
         paths = self.split_if_needed(file_path)
         results = []
@@ -455,6 +456,33 @@ class TelegramUploader:
                         )
                         last_logged_at = now
                         last_logged_bytes = current
+
+                if separate_thumbnail and index == 1 and prepared_thumbnail:
+                    try:
+                        logger.info("TELEGRAM UPLOAD: sending separate thumbnail post")
+                        client.send_photo(
+                            chat_id,
+                            prepared_thumbnail,
+                            caption=caption,
+                        )
+                    except FloodWait as exc:
+                        wait_seconds = int(
+                            getattr(exc, "value", 0) or getattr(exc, "x", 0) or 0
+                        )
+                        wait_seconds = max(1, wait_seconds)
+                        logger.warning(
+                            "TELEGRAM FLOODWAIT: %ss before retrying thumbnail post",
+                            wait_seconds,
+                        )
+                        time.sleep(wait_seconds)
+                        client.send_photo(
+                            chat_id,
+                            prepared_thumbnail,
+                            caption=caption,
+                        )
+                    except Exception:
+                        logger.exception("TELEGRAM UPLOAD: separate thumbnail post failed")
+                        raise
 
                 while True:
                     try:
