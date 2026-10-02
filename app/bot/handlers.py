@@ -9,13 +9,110 @@ from app.jobs.pipeline import Pipeline
 from app.jobs.queue import Job
 from app.uploaders.manager import UploadManager
 from app.extractor.javtiful import JavtifulExtractor
+from app.extractor.channel import JavtifulChannelExtractor
 
 
 extractor = JavtifulExtractor()
+channel_extractor = JavtifulChannelExtractor()
 uploads = UploadManager()
 telegram_uploader = uploads.get("telegram")
 pipeline = Pipeline(extractor=extractor, uploaders={"telegram": telegram_uploader, "gofile": uploads.get("gofile")})
 pending = {}
+
+
+
+def _channel_keyboard():
+    return InlineKeyboardMarkup([
+        [InlineKeyboardButton("⬇️ Download Page", callback_data="channel|download")]
+    ])
+
+
+async def _run_channel_page(message, state, page_number):
+    channel_url = state["url"]
+    channel_name = state.get("channel_name", "Channel")
+    total_pages = int(state.get("total_pages") or 1)
+    status = await message.reply_text(
+        f"⏳ Loading page {page_number} ({page_number + 1}/{total_pages})…"
+    )
+
+    try:
+        page_data = await asyncio.to_thread(
+            channel_extractor.page, channel_url, page_number
+        )
+        items = page_data.get("items", [])
+        if not items:
+            await status.edit_text(
+                f"❌ No videos found on page {page_number}.\n\n"
+                f"Channel: {channel_name}"
+            )
+            return
+
+        await status.edit_text(
+            f"📥 Downloading **{len(items)} videos** from page {page_number}…\n\n"
+            f"Channel: {channel_name}"
+        )
+
+        completed = 0
+        failed = 0
+
+        for item in items:
+            title = item.get("title") or "Video"
+            code = item.get("code")
+            caption = f"{code} {title}" if code else title
+
+            if item.get("thumbnail"):
+                await asyncio.to_thread(
+                    telegram_uploader.send_preview,
+                    message.chat.id,
+                    item["thumbnail"],
+                    title,
+                    item.get("post_url"),
+                )
+
+            job = Job(
+                id=f"TG-CH-{uuid.uuid4().hex[:10]}",
+                url=item["post_url"],
+                quality="720p",
+                uploader="telegram",
+                target=message.chat.id,
+                caption=caption,
+            )
+
+            try:
+                await asyncio.to_thread(pipeline.run, job, None)
+                completed += 1
+            except Exception as exc:
+                failed += 1
+                await status.edit_text(
+                    f"📥 **Channel:** {channel_name}\n"
+                    f"📄 **Page:** {page_number}\n"
+                    f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
+                    f"✅ **Completed:** {completed}\n"
+                    f"❌ **Failed:** {failed}\n\n"
+                    f"❌ {title}\n{type(exc).__name__}: {exc}"
+                )
+                continue
+
+            await status.edit_text(
+                f"📥 **Channel:** {channel_name}\n"
+                f"📄 **Page:** {page_number}\n"
+                f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
+                f"✅ **Completed:** {completed}\n"
+                f"❌ **Failed:** {failed}\n\n"
+                f"▶️ {title}"
+            )
+
+        await status.edit_text(
+            f"✅ **Page {page_number} complete**\n\n"
+            f"📺 **Channel:** {channel_name}\n"
+            f"🎬 **Videos:** {len(items)}\n"
+            f"✅ **Uploaded:** {completed}\n"
+            f"❌ **Failed:** {failed}"
+        )
+    except Exception as exc:
+        await status.edit_text(
+            f"❌ Channel page download failed\n\n{type(exc).__name__}: {exc}"
+        )
 
 
 def _destination_keyboard():
@@ -113,6 +210,20 @@ def register_handlers(app: Client):
         text = message.text.strip()
         state = pending.get(message.from_user.id)
 
+        if state and state.get("channel_waiting_page"):
+            if not re.fullmatch(r"\d+", text):
+                return await message.reply_text("Invalid page number. Use 0 for the first page.")
+            page_number = int(text)
+            total_pages = int(state.get("total_pages") or 0)
+            if page_number < 0 or page_number >= total_pages:
+                return await message.reply_text(
+                    f"Invalid page. Enter a number from 0 to {max(0, total_pages - 1)}."
+                )
+            state.pop("channel_waiting_page", None)
+            await _run_channel_page(message, state, page_number)
+            pending.pop(message.from_user.id, None)
+            return
+
         if state and state.get("clip_waiting"):
             match = re.fullmatch(r"\s*([^\-]+)\s*-\s*([^\-]+)\s*", text)
             if not match:
@@ -135,6 +246,33 @@ def register_handlers(app: Client):
             return await message.reply_text("JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
         if not text.startswith(("https://javtiful.com/","http://javtiful.com/")):
             return await message.reply_text("Send a supported Javtiful URL.")
+
+        if re.fullmatch(r"https?://javtiful\.com/channel/[^/?#]+/?(?:\?.*)?", text, re.I):
+            status = await message.reply_text("🔎 Inspecting channel…")
+            try:
+                info = await asyncio.to_thread(channel_extractor.inspect, text)
+                total_pages = int(info.get("total_pages") or 1)
+                total_videos = info.get("total_videos")
+                total_videos_text = str(total_videos) if total_videos is not None else "Unknown"
+                pending[message.from_user.id] = {
+                    "type": "channel",
+                    "url": text,
+                    "channel_name": info.get("channel_name") or "Channel",
+                    "total_videos": total_videos,
+                    "total_pages": total_pages,
+                }
+                await status.edit_text(
+                    f"📺 **Channel:** {info.get('channel_name') or 'Channel'}\n"
+                    f"🎬 **Total videos:** {total_videos_text}\n"
+                    f"📄 **Total pages:** {total_pages}\n\n"
+                    "Choose an option:",
+                    reply_markup=_channel_keyboard(),
+                )
+            except Exception as exc:
+                await status.edit_text(
+                    f"❌ Channel extraction failed\n\n{type(exc).__name__}: {exc}"
+                )
+            return
         status = await message.reply_text("🔎 Extracting video information…")
         try:
             video = extractor.extract(text)
@@ -161,6 +299,25 @@ def register_handlers(app: Client):
             )
         except Exception as exc:
             await status.edit_text(f"❌ Extraction failed\n\n{type(exc).__name__}: {exc}")
+
+
+    @app.on_callback_query(filters.regex(r"^channel\|download$"))
+    async def channel_download_handler(client, query):
+        state = pending.get(query.from_user.id)
+        if not state or state.get("type") != "channel":
+            return await query.answer("Session expired. Send the channel URL again.", show_alert=True)
+
+        state["channel_waiting_page"] = True
+        await query.answer("Choose a page")
+        total_pages = int(state.get("total_pages") or 1)
+        await query.message.edit_text(
+            f"📺 **{state.get('channel_name', 'Channel')}**\n\n"
+            f"Enter page number from **0** to **{total_pages - 1}**.\n"
+            "0 = website page 1\n"
+            "1 = website page 2\n"
+            "2 = website page 3\n\n"
+            "Send only the page number."
+        )
 
 
     @app.on_callback_query(filters.regex(r"^dest\|"))
