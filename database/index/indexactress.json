@@ -2408,10 +2408,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/793e042dc707c4ec2bcd9d176679fe03.jpg",
       "total_videos": 111,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 108,
+      "last_crawled_at": 1790966244
     },
     "mutou-ayaka": {
       "name": "Mutou Ayaka",
