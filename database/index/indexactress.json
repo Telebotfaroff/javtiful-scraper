@@ -1904,10 +1904,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fc0e23f78f3ba378355f3566f47f4f0a.jpg",
       "total_videos": 127,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 120,
+      "last_crawled_at": 1790944716
     },
     "natsukawa-ayumi": {
       "name": "Natsukawa Ayumi",
