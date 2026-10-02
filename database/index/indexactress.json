@@ -1832,10 +1832,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/01677d5159afcc8f74a715b75450e1ec.jpg",
       "total_videos": 129,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 104,
+      "last_crawled_at": 1790941576
     },
     "misumi-rei": {
       "name": "Misumi Rei",
