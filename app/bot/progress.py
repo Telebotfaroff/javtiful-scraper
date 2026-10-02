@@ -124,6 +124,7 @@ class ParallelTelegramProgress:
         self.min_interval = min_interval
         self.last = 0.0
         self.download = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
+        self.uploads = {}
         self.upload = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
         self.download_title = "Video"
         self.upload_title = "Video"
@@ -223,6 +224,24 @@ class ParallelTelegramProgress:
                 f"⚡ {self._speed(speed)}"
             )
 
+        if self.uploads:
+            total_current = sum(v["current"] for v in self.uploads.values())
+            total_total = sum(v["total"] for v in self.uploads.values())
+            total_speed = sum(v["speed"] for v in self.uploads.values())
+            upload_state = {
+                "current": total_current,
+                "total": total_total,
+                "speed": total_speed,
+            }
+            upload_text = section(
+                "⬆️",
+                f"Uploading ({len(self.uploads)} workers)",
+                self.upload_title,
+                upload_state,
+            )
+        else:
+            upload_text = section("⬆️", "Uploading", self.upload_title, self.upload)
+
         counts = (
             f"Download complete - {self.download_complete}\n"
             f"Upload complete - {self.upload_complete}\n"
@@ -231,7 +250,7 @@ class ParallelTelegramProgress:
         return (
             section("⬇️", "Downloading", self.download_title, self.download)
             + "\n\n"
-            + section("⬆️", "Uploading", self.upload_title, self.upload)
+            + upload_text
             + "\n\n"
             + counts
         )
@@ -250,8 +269,17 @@ class ParallelTelegramProgress:
                 continue
 
     async def update(self, current, total, stage):
-        if str(stage).startswith("telegram_upload"):
-            self._update_state(self.upload, current, total)
+        stage_text = str(stage)
+        if stage_text.startswith("telegram_upload"):
+            worker = "default"
+            if ":" in stage_text:
+                worker = stage_text.split(":", 1)[1] or "default"
+            state = self.uploads.setdefault(
+                worker,
+                {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0},
+            )
+            self._update_state(state, current, total)
+            self.upload = state
         elif stage not in {"extract", "clip"}:
             self._update_state(self.download, current, total)
         else:
