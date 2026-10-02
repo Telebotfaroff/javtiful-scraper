@@ -956,10 +956,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e72b292c44cdfbae1a5ed52bc19697c9.jpg",
       "total_videos": 190,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 136,
+      "last_crawled_at": 1790900416
     },
     "mizuhata-asami": {
       "name": "Mizuhata Asami",
