@@ -1,5 +1,5 @@
 {
-  "total": 9,
+  "total": 10,
   "videos": {
     "AP-257": {
       "title": "AP-257 A mobile hot dog vendor with aphrodisiac is coming! In Harajuku, a mobile vendor sells hot dogs with aphrodisiac in a popular spot where young girls gather! The aphrodisiac",
@@ -80,6 +80,15 @@
       "duration": "03:50:05",
       "date": "2025-12-05",
       "studio": "kmproduce",
+      "genres": []
+    },
+    "SW-361": {
+      "title": "SW-361 Only One Man In The Hot Spring",
+      "url": "https://javtiful.com/video/5676/sw-361",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/14/0f22c6f32ec5ff67cb521abe7fc3f8d9.jpg",
+      "duration": "02:10:27",
+      "date": "2020-02-14",
+      "studio": "switch",
       "genres": []
     }
   }

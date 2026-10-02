@@ -2552,10 +2552,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/72d4499591d8c619d0b5bb3e76a623e9.jpg",
       "total_videos": 105,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 94,
+      "last_crawled_at": 1790972220
     },
     "isumi-rion": {
       "name": "Isumi Rion",

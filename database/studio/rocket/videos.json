@@ -1,5 +1,5 @@
 {
-  "total": 120,
+  "total": 121,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -1484,6 +1484,18 @@
       "actresses": [
         "Arakaki Marin",
         "Nitori Hina"
+      ],
+      "genres": []
+    },
+    "RCT-670": {
+      "title": "RCT-670 Dark Devilish Kid 2 Ayumi Shinoda Marie Konishi",
+      "url": "https://javtiful.com/video/79301/rct-670",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/02/25/a8560dff3c39c73f969dbcfb9e687509.jpg",
+      "duration": "02:31:08",
+      "date": "2025-02-25",
+      "actresses": [
+        "Konishi Marie",
+        "Shinoda Ayumi"
       ],
       "genres": []
     }
