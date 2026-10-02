@@ -2252,10 +2252,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/4170ac9156c97b9f212e47bb6c11bebf.jpg",
       "total_videos": 116,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 93,
+      "last_crawled_at": 1790959665
     },
     "amatsuka-moe": {
       "name": "Amatsuka Moe",

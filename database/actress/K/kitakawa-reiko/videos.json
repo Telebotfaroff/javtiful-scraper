@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 3,
   "videos": {
     "AP-619": {
       "title": "AP-619 Drinking Party Of A Neighborhood Association",
@@ -8,6 +8,24 @@
       "duration": "02:44:48",
       "date": "2019-01-01",
       "studio": null,
+      "genres": []
+    },
+    "HOKS-207-REDUCING": {
+      "title": "HOKS-207 A new family: A remarried life orchestrated by a daughter caught in a hellish trap...",
+      "url": "https://javtiful.com/video/96021/hoks-207-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/10/20/5f849ef48877f24b62766cac31397ce1.jpg",
+      "duration": "01:47:08",
+      "date": "2025-10-20",
+      "studio": "fa-pro-platinum",
+      "genres": []
+    },
+    "HOKS-207": {
+      "title": "HOKS-207 A new family: A remarried life orchestrated by a daughter caught in a hellish trap...",
+      "url": "https://javtiful.com/video/95909/hoks-207",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/10/17/f084f10474005373ec1d0fe2b9de7260.jpg",
+      "duration": "01:47:08",
+      "date": "2025-10-17",
+      "studio": "fa-pro-platinum",
       "genres": []
     }
   }

@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "FAYS-014": {
       "title": "FAYS-014 My Personal Cosplay Photoshoot",
@@ -9,6 +9,18 @@
       "date": "2026-07-04",
       "actresses": [
         "Tsubaki Rika"
+      ],
+      "studio": "Tma",
+      "genres": []
+    },
+    "FAYS-004": {
+      "title": "FAYS-004 My Own Favorite Cosplay Photoshoot Hina",
+      "url": "https://javtiful.com/video/92503/fays-004",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/01/6f2c06f93cba3bf5fe07694e6d98cc11.jpg",
+      "duration": "01:15:56",
+      "date": "2025-09-01",
+      "actresses": [
+        "Aizuki Himari"
       ],
       "studio": "Tma",
       "genres": []
