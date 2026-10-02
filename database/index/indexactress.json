@@ -1388,10 +1388,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2ef33f91168db55828109d7aa1ebd992.jpg",
       "total_videos": 153,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 134,
+      "last_crawled_at": 1790921474
     },
     "kudou-rara": {
       "name": "Kudou Rara",
