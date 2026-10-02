@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 5,
   "videos": {
     "MUDR-270": {
       "title": "MUDR-270 Spring Comparison ~A chaotic school life with two J●",
@@ -26,6 +26,24 @@
       "duration": "02:00:51",
       "date": "2023-04-28",
       "studio": "tma",
+      "genres": []
+    },
+    "SDDE-739-REDUCING": {
+      "title": "SDDE-739 Idol politicians and women in the political world are being corrupted by the Wash NOU ring. The upstart girls who preach about clean votes are manipulated, and their caree",
+      "url": "https://javtiful.com/video/105833/sdde-739-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/04/05/30b8ac1a8315ffcf88a6e90419ae465b.jpg",
+      "duration": "02:08:51",
+      "date": "2026-04-05",
+      "studio": "sod-create",
+      "genres": []
+    },
+    "SDDE-739": {
+      "title": "SDDE-739 Idol politicians and women in politics are being invaded by the SenNOU Ring. The personalities of these young upstart girls who are casting their pure vote are manipulated",
+      "url": "https://javtiful.com/video/77668/sdde-739",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/02/03/e708fdb801011ad9b1654eb2c03ea6ca.jpg",
+      "duration": "02:08:51",
+      "date": "2025-02-03",
+      "studio": "sod-create",
       "genres": []
     }
   }
