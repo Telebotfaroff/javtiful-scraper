@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "DVMM-159": {
       "title": "DVMM-159 A world where you can stop time at will",
@@ -44,6 +44,15 @@
       "duration": "02:58:42",
       "date": "2025-05-15",
       "studio": "deeps",
+      "genres": []
+    },
+    "RCTD-681": {
+      "title": "RCTD-681 ROCKET 17th Anniversary User Request Festival: Turn your everyday life into an NPC. Do whatever you want with that girl who only says the same lines and moves!",
+      "url": "https://javtiful.com/video/92076/rctd-681",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/08/27/0558f3244f050c2ae12d6ebaa6ef286f.jpg",
+      "duration": "02:02:41",
+      "date": "2025-08-27",
+      "studio": "rocket",
       "genres": []
     }
   }

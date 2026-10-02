@@ -1,5 +1,5 @@
 {
-  "total": 109,
+  "total": 110,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -1426,6 +1426,20 @@
         "Hinata Yuna",
         "Kanade Aya",
         "Nishino Emi"
+      ],
+      "studio": "Rocket",
+      "genres": []
+    },
+    "RCTD-681": {
+      "title": "RCTD-681 ROCKET 17th Anniversary User Request Festival: Turn your everyday life into an NPC. Do whatever you want with that girl who only says the same lines and moves!",
+      "url": "https://javtiful.com/video/92076/rctd-681",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/08/27/0558f3244f050c2ae12d6ebaa6ef286f.jpg",
+      "duration": "02:02:41",
+      "date": "2025-08-27",
+      "actresses": [
+        "Mine Yume",
+        "Natsukawa Ayumi",
+        "Tsuji Sakura"
       ],
       "studio": "Rocket",
       "genres": []

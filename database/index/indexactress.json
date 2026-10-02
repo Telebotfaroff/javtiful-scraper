@@ -1916,10 +1916,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/860f26287d64d72ab936e1f5dd28832f.jpg",
       "total_videos": 127,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 119,
+      "last_crawled_at": 1790945232
     },
     "nagase-yui": {
       "name": "Nagase Yui",
