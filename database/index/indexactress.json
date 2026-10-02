@@ -2492,10 +2492,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/0ece3ca0078614f47da1c2635cae4377.jpg",
       "total_videos": 107,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 103,
+      "last_crawled_at": 1790969746
     },
     "yatsugake-umi": {
       "name": "Yatsugake Umi",
