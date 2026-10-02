@@ -193,6 +193,11 @@ class ParallelTelegramProgress:
         now = time.monotonic()
         current = float(current or 0)
         total = float(total or 0)
+        if current < state["last"]:
+            state["time"] = now
+            state["last"] = 0.0
+            state["speed"] = 0.0
+
         elapsed = now - state["time"]
         delta = current - state["last"]
         instant = delta / elapsed if elapsed > 0 and delta >= 0 else 0
