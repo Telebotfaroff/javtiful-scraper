@@ -2204,10 +2204,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/0af6f5cb212f4e063fb5fb2349fd0d7c.jpg",
       "total_videos": 119,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 86,
+      "last_crawled_at": 1790957602
     },
     "kururigi-aoi": {
       "name": "Kururigi Aoi",
