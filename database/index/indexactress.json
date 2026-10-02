@@ -2336,10 +2336,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/61f0438fe1c9ee40769be1e3fce7bd60.jpg",
       "total_videos": 114,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 92,
+      "last_crawled_at": 1790963223
     },
     "hoshino-natsuki": {
       "name": "Hoshino Natsuki",

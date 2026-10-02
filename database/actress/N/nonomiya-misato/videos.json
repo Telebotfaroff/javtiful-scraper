@@ -1,5 +1,5 @@
 {
-  "total": 11,
+  "total": 12,
   "videos": {
     "BDA-090": {
       "title": "BDA-090 Brainwashing Undercover Investigator Kana Morisawa",
@@ -98,6 +98,15 @@
       "duration": "02:30:48",
       "date": "2023-08-15",
       "studio": "moodyz",
+      "genres": []
+    },
+    "SW-574": {
+      "title": "SW-574 A summer trip reminiscing on youth with a former student",
+      "url": "https://javtiful.com/video/90118/sw-574",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/08/01/40c4a131e7ea80ff05a04eb51224c7ab.jpg",
+      "duration": "02:29:17",
+      "date": "2025-08-01",
+      "studio": "switch",
       "genres": []
     }
   }
