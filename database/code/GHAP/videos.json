@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "GHAP-009": {
       "title": "GHAP-009 Fascinating Happening Bar Nozomi Arimura",
@@ -21,6 +21,18 @@
       "date": "2024-05-12",
       "actresses": [
         "Aoi Yurika"
+      ],
+      "studio": "MERCURY",
+      "genres": []
+    },
+    "GHAP-008": {
+      "title": "GHAP-008 Enchanting Happening Bar Sakura Mita",
+      "url": "https://javtiful.com/video/34667/ghap-008",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/06/12/720ad338c241ab40cfc2463ac8c1ff14.jpg",
+      "duration": "02:02:09",
+      "date": "2023-06-12",
+      "actresses": [
+        "Mita Sakura"
       ],
       "studio": "MERCURY",
       "genres": []

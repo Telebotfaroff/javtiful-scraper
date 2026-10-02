@@ -2756,10 +2756,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/90e377f7094a0fa61b003ff75bf607af.jpg",
       "total_videos": 98,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 75,
+      "last_crawled_at": 1790980429
     },
     "nonoura-non": {
       "name": "Nonoura Non",
