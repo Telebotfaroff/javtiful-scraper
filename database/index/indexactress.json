@@ -1424,10 +1424,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6fb8e66464cb8084b88aea90f87229a7.jpg",
       "total_videos": 148,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 145,
+      "last_crawled_at": 1790923140
     },
     "sasaki-aki": {
       "name": "Sasaki Aki",
