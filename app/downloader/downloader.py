@@ -78,8 +78,7 @@ class Downloader:
     def _download_hls(url, path, headers, progress):
         if progress:
             progress(0, 0, "download")
-
-        header_text = "".join(f"{key}: {value}\\r\\n" for key, value in headers.items())
+        header_text = "".join(f"{key}: {value}\r\n" for key, value in headers.items())
         command = [
             "ffmpeg", "-y",
             "-loglevel", "error",
@@ -105,7 +104,7 @@ class Downloader:
 
     @staticmethod
     def _is_hls(url):
-        return bool(re.search(r"\\.m3u8(?:[?#]|$)", str(url), re.I))
+        return bool(re.search(r"\.m3u8(?:[?#]|$)", str(url), re.I))
 
     @staticmethod
     def _filename(title, quality):
