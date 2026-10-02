@@ -71,10 +71,11 @@ async def _run_channel_sequential(message, state, page_number, items, status):
             await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
             completed += 1
             code = item.get("code") or ""
-            await status.reply_text(
+            sent = await status.reply_text(
                 f"✅ **Uploaded successfully to channel**\n\n"
                 f"🎬 **{code + ' ' if code else ''}{title}**"
             )
+            _schedule_delete(sent)
         except Exception as exc:
             failed += 1
             await status.edit_text(
@@ -152,10 +153,11 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 progress.mark_upload_complete()
                 progress.set_queue(queue.qsize())
                 code = item.get("code") or ""
-                await status.reply_text(
+                sent = await status.reply_text(
                     f"✅ **Uploaded successfully to channel**\n\n"
                     f"🎬 **{code + ' ' if code else ''}{title}**"
                 )
+                _schedule_delete(sent)
             except Exception as exc:
                 failed += 1
                 progress.mark_failed()
