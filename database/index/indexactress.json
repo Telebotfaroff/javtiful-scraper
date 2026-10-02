@@ -2396,10 +2396,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/06bfe06c8748403c1dd84b678f261960.jpg",
       "total_videos": 112,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 102,
+      "last_crawled_at": 1790965742
     },
     "nishimiya-yume": {
       "name": "Nishimiya Yume",
