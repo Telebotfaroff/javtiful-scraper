@@ -1652,10 +1652,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6035bd473bf19c033f7567a935c02690.jpg",
       "total_videos": 140,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 133,
+      "last_crawled_at": 1790933538
     },
     "miura-ayumi": {
       "name": "Miura Ayumi",
