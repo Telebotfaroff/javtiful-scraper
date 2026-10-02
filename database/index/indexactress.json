@@ -992,10 +992,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/bd697a272d3d3a582bbbc7c81527e0d1.jpg",
       "total_videos": 182,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 180,
+      "last_crawled_at": 1790902268
     },
     "iwasa-mei": {
       "name": "Iwasa Mei",
