@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "233BAT-121": {
       "title": "233BAT-121 Mao",
@@ -21,6 +21,18 @@
       "date": "2022-11-06",
       "actresses": [
         "Tsubomi"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "233BAT-102": {
+      "title": "233BAT-102 Yuna",
+      "url": "https://javtiful.com/video/19410/233bat-102",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/06/06/422f0ff2d075bee8b18e697eb45c13c3.jpg",
+      "duration": "00:38:01",
+      "date": "2022-06-06",
+      "actresses": [
+        "Shiina Yuna"
       ],
       "studio": null,
       "genres": []

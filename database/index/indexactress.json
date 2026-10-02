@@ -2024,10 +2024,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/d3eea7e91ee9838fee830756173a512c.jpg",
       "total_videos": 124,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 117,
+      "last_crawled_at": 1790949966
     },
     "itou-meru": {
       "name": "Itou Meru",
