@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "275OCHA-149": {
       "title": "275OCHA-149 light",
@@ -9,6 +9,18 @@
       "date": "2023-06-18",
       "actresses": [
         "Minase Akari"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "275OCHA-139": {
+      "title": "275OCHA-139 ASUKA",
+      "url": "https://javtiful.com/video/26882/275ocha-139",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/01/03/2380544bc7c480f6128640093c2aa01d.jpg",
+      "duration": "00:43:03",
+      "date": "2023-01-03",
+      "actresses": [
+        "Momose Asuka"
       ],
       "studio": null,
       "genres": []

@@ -1088,10 +1088,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/991ead96819f9f6dbae5efebf06c6425.jpg",
       "total_videos": 170,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 136,
+      "last_crawled_at": 1790907133
     },
     "katou-momoka": {
       "name": "Katou Momoka",
