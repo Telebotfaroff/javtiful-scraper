@@ -2540,10 +2540,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/6f8fa62b555fd21fd3c7a6b55b6ba88b.jpg",
       "total_videos": 106,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 86,
+      "last_crawled_at": 1790971729
     },
     "shinoda-ayumi": {
       "name": "Shinoda Ayumi",
