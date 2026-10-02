@@ -2084,10 +2084,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/dac3d9f411058ec028df3c5285e74b0a.jpg",
       "total_videos": 120,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 84,
+      "last_crawled_at": 1790952541
     },
     "ishihara-nozomi": {
       "name": "Ishihara Nozomi",
