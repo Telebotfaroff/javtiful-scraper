@@ -13,6 +13,8 @@ class Job:
     target: str | int | None = None
     # None means full video. A list means only the selected clips are uploaded.
     clips: Optional[list[tuple[str, str]]] = None
+    # Optional custom caption used by batch/channel downloads.
+    caption: Optional[str] = None
 
 
 class JobQueue:
@@ -21,7 +23,7 @@ class JobQueue:
         self._lock = Lock()
         self._counter = 0
 
-    def add(self, url, quality="best", uploader="telegram", target=None, clips=None):
+    def add(self, url, quality="best", uploader="telegram", target=None, clips=None, caption=None):
         with self._lock:
             self._counter += 1
             job = Job(
@@ -31,6 +33,7 @@ class JobQueue:
                 uploader,
                 target,
                 clips,
+                caption,
             )
             self.queue.put(job)
             return job
