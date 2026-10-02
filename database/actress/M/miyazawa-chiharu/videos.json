@@ -1,5 +1,5 @@
 {
-  "total": 26,
+  "total": 27,
   "videos": {
     "HUNTB-500": {
       "title": "HUNTB-500 Used Car Dealer Edition As Long As You Pay A Fixed Monthly Fee, You Can Ride As Many People (female) As You Like At The Used Car Dealer!",
@@ -233,6 +233,15 @@
       "duration": "02:22:19",
       "date": "2025-05-02",
       "studio": "z-men",
+      "genres": []
+    },
+    "SAME-100": {
+      "title": "SAME-100 Includes 3 new titles, completely newly shot. A woman who was attacked, a horror the incident",
+      "url": "https://javtiful.com/video/56102/same-100",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/03/29/f3db546f418e3e241b29530cbf893c5c.jpg",
+      "duration": "01:43:17",
+      "date": "2024-03-29",
+      "studio": "attackers",
       "genres": []
     }
   }

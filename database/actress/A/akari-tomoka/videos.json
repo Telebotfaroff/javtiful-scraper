@@ -1,5 +1,5 @@
 {
-  "total": 9,
+  "total": 10,
   "videos": {
     "SILK-169": {
       "title": "SILK-169 Romantic album page2",
@@ -80,6 +80,15 @@
       "duration": "03:49:26",
       "date": "2019-05-17",
       "studio": null,
+      "genres": []
+    },
+    "YMDD-415": {
+      "title": "YMDD-415 Anaconda Nighttime: The ever-changing amoeba snake tongue brings you the ultimate pleasure of a slimy mind Tomoka Akari Emi Nishino",
+      "url": "https://javtiful.com/video/70762/ymdd-415",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/11/02/0605b6b4d5c43957b75250e77f05f9b0.jpg",
+      "duration": "01:58:02",
+      "date": "2024-11-02",
+      "studio": "momotarou-eizou-shuppan",
       "genres": []
     }
   }

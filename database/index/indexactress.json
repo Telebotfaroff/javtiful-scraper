@@ -1892,10 +1892,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fd5d3bb602d8e661a6a3a3457dc0f8d9.jpg",
       "total_videos": 128,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 117,
+      "last_crawled_at": 1790944186
     },
     "aoi-tsukasa": {
       "name": "Aoi Tsukasa",

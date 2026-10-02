@@ -1,5 +1,5 @@
 {
-  "total": 13,
+  "total": 15,
   "videos": {
     "ATID-655": {
       "title": "ATID-655 The House Infested With Incubi Episode 2",
@@ -116,6 +116,24 @@
       "duration": "02:20:45",
       "date": "2026-01-13",
       "studio": "tma",
+      "genres": []
+    },
+    "RCTD-738-REDUCING": {
+      "title": "RCTD-738 Brainwashed Family II",
+      "url": "https://javtiful.com/video/108246/rctd-738-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/05/21/3574a93f180eb99acf6778c12cbaf5e0.jpg",
+      "duration": "02:10:21",
+      "date": "2026-05-20",
+      "studio": "rocket",
+      "genres": []
+    },
+    "RCTD-738": {
+      "title": "RCTD-738 Brainwashed Family II",
+      "url": "https://javtiful.com/video/108221/rctd-738",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/05/20/c2fadf150fe183bd22f873d96628cb71.jpg",
+      "duration": "02:10:21",
+      "date": "2026-05-20",
+      "studio": "rocket",
       "genres": []
     }
   }
