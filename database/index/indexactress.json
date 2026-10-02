@@ -1544,10 +1544,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/5c9f9834c22db51c379d990b89b27c27.jpg",
       "total_videos": 144,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 138,
+      "last_crawled_at": 1790928682
     },
     "ooura-manami": {
       "name": "Ooura Manami",

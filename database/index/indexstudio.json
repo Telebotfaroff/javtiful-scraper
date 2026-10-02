@@ -1,5 +1,5 @@
 {
-  "total": 238,
+  "total": 239,
   "studios": {
     "yama-to-sora": {
       "name": "Yama To Sora",
@@ -545,7 +545,7 @@
       "slug": "idea-pocket",
       "url": "https://javtiful.com/channel/idea-pocket",
       "thumbnail": null,
-      "total_videos": 432
+      "total_videos": 543
     },
     "waap-entertainment": {
       "name": "Waap Entertainment",
@@ -1666,6 +1666,13 @@
       "url": "https://javtiful.com/channel/young-corn-mousozoku",
       "thumbnail": null,
       "total_videos": 1
+    },
+    "imouto-channel": {
+      "name": "Imouto Channel",
+      "slug": "imouto-channel",
+      "url": "https://javtiful.com/channel/imouto-channel",
+      "thumbnail": null,
+      "total_videos": 4
     }
   }
 }
