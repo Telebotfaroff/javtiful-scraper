@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "YMDD-222": {
       "title": "YMDD-222 First Shooting Amateur Documentary ~Three star Shiro will not let you escape~",
@@ -44,6 +44,15 @@
       "duration": "03:26:06",
       "date": "2026-03-22",
       "studio": "s-kyuu-shirouto",
+      "genres": []
+    },
+    "MDTE-030": {
+      "title": "MDTE-030 Famous Private Girls",
+      "url": "https://javtiful.com/video/18230/mdte-030",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/05/06/bc200d928c0e42cf14778f9537103ed1.jpg",
+      "duration": "03:24:31",
+      "date": "2022-05-06",
+      "studio": null,
       "genres": []
     }
   }

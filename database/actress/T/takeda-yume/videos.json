@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 9,
   "videos": {
     "AARM-090": {
       "title": "AARM-090 Can't Take It Off Because It's Cute Clothes",
@@ -71,6 +71,15 @@
       "duration": "04:03:13",
       "date": "2023-12-23",
       "studio": "ke-toraibu",
+      "genres": []
+    },
+    "SCOP-738": {
+      "title": "SCOP-738 A Close Friend Who Was Allowed To Sleep",
+      "url": "https://javtiful.com/video/12131/scop-738",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/09/11/8113834726b9ee7ce9af32c887405c79.jpg",
+      "duration": "02:35:13",
+      "date": "2021-09-11",
+      "studio": null,
       "genres": []
     }
   }
