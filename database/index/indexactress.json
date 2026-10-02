@@ -1268,10 +1268,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/3ada51e303d1df339f07fbc1f897c3ff.jpg",
       "total_videos": 159,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 159,
+      "last_crawled_at": 1790915750
     },
     "mizuno-asahi": {
       "name": "Mizuno Asahi",

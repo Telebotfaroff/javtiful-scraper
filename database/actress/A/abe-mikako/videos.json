@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "MIRD-187": {
       "title": "MIRD-187 A King Who Lives With Ten Obedient Maids",
@@ -44,6 +44,15 @@
       "duration": "02:54:30",
       "date": "2022-10-30",
       "studio": null,
+      "genres": []
+    },
+    "ZEX-384": {
+      "title": "ZEX-384 time stops",
+      "url": "https://javtiful.com/video/60629/zex-384",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/03/1a7b18dce4a4dbdda1d558c33be5542c.jpg",
+      "duration": "01:58:17",
+      "date": "2024-06-03",
+      "studio": "peters-max",
       "genres": []
     }
   }
