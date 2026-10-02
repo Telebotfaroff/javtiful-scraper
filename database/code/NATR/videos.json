@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "NATR-685": {
       "title": "NATR-685 Whole! Kana Morisawa",
@@ -23,6 +23,18 @@
         "Kobayakawa Reiko"
       ],
       "studio": null,
+      "genres": []
+    },
+    "NATR-737": {
+      "title": "NATR-737 Whole! Yuri Sasahara",
+      "url": "https://javtiful.com/video/69954/natr-737",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/10/20/a32a1315dbd14ecfb2e382d111f42f59.jpg",
+      "duration": "04:01:30",
+      "date": "2024-10-20",
+      "actresses": [
+        "Sasahara Yuri"
+      ],
+      "studio": "Planet Plus",
       "genres": []
     }
   }

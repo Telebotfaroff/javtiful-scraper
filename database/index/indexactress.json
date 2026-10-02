@@ -1052,10 +1052,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7920baa4a7ad06ca5627245be5364a2c.jpg",
       "total_videos": 172,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 154,
+      "last_crawled_at": 1790905351
     },
     "shiromine-miu": {
       "name": "Shiromine Miu",

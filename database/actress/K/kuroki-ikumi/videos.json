@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 9,
   "videos": {
     "IENE-888": {
       "title": "IENE-888 Support project for working office workers! Soapland Wagon is coming!! 2",
@@ -71,6 +71,15 @@
       "duration": "03:16:19",
       "date": "2024-08-24",
       "studio": "moodyz",
+      "genres": []
+    },
+    "SW-570": {
+      "title": "SW-570 The First Love Woman I Met At The Reunion",
+      "url": "https://javtiful.com/video/1926/sw-570",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/01/19/16780fcf444e8b20414577f8d33273db.jpg",
+      "duration": "03:00:04",
+      "date": "2019-01-19",
+      "studio": "switch",
       "genres": []
     }
   }
