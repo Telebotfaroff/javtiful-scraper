@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 3,
   "videos": {
     "MIZD-260": {
       "title": "MIZD-260 Simultaneous Play With A Sensitive Spot",
@@ -8,6 +8,24 @@
       "duration": "03:57:19",
       "date": "2021-12-18",
       "studio": null,
+      "genres": []
+    },
+    "SSPD-143-REDUCING": {
+      "title": "SSPD-143 Original work by Rei Fujisaki: Beautiful Beast Sisters",
+      "url": "https://javtiful.com/video/105292/sspd-143-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/03/25/28468b9d20d09175d95d0ab1b6375c6f.jpg",
+      "duration": "03:13:38",
+      "date": "2026-03-25",
+      "studio": "attackers",
+      "genres": []
+    },
+    "SSPD-143": {
+      "title": "SSPD-143 Original work by Rei Fujisaki, Beautiful Beast Sisters",
+      "url": "https://javtiful.com/video/91224/sspd-143",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/08/15/28274c554384ee012ba71ff2d94c1eaa.jpg",
+      "duration": "03:13:38",
+      "date": "2025-08-15",
+      "studio": "attackers",
       "genres": []
     }
   }

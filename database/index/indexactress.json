@@ -1280,10 +1280,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7545e7daea971af17c80f853a9a0ab30.jpg",
       "total_videos": 158,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 140,
+      "last_crawled_at": 1790916329
     },
     "yokomiya-nanami": {
       "name": "Yokomiya Nanami",
