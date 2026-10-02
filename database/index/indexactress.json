@@ -1688,10 +1688,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/27717eccf665ff0449dac1799037edf3.jpg",
       "total_videos": 140,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 132,
+      "last_crawled_at": 1790935148
     },
     "mikami-yua": {
       "name": "Mikami Yua",
