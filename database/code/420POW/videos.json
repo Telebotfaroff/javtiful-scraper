@@ -1,5 +1,5 @@
 {
-  "total": 13,
+  "total": 14,
   "videos": {
     "420POW-046": {
       "title": "420POW-046 Techi Ultimate Weapon Of The Raccoon Face World",
@@ -153,6 +153,18 @@
       "date": "2021-12-20",
       "actresses": [
         "Shirato Hana"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "420POW-038": {
+      "title": "420POW-038 A Familiar Cosplayer At A Certain Event Venue",
+      "url": "https://javtiful.com/video/12891/420pow-038",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/10/19/d68e082ef5f65cbe9dab161f097c309a.jpg",
+      "duration": "02:00:27",
+      "date": "2021-10-19",
+      "actresses": [
+        "Natsuki Maron"
       ],
       "studio": null,
       "genres": []
