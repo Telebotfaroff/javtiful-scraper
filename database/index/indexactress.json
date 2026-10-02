@@ -1880,10 +1880,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a7c015a10426ef323eff025c93ec600c.jpg",
       "total_videos": 128,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 125,
+      "last_crawled_at": 1790943673
     },
     "nishino-emi": {
       "name": "Nishino Emi",
