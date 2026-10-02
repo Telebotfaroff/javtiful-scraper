@@ -1196,10 +1196,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/af003fecd6a3a8768e17df085a1cb493.jpg",
       "total_videos": 163,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 119,
+      "last_crawled_at": 1790912291
     },
     "ichijou-mio": {
       "name": "Ichijou Mio",
