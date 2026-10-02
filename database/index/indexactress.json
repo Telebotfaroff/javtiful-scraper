@@ -2720,10 +2720,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/72a2d78a312f535c2e1c576cd87087fc.jpg",
       "total_videos": 99,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 94,
+      "last_crawled_at": 1790979002
     },
     "itoi-ruka": {
       "name": "Itoi Ruka",
