@@ -3,10 +3,12 @@ import math
 import os
 import subprocess
 import tempfile
+import time
 from pathlib import Path
 
 import requests
 from pyrogram import Client
+from pyrogram.errors import FloodWait
 from app.storage.cleanup import cleanup
 
 logger = logging.getLogger(__name__)
@@ -33,7 +35,7 @@ class TelegramUploader:
         )
         concurrency = int(
             max_concurrent_transmissions
-            or os.getenv("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS", "4")
+            or os.getenv("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS", "8")
         )
         if concurrency < 1:
             raise ValueError("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS must be >= 1")
@@ -135,9 +137,6 @@ class TelegramUploader:
             jpg.close()
             jpg_path = jpg.name
 
-            # Telegram video thumbnails must stay below 200 KB. Use the
-            # largest JPEG quality that fits instead of accepting the first
-            # low-quality encode that happens to fit.
             best_path = None
             best_size = 0
             for quality in range(2, 32, 2):
@@ -298,11 +297,13 @@ class TelegramUploader:
         paths = self.split_if_needed(file_path)
         results = []
 
+        file_size = Path(file_path).stat().st_size
         logger.info(
-            "TELEGRAM UPLOAD: file=%s size=%d bytes parts=%d",
+            "TELEGRAM UPLOAD: file=%s size=%d bytes parts=%d concurrency=%d",
             file_path,
-            Path(file_path).stat().st_size,
+            file_size,
             len(paths),
+            self.max_concurrent_transmissions,
         )
 
         prepared_thumbnail = self._prepare_thumbnail(
@@ -316,7 +317,6 @@ class TelegramUploader:
         )
 
         try:
-            # Keep the dedicated upload client alive across jobs.
             if not self.app.is_connected:
                 self.app.start()
                 logger.info("TELEGRAM UPLOAD: dedicated upload client started")
@@ -328,18 +328,78 @@ class TelegramUploader:
                     else f"{caption}\n\n📦 Part {index}/{len(paths)}"
                 )
 
-                results.append(
-                    self.app.send_video(
-                        chat_id,
-                        path,
-                        caption=part_caption,
-                        thumb=prepared_thumbnail,
-                        duration=int(duration or 0),
-                        supports_streaming=True,
-                        progress=self._progress(progress),
-                    )
+                logger.info(
+                    "TELEGRAM UPLOAD: starting part %d/%d path=%s size=%d bytes",
+                    index,
+                    len(paths),
+                    path,
+                    Path(path).stat().st_size,
                 )
 
+                started_at = time.monotonic()
+                last_logged_at = started_at
+                last_logged_bytes = 0
+
+                def upload_progress(current, total):
+                    nonlocal last_logged_at, last_logged_bytes
+                    if progress:
+                        progress(current, total, "telegram_upload")
+
+                    now = time.monotonic()
+                    if now - last_logged_at >= 5:
+                        delta_bytes = current - last_logged_bytes
+                        delta_time = now - last_logged_at
+                        mbps = (
+                            delta_bytes / delta_time / 1024 / 1024
+                            if delta_time > 0
+                            else 0
+                        )
+                        logger.info(
+                            "TELEGRAM SPEED: part=%d/%d %.2f MB/s %.1f%% (%d/%d bytes)",
+                            index,
+                            len(paths),
+                            mbps,
+                            (current / total * 100) if total else 0,
+                            current,
+                            total,
+                        )
+                        last_logged_at = now
+                        last_logged_bytes = current
+
+                while True:
+                    try:
+                        results.append(
+                            self.app.send_video(
+                                chat_id,
+                                path,
+                                caption=part_caption,
+                                thumb=prepared_thumbnail,
+                                duration=int(duration or 0),
+                                supports_streaming=True,
+                                progress=upload_progress,
+                            )
+                        )
+                        break
+                    except FloodWait as exc:
+                        wait_seconds = int(getattr(exc, "value", 0) or getattr(exc, "x", 0) or 0)
+                        wait_seconds = max(1, wait_seconds)
+                        logger.warning(
+                            "TELEGRAM FLOODWAIT: %ss before retrying part %d/%d",
+                            wait_seconds,
+                            index,
+                            len(paths),
+                        )
+                        time.sleep(wait_seconds)
+
+                elapsed = max(0.001, time.monotonic() - started_at)
+                average_mbps = Path(path).stat().st_size / elapsed / 1024 / 1024
+                logger.info(
+                    "TELEGRAM SPEED: part=%d/%d completed in %.1fs average=%.2f MB/s",
+                    index,
+                    len(paths),
+                    elapsed,
+                    average_mbps,
+                )
                 logger.info(
                     "TELEGRAM UPLOAD: part %d/%d sent successfully",
                     index,
