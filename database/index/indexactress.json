@@ -1256,10 +1256,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/726df4b6536ec68bb4d481a1e6a18fce.jpg",
       "total_videos": 159,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 137,
+      "last_crawled_at": 1790915170
     },
     "neo-akari": {
       "name": "Neo Akari",
