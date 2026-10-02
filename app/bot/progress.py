@@ -11,6 +11,10 @@ class TelegramProgress:
         self.last_time = time.monotonic()
         self.speed_ema = 0.0
         self.stage = None
+        self.title = "Video"
+
+    def set_title(self, title):
+        self.title = title or "Video"
 
     @staticmethod
     def _bar(percent, width=14):
@@ -19,7 +23,7 @@ class TelegramProgress:
 
     @staticmethod
     def _size(value):
-        value = float(value)
+        value = float(value or 0)
         units = ("B", "KB", "MB", "GB", "TB")
         for unit in units:
             if value < 1024 or unit == units[-1]:
@@ -37,8 +41,7 @@ class TelegramProgress:
     def _eta(current, total, speed):
         if total <= 0 or speed <= 0:
             return "—"
-        remaining = max(0, total - current)
-        seconds = int(remaining / speed)
+        seconds = int(max(0, total - current) / speed)
         if seconds >= 3600:
             return f"{seconds // 3600}h {(seconds % 3600) // 60:02d}m"
         if seconds >= 60:
@@ -60,8 +63,6 @@ class TelegramProgress:
         ):
             return
 
-        name = str(stage).replace("_", " ").title()
-
         if stage != self.stage:
             self.stage = stage
             self.last_current = current
@@ -81,16 +82,17 @@ class TelegramProgress:
 
         if total > 0:
             percent = min(100.0, max(0.0, current / total * 100))
-            bar = self._bar(percent)
             text = (
-                f"{name}\n\n"
-                f"{bar} {percent:.1f}%\n"
+                f"⬇️ **Downloading**\n"
+                f"Title - {self.title}\n"
+                f"{self._bar(percent)} {percent:.1f}%\n"
                 f"📦 {self._size(current)} / {self._size(total)}\n"
                 f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
             )
         else:
             text = (
-                f"{name}\n\n"
+                f"⬇️ **Downloading**\n"
+                f"Title - {self.title}\n"
                 f"📦 {self._size(current)}\n"
                 f"⚡ {self._speed(speed)}"
             )
@@ -110,6 +112,34 @@ class ParallelTelegramProgress:
         self.last = 0.0
         self.download = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
         self.upload = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
+        self.download_title = "Video"
+        self.upload_title = "Video"
+        self.download_complete = 0
+        self.upload_complete = 0
+        self.failed = 0
+        self.queue = 0
+        self.total_jobs = 0
+
+    def set_total(self, total):
+        self.total_jobs = int(total or 0)
+
+    def set_download_title(self, title):
+        self.download_title = title or "Video"
+
+    def set_upload_title(self, title):
+        self.upload_title = title or "Video"
+
+    def set_queue(self, count):
+        self.queue = max(0, int(count or 0))
+
+    def mark_download_complete(self):
+        self.download_complete += 1
+
+    def mark_upload_complete(self):
+        self.upload_complete += 1
+
+    def mark_failed(self):
+        self.failed += 1
 
     @staticmethod
     def _bar(percent, width=14):
@@ -170,7 +200,7 @@ class ParallelTelegramProgress:
             return
         self.last = now
 
-        def section(icon, label, state):
+        def section(icon, label, title, state):
             current = state["current"]
             total = state["total"]
             speed = state["speed"]
@@ -178,17 +208,31 @@ class ParallelTelegramProgress:
                 percent = min(100.0, max(0.0, current / total * 100))
                 return (
                     f"{icon} **{label}**\n"
+                    f"Title - {title}\n"
                     f"{self._bar(percent)} {percent:.1f}%\n"
                     f"📦 {self._size(current)} / {self._size(total)}\n"
                     f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
                 )
-            return f"{icon} **{label}**\n📦 {self._size(current)}\n⚡ {self._speed(speed)}"
+            return (
+                f"{icon} **{label}**\n"
+                f"Title - {title}\n"
+                f"📦 {self._size(current)}\n"
+                f"⚡ {self._speed(speed)}"
+            )
+
+        counts = (
+            f"Download complete - {self.download_complete}\n"
+            f"Upload complete - {self.upload_complete}\n"
+            f"Queue - {self.queue}"
+        )
 
         try:
             await self.message.edit_text(
-                section("⬇️", "Downloading", self.download)
+                section("⬇️", "Downloading", self.download_title, self.download)
                 + "\n\n"
-                + section("⬆️", "Uploading", self.upload)
+                + section("⬆️", "Uploading", self.upload_title, self.upload)
+                + "\n\n"
+                + counts
             )
         except Exception:
             return
