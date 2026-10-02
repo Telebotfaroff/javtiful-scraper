@@ -980,10 +980,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/aa2d0c573d96e1f35ae71d6c229c7f5e.jpg",
       "total_videos": 183,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 180,
+      "last_crawled_at": 1790901651
     },
     "kijima-airi": {
       "name": "Kijima Airi",
