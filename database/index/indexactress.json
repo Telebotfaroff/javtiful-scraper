@@ -1016,10 +1016,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/444128172cc158562174ba30d16dc994.jpg",
       "total_videos": 176,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 151,
+      "last_crawled_at": 1790903479
     },
     "yume-kana": {
       "name": "Yume Kana",
