@@ -1,5 +1,5 @@
 {
-  "total": 6,
+  "total": 7,
   "videos": {
     "ZMAR-063": {
       "title": "ZMAR-063 Marutto! Nagisa Mitsuki",
@@ -71,6 +71,18 @@
         "Mukai Ai"
       ],
       "studio": null,
+      "genres": []
+    },
+    "ZMAR-114": {
+      "title": "ZMAR-114 All of it! Ayaka Muto 2",
+      "url": "https://javtiful.com/video/61841/zmar-114",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/19/e310d2c55467aadfbe147f9f19885f70.jpg",
+      "duration": "04:01:43",
+      "date": "2024-06-19",
+      "actresses": [
+        "Mutou Ayaka"
+      ],
+      "studio": "Planet Plus",
       "genres": []
     }
   }
