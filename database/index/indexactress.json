@@ -2300,10 +2300,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/5d68e13a4686ac163f9f0305775a2d3b.jpg",
       "total_videos": 116,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 110,
+      "last_crawled_at": 1790961686
     },
     "isshiki-momoko": {
       "name": "Isshiki Momoko",
