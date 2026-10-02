@@ -197,7 +197,7 @@ async def _run_channel_parallel(message, state, page_number, items, status):
     return sum(x[0] for x in totals), sum(x[1] for x in totals)
 
 
-async def _run_channel_page(message, state, page_number, parallel=False):
+async def _run_channel_page(message, state, page_number, requested_count, parallel=False):
     channel_url = state["url"]
     channel_name = state.get("channel_name", "Channel")
     total_pages = int(state.get("total_pages") or 1)
@@ -213,12 +213,26 @@ async def _run_channel_page(message, state, page_number, parallel=False):
             )
             await _delete_status_later(status)
             return
+
+        available = len(items)
+        if requested_count < 1 or requested_count > available:
+            await status.edit_text(
+                f"❌ Invalid video count.\n\n"
+                f"📄 **Page:** {page_number}\n"
+                f"🎬 **Videos available:** {available}\n"
+                f"🔢 **Requested:** {requested_count}\n\n"
+                f"Enter a number from 1 to {available}."
+            )
+            await _delete_status_later(status)
+            return
+
+        items = items[:requested_count]
         mode_name = "Parallel" if parallel else "Sequential"
         await status.edit_text(
             f"📥 **{mode_name} mode**\n"
             f"📺 **Channel:** {channel_name}\n"
             f"📄 **Page:** {page_number}\n"
-            f"🎬 **Videos:** {len(items)}"
+            f"🎬 **Selected:** {len(items)}/{available}"
         )
         if parallel:
             completed, failed = await _run_channel_parallel(message, state, page_number, items, status)
@@ -227,7 +241,7 @@ async def _run_channel_page(message, state, page_number, parallel=False):
         await status.edit_text(
             f"✅ **Page {page_number} complete**\n\n"
             f"📺 **Channel:** {channel_name}\n"
-            f"🎬 **Videos:** {len(items)}\n"
+            f"🎬 **Selected:** {len(items)}/{available}\n"
             f"⚡ **Mode:** {mode_name}\n"
             f"✅ **Uploaded:** {completed}\n"
             f"❌ **Failed:** {failed}"
@@ -373,10 +387,26 @@ def register_handlers(app: Client):
                 )
             state["channel_page"] = page_number
             state.pop("channel_waiting_page", None)
+            state["channel_waiting_count"] = True
+            return await _reply_and_delete_later(
+                message,
+                f"📄 Page **{page_number}** selected.\n\n"
+                "How many videos do you want to download from this page?\n"
+                "Send a number; the bot will validate it against the page.",
+            )
+
+        if state and state.get("channel_waiting_count"):
+            if not re.fullmatch(r"\d+", text):
+                return await _reply_and_delete_later(message, "Invalid video count. Enter a whole number.")
+            count = int(text)
+            if count < 1:
+                return await _reply_and_delete_later(message, "Video count must be at least 1.")
+            state["channel_requested_count"] = count
+            state.pop("channel_waiting_count", None)
             state["channel_waiting_mode"] = True
             return await _reply_and_delete_later(
                 message,
-                f"📄 Page **{page_number}** selected.\n\nChoose download mode:",
+                f"🎬 **Requested videos:** {count}\n\nChoose download mode:",
                 reply_markup=_channel_mode_keyboard(),
             )
 
@@ -484,14 +514,17 @@ def register_handlers(app: Client):
 
         mode = query.data.split("|", 1)[1]
         page_number = int(state["channel_page"])
+        requested_count = int(state.get("channel_requested_count") or 0)
         state.pop("channel_waiting_mode", None)
         state.pop("channel_page", None)
+        state.pop("channel_requested_count", None)
         await query.answer("Starting " + mode + " mode")
         try:
             await _run_channel_page(
                 query.message,
                 state,
                 page_number,
+                requested_count,
                 parallel=(mode == "parallel"),
             )
         finally:
