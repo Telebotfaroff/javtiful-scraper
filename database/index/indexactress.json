@@ -2732,10 +2732,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/829f1fc0016f8cc0941fbcabf385dbbb.jpg",
       "total_videos": 98,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 91,
+      "last_crawled_at": 1790979475
     },
     "kaede-fuua": {
       "name": "Kaede Fuua",
