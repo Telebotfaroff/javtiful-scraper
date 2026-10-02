@@ -2144,10 +2144,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/3b55017c20f6452f72e29fd7d9a6969c.jpg",
       "total_videos": 120,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 108,
+      "last_crawled_at": 1790955082
     },
     "fukiishi-rena": {
       "name": "Fukiishi Rena",
