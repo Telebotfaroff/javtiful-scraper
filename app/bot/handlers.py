@@ -4,7 +4,7 @@ import re
 
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from app.bot.progress import TelegramProgress
+from app.bot.progress import TelegramProgress, ParallelTelegramProgress
 from app.jobs.pipeline import Pipeline
 from app.jobs.queue import Job
 from app.uploaders.manager import UploadManager
@@ -27,97 +27,194 @@ def _channel_keyboard():
     ])
 
 
-async def _run_channel_page(message, state, page_number):
-    channel_url = state["url"]
-    channel_name = state.get("channel_name", "Channel")
-    total_pages = int(state.get("total_pages") or 1)
-    status = await message.reply_text(
-        f"⏳ Loading page {page_number} ({page_number + 1}/{total_pages})…"
+def _channel_mode_keyboard():
+    return InlineKeyboardMarkup([
+        [
+            InlineKeyboardButton("🐢 Sequential", callback_data="channel|sequential"),
+            InlineKeyboardButton("⚡ Parallel", callback_data="channel|parallel"),
+        ]
+    ])
+
+
+def _make_channel_job(item, chat_id):
+    title = item.get("title") or "Video"
+    code = item.get("code")
+    caption = f"{code} {title}" if code else title
+    return Job(
+        id=f"TG-CH-{uuid.uuid4().hex[:10]}",
+        url=item["post_url"],
+        quality="720p",
+        uploader="telegram",
+        target=chat_id,
+        caption=caption,
     )
 
-    try:
-        page_data = await asyncio.to_thread(
-            channel_extractor.page, channel_url, page_number
+
+async def _send_channel_preview(message, item):
+    if item.get("thumbnail"):
+        await asyncio.to_thread(
+            telegram_uploader.send_preview,
+            message.chat.id,
+            item["thumbnail"],
+            item.get("title") or "Video",
+            item.get("post_url"),
         )
-        items = page_data.get("items", [])
-        if not items:
+
+
+async def _run_channel_sequential(message, state, page_number, items, status):
+    channel_name = state.get("channel_name", "Channel")
+    completed = failed = 0
+    for item in items:
+        title = item.get("title") or "Video"
+        job = _make_channel_job(item, message.chat.id)
+        progress = TelegramProgress(status, min_interval=2.0)
+        try:
+            await _send_channel_preview(message, item)
             await status.edit_text(
-                f"❌ No videos found on page {page_number}.\n\n"
-                f"Channel: {channel_name}"
+                f"⬇️ **Downloading:** {title}\n"
+                f"📺 **Channel:** {channel_name}\n"
+                f"📄 **Page:** {page_number}\n"
+                f"🎬 **Video:** {completed + failed + 1}/{len(items)}"
             )
-            return
-
-        await status.edit_text(
-            f"📥 Downloading **{len(items)} videos** from page {page_number}…\n\n"
-            f"Channel: {channel_name}"
-        )
-
-        completed = 0
-        failed = 0
-
-        for item in items:
-            title = item.get("title") or "Video"
-            code = item.get("code")
-            caption = f"{code} {title}" if code else title
-
-            if item.get("thumbnail"):
-                await asyncio.to_thread(
-                    telegram_uploader.send_preview,
-                    message.chat.id,
-                    item["thumbnail"],
-                    title,
-                    item.get("post_url"),
-                )
-
-            job = Job(
-                id=f"TG-CH-{uuid.uuid4().hex[:10]}",
-                url=item["post_url"],
-                quality="720p",
-                uploader="telegram",
-                target=message.chat.id,
-                caption=caption,
-            )
-
-            progress = TelegramProgress(status, min_interval=2.0)
-
-            try:
-                await status.edit_text(
-                    f"⬇️ **Downloading:** {title}\n"
-                    f"📺 **Channel:** {channel_name}\n"
-                    f"📄 **Page:** {page_number}\n"
-                    f"🎬 **Video:** {completed + failed + 1}/{len(items)}"
-                )
-                await asyncio.to_thread(
-                    pipeline.run,
-                    job,
-                    _progress_callback(progress),
-                )
-                completed += 1
-            except Exception as exc:
-                failed += 1
-                await status.edit_text(
-                    f"📥 **Channel:** {channel_name}\n"
-                    f"📄 **Page:** {page_number}\n"
-                    f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
-                    f"✅ **Completed:** {completed}\n"
-                    f"❌ **Failed:** {failed}\n\n"
-                    f"❌ {title}\n{type(exc).__name__}: {exc}"
-                )
-                continue
-
+            await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
+            completed += 1
+        except Exception as exc:
+            failed += 1
             await status.edit_text(
                 f"📥 **Channel:** {channel_name}\n"
                 f"📄 **Page:** {page_number}\n"
                 f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
                 f"✅ **Completed:** {completed}\n"
                 f"❌ **Failed:** {failed}\n\n"
-                f"▶️ {title}"
+                f"❌ {title}\n{type(exc).__name__}: {exc}"
             )
+            continue
+        await status.edit_text(
+            f"📥 **Channel:** {channel_name}\n"
+            f"📄 **Page:** {page_number}\n"
+            f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
+            f"✅ **Completed:** {completed}\n"
+            f"❌ **Failed:** {failed}\n\n"
+            f"▶️ {title}"
+        )
+    return completed, failed
 
+
+async def _run_channel_parallel(message, state, page_number, items, status):
+    channel_name = state.get("channel_name", "Channel")
+    queue = asyncio.Queue(maxsize=1)
+    progress = ParallelTelegramProgress(status, min_interval=2.0)
+
+    async def producer():
+        for index, item in enumerate(items):
+            title = item.get("title") or "Video"
+            job = _make_channel_job(item, message.chat.id)
+            try:
+                await _send_channel_preview(message, item)
+                video = await asyncio.to_thread(
+                    pipeline.prepare_download,
+                    job,
+                    _progress_callback(progress),
+                )
+                await queue.put(("ok", index, item, job, video))
+            except Exception as exc:
+                await queue.put(("error", index, item, job, exc))
+        await queue.put(("done",))
+
+    async def consumer():
+        completed = failed = 0
+        while True:
+            entry = await queue.get()
+            if entry[0] == "done":
+                queue.task_done()
+                break
+            kind, index, item, job, payload = entry
+            title = item.get("title") or "Video"
+            if kind == "error":
+                failed += 1
+                await status.edit_text(
+                    f"⚡ **Parallel mode**\n"
+                    f"📺 **Channel:** {channel_name}\n"
+                    f"📄 **Page:** {page_number}\n"
+                    f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
+                    f"✅ **Uploaded:** {completed}\n"
+                    f"❌ **Failed:** {failed}\n\n"
+                    f"❌ {title}\n{type(payload).__name__}: {payload}"
+                )
+                queue.task_done()
+                continue
+            try:
+                await status.edit_text(
+                    f"⚡ **Parallel mode**\n"
+                    f"📺 **Channel:** {channel_name}\n"
+                    f"📄 **Page:** {page_number}\n"
+                    f"⬆️ Uploading {index + 1}/{len(items)}: **{title}**"
+                )
+                await asyncio.to_thread(
+                    pipeline.upload_prepared,
+                    job,
+                    payload,
+                    _progress_callback(progress),
+                )
+                completed += 1
+            except Exception as exc:
+                failed += 1
+                await status.edit_text(
+                    f"⚡ **Parallel mode**\n"
+                    f"📺 **Channel:** {channel_name}\n"
+                    f"📄 **Page:** {page_number}\n"
+                    f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
+                    f"✅ **Uploaded:** {completed}\n"
+                    f"❌ **Failed:** {failed}\n\n"
+                    f"❌ {title}\n{type(exc).__name__}: {exc}"
+                )
+            finally:
+                queue.task_done()
+        return completed, failed
+
+    producer_task = asyncio.create_task(producer())
+    consumer_task = asyncio.create_task(consumer())
+    try:
+        await asyncio.gather(producer_task, consumer_task)
+    except Exception:
+        producer_task.cancel()
+        consumer_task.cancel()
+        await asyncio.gather(producer_task, consumer_task, return_exceptions=True)
+        raise
+    return consumer_task.result()
+
+
+async def _run_channel_page(message, state, page_number, parallel=False):
+    channel_url = state["url"]
+    channel_name = state.get("channel_name", "Channel")
+    total_pages = int(state.get("total_pages") or 1)
+    status = await message.reply_text(
+        f"⏳ Loading page {page_number} ({page_number + 1}/{total_pages})…"
+    )
+    try:
+        page_data = await asyncio.to_thread(channel_extractor.page, channel_url, page_number)
+        items = page_data.get("items", [])
+        if not items:
+            await status.edit_text(
+                f"❌ No videos found on page {page_number}.\n\nChannel: {channel_name}"
+            )
+            return
+        mode_name = "Parallel" if parallel else "Sequential"
+        await status.edit_text(
+            f"📥 **{mode_name} mode**\n"
+            f"📺 **Channel:** {channel_name}\n"
+            f"📄 **Page:** {page_number}\n"
+            f"🎬 **Videos:** {len(items)}"
+        )
+        if parallel:
+            completed, failed = await _run_channel_parallel(message, state, page_number, items, status)
+        else:
+            completed, failed = await _run_channel_sequential(message, state, page_number, items, status)
         await status.edit_text(
             f"✅ **Page {page_number} complete**\n\n"
             f"📺 **Channel:** {channel_name}\n"
             f"🎬 **Videos:** {len(items)}\n"
+            f"⚡ **Mode:** {mode_name}\n"
             f"✅ **Uploaded:** {completed}\n"
             f"❌ **Failed:** {failed}"
         )
@@ -231,10 +328,13 @@ def register_handlers(app: Client):
                 return await message.reply_text(
                     f"Invalid page. Enter a number from 0 to {max(0, total_pages - 1)}."
                 )
+            state["channel_page"] = page_number
             state.pop("channel_waiting_page", None)
-            await _run_channel_page(message, state, page_number)
-            pending.pop(message.from_user.id, None)
-            return
+            state["channel_waiting_mode"] = True
+            return await message.reply_text(
+                f"📄 Page **{page_number}** selected.\n\nChoose download mode:",
+                reply_markup=_channel_mode_keyboard(),
+            )
 
         if state and state.get("clip_waiting"):
             match = re.fullmatch(r"\s*([^\-]+)\s*-\s*([^\-]+)\s*", text)
@@ -330,6 +430,30 @@ def register_handlers(app: Client):
             "2 = website page 3\n\n"
             "Send only the page number."
         )
+
+
+    @app.on_callback_query(filters.regex(r"^channel\|(sequential|parallel)$"))
+    async def channel_mode_handler(client, query):
+        state = pending.get(query.from_user.id)
+        if not state or state.get("type") != "channel":
+            return await query.answer("Session expired. Send the channel URL again.", show_alert=True)
+        if not state.get("channel_waiting_mode"):
+            return await query.answer("Choose the page first.", show_alert=True)
+
+        mode = query.data.split("|", 1)[1]
+        page_number = int(state["channel_page"])
+        state.pop("channel_waiting_mode", None)
+        state.pop("channel_page", None)
+        await query.answer("Starting " + mode + " mode")
+        try:
+            await _run_channel_page(
+                query.message,
+                state,
+                page_number,
+                parallel=(mode == "parallel"),
+            )
+        finally:
+            pending.pop(query.from_user.id, None)
 
 
     @app.on_callback_query(filters.regex(r"^dest\|"))
