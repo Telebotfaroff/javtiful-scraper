@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "STAR-995-REDUCING": {
       "title": "STAR-995 The sweet taste of lilies and honey",
@@ -23,6 +23,18 @@
       "actresses": [
         "Kogawa Iori",
         "Oshikawa Yuuri"
+      ],
+      "studio": "SOD Create",
+      "genres": []
+    },
+    "STAR-960": {
+      "title": "STAR-960 Kato Momoka Who Is Cute With The Best Is Becoming A Sister Of You, Love Love Life",
+      "url": "https://javtiful.com/video/32620/star-960",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/05/06/37a2986d80c97d6cb29f564c1a39e829.jpg",
+      "duration": "03:04:58",
+      "date": "2023-05-06",
+      "actresses": [
+        "Katou Momoka"
       ],
       "studio": "SOD Create",
       "genres": []
