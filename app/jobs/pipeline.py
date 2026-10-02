@@ -14,7 +14,8 @@ class Pipeline:
         self.downloader = downloader or Downloader()
         self.uploaders = uploaders or {}
 
-    def run(self, job, progress=None):
+    def prepare_download(self, job, progress=None):
+        """Extract and download a video, but leave upload for the caller."""
         logger.info("PIPELINE: extracting %s", job.url)
         video = self.extractor.extract(job.url)
         logger.info(
@@ -35,9 +36,12 @@ class Pipeline:
                 progress(current, total, stage) if progress else None
             ),
         )
+        logger.info("PIPELINE: download complete: %s", video.local_path)
+        return video
 
+    def upload_prepared(self, job, video, progress=None):
+        """Upload an already downloaded video and clean it up after success."""
         source_path = video.local_path
-        logger.info("PIPELINE: download complete: %s", source_path)
         upload_paths = [source_path]
         temporary_paths = []
         results = []
@@ -98,3 +102,7 @@ class Pipeline:
         finally:
             if len(results) == len(upload_paths) and upload_paths:
                 cleanup([source_path, *temporary_paths])
+
+    def run(self, job, progress=None):
+        video = self.prepare_download(job, progress)
+        return self.upload_prepared(job, video, progress)
