@@ -2792,10 +2792,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1e98c8427ca4058beeed03063a0cf84f.jpg",
       "total_videos": 97,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 77,
+      "last_crawled_at": 1790981864
     },
     "kamiki-rei": {
       "name": "Kamiki Rei",
