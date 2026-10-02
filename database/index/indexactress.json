@@ -2648,10 +2648,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/bc3bc2b4839d86a71031f17d7c70590f.jpg",
       "total_videos": 100,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 80,
+      "last_crawled_at": 1790976094
     },
     "ishikawa-mio": {
       "name": "Ishikawa Mio",

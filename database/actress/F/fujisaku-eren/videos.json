@@ -1,0 +1,23 @@
+{
+  "total": 2,
+  "videos": {
+    "RCTD-542-REDUCING": {
+      "title": "RCTD-542 The True Time-Stopping Watch Part 27",
+      "url": "https://javtiful.com/video/93037/rctd-542-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/09/d9c79cef8a22e0a45db3986765d43855.jpg",
+      "duration": "02:01:10",
+      "date": "2025-09-09",
+      "studio": "rocket",
+      "genres": []
+    },
+    "RCTD-542": {
+      "title": "RCTD-542 True Time Stopping Watch Part 27",
+      "url": "https://javtiful.com/video/39149/rctd-542",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/08/07/6d5315fc9cdc84ef414266cd5972a1e2.jpg",
+      "duration": "02:01:10",
+      "date": "2023-08-07",
+      "studio": "rocket",
+      "genres": []
+    }
+  }
+}
