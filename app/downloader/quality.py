@@ -1,11 +1,26 @@
-def choose_quality(qualities: dict[str,str], requested: str = "best") -> tuple[str,str]:
-    if not qualities: raise ValueError("No downloadable qualities were exposed by the source")
-    normalized={str(k).lower():v for k,v in qualities.items()}
-    if requested.lower() in normalized: return requested, normalized[requested.lower()]
-    pairs=[]
-    for k,v in qualities.items():
-        import re
-        m=re.search(r"(\\d+)p", str(k))
-        if m: pairs.append((int(m.group(1)), k, v))
-    if pairs: _,k,v=max(pairs); return k,v
-    k=next(iter(qualities)); return k,qualities[k]
+import re
+
+
+def choose_quality(qualities: dict[str, str], requested: str = "best") -> tuple[str, str]:
+    if not qualities:
+        raise ValueError("No downloadable qualities were exposed by the source")
+
+    requested = str(requested or "best").strip().lower()
+    normalized = {str(k).strip().lower(): (k, v) for k, v in qualities.items()}
+
+    if requested != "best" and requested in normalized:
+        key, url = normalized[requested]
+        return key, url
+
+    pairs = []
+    for key, url in qualities.items():
+        match = re.search(r"(\d{3,4})p\b", str(key), re.I)
+        if match:
+            pairs.append((int(match.group(1)), str(key), url))
+
+    if pairs:
+        _, key, url = max(pairs, key=lambda item: item[0])
+        return key, url
+
+    key = next(iter(qualities))
+    return key, qualities[key]
