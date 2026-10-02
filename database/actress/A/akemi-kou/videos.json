@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "HUNTA-948": {
       "title": "HUNTA-948 I thought it would be a meetup full of guys, but everyone around me was a girl and I was the only guy! I went to a hotpot meetup for game lovers for the first time. Contr",
@@ -106,6 +106,15 @@
       "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/02/19/64a4ae11158e9c0e0de4b99ae7e163dc.jpg",
       "duration": "02:31:47",
       "date": "2025-02-19",
+      "studio": null,
+      "genres": []
+    },
+    "SDMUA-047": {
+      "title": "SDMUA-047 Circle Synchrons Meet For The First Time In 5 Years And Fight Reason With Alcohol And Emo",
+      "url": "https://javtiful.com/video/23828/sdmua-047",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/10/11/558bd61d156a3143911d0c36232809d9.jpg",
+      "duration": "03:01:43",
+      "date": "2022-10-11",
       "studio": null,
       "genres": []
     }

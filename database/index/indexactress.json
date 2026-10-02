@@ -1148,10 +1148,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7f526d154e8f5cbd837631134a5b73ba.jpg",
       "total_videos": 166,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 132,
+      "last_crawled_at": 1790910002
     },
     "meguri": {
       "name": "Meguri",
