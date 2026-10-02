@@ -2864,10 +2864,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2631f88c13167a1b2c71f78f0ff57192.jpg",
       "total_videos": 96,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 88,
+      "last_crawled_at": 1790984704
     },
     "tsukinoe-sui": {
       "name": "Tsukinoe Sui",
