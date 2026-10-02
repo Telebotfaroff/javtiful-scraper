@@ -2636,10 +2636,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a77b42800fffe2007a42e10dd9fc6a99.jpg",
       "total_videos": 101,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 101,
+      "last_crawled_at": 1790975600
     },
     "hanayagi-anna": {
       "name": "Hanayagi Anna",
