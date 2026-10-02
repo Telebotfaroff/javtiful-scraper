@@ -3,7 +3,7 @@ import time
 
 
 class TelegramProgress:
-    def __init__(self, message, min_interval=2.0):
+    def __init__(self, message, min_interval=5.0):
         self.message = message
         self.min_interval = min_interval
         self.last = 0.0
@@ -12,6 +12,10 @@ class TelegramProgress:
         self.speed_ema = 0.0
         self.stage = None
         self.title = "Video"
+        self._lock = asyncio.Lock()
+        self._pending = None
+        self._worker = None
+        self._closed = False
 
     def set_title(self, title):
         self.title = title or "Video"
@@ -48,21 +52,8 @@ class TelegramProgress:
             return f"{seconds // 60}m {seconds % 60:02d}s"
         return f"{seconds}s"
 
-    async def update(self, current, total, stage):
-        try:
-            current = float(current or 0)
-            total = float(total or 0)
-        except (TypeError, ValueError):
-            return
-
+    def _render(self, current, total, stage):
         now = time.monotonic()
-
-        if (
-            now - self.last < self.min_interval
-            and (not total or current < total)
-        ):
-            return
-
         if stage != self.stage:
             self.stage = stage
             self.last_current = current
@@ -74,39 +65,61 @@ class TelegramProgress:
         instant_speed = delta / elapsed if elapsed > 0 and delta >= 0 else 0
         if instant_speed > 0:
             self.speed_ema = (self.speed_ema * 0.75) + (instant_speed * 0.25)
-        speed = self.speed_ema
-
-        self.last = now
         self.last_time = now
         self.last_current = current
 
         if total > 0:
             percent = min(100.0, max(0.0, current / total * 100))
-            text = (
+            return (
                 f"⬇️ **Downloading**\n"
                 f"Title - {self.title}\n"
                 f"{self._bar(percent)} {percent:.1f}%\n"
                 f"📦 {self._size(current)} / {self._size(total)}\n"
-                f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
+                f"⚡ {self._speed(self.speed_ema)}  •  ⏳ {self._eta(current, total, self.speed_ema)}"
             )
-        else:
-            text = (
-                f"⬇️ **Downloading**\n"
-                f"Title - {self.title}\n"
-                f"📦 {self._size(current)}\n"
-                f"⚡ {self._speed(speed)}"
-            )
+        return (
+            f"⬇️ **Downloading**\n"
+            f"Title - {self.title}\n"
+            f"📦 {self._size(current)}\n"
+            f"⚡ {self._speed(self.speed_ema)}"
+        )
 
+    async def _send_loop(self):
+        while not self._closed:
+            await asyncio.sleep(self.min_interval)
+            async with self._lock:
+                pending = self._pending
+                self._pending = None
+            if pending is None:
+                continue
+            try:
+                await self.message.edit_text(self._render(*pending))
+            except Exception:
+                continue
+
+    async def update(self, current, total, stage):
         try:
-            await self.message.edit_text(text)
-        except Exception:
+            current = float(current or 0)
+            total = float(total or 0)
+        except (TypeError, ValueError):
             return
+
+        async with self._lock:
+            self._pending = (current, total, stage)
+            if self._worker is None or self._worker.done():
+                self._worker = asyncio.create_task(self._send_loop())
+
+    async def close(self):
+        self._closed = True
+        if self._worker:
+            self._worker.cancel()
+            await asyncio.gather(self._worker, return_exceptions=True)
 
 
 class ParallelTelegramProgress:
     """Render download and upload progress together for batch mode."""
 
-    def __init__(self, message, min_interval=2.0):
+    def __init__(self, message, min_interval=5.0):
         self.message = message
         self.min_interval = min_interval
         self.last = 0.0
@@ -119,6 +132,10 @@ class ParallelTelegramProgress:
         self.failed = 0
         self.queue = 0
         self.total_jobs = 0
+        self._lock = asyncio.Lock()
+        self._pending = None
+        self._worker = None
+        self._closed = False
 
     def set_total(self, total):
         self.total_jobs = int(total or 0)
@@ -185,21 +202,7 @@ class ParallelTelegramProgress:
         state["last"] = current
         state["time"] = now
 
-    async def update(self, current, total, stage):
-        if str(stage).startswith("telegram_upload"):
-            self._update_state(self.upload, current, total)
-        elif stage not in {"extract", "clip"}:
-            self._update_state(self.download, current, total)
-        else:
-            return
-
-        now = time.monotonic()
-        if now - self.last < self.min_interval and (
-            total <= 0 or current < total
-        ):
-            return
-        self.last = now
-
+    def _render(self):
         def section(icon, label, title, state):
             current = state["current"]
             total = state["total"]
@@ -225,14 +228,42 @@ class ParallelTelegramProgress:
             f"Upload complete - {self.upload_complete}\n"
             f"Queue - {self.queue}"
         )
+        return (
+            section("⬇️", "Downloading", self.download_title, self.download)
+            + "\n\n"
+            + section("⬆️", "Uploading", self.upload_title, self.upload)
+            + "\n\n"
+            + counts
+        )
 
-        try:
-            await self.message.edit_text(
-                section("⬇️", "Downloading", self.download_title, self.download)
-                + "\n\n"
-                + section("⬆️", "Uploading", self.upload_title, self.upload)
-                + "\n\n"
-                + counts
-            )
-        except Exception:
+    async def _send_loop(self):
+        while not self._closed:
+            await asyncio.sleep(self.min_interval)
+            async with self._lock:
+                pending = self._pending
+                self._pending = None
+            if pending is None:
+                continue
+            try:
+                await self.message.edit_text(self._render())
+            except Exception:
+                continue
+
+    async def update(self, current, total, stage):
+        if str(stage).startswith("telegram_upload"):
+            self._update_state(self.upload, current, total)
+        elif stage not in {"extract", "clip"}:
+            self._update_state(self.download, current, total)
+        else:
             return
+
+        async with self._lock:
+            self._pending = True
+            if self._worker is None or self._worker.done():
+                self._worker = asyncio.create_task(self._send_loop())
+
+    async def close(self):
+        self._closed = True
+        if self._worker:
+            self._worker.cancel()
+            await asyncio.gather(self._worker, return_exceptions=True)
