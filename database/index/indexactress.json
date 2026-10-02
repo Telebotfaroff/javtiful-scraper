@@ -2528,10 +2528,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/76c16310a90396ef98a7ffc9b4a49820.jpg",
       "total_videos": 106,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 98,
+      "last_crawled_at": 1790971240
     },
     "yorimoto-shiori": {
       "name": "Yorimoto Shiori",
