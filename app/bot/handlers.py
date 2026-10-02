@@ -117,11 +117,10 @@ def register_handlers(app: Client):
     @app.on_message(filters.private & filters.text)
     async def link_handler(client, message):
         text = message.text.strip()
-        # Handle a clip range here before URL validation. Pyrogram stops
-        # propagation after the first matching handler.
         state = pending.get(message.from_user.id)
+
         if state and state.get("clip_waiting"):
-            match = re.fullmatch(r"\\s*([^\\-]+)\\s*-\\s*([^\\-]+)\\s*", text)
+            match = re.fullmatch(r"\s*([^\-]+)\s*-\s*([^\-]+)\s*", text)
             if not match:
                 return await message.reply_text("Invalid range. Use 00:00-01:30.")
             start, end = match.group(1).strip(), match.group(2).strip()
@@ -132,28 +131,12 @@ def register_handlers(app: Client):
             state["clips"] = [(start, end)]
             state.pop("clip_waiting", None)
             await message.reply_text("✂️ Clip selected. Starting pipeline…")
-            await _run_job(message, state)
-            pending.pop(message.from_user.id, None)
+            try:
+                await _run_job(message, state)
+            finally:
+                pending.pop(message.from_user.id, None)
             return
 
-        # Clip ranges are also private text messages. Handle them here before
-        # the URL validation so the URL handler does not swallow the range.
-        state = pending.get(message.from_user.id)
-        if state and state.get("clip_waiting"):
-            match = re.fullmatch(r"\\s*([^\\-]+)\\s*-\\s*([^\\-]+)\\s*", text)
-            if not match:
-                return await message.reply_text("Invalid range. Use 00:00-01:30.")
-            start, end = match.group(1).strip(), match.group(2).strip()
-            if not (_valid_time(start) and _valid_time(end)):
-                return await message.reply_text("Invalid time. Use SS, MM:SS, or HH:MM:SS.")
-            if _seconds(end) <= _seconds(start):
-                return await message.reply_text("End time must be after start time.")
-            state["clips"] = [(start, end)]
-            state.pop("clip_waiting", None)
-            await message.reply_text("✂️ Clip selected. Starting pipeline…")
-            await _run_job(message, state)
-            pending.pop(message.from_user.id, None)
-            return
         if text.startswith("/start"):
             return await message.reply_text("JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
         if not text.startswith(("https://javtiful.com/","http://javtiful.com/")):
