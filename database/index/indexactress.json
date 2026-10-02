@@ -2012,10 +2012,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/eebe5656fb3eafc7d0fdad7fda58f77d.jpg",
       "total_videos": 124,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 106,
+      "last_crawled_at": 1790949437
     },
     "shiina-yuna": {
       "name": "Shiina Yuna",
