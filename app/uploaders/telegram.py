@@ -354,21 +354,21 @@ class TelegramUploader:
             logger.warning("TELEGRAM PREVIEW: thumbnail preparation failed")
             return None
 
+        index, client = self._acquire_client()
         try:
-            index, client = self._acquire_client()
-            try:
-                self._ensure_started(client, self._clients[index].name)
-                preview = client.send_photo(
+            self._ensure_started(client, getattr(client, "name", f"client-{index + 1}"))
+            preview = client.send_photo(
                 chat_id,
                 prepared,
                 caption=f"🎬 {title}",
             )
-                logger.info("TELEGRAM PREVIEW: sent for %s", title)
-                return preview
-            except Exception:
+            logger.info("TELEGRAM PREVIEW: sent for %s", title)
+            return preview
+        except Exception:
             logger.exception("TELEGRAM PREVIEW: send_photo failed")
             return None
         finally:
+            self._release_client(index)
             if str(prepared).startswith(tempfile.gettempdir()):
                 Path(prepared).unlink(missing_ok=True)
 
