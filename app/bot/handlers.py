@@ -40,7 +40,10 @@ def _channel_mode_keyboard():
 def _make_channel_job(item, chat_id):
     title = item.get("title") or "Video"
     code = item.get("code")
-    caption = f"{code} {title}" if code else title
+    if code and not re.match(rf"^\s*{re.escape(code)}(?:\s|$)", title, re.I):
+        caption = f"{code} {title}"
+    else:
+        caption = title
     return Job(
         id=f"TG-CH-{uuid.uuid4().hex[:10]}",
         url=item["post_url"],
@@ -67,6 +70,11 @@ async def _run_channel_sequential(message, state, page_number, items, status):
             )
             await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
             completed += 1
+            code = item.get("code") or ""
+            await status.reply_text(
+                f"✅ **Uploaded successfully to channel**\n\n"
+                f"🎬 **{code + ' ' if code else ''}{title}**"
+            )
         except Exception as exc:
             failed += 1
             await status.edit_text(
@@ -143,6 +151,11 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 completed += 1
                 progress.mark_upload_complete()
                 progress.set_queue(queue.qsize())
+                code = item.get("code") or ""
+                await status.reply_text(
+                    f"✅ **Uploaded successfully to channel**\n\n"
+                    f"🎬 **{code + ' ' if code else ''}{title}**"
+                )
             except Exception as exc:
                 failed += 1
                 progress.mark_failed()
