@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 6,
   "videos": {
     "BGN-046": {
       "title": "BGN-046 Newcomer Prestige Exclusive Debut Kurokawa Sarina",
@@ -45,6 +45,30 @@
       "date": "2024-05-26",
       "actresses": [
         "Saitou Amiri"
+      ],
+      "studio": "PRESTIGE",
+      "genres": []
+    },
+    "BGN-054-REDUCING": {
+      "title": "BGN-054 Newcomer Prestige Exclusive Debut",
+      "url": "https://javtiful.com/video/98108/bgn-054-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/11/25/82fdb66f0a4e427f4827497c6c36ec42.jpg",
+      "duration": "03:10:11",
+      "date": "2025-11-25",
+      "actresses": [
+        "Suzumori Remu"
+      ],
+      "studio": "PRESTIGE",
+      "genres": []
+    },
+    "BGN-054": {
+      "title": "BGN-054 Newcomer Prestige Exclusive Debut",
+      "url": "https://javtiful.com/video/2653/bgn-054",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/04/20/d6cf41db9c6fec8a9337f1a75f6649e5.jpg",
+      "duration": "03:10:09",
+      "date": "2019-04-20",
+      "actresses": [
+        "Suzumori Remu"
       ],
       "studio": "PRESTIGE",
       "genres": []
