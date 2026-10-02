@@ -1856,10 +1856,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1214d8083027e191c4a1a8f5fc55763c.jpg",
       "total_videos": 129,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 129,
+      "last_crawled_at": 1790942627
     },
     "sachiko": {
       "name": "Sachiko",
