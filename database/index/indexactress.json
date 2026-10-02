@@ -1604,10 +1604,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/244599f798a6f0b2187e60a87057fe3f.jpg",
       "total_videos": 143,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 97,
+      "last_crawled_at": 1790931386
     },
     "matsui-hinako": {
       "name": "Matsui Hinako",
