@@ -1004,10 +1004,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e124968582dc4069c1e4ea3dfb311871.jpg",
       "total_videos": 181,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 169,
+      "last_crawled_at": 1790902875
     },
     "honma-yuri": {
       "name": "Honma Yuri",
