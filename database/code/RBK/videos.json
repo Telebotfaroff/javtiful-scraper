@@ -1,5 +1,5 @@
 {
-  "total": 35,
+  "total": 36,
   "videos": {
     "RBK-063": {
       "title": "RBK-063 Secret Investigator, Until You Fall... Storm Of Violence Mizuki Yayoi",
@@ -423,6 +423,18 @@
         "Nanami Tina"
       ],
       "studio": "Attackers",
+      "genres": []
+    },
+    "RBK-040": {
+      "title": "RBK-040 My Sonhood Friend Who Was Close To Me Like A Sonfriend",
+      "url": "https://javtiful.com/video/15754/rbk-040",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/02/25/a4e74443125d5fd13956061cfec3a39e.jpg",
+      "duration": "02:36:14",
+      "date": "2022-02-25",
+      "actresses": [
+        "Sannomiya Tsubaki"
+      ],
+      "studio": null,
       "genres": []
     }
   }

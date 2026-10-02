@@ -2816,10 +2816,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1bd7bf5565fda40e6a10f942f7b85120.jpg",
       "total_videos": 97,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 97,
+      "last_crawled_at": 1790982826
     },
     "shiina-sora": {
       "name": "Shiina Sora",
