@@ -1352,10 +1352,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/da439e8a0ff9bfd844ab68253797ec2d.jpg",
       "total_videos": 156,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 116,
+      "last_crawled_at": 1790919784
     },
     "kawakami-yuu": {
       "name": "Kawakami Yuu",
