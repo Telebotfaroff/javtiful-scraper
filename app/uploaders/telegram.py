@@ -92,7 +92,12 @@ class TelegramUploader:
 
     @staticmethod
     def _prepare_thumbnail(thumbnail, video_path=None, referer=None):
-        """Download/normalize a poster, with a video-frame fallback."""
+        """Prepare the best possible Telegram-compatible thumbnail.
+
+        If the source is already a JPEG within Telegram's thumbnail limits,
+        keep the original bytes untouched. Otherwise convert it to JPEG using
+        the highest quality that fits the limits.
+        """
         if not thumbnail:
             logger.warning("THUMBNAIL: crawler returned no thumbnail URL")
             return TelegramUploader._fallback_thumbnail(video_path)
@@ -120,23 +125,65 @@ class TelegramUploader:
                 headers["Referer"] = str(referer)
 
             response = requests.get(value, timeout=20, headers=headers)
+            content_type = response.headers.get("content-type", "").lower()
             logger.info(
                 "THUMBNAIL: HTTP %s, content-type=%s, bytes=%s",
                 response.status_code,
-                response.headers.get("content-type", "unknown"),
+                content_type or "unknown",
                 len(response.content),
             )
             response.raise_for_status()
 
-            raw = tempfile.NamedTemporaryFile(delete=False, suffix=".img")
+            suffix = ".jpg" if "jpeg" in content_type or "jpg" in content_type else ".img"
+            raw = tempfile.NamedTemporaryFile(delete=False, suffix=suffix)
             raw.write(response.content)
             raw.close()
             raw_path = raw.name
+
+            # Preserve a compliant JPEG exactly as downloaded. This avoids
+            # an unnecessary recompression/quality loss.
+            if (
+                "jpeg" in content_type
+                and len(response.content) <= 200_000
+            ):
+                try:
+                    probe = subprocess.check_output(
+                        [
+                            "ffprobe", "-v", "error",
+                            "-select_streams", "v:0",
+                            "-show_entries", "stream=width,height",
+                            "-of", "csv=p=0:s=x",
+                            raw_path,
+                        ],
+                        text=True,
+                    ).strip()
+                    width, height = [int(x) for x in probe.split("x", 1)]
+                    if width <= 320 and height <= 320:
+                        logger.info(
+                            "THUMBNAIL: preserving original JPEG unchanged: %dx%d, %d bytes",
+                            width,
+                            height,
+                            len(response.content),
+                        )
+                        return raw_path
+                    logger.info(
+                        "THUMBNAIL: original JPEG is %dx%d; resizing is required",
+                        width,
+                        height,
+                    )
+                except Exception as exc:
+                    logger.warning(
+                        "THUMBNAIL: could not inspect original JPEG dimensions: %s",
+                        exc,
+                    )
 
             jpg = tempfile.NamedTemporaryFile(delete=False, suffix=".jpg")
             jpg.close()
             jpg_path = jpg.name
 
+            # Telegram video thumbnails are limited to 320x320 and 200 KB.
+            # Start at the highest JPEG quality and keep the best encode that
+            # fits, so quality is reduced only as much as Telegram requires.
             best_path = None
             best_size = 0
             for quality in range(2, 32, 2):
@@ -170,19 +217,26 @@ class TelegramUploader:
 
             if best_path:
                 logger.info(
-                    "THUMBNAIL: selected highest-quality encode: %s (%d bytes)",
+                    "THUMBNAIL: selected highest-quality compliant encode: %s (%d bytes)",
                     best_path,
                     best_size,
                 )
                 return best_path
 
-            logger.warning("THUMBNAIL: converted image is still over 200 KB")
+            logger.warning("THUMBNAIL: no JPEG encode fit under 200 KB")
 
         except Exception as exc:
             logger.exception("THUMBNAIL: download/conversion failed: %s", exc)
         finally:
             if raw_path:
-                Path(raw_path).unlink(missing_ok=True)
+                # Do not delete a raw JPEG that is being returned unchanged.
+                if not (
+                    jpg_path is None
+                    and Path(raw_path).exists()
+                    and "jpeg" in content_type
+                    and len(response.content) <= 200_000
+                ):
+                    Path(raw_path).unlink(missing_ok=True)
 
         if jpg_path:
             Path(jpg_path).unlink(missing_ok=True)
