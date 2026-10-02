@@ -64,7 +64,7 @@ class Pipeline:
                     job.uploader,
                 )
                 kwargs = {
-                    "caption": video.title,
+                    "caption": job.caption or video.title,
                     "thumbnail": video.thumbnail,
                     "duration": video.duration,
                     "progress": (
