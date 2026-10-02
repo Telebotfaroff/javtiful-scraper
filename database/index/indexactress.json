@@ -2708,10 +2708,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fccb257088c3ec3a4bd4e2a5f398b7cb.jpg",
       "total_videos": 99,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 92,
+      "last_crawled_at": 1790978510
     },
     "nanami-tina": {
       "name": "Nanami Tina",
