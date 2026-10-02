@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "HUNTB-500": {
       "title": "HUNTB-500 Used Car Dealer Edition As Long As You Pay A Fixed Monthly Fee, You Can Ride As Many People (female) As You Like At The Used Car Dealer!",
@@ -26,6 +26,15 @@
       "duration": "02:24:25",
       "date": "2023-10-26",
       "studio": "natural-high",
+      "genres": []
+    },
+    "HUNTB-487": {
+      "title": "HUNTB-487 The True Nature Of A Serious Female Boss Who Is Usually Strict With Me!",
+      "url": "https://javtiful.com/video/28885/huntb-487",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/02/24/fc133c40383083ea554efc861a0820a1.jpg",
+      "duration": "03:29:09",
+      "date": "2023-02-24",
+      "studio": "hunter",
       "genres": []
     }
   }

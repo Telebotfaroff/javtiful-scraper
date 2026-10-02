@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "MIRD-187": {
       "title": "MIRD-187 A King Who Lives With Ten Obedient Maids",
@@ -107,6 +107,15 @@
       "duration": "02:00:11",
       "date": "2022-08-16",
       "studio": "tma",
+      "genres": []
+    },
+    "SDMU-971": {
+      "title": "SDMU-971 Yuri Planning A Work In Collaboration",
+      "url": "https://javtiful.com/video/14689/sdmu-971",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/01/12/3095a294067497859e547c2e84fc9d89.jpg",
+      "duration": "02:16:18",
+      "date": "2022-01-12",
+      "studio": null,
       "genres": []
     }
   }
