@@ -15,6 +15,8 @@ class Job:
     clips: Optional[list[tuple[str, str]]] = None
     # Optional custom caption used by batch/channel downloads.
     caption: Optional[str] = None
+    # Send the thumbnail as a separate Telegram photo before the video.
+    separate_thumbnail: bool = False
 
 
 class JobQueue:
@@ -23,7 +25,7 @@ class JobQueue:
         self._lock = Lock()
         self._counter = 0
 
-    def add(self, url, quality="best", uploader="telegram", target=None, clips=None, caption=None):
+    def add(self, url, quality="best", uploader="telegram", target=None, clips=None, caption=None, separate_thumbnail=False):
         with self._lock:
             self._counter += 1
             job = Job(
@@ -34,6 +36,7 @@ class JobQueue:
                 target,
                 clips,
                 caption,
+                separate_thumbnail,
             )
             self.queue.put(job)
             return job
