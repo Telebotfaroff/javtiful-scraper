@@ -968,10 +968,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/edc5ccd4e60e1f3ee1b22ec2fce46e52.jpg",
       "total_videos": 184,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 166,
+      "last_crawled_at": 1790901042
     },
     "yumeno-aika": {
       "name": "Yumeno Aika",

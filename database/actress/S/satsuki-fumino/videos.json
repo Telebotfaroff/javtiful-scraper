@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "NHDTC-124": {
       "title": "NHDTC-124 Two female campers were taken into a tent and were unable to help their friend.",
@@ -44,6 +44,15 @@
       "duration": "02:30:26",
       "date": "2025-06-09",
       "studio": "sod-create",
+      "genres": []
+    },
+    "DVMM-275": {
+      "title": "DVMM-275 The Magic Mirror Suit CA Edition: Wear this and your \"existence\" will be \"ignored\" and you can have unlimited sex",
+      "url": "https://javtiful.com/video/90005/dvmm-275",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/07/31/542ea91728e2e3cff558d6910d2a60e6.jpg",
+      "duration": "02:36:56",
+      "date": "2025-07-31",
+      "studio": "deeps",
       "genres": []
     }
   }
