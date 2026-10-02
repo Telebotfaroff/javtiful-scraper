@@ -71,6 +71,7 @@ class Pipeline:
                     "caption": job.caption or video.title,
                     "thumbnail": video.thumbnail,
                     "duration": video.duration,
+                    "separate_thumbnail": job.separate_thumbnail,
                     "progress": (
                         lambda current, total, stage: (
                             progress(current, total, stage) if progress else None
