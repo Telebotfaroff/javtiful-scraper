@@ -104,19 +104,23 @@ async def _run_channel_parallel(message, state, page_number, items, status):
     channel_name = state.get("channel_name", "Channel")
     queue = asyncio.Queue(maxsize=1)
     progress = ParallelTelegramProgress(status, min_interval=2.0)
+    progress.set_total(len(items))
 
     async def producer():
         for index, item in enumerate(items):
             title = item.get("title") or "Video"
             job = _make_channel_job(item, message.chat.id)
             try:
+                progress.set_download_title(title)
                 await _send_channel_preview(message, item)
                 video = await asyncio.to_thread(
                     pipeline.prepare_download,
                     job,
                     _progress_callback(progress),
                 )
+                progress.mark_download_complete()
                 await queue.put(("ok", index, item, job, video))
+                progress.set_queue(queue.qsize())
             except Exception as exc:
                 await queue.put(("error", index, item, job, exc))
         await queue.put(("done",))
@@ -132,6 +136,8 @@ async def _run_channel_parallel(message, state, page_number, items, status):
             title = item.get("title") or "Video"
             if kind == "error":
                 failed += 1
+                progress.mark_failed()
+                progress.set_queue(queue.qsize())
                 await status.edit_text(
                     f"⚡ **Parallel mode**\n"
                     f"📺 **Channel:** {channel_name}\n"
@@ -144,6 +150,8 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 queue.task_done()
                 continue
             try:
+                progress.set_upload_title(title)
+                progress.set_queue(queue.qsize())
                 await status.edit_text(
                     f"⚡ **Parallel mode**\n"
                     f"📺 **Channel:** {channel_name}\n"
@@ -157,8 +165,12 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                     _progress_callback(progress),
                 )
                 completed += 1
+                progress.mark_upload_complete()
+                progress.set_queue(queue.qsize())
             except Exception as exc:
                 failed += 1
+                progress.mark_failed()
+                progress.set_queue(queue.qsize())
                 await status.edit_text(
                     f"⚡ **Parallel mode**\n"
                     f"📺 **Channel:** {channel_name}\n"
