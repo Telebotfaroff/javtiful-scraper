@@ -1664,10 +1664,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/509876a0c17f5300716896f780405362.jpg",
       "total_videos": 140,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 131,
+      "last_crawled_at": 1790934071
     },
     "nagarekawa-rio": {
       "name": "Nagarekawa Rio",
