@@ -1,5 +1,5 @@
 {
-  "total": 602,
+  "total": 603,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -5417,6 +5417,15 @@
       "duration": "02:10:59",
       "date": "2020-02-02",
       "studio": null,
+      "genres": []
+    },
+    "HUNTA-766": {
+      "title": "HUNTA-766 Do You Want To Have Sex With Me?",
+      "url": "https://javtiful.com/video/6609/hunta-766",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/05/04/37aaa59f5ac18c9f5856cae65512297d.jpg",
+      "duration": "02:44:18",
+      "date": "2020-05-04",
+      "studio": "hunter",
       "genres": []
     }
   }

@@ -1472,10 +1472,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/3b08a9e4cc5c143f7b8a520383a3f2b1.jpg",
       "total_videos": 146,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 104,
+      "last_crawled_at": 1790925360
     },
     "hashimoto-arina": {
       "name": "Hashimoto Arina",
