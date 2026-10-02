@@ -2348,10 +2348,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/8f09c34012e02547a8a9e2df3197cc99.jpg",
       "total_videos": 113,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 96,
+      "last_crawled_at": 1790963716
     },
     "miyazawa-chiharu": {
       "name": "Miyazawa Chiharu",
