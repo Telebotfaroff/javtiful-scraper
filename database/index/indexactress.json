@@ -1796,10 +1796,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f34761e338ff51fecea28fc1b1ee0e51.jpg",
       "total_videos": 132,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 125,
+      "last_crawled_at": 1790939982
     },
     "minoshima-meguri": {
       "name": "Minoshima Meguri",
