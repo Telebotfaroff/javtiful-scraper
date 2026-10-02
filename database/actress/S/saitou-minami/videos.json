@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "HUNTA-938": {
       "title": "HUNTA-938 The food stall at the school festival of class 3-4 is... a go-go bar. A private girls' school's school festival. The very popular food stall that has a line every year is",
@@ -17,6 +17,15 @@
       "duration": "04:03:13",
       "date": "2023-12-23",
       "studio": "ke-toraibu",
+      "genres": []
+    },
+    "DOCP-254": {
+      "title": "DOCP-254 I Made A Mistake With Her",
+      "url": "https://javtiful.com/video/7902/docp-254",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/10/17/b2baa0749b608f534f2b464fd225ef79.jpg",
+      "duration": "03:55:05",
+      "date": "2020-10-17",
+      "studio": null,
       "genres": []
     }
   }
