@@ -1328,10 +1328,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/501ef6d34d7c73949d47ab1b5210fc59.jpg",
       "total_videos": 156,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 137,
+      "last_crawled_at": 1790918641
     },
     "shiraishi-marina": {
       "name": "Shiraishi Marina",
