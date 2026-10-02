@@ -1820,10 +1820,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/0d7f0b39445cbf1e9d76c359b006c29f.jpg",
       "total_videos": 130,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 127,
+      "last_crawled_at": 1790941046
     },
     "kosaka-himari": {
       "name": "Kosaka Himari",
