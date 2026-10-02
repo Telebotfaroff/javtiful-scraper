@@ -1736,10 +1736,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/46bd02df328fdef00e260685a8a165ba.jpg",
       "total_videos": 136,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 123,
+      "last_crawled_at": 1790937317
     },
     "miyagi-rie": {
       "name": "Miyagi Rie",
