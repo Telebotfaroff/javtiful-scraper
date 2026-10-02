@@ -2804,10 +2804,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/c75b9cde42c046b3a2c10f3ede901d0f.jpg",
       "total_videos": 97,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 95,
+      "last_crawled_at": 1790982346
     },
     "sannomiya-tsubaki": {
       "name": "Sannomiya Tsubaki",
