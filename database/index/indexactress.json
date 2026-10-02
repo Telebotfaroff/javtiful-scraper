@@ -1436,10 +1436,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/c70c1e6aa587c1ea0020ed387588f06c.jpg",
       "total_videos": 148,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 141,
+      "last_crawled_at": 1790923682
     },
     "rinne-touka": {
       "name": "Rinne Touka",

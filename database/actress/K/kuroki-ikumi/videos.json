@@ -1,5 +1,5 @@
 {
-  "total": 11,
+  "total": 12,
   "videos": {
     "IENE-888": {
       "title": "IENE-888 Support project for working office workers! Soapland Wagon is coming!! 2",
@@ -98,6 +98,15 @@
       "duration": "03:11:03",
       "date": "2023-07-17",
       "studio": "hunter",
+      "genres": []
+    },
+    "GRCH-285-REDUCING": {
+      "title": "GRCH-285 Violation Ward ~The Captive Investigator III Episode 0 This is where it all began~",
+      "url": "https://javtiful.com/video/77284/grch-285-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/01/30/74e8bf914a11191c872bca029830e80e.jpg",
+      "duration": "02:06:14",
+      "date": "2025-01-30",
+      "studio": null,
       "genres": []
     }
   }
