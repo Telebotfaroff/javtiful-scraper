@@ -2072,10 +2072,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/0d76b4884042a1744bfa4592c3431a68.jpg",
       "total_videos": 121,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 77,
+      "last_crawled_at": 1790952037
     },
     "hanamori-kaho": {
       "name": "Hanamori Kaho",
