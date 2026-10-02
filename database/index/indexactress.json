@@ -2432,10 +2432,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/4b65c9f3b8eedc09c61288cbd55bfa88.jpg",
       "total_videos": 109,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 109,
+      "last_crawled_at": 1790967262
     },
     "yagi-nana": {
       "name": "Yagi Nana",
