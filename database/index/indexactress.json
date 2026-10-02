@@ -1028,10 +1028,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2cbda6f234400206fe3d2164b0dbb3ec.jpg",
       "total_videos": 174,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 160,
+      "last_crawled_at": 1790904149
     },
     "ozaki-erika": {
       "name": "Ozaki Erika",
