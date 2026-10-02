@@ -2324,10 +2324,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1af0ca5c75bdf20c6398939ae7bda0ea.jpg",
       "total_videos": 114,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 112,
+      "last_crawled_at": 1790962713
     },
     "yuzuki-marina": {
       "name": "Yuzuki Marina",
