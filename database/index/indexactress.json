@@ -2312,10 +2312,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e734bd631d9982b6f2f3dd5e7ed05462.jpg",
       "total_videos": 115,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 114,
+      "last_crawled_at": 1790962202
     },
     "aozora-hikari": {
       "name": "Aozora Hikari",
