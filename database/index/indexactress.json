@@ -1064,10 +1064,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1fb81541af2fa8b4fde20a7d6fd629f0.jpg",
       "total_videos": 171,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 172,
+      "last_crawled_at": 1790905953
     },
     "mochizuki-ayaka": {
       "name": "Mochizuki Ayaka",
