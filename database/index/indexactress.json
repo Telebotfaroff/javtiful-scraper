@@ -1124,10 +1124,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f9f4f569bbd58125737b96ceb9e62c0a.jpg",
       "total_videos": 168,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 159,
+      "last_crawled_at": 1790908871
     },
     "sakura-momo": {
       "name": "Sakura Momo",
