@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "ZMAR-063": {
       "title": "ZMAR-063 Marutto! Nagisa Mitsuki",
@@ -83,6 +83,18 @@
         "Mutou Ayaka"
       ],
       "studio": "Planet Plus",
+      "genres": []
+    },
+    "ZMAR-066": {
+      "title": "ZMAR-066 Marutto! Honoka Mihara",
+      "url": "https://javtiful.com/video/19886/zmar-066",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/06/21/435ac0d47901a511cc5a156dfa6b2a91.jpg",
+      "duration": "04:06:23",
+      "date": "2022-06-21",
+      "actresses": [
+        "Mihara Honoka"
+      ],
+      "studio": null,
       "genres": []
     }
   }

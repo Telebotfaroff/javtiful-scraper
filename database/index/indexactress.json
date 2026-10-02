@@ -2672,10 +2672,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/c18473bab7ae8b6ffdf2ac76cf80e090.jpg",
       "total_videos": 100,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 77,
+      "last_crawled_at": 1790977062
     },
     "mio-megu": {
       "name": "Mio Megu",
