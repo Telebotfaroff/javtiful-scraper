@@ -2564,10 +2564,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6598986d6bf5a40e8fa6ca66336b89b2.jpg",
       "total_videos": 104,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 63,
+      "last_crawled_at": 1790972703
     },
     "kamisaka-mei": {
       "name": "Kamisaka Mei",
