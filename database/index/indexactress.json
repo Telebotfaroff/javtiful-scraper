@@ -1988,10 +1988,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f1c273ac214b503851423e322c1a52b1.jpg",
       "total_videos": 125,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 119,
+      "last_crawled_at": 1790948382
     },
     "ayase-kokoro": {
       "name": "Ayase Kokoro",
