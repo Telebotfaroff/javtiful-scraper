@@ -1244,10 +1244,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/98f2644dc97a8a96fed5107db5ed9e64.jpg",
       "total_videos": 160,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 154,
+      "last_crawled_at": 1790914592
     },
     "matsumoto-nanami": {
       "name": "Matsumoto Nanami",
