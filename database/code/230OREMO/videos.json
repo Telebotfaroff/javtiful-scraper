@@ -1,5 +1,5 @@
 {
-  "total": 22,
+  "total": 23,
   "videos": {
     "230OREMO-055": {
       "title": "230OREMO-055 Women's 1500m walk out K",
@@ -264,6 +264,18 @@
       "date": "2023-10-14",
       "actresses": [
         "Ozaki Erika"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "230OREMO-041": {
+      "title": "230OREMO-041 Basketball club manager H",
+      "url": "https://javtiful.com/video/44428/230oremo-041",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/10/15/f2eba71ae188265120bc2ccee717cbfe.jpg",
+      "duration": "00:47:28",
+      "date": "2023-10-15",
+      "actresses": [
+        "Honda Hitomi"
       ],
       "studio": null,
       "genres": []

@@ -1496,10 +1496,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/bd1129c109f28627f148ea0bfe51ed4b.jpg",
       "total_videos": 145,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 126,
+      "last_crawled_at": 1790926456
     },
     "mochizuki-tsubomi": {
       "name": "Mochizuki Tsubomi",

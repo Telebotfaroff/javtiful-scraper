@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "420SEF-001": {
       "title": "420SEF-001 RIMA (21)",
@@ -33,6 +33,18 @@
       "date": "2023-11-29",
       "actresses": [
         "Saitou Amiri"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "420SEF-012": {
+      "title": "420SEF-012 hitomi(27)",
+      "url": "https://javtiful.com/video/48969/420sef-012",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/12/16/e6d0c37c58453ca0c73dfba6c1758951.jpg",
+      "duration": "01:34:02",
+      "date": "2023-12-16",
+      "actresses": [
+        "Honda Hitomi"
       ],
       "studio": null,
       "genres": []
