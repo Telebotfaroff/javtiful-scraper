@@ -2132,10 +2132,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8b388e750730058883a99c98b601a895.jpg",
       "total_videos": 120,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 111,
+      "last_crawled_at": 1790954572
     },
     "satsuki-nao": {
       "name": "Satsuki Nao",
