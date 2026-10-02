@@ -2828,10 +2828,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a4265ec9e0a99bf78f62cfac8b9b79e4.jpg",
       "total_videos": 97,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 88,
+      "last_crawled_at": 1790983301
     },
     "yuuki-nono": {
       "name": "Yuuki Nono",
