@@ -1712,10 +1712,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/4b444253d3b2ac2e25859e435c2a7d7a.jpg",
       "total_videos": 137,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 130,
+      "last_crawled_at": 1790936226
     },
     "fukada-yuuri": {
       "name": "Fukada Yuuri",

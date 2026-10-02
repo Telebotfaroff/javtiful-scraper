@@ -1,5 +1,5 @@
 {
-  "total": 66,
+  "total": 67,
   "videos": {
     "YMDS-124": {
       "title": "YMDS-124 The Day Yui Hatano Became Her Girlfriend",
@@ -791,6 +791,18 @@
         "Nagarekawa Rio"
       ],
       "studio": "Momotarou Eizou Shuppan",
+      "genres": []
+    },
+    "YMDS-107": {
+      "title": "YMDS-107 The Day When Minori Hatsune Became Her",
+      "url": "https://javtiful.com/video/21264/ymds-107",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/07/30/ac086fb4e64b1a53d3ab9d75f17d9f50.jpg",
+      "duration": "02:17:50",
+      "date": "2022-07-30",
+      "actresses": [
+        "Hatsune Minori"
+      ],
+      "studio": null,
       "genres": []
     }
   }
