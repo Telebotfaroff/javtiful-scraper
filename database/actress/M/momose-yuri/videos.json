@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "GIRO-048": {
       "title": "GIRO-048 I Can't Make It In Time",
@@ -60,6 +60,15 @@
       "url": "https://javtiful.com/video/5704/sw-440",
       "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/16/e1f2ffa1b892be7de6904b4db6c20414.jpg",
       "duration": "02:23:13",
+      "date": "2020-02-16",
+      "studio": "switch",
+      "genres": []
+    },
+    "SW-492": {
+      "title": "SW-492 A Partner At Business Trip Destination",
+      "url": "https://javtiful.com/video/5716/sw-492",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/16/6341c5140609fcb124b93e17eb50d254.jpg",
+      "duration": "01:58:21",
       "date": "2020-02-16",
       "studio": "switch",
       "genres": []

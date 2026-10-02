@@ -2696,10 +2696,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1090648b016fc64b864d99f5e0894fdd.jpg",
       "total_videos": 100,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 66,
+      "last_crawled_at": 1790978032
     },
     "hatsukawa-minami": {
       "name": "Hatsukawa Minami",
