@@ -18,12 +18,6 @@ pipeline = Pipeline(extractor=extractor, uploaders={"telegram": telegram_uploade
 pending = {}
 
 
-def _quality_keyboard(qualities):
-    buttons = [InlineKeyboardButton(str(q), callback_data=f"q|{q}") for q in qualities]
-    buttons.append(InlineKeyboardButton("Best available", callback_data="q|best"))
-    return InlineKeyboardMarkup([buttons[i:i+2] for i in range(0, len(buttons), 2)])
-
-
 def _destination_keyboard():
     return InlineKeyboardMarkup([
         [
@@ -146,7 +140,7 @@ def register_handlers(app: Client):
             video = extractor.extract(text)
             if not video.qualities:
                 return await status.edit_text("❌ No downloadable source/quality was exposed by the page.")
-            pending[message.from_user.id] = {"url": text, "qualities": list(video.qualities)}
+            pending[message.from_user.id] = {"url": text, "quality": "720p"}
             title = video.title or "Video"
             duration = video.duration or "unknown"
 
@@ -162,32 +156,18 @@ def register_handlers(app: Client):
             await status.edit_text(
                 f"🎬 {title}\n\n⏱ Duration: {duration}\n\n"
                 + ("🖼 Preview uploaded.\n\n" if preview else "")
-                + "Choose a quality:",
-                reply_markup=_quality_keyboard(video.qualities),
+                + "Quality: 720p\n\nChoose upload destination:",
+                reply_markup=_destination_keyboard(),
             )
         except Exception as exc:
             await status.edit_text(f"❌ Extraction failed\n\n{type(exc).__name__}: {exc}")
 
 
-    @app.on_callback_query(filters.regex(r"^q\|"))
-    async def quality_handler(client, query):
-        state = pending.get(query.from_user.id)
-        if not state:
-            return await query.answer("Session expired. Send the URL again.", show_alert=True)
-        quality = query.data.split("|",1)[1]
-        state["quality"] = quality
-        await query.answer(f"Quality: {quality}")
-        await query.message.edit_text(
-            f"🎚 Quality: {quality}\n\nChoose upload destination:",
-            reply_markup=_destination_keyboard(),
-        )
-
-
     @app.on_callback_query(filters.regex(r"^dest\|"))
     async def destination_handler(client, query):
         state = pending.get(query.from_user.id)
-        if not state or "quality" not in state:
-            return await query.answer("Choose a quality first.", show_alert=True)
+        if not state:
+            return await query.answer("Session expired. Send the URL again.", show_alert=True)
 
         destination = query.data.split("|", 1)[1]
         if destination not in {"telegram", "gofile"}:
@@ -197,7 +177,7 @@ def register_handlers(app: Client):
         label = "Telegram" if destination == "telegram" else "GoFile"
         await query.answer(f"Destination: {label}")
         await query.message.edit_text(
-            f"🎚 Quality: {state['quality']}\n"
+            f"🎚 Quality: 720p\n"
             f"📤 Destination: {label}\n\n"
             "Choose download mode:",
             reply_markup=_mode_keyboard(),
@@ -207,8 +187,8 @@ def register_handlers(app: Client):
     @app.on_callback_query(filters.regex(r"^mode\|"))
     async def mode_handler(client, query):
         state = pending.get(query.from_user.id)
-        if not state or "quality" not in state:
-            return await query.answer("Choose a quality first.", show_alert=True)
+        if not state:
+            return await query.answer("Session expired. Send the URL again.", show_alert=True)
         if "destination" not in state:
             return await query.answer("Choose an upload destination first.", show_alert=True)
         mode = query.data.split("|",1)[1]
