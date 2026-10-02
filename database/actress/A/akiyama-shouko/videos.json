@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "MIZD-260": {
       "title": "MIZD-260 Simultaneous Play With A Sensitive Spot",
@@ -26,6 +26,15 @@
       "duration": "03:13:38",
       "date": "2025-08-15",
       "studio": "attackers",
+      "genres": []
+    },
+    "IPX-350": {
+      "title": "IPX-350 BEAUTY VENUS 6",
+      "url": "https://javtiful.com/video/25732/ipx-350",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/12/04/730ee07a4da0f766a297225249b6d24c.jpg",
+      "duration": "03:59:26",
+      "date": "2022-12-04",
+      "studio": null,
       "genres": []
     }
   }

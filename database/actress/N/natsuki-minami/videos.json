@@ -1,5 +1,5 @@
 {
-  "total": 9,
+  "total": 10,
   "videos": {
     "HODV-21385": {
       "title": "HODV-21385 The story of when my childhood twin sisters aggressively pursued me and created a harem",
@@ -80,6 +80,15 @@
       "duration": "02:20:51",
       "date": "2024-10-17",
       "studio": "switch",
+      "genres": []
+    },
+    "SSPD-128-REDUCING": {
+      "title": "SSPD-128 Phantom Thief Female Butterfly Tsubasa Amami",
+      "url": "https://javtiful.com/video/46380/sspd-128-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/11/12/c3029417f4ad2eebeb14b7cddfcc807a.jpg",
+      "duration": "01:56:43",
+      "date": "2023-11-12",
+      "studio": "attackers",
       "genres": []
     }
   }
