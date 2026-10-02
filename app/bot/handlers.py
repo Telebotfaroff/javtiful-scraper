@@ -1,4 +1,5 @@
 import asyncio
+import os
 import uuid
 import re
 
@@ -90,9 +91,11 @@ async def _run_channel_sequential(message, state, page_number, items, status):
 
 async def _run_channel_parallel(message, state, page_number, items, status):
     channel_name = state.get("channel_name", "Channel")
-    queue = asyncio.Queue(maxsize=1)
-    progress = ParallelTelegramProgress(status, min_interval=2.0)
+    queue = asyncio.Queue(maxsize=max(1, int(os.getenv("TELEGRAM_BATCH_BUFFER", "2"))))
+    progress = ParallelTelegramProgress(status, min_interval=5.0)
     progress.set_total(len(items))
+
+    upload_workers = max(1, int(os.getenv("TELEGRAM_BATCH_UPLOAD_WORKERS", "2")))
 
     async def producer():
         for index, item in enumerate(items):
@@ -103,16 +106,17 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 video = await asyncio.to_thread(
                     pipeline.prepare_download,
                     job,
-                    _progress_callback(progress),
+                    _progress_callback(progress, worker_id=f"download-{index}"),
                 )
                 progress.mark_download_complete()
                 await queue.put(("ok", index, item, job, video))
                 progress.set_queue(queue.qsize())
             except Exception as exc:
                 await queue.put(("error", index, item, job, exc))
-        await queue.put(("done",))
+        for _ in range(upload_workers):
+            await queue.put(("done",))
 
-    async def consumer():
+    async def consumer(worker_id):
         completed = failed = 0
         while True:
             entry = await queue.get()
@@ -125,31 +129,16 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 failed += 1
                 progress.mark_failed()
                 progress.set_queue(queue.qsize())
-                await status.edit_text(
-                    f"⚡ **Parallel mode**\n"
-                    f"📺 **Channel:** {channel_name}\n"
-                    f"📄 **Page:** {page_number}\n"
-                    f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
-                    f"✅ **Uploaded:** {completed}\n"
-                    f"❌ **Failed:** {failed}\n\n"
-                    f"❌ {title}\n{type(payload).__name__}: {payload}"
-                )
                 queue.task_done()
                 continue
             try:
                 progress.set_upload_title(title)
                 progress.set_queue(queue.qsize())
-                await status.edit_text(
-                    f"⚡ **Parallel mode**\n"
-                    f"📺 **Channel:** {channel_name}\n"
-                    f"📄 **Page:** {page_number}\n"
-                    f"⬆️ Uploading {index + 1}/{len(items)}: **{title}**"
-                )
                 await asyncio.to_thread(
                     pipeline.upload_prepared,
                     job,
                     payload,
-                    _progress_callback(progress),
+                    _progress_callback(progress, worker_id=f"upload-{worker_id}"),
                 )
                 completed += 1
                 progress.mark_upload_complete()
@@ -162,9 +151,9 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                     f"⚡ **Parallel mode**\n"
                     f"📺 **Channel:** {channel_name}\n"
                     f"📄 **Page:** {page_number}\n"
-                    f"🎬 **Progress:** {completed + failed}/{len(items)}\n"
-                    f"✅ **Uploaded:** {completed}\n"
-                    f"❌ **Failed:** {failed}\n\n"
+                    f"🎬 **Progress:** {progress.upload_complete + progress.failed}/{len(items)}\n"
+                    f"✅ **Uploaded:** {progress.upload_complete}\n"
+                    f"❌ **Failed:** {progress.failed}\n\n"
                     f"❌ {title}\n{type(exc).__name__}: {exc}"
                 )
             finally:
@@ -172,15 +161,25 @@ async def _run_channel_parallel(message, state, page_number, items, status):
         return completed, failed
 
     producer_task = asyncio.create_task(producer())
-    consumer_task = asyncio.create_task(consumer())
+    consumer_tasks = [
+        asyncio.create_task(consumer(index + 1))
+        for index in range(upload_workers)
+    ]
     try:
-        await asyncio.gather(producer_task, consumer_task)
+        await asyncio.gather(producer_task, *consumer_tasks)
     except Exception:
         producer_task.cancel()
-        consumer_task.cancel()
-        await asyncio.gather(producer_task, consumer_task, return_exceptions=True)
+        for task in consumer_tasks:
+            task.cancel()
+        await asyncio.gather(
+            producer_task,
+            *consumer_tasks,
+            return_exceptions=True,
+        )
         raise
-    return consumer_task.result()
+
+    totals = [task.result() for task in consumer_tasks]
+    return sum(x[0] for x in totals), sum(x[1] for x in totals)
 
 
 async def _run_channel_page(message, state, page_number, parallel=False):
@@ -247,10 +246,14 @@ def _seconds(value):
     return parts[0] * 3600 + parts[1] * 60 + parts[2]
 
 
-def _progress_callback(progress_obj):
+def _progress_callback(progress_obj, worker_id=None):
     loop = asyncio.get_running_loop()
     def callback(current, total, stage):
-        loop.call_soon_threadsafe(lambda: asyncio.create_task(progress_obj.update(current, total, stage)))
+        if worker_id is not None and str(stage).startswith("telegram_upload"):
+            stage = f"telegram_upload:{worker_id}"
+        loop.call_soon_threadsafe(
+            lambda: asyncio.create_task(progress_obj.update(current, total, stage))
+        )
     return callback
 
 
