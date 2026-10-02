@@ -1040,10 +1040,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/54c875a45a370f4d18c85832a83dd62c.jpg",
       "total_videos": 173,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 139,
+      "last_crawled_at": 1790904757
     },
     "sasahara-yuri": {
       "name": "Sasahara Yuri",

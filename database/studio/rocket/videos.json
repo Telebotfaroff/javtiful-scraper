@@ -1,5 +1,5 @@
 {
-  "total": 77,
+  "total": 78,
   "videos": {
     "RCTD-746-REDUCING": {
       "title": "RCTD-746 ROCKET 18th Anniversary User Request Festival",
@@ -962,6 +962,17 @@
         "Honma Yuri",
         "Nishimura Nina",
         "Tsukada Shiori"
+      ],
+      "genres": []
+    },
+    "RCTD-587": {
+      "title": "RCTD-587 Erika Ozaki's Time Stops! Female Teacher Edition",
+      "url": "https://javtiful.com/video/57297/rctd-587",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/04/15/92cb0d52b0b88302327764cd2d34e3a3.jpg",
+      "duration": "02:04:02",
+      "date": "2024-04-15",
+      "actresses": [
+        "Ozaki Erika"
       ],
       "genres": []
     }
