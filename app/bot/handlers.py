@@ -50,17 +50,6 @@ def _make_channel_job(item, chat_id):
     )
 
 
-async def _send_channel_preview(message, item):
-    if item.get("thumbnail"):
-        await asyncio.to_thread(
-            telegram_uploader.send_preview,
-            message.chat.id,
-            item["thumbnail"],
-            item.get("title") or "Video",
-            item.get("post_url"),
-        )
-
-
 async def _run_channel_sequential(message, state, page_number, items, status):
     channel_name = state.get("channel_name", "Channel")
     completed = failed = 0
@@ -69,7 +58,6 @@ async def _run_channel_sequential(message, state, page_number, items, status):
         job = _make_channel_job(item, message.chat.id)
         progress = TelegramProgress(status, min_interval=2.0)
         try:
-            await _send_channel_preview(message, item)
             await status.edit_text(
                 f"⬇️ **Downloading:** {title}\n"
                 f"📺 **Channel:** {channel_name}\n"
@@ -112,7 +100,6 @@ async def _run_channel_parallel(message, state, page_number, items, status):
             job = _make_channel_job(item, message.chat.id)
             try:
                 progress.set_download_title(title)
-                await _send_channel_preview(message, item)
                 video = await asyncio.to_thread(
                     pipeline.prepare_download,
                     job,
@@ -406,19 +393,11 @@ def register_handlers(app: Client):
             title = video.title or "Video"
             duration = video.duration or "unknown"
 
-            # Show the post preview immediately after extraction, before the
-            # user chooses quality/download mode.
-            preview = await asyncio.to_thread(
-                telegram_uploader.send_preview,
-                message.chat.id,
-                video.thumbnail,
-                title,
-                video.source_url or text,
-            )
             await status.edit_text(
-                f"🎬 {title}\n\n⏱ Duration: {duration}\n\n"
-                + ("🖼 Preview uploaded.\n\n" if preview else "")
-                + "Quality: 720p\n\nChoose upload destination:",
+                f"🎬 {title}\n\n"
+                f"⏱ Duration: {duration}\n\n"
+                "🖼 Thumbnail will be uploaded with the video.\n\n"
+                "Quality: 720p\n\nChoose upload destination:",
                 reply_markup=_destination_keyboard(),
             )
         except Exception as exc:
