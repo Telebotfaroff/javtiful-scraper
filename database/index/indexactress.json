@@ -1208,10 +1208,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2c04f1f534d60a3036ab9dd2f244d3c4.jpg",
       "total_videos": 161,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 134,
+      "last_crawled_at": 1790912877
     },
     "kazama-yumi": {
       "name": "Kazama Yumi",
