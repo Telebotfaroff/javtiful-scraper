@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "CMD-026-REDUCING": {
       "title": "CMD-026 Temptation Dental Clinic",
@@ -11,6 +11,18 @@
         "Fukada Eimi"
       ],
       "studio": "Dream Ticket",
+      "genres": []
+    },
+    "CMD-028": {
+      "title": "CMD-028 Temptation Beauty Salon",
+      "url": "https://javtiful.com/video/3833/cmd-028",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/09/29/ddeaa501c57a6d181f54578c7cf1a5bd.jpg",
+      "duration": "02:11:40",
+      "date": "2019-09-29",
+      "actresses": [
+        "Imai Kaho"
+      ],
+      "studio": null,
       "genres": []
     }
   }
