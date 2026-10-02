@@ -2036,10 +2036,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/3199a7ebcd9a079fbd4a6b5045fe668a.jpg",
       "total_videos": 123,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 99,
+      "last_crawled_at": 1790950474
     },
     "shirato-hana": {
       "name": "Shirato Hana",
