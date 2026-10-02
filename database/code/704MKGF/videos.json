@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "704MKGF-003": {
       "title": "704MKGF-003 Sarina",
@@ -9,6 +9,18 @@
       "date": "2022-08-30",
       "actresses": [
         "Momonaga Sarina"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "704MKGF-007": {
+      "title": "704MKGF-007 Nanami",
+      "url": "https://javtiful.com/video/32305/704mkgf-007",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/05/03/9bb7498d60dcf4faaf68d00830d82c70.jpg",
+      "duration": "00:47:37",
+      "date": "2023-05-03",
+      "actresses": [
+        "Yokomiya Nanami"
       ],
       "studio": null,
       "genres": []
