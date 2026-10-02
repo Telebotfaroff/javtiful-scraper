@@ -2264,10 +2264,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/d5f42a0a5dab379a23f956cbcf2b09ac.jpg",
       "total_videos": 116,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 110,
+      "last_crawled_at": 1790960174
     },
     "honda-momo": {
       "name": "Honda Momo",
