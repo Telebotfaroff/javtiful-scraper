@@ -1940,10 +1940,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/9f1e82453c61ab81e6b88ce823e1e446.jpg",
       "total_videos": 126,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 127,
+      "last_crawled_at": 1790946291
     },
     "hoshimiya-ichika": {
       "name": "Hoshimiya Ichika",
