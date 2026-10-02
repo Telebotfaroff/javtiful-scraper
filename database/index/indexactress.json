@@ -1448,10 +1448,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/529dfcdd09d846d733936ec6d6d7cea1.jpg",
       "total_videos": 147,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 131,
+      "last_crawled_at": 1790924247
     },
     "kanon-urara": {
       "name": "Kanon Urara",
