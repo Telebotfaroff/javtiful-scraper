@@ -1076,10 +1076,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/cbcf0910bcd535c32bc127f27a05fa92.jpg",
       "total_videos": 170,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 137,
+      "last_crawled_at": 1790906552
     },
     "momose-asuka": {
       "name": "Momose Asuka",
