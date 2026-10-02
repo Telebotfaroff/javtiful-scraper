@@ -1844,10 +1844,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6c2fb74e1ecc46346ca06da4463e5cbb.jpg",
       "total_videos": 129,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 104,
+      "last_crawled_at": 1790942098
     },
     "miura-sakura": {
       "name": "Miura Sakura",
