@@ -78,8 +78,20 @@ async def _run_channel_page(message, state, page_number):
                 caption=caption,
             )
 
+            progress = TelegramProgress(status, min_interval=2.0)
+
             try:
-                await asyncio.to_thread(pipeline.run, job, None)
+                await status.edit_text(
+                    f"⬇️ **Downloading:** {title}\n"
+                    f"📺 **Channel:** {channel_name}\n"
+                    f"📄 **Page:** {page_number}\n"
+                    f"🎬 **Video:** {completed + failed + 1}/{len(items)}"
+                )
+                await asyncio.to_thread(
+                    pipeline.run,
+                    job,
+                    _progress_callback(progress),
+                )
                 completed += 1
             except Exception as exc:
                 failed += 1
