@@ -2504,10 +2504,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2f2e099483ed265f65e99837867ba4bc.jpg",
       "total_videos": 107,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 106,
+      "last_crawled_at": 1790970243
     },
     "aoi-rena": {
       "name": "Aoi Rena",
