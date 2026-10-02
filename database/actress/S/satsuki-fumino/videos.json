@@ -1,5 +1,5 @@
 {
-  "total": 6,
+  "total": 7,
   "videos": {
     "NHDTC-124": {
       "title": "NHDTC-124 Two female campers were taken into a tent and were unable to help their friend.",
@@ -53,6 +53,15 @@
       "duration": "02:36:56",
       "date": "2025-07-31",
       "studio": "deeps",
+      "genres": []
+    },
+    "JUQ-809": {
+      "title": "JUQ-809 Traveling with a woman on a double booking - Only one room is available at the inn I had booked.",
+      "url": "https://javtiful.com/video/65989/juq-809",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/08/23/539e3283796f2806f94f742d119cae0e.jpg",
+      "duration": "02:46:56",
+      "date": "2024-08-23",
+      "studio": "madonna",
       "genres": []
     }
   }

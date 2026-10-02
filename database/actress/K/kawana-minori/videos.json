@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "SSPD-145": {
       "title": "SSPD-145 Incubus Ward 4",
@@ -26,6 +26,15 @@
       "duration": "02:48:56",
       "date": "2023-06-19",
       "studio": "kmproduce",
+      "genres": []
+    },
+    "JUL-141": {
+      "title": "JUL-141 A Two-legged Affair Wife",
+      "url": "https://javtiful.com/video/5789/jul-141",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/22/8ffcee69fe9c22b46ee9673791431c35.jpg",
+      "duration": "01:55:25",
+      "date": "2020-02-22",
+      "studio": null,
       "genres": []
     }
   }

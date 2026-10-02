@@ -1,5 +1,5 @@
 {
-  "total": 3,
+  "total": 4,
   "videos": {
     "MDTM-588": {
       "title": "MDTM-588 Let's do it at school - Farewell to the Light of Youth BEST Selection - Snapshot of the mind and body",
@@ -26,6 +26,15 @@
       "duration": "02:50:47",
       "date": "2026-07-30",
       "studio": null,
+      "genres": []
+    },
+    "MIMK-047": {
+      "title": "MIMK-047 Human Puppet Item Anywhere Customs Sticker ~Women Who Become Absolute Obedience Female Slaves The Moment They Are Sticked~",
+      "url": "https://javtiful.com/video/39652/mimk-047",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/08/13/4e96f111256b77aea9bd734a56115ba8.jpg",
+      "duration": "02:28:12",
+      "date": "2023-08-13",
+      "studio": "moodyz",
       "genres": []
     }
   }
