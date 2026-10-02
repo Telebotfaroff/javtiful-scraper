@@ -231,10 +231,12 @@ async def _run_channel_page(message, state, page_number, parallel=False):
             f"✅ **Uploaded:** {completed}\n"
             f"❌ **Failed:** {failed}"
         )
+        await _delete_status_later(status)
     except Exception as exc:
         await status.edit_text(
             f"❌ Channel page download failed\n\n{type(exc).__name__}: {exc}"
         )
+        await _delete_status_later(status)
 
 
 def _destination_keyboard():
@@ -347,8 +349,10 @@ async def _run_job(message, state):
 
         lines.extend(["", "✨ Your video is ready!"])
         await status.edit_text("\n".join(lines))
+        await _delete_status_later(status)
     except Exception as exc:
         await status.edit_text(f"❌ Pipeline failed\n\n{type(exc).__name__}: {exc}")
+        await _delete_status_later(status)
 
 
 def register_handlers(app: Client):
@@ -359,17 +363,18 @@ def register_handlers(app: Client):
 
         if state and state.get("channel_waiting_page"):
             if not re.fullmatch(r"\d+", text):
-                return await message.reply_text("Invalid page number. Use 0 for the first page.")
+                return await _reply_and_delete_later(message, "Invalid page number. Use 0 for the first page.")
             page_number = int(text)
             total_pages = int(state.get("total_pages") or 0)
             if page_number < 0 or page_number >= total_pages:
-                return await message.reply_text(
+                return await _reply_and_delete_later(message,
                     f"Invalid page. Enter a number from 0 to {max(0, total_pages - 1)}."
                 )
             state["channel_page"] = page_number
             state.pop("channel_waiting_page", None)
             state["channel_waiting_mode"] = True
-            return await message.reply_text(
+            return await _reply_and_delete_later(
+                message,
                 f"📄 Page **{page_number}** selected.\n\nChoose download mode:",
                 reply_markup=_channel_mode_keyboard(),
             )
@@ -385,7 +390,7 @@ def register_handlers(app: Client):
                 return await message.reply_text("End time must be after start time.")
             state["clips"] = [(start, end)]
             state.pop("clip_waiting", None)
-            await message.reply_text("✂️ Clip selected. Starting pipeline…")
+            await _reply_and_delete_later(message, "✂️ Clip selected. Starting pipeline…")
             try:
                 await _run_job(message, state)
             finally:
@@ -393,9 +398,9 @@ def register_handlers(app: Client):
             return
 
         if text.startswith("/start"):
-            return await message.reply_text("JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
+            return await _reply_and_delete_later(message, "JAVDL test bot is ready.\n\nSend a supported Javtiful URL to begin.")
         if not text.startswith(("https://javtiful.com/","http://javtiful.com/")):
-            return await message.reply_text("Send a supported Javtiful URL.")
+            return await _reply_and_delete_later(message, "Send a supported Javtiful URL.")
 
         if re.fullmatch(r"https?://javtiful\.com/channel/[^/?#]+/?(?:\?.*)?", text, re.I):
             status = await message.reply_text("🔎 Inspecting channel…")
