@@ -1172,10 +1172,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f21623690553cc76e5d3ed36416c4663.jpg",
       "total_videos": 165,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 114,
+      "last_crawled_at": 1790911143
     },
     "houjou-maki": {
       "name": "Houjou Maki",

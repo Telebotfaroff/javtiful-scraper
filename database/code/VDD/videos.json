@@ -1,5 +1,5 @@
 {
-  "total": 11,
+  "total": 12,
   "videos": {
     "VDD-162": {
       "title": "VDD-162 Secretary in... (Threat Suite) Mizuki Yayoi",
@@ -131,6 +131,18 @@
         "Kurata Mao"
       ],
       "studio": null,
+      "genres": []
+    },
+    "VDD-177": {
+      "title": "VDD-177 Secretary in... (Intimidation Suite Room) Rina Takase",
+      "url": "https://javtiful.com/video/38186/vdd-177",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/07/28/e10d7c5a9d96e1b3469888536eb85eaa.jpg",
+      "duration": "01:58:24",
+      "date": "2023-07-28",
+      "actresses": [
+        "Takase Rina"
+      ],
+      "studio": "Dream Ticket",
       "genres": []
     }
   }

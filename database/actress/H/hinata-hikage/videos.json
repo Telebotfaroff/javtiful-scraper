@@ -1,5 +1,5 @@
 {
-  "total": 6,
+  "total": 7,
   "videos": {
     "FTHTD-075": {
       "title": "FTHTD-075 The Book of XX: Fallen Swimming Club Members - Ruthless Psychopaths - A live-action adaptation of a light novel",
@@ -53,6 +53,15 @@
       "duration": "03:21:41",
       "date": "2024-11-01",
       "studio": "doc",
+      "genres": []
+    },
+    "RKI-763": {
+      "title": "RKI-763 A Harem Party For Five Losers Who Yearn To Be Extroverts!",
+      "url": "https://javtiful.com/video/112052/rki-763",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/08/07/1ed1faf9593df6d432a278f8f8890ad9.jpg",
+      "duration": "01:57:38",
+      "date": "2026-08-07",
+      "studio": "rookie",
       "genres": []
     }
   }
