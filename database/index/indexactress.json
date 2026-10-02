@@ -944,10 +944,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/ebd24ef8b00ff6ea410f66a91d11e123.jpg",
       "total_videos": 191,
       "total_pages": 8,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 8,
+      "videos_crawled": 154,
+      "last_crawled_at": 1790899798
     },
     "takarada-arisa": {
       "name": "Takarada Arisa",
