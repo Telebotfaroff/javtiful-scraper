@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "DPHN-173": {
       "title": "DPHN-173 Extraordinary Fainting Game: The Case of Reiko, an Office Lady Assigned to the Planning, Development and Sales Department",
@@ -9,6 +9,18 @@
       "date": "2024-06-22",
       "actresses": [
         "Kobayakawa Reiko"
+      ],
+      "studio": "Avs",
+      "genres": []
+    },
+    "DPHN-176": {
+      "title": "DPHN-176 Extraordinary Fainting Play: The Case of Yu, a Model Asked to Shoot for the Cover of a Motorcycle Magazine",
+      "url": "https://javtiful.com/video/62216/dphn-176",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/25/8eb752bf6bc3b6e9eb96f988726aba0f.jpg",
+      "duration": "02:19:13",
+      "date": "2024-06-25",
+      "actresses": [
+        "Kawakami Yuu"
       ],
       "studio": "Avs",
       "genres": []

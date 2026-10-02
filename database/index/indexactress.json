@@ -1364,10 +1364,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/b45d9307f5fbe540147f20f603ca30b0.jpg",
       "total_videos": 155,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 143,
+      "last_crawled_at": 1790920343
     },
     "hayama-sayuri": {
       "name": "Hayama Sayuri",
