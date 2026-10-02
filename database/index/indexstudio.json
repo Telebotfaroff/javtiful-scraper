@@ -1,5 +1,5 @@
 {
-  "total": 239,
+  "total": 240,
   "studios": {
     "yama-to-sora": {
       "name": "Yama To Sora",
@@ -62,7 +62,7 @@
       "slug": "moodyz",
       "url": "https://javtiful.com/channel/moodyz",
       "thumbnail": null,
-      "total_videos": 1496
+      "total_videos": 1500
     },
     "premium": {
       "name": "Premium",
@@ -545,7 +545,7 @@
       "slug": "idea-pocket",
       "url": "https://javtiful.com/channel/idea-pocket",
       "thumbnail": null,
-      "total_videos": 554
+      "total_videos": 555
     },
     "waap-entertainment": {
       "name": "Waap Entertainment",
@@ -1266,7 +1266,7 @@
       "slug": "s1-no1-style",
       "url": "https://javtiful.com/channel/s1-no1-style",
       "thumbnail": null,
-      "total_videos": 662
+      "total_videos": 750
     },
     "atagoya-emanuel": {
       "name": "Atagoya / Emanuel",
@@ -1673,6 +1673,13 @@
       "url": "https://javtiful.com/channel/imouto-channel",
       "thumbnail": null,
       "total_videos": 4
+    },
+    "muteki": {
+      "name": "MUTEKI",
+      "slug": "muteki",
+      "url": "https://javtiful.com/channel/muteki",
+      "thumbnail": null,
+      "total_videos": 6
     }
   }
 }
