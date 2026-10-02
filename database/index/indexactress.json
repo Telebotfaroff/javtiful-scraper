@@ -1304,10 +1304,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1b0c60702669a82c1de0c5a56c0f4ad1.jpg",
       "total_videos": 157,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 120,
+      "last_crawled_at": 1790917505
     },
     "amami-tsubasa": {
       "name": "Amami Tsubasa",
