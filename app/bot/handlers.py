@@ -211,6 +211,7 @@ async def _run_channel_page(message, state, page_number, parallel=False):
             await status.edit_text(
                 f"❌ No videos found on page {page_number}.\n\nChannel: {channel_name}"
             )
+            await _delete_status_later(status)
             return
         mode_name = "Parallel" if parallel else "Sequential"
         await status.edit_text(
@@ -382,12 +383,12 @@ def register_handlers(app: Client):
         if state and state.get("clip_waiting"):
             match = re.fullmatch(r"\s*([^\-]+)\s*-\s*([^\-]+)\s*", text)
             if not match:
-                return await message.reply_text("Invalid range. Use 00:00-01:30.")
+                return await _reply_and_delete_later(message, "Invalid range. Use 00:00-01:30.")
             start, end = match.group(1).strip(), match.group(2).strip()
             if not (_valid_time(start) and _valid_time(end)):
-                return await message.reply_text("Invalid time. Use SS, MM:SS, or HH:MM:SS.")
+                return await _reply_and_delete_later(message, "Invalid time. Use SS, MM:SS, or HH:MM:SS.")
             if _seconds(end) <= _seconds(start):
-                return await message.reply_text("End time must be after start time.")
+                return await _reply_and_delete_later(message, "End time must be after start time.")
             state["clips"] = [(start, end)]
             state.pop("clip_waiting", None)
             await _reply_and_delete_later(message, "✂️ Clip selected. Starting pipeline…")
@@ -423,16 +424,20 @@ def register_handlers(app: Client):
                     "Choose an option:",
                     reply_markup=_channel_keyboard(),
                 )
+                await _delete_status_later(status)
             except Exception as exc:
                 await status.edit_text(
                     f"❌ Channel extraction failed\n\n{type(exc).__name__}: {exc}"
                 )
+                await _delete_status_later(status)
             return
         status = await message.reply_text("🔎 Extracting video information…")
         try:
             video = extractor.extract(text)
             if not video.qualities:
-                return await status.edit_text("❌ No downloadable source/quality was exposed by the page.")
+                await status.edit_text("❌ No downloadable source/quality was exposed by the page.")
+                await _delete_status_later(status)
+                return
             pending[message.from_user.id] = {"url": text, "quality": "720p"}
             title = video.title or "Video"
             duration = video.duration or "unknown"
@@ -444,8 +449,10 @@ def register_handlers(app: Client):
                 "Quality: 720p\n\nChoose upload destination:",
                 reply_markup=_destination_keyboard(),
             )
+            await _delete_status_later(status)
         except Exception as exc:
             await status.edit_text(f"❌ Extraction failed\n\n{type(exc).__name__}: {exc}")
+            await _delete_status_later(status)
 
 
     @app.on_callback_query(filters.regex(r"^channel\|download$"))
