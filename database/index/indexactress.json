@@ -1184,10 +1184,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/106c1c1df463a32f7a9ca5b505a5075d.jpg",
       "total_videos": 164,
       "total_pages": 7,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 7,
+      "videos_crawled": 156,
+      "last_crawled_at": 1790911720
     },
     "maki-kyouko": {
       "name": "Maki Kyouko",
