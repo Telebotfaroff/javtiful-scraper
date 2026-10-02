@@ -1628,10 +1628,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/21f40ca06cb6e9323bd75f6649886414.jpg",
       "total_videos": 142,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 93,
+      "last_crawled_at": 1790932469
     },
     "tomoda-ayaka": {
       "name": "Tomoda Ayaka",
