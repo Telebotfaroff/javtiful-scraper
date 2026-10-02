@@ -4,6 +4,7 @@ import os
 import subprocess
 import tempfile
 import time
+import threading
 from pathlib import Path
 
 import requests
@@ -29,10 +30,18 @@ class TelegramUploader:
     ):
         # Dedicated upload session: bot updates and large file transfers
         # do not share the same Pyrogram client/session.
-        upload_session = (
-            session
-            or os.getenv("TELEGRAM_UPLOAD_SESSION", "javdl_uploads")
-        )
+        base_session = session or os.getenv("TELEGRAM_UPLOAD_SESSION", "javdl_uploads")
+        sessions_env = os.getenv("TELEGRAM_UPLOAD_SESSIONS", "").strip()
+        if sessions_env:
+            sessions = [item.strip() for item in sessions_env.split(",") if item.strip()]
+        else:
+            client_count = int(os.getenv("TELEGRAM_UPLOAD_CLIENTS", "1"))
+            if client_count < 1:
+                raise ValueError("TELEGRAM_UPLOAD_CLIENTS must be >= 1")
+            sessions = [base_session] + [
+                f"{base_session}_{index}" for index in range(2, client_count + 1)
+            ]
+
         concurrency = int(
             max_concurrent_transmissions
             or os.getenv("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS", "8")
@@ -41,17 +50,28 @@ class TelegramUploader:
             raise ValueError("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS must be >= 1")
 
         self.max_concurrent_transmissions = concurrency
-        self.app = Client(
-            upload_session,
-            api_id=int(api_id or os.environ["TELEGRAM_API_ID"]),
-            api_hash=api_hash or os.environ["TELEGRAM_API_HASH"],
-            bot_token=bot_token or os.getenv("TELEGRAM_BOT_TOKEN"),
-            max_concurrent_transmissions=concurrency,
-        )
+        self._clients = []
+        self._client_loads = []
+        self._pool_lock = threading.Lock()
+        for upload_session in sessions:
+            client = Client(
+                upload_session,
+                api_id=int(api_id or os.environ["TELEGRAM_API_ID"]),
+                api_hash=api_hash or os.environ["TELEGRAM_API_HASH"],
+                bot_token=bot_token or os.getenv("TELEGRAM_BOT_TOKEN"),
+                max_concurrent_transmissions=concurrency,
+            )
+            self._clients.append(client)
+            self._client_loads.append(0)
+
+        # WZML-style helper-client pool: each client has its own MTProto
+        # connection/session. A job is pinned to the least-loaded client for
+        # its whole upload, avoiding contention on one Pyrogram session.
         logger.info(
-            "TELEGRAM UPLOAD: dedicated session=%s max_concurrent_transmissions=%d",
-            upload_session,
+            "TELEGRAM UPLOAD POOL: clients=%d concurrency_per_client=%d sessions=%s",
+            len(self._clients),
             concurrency,
+            ",".join(sessions),
         )
 
     @staticmethod
@@ -304,6 +324,21 @@ class TelegramUploader:
         logger.error("THUMBNAIL: no usable thumbnail could be created")
         return None
 
+    def _acquire_client(self):
+        with self._pool_lock:
+            index = min(range(len(self._clients)), key=lambda i: self._client_loads[i])
+            self._client_loads[index] += 1
+            return index, self._clients[index]
+
+    def _release_client(self, index):
+        with self._pool_lock:
+            self._client_loads[index] = max(0, self._client_loads[index] - 1)
+
+    def _ensure_started(self, client, session_name):
+        if not client.is_connected:
+            client.start()
+            logger.info("TELEGRAM UPLOAD: client started session=%s", session_name)
+
     def send_preview(self, chat_id, thumbnail=None, title="Video", referer=None):
         """Send the extracted post thumbnail and title before the download starts."""
         if not thumbnail:
@@ -320,18 +355,17 @@ class TelegramUploader:
             return None
 
         try:
-            if not self.app.is_connected:
-                self.app.start()
-                logger.info("TELEGRAM UPLOAD: dedicated upload client started")
-
-            preview = self.app.send_photo(
+            index, client = self._acquire_client()
+            try:
+                self._ensure_started(client, self._clients[index].name)
+                preview = client.send_photo(
                 chat_id,
                 prepared,
                 caption=f"🎬 {title}",
             )
-            logger.info("TELEGRAM PREVIEW: sent for %s", title)
-            return preview
-        except Exception:
+                logger.info("TELEGRAM PREVIEW: sent for %s", title)
+                return preview
+            except Exception:
             logger.exception("TELEGRAM PREVIEW: send_photo failed")
             return None
         finally:
@@ -370,10 +404,12 @@ class TelegramUploader:
             prepared_thumbnail or "NONE",
         )
 
+        client_index, client = self._acquire_client()
         try:
-            if not self.app.is_connected:
-                self.app.start()
-                logger.info("TELEGRAM UPLOAD: dedicated upload client started")
+            self._ensure_started(
+                client,
+                getattr(client, "name", f"client-{client_index + 1}"),
+            )
 
             for index, path in enumerate(paths, 1):
                 part_caption = (
@@ -423,7 +459,7 @@ class TelegramUploader:
                 while True:
                     try:
                         results.append(
-                            self.app.send_video(
+                            client.send_video(
                                 chat_id,
                                 path,
                                 caption=part_caption,
@@ -468,10 +504,15 @@ class TelegramUploader:
                 and str(prepared_thumbnail).startswith(tempfile.gettempdir())
             ):
                 Path(prepared_thumbnail).unlink(missing_ok=True)
+            self._release_client(client_index)
 
         cleanup([path for path in paths if Path(path) != Path(file_path)])
         logger.info("TELEGRAM UPLOAD: completed successfully")
         return results
+
+    @property
+    def client_count(self):
+        return len(self._clients)
 
     @staticmethod
     def _progress(callback):
