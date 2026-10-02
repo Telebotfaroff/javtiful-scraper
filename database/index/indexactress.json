@@ -2876,10 +2876,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a14758602cbd5abc04d7f894404bd5a6.jpg",
       "total_videos": 96,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 91,
+      "last_crawled_at": 1790985180
     },
     "arisu-mai": {
       "name": "Arisu Mai",
