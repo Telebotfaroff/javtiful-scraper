@@ -2120,10 +2120,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/44292d8d072a97b55b1719f3c3b4a994.jpg",
       "total_videos": 120,
       "total_pages": 5,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 5,
+      "videos_crawled": 95,
+      "last_crawled_at": 1790954061
     },
     "nanatsumori-riri": {
       "name": "Nanatsumori Riri",
