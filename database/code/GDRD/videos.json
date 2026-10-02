@@ -1,5 +1,5 @@
 {
-  "total": 18,
+  "total": 19,
   "videos": {
     "GDRD-007": {
       "title": "GDRD-007 Red Dragon Hibiki Otsuki Yui Hatano",
@@ -214,6 +214,18 @@
       "date": "2024-03-09",
       "actresses": [
         "Mizuhata Asami"
+      ],
+      "studio": "GOLD / Mousozoku",
+      "genres": []
+    },
+    "GDRD-002": {
+      "title": "GDRD-002 Red Dragon Amiri Saito",
+      "url": "https://javtiful.com/video/34489/gdrd-002",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/06/10/ee18a609c5d83647c2fb7d56987a0516.jpg",
+      "duration": "02:14:27",
+      "date": "2023-06-10",
+      "actresses": [
+        "Saitou Amiri"
       ],
       "studio": "GOLD / Mousozoku",
       "genres": []

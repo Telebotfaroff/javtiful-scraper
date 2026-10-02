@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "739MMKA-007": {
       "title": "739MMKA-007 Hitomi",
@@ -9,6 +9,18 @@
       "date": "2023-10-26",
       "actresses": [
         "Iioka Kanako"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "739MMKA-001": {
+      "title": "739MMKA-001 Aya",
+      "url": "https://javtiful.com/video/35761/739mmka-001",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/06/25/2f270430e7f87a31d687b65880642c39.jpg",
+      "duration": "00:53:34",
+      "date": "2023-06-25",
+      "actresses": [
+        "Saitou Amiri"
       ],
       "studio": null,
       "genres": []
