@@ -1592,10 +1592,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/47baeb75c0b750848ec0ef19ed8a29b9.jpg",
       "total_videos": 143,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 137,
+      "last_crawled_at": 1790930844
     },
     "konno-hikaru": {
       "name": "Konno Hikaru",
