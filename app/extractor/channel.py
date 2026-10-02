@@ -30,6 +30,18 @@ class JavtifulChannelExtractor:
         return re.sub(r"\s+", " ", str(value or "")).strip() or None
 
     @staticmethod
+    def _normalize_title_code(title, code):
+        """Remove repeated/leading occurrences of the detected code from a title."""
+        title = JavtifulChannelExtractor._clean(title) or "Video"
+        if not code:
+            return title
+
+        code_pattern = re.escape(code).replace(r"\-", r"[-_ ]?")
+        pattern = rf"^(?:{code_pattern}\s*)+"
+        cleaned = re.sub(pattern, "", title, flags=re.I).strip(" -_")
+        return f"{code} {cleaned}".strip() if cleaned else code
+
+    @staticmethod
     def page_url(base, site_page):
         if site_page <= 1:
             parsed = urlparse(base)
@@ -182,6 +194,7 @@ class JavtifulChannelExtractor:
                 )
 
             code = self._extract_code(title, post_url)
+            title = self._normalize_title_code(title, code)
             seen.add(post_url)
             items.append({
                 "code": code,
@@ -201,9 +214,11 @@ class JavtifulChannelExtractor:
                 img = anchor.find("img")
                 thumbnail = img.get("data-front-lazy-src") if img else None
                 thumbnail = thumbnail or (img.get("src") if img else None)
+                code = self._extract_code(title, post_url)
+                title = self._normalize_title_code(title, code)
                 seen.add(post_url)
                 items.append({
-                    "code": self._extract_code(title, post_url),
+                    "code": code,
                     "title": title,
                     "post_url": post_url,
                     "thumbnail": self._absolute(base, thumbnail),
