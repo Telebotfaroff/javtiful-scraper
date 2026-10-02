@@ -1748,10 +1748,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/5b3409af9b22736a2c1fbb70bf5bac64.jpg",
       "total_videos": 135,
       "total_pages": 6,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 6,
+      "videos_crawled": 118,
+      "last_crawled_at": 1790937843
     },
     "honjou-suzu": {
       "name": "Honjou Suzu",

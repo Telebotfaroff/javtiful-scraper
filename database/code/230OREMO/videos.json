@@ -1,5 +1,5 @@
 {
-  "total": 26,
+  "total": 27,
   "videos": {
     "230OREMO-055": {
       "title": "230OREMO-055 Women's 1500m walk out K",
@@ -312,6 +312,18 @@
       "date": "2024-03-05",
       "actresses": [
         "Nagarekawa Rio"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "230OREMO-323": {
+      "title": "230OREMO-323 Mr. R graduated from H University",
+      "url": "https://javtiful.com/video/80308/230oremo-323",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/03/10/6088dc7de2b9fc6bceddb84ed69b9de3.jpg",
+      "duration": "00:55:34",
+      "date": "2025-03-10",
+      "actresses": [
+        "Miyagi Rie"
       ],
       "studio": null,
       "genres": []
