@@ -35,7 +35,7 @@ class TelegramUploader:
         if sessions_env:
             sessions = [item.strip() for item in sessions_env.split(",") if item.strip()]
         else:
-            client_count = int(os.getenv("TELEGRAM_UPLOAD_CLIENTS", "1"))
+            client_count = int(os.getenv("TELEGRAM_UPLOAD_CLIENTS", "2"))
             if client_count < 1:
                 raise ValueError("TELEGRAM_UPLOAD_CLIENTS must be >= 1")
             sessions = [base_session] + [
