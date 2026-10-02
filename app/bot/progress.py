@@ -1,3 +1,4 @@
+import asyncio
 import time
 
 
@@ -53,7 +54,6 @@ class TelegramProgress:
 
         now = time.monotonic()
 
-        # Throttle Telegram edits, but always allow completion.
         if (
             now - self.last < self.min_interval
             and (not total or current < total)
@@ -62,7 +62,6 @@ class TelegramProgress:
 
         name = str(stage).replace("_", " ").title()
 
-        # Reset the speed window when moving between download/upload stages.
         if stage != self.stage:
             self.stage = stage
             self.last_current = current
@@ -99,5 +98,97 @@ class TelegramProgress:
         try:
             await self.message.edit_text(text)
         except Exception:
-            # Progress updates are best-effort and must never interrupt the job.
+            return
+
+
+class ParallelTelegramProgress:
+    """Render download and upload progress together for batch mode."""
+
+    def __init__(self, message, min_interval=2.0):
+        self.message = message
+        self.min_interval = min_interval
+        self.last = 0.0
+        self.download = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
+        self.upload = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
+
+    @staticmethod
+    def _bar(percent, width=14):
+        filled = round(width * percent / 100)
+        return "▰" * filled + "▱" * (width - filled)
+
+    @staticmethod
+    def _size(value):
+        value = float(value or 0)
+        units = ("B", "KB", "MB", "GB", "TB")
+        for unit in units:
+            if value < 1024 or unit == units[-1]:
+                return f"{value:.1f} {unit}"
+            value /= 1024
+        return f"{value:.1f} TB"
+
+    @classmethod
+    def _speed(cls, value):
+        return "—" if value <= 0 else f"{cls._size(value)}/s"
+
+    @classmethod
+    def _eta(cls, current, total, speed):
+        if total <= 0 or speed <= 0:
+            return "—"
+        seconds = int(max(0, total - current) / speed)
+        if seconds >= 3600:
+            return f"{seconds // 3600}h {(seconds % 3600) // 60:02d}m"
+        if seconds >= 60:
+            return f"{seconds // 60}m {seconds % 60:02d}s"
+        return f"{seconds}s"
+
+    def _update_state(self, state, current, total):
+        now = time.monotonic()
+        current = float(current or 0)
+        total = float(total or 0)
+        elapsed = now - state["time"]
+        delta = current - state["last"]
+        instant = delta / elapsed if elapsed > 0 and delta >= 0 else 0
+        if instant > 0:
+            state["speed"] = state["speed"] * 0.75 + instant * 0.25
+        state["current"] = current
+        state["total"] = total
+        state["last"] = current
+        state["time"] = now
+
+    async def update(self, current, total, stage):
+        if str(stage).startswith("telegram_upload"):
+            self._update_state(self.upload, current, total)
+        elif stage not in {"extract", "clip"}:
+            self._update_state(self.download, current, total)
+        else:
+            return
+
+        now = time.monotonic()
+        if now - self.last < self.min_interval and (
+            total <= 0 or current < total
+        ):
+            return
+        self.last = now
+
+        def section(icon, label, state):
+            current = state["current"]
+            total = state["total"]
+            speed = state["speed"]
+            if total > 0:
+                percent = min(100.0, max(0.0, current / total * 100))
+                return (
+                    f"{icon} **{label}**\n"
+                    f"{self._bar(percent)} {percent:.1f}%\n"
+                    f"📦 {self._size(current)} / {self._size(total)}\n"
+                    f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
+                )
+            return f"{icon} **{label}**\n📦 {self._size(current)}\n⚡ {self._speed(speed)}"
+
+        try:
+            await self.message.edit_text(
+                section("⬇️", "Downloading", self.download)
+                + "\n\n"
+                + section("⬆️", "Uploading", self.upload)
+            )
+        except Exception:
             return
