@@ -2960,10 +2960,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a12ea99ba4167b58d726da8810787b6b.jpg",
       "total_videos": 94,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 85,
+      "last_crawled_at": 1790988456
     },
     "nishimura-nina": {
       "name": "Nishimura Nina",

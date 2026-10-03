@@ -1,5 +1,5 @@
 {
-  "total": 81,
+  "total": 82,
   "videos": {
     "YMDS-124": {
       "title": "YMDS-124 The Day Yui Hatano Became Her Girlfriend",
@@ -971,6 +971,18 @@
         "Takeda Reika"
       ],
       "studio": "Momotarou Eizou Shuppan",
+      "genres": []
+    },
+    "YMDS-087": {
+      "title": "YMDS-087 The Day When Rena Kodama Became Her",
+      "url": "https://javtiful.com/video/16760/ymds-087",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/04/02/0aa1bee7cb4f2d7360132965de9ee36f.jpg",
+      "duration": "02:19:11",
+      "date": "2022-04-02",
+      "actresses": [
+        "Kodama Rena"
+      ],
+      "studio": null,
       "genres": []
     }
   }
