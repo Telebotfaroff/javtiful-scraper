@@ -1,5 +1,5 @@
 {
-  "total": 21,
+  "total": 22,
   "videos": {
     "VDD-162": {
       "title": "VDD-162 Secretary in... (Threat Suite) Mizuki Yayoi",
@@ -252,6 +252,18 @@
         "Mishima Natsuko"
       ],
       "studio": "Dream Ticket",
+      "genres": []
+    },
+    "VDD-184-REDUCING": {
+      "title": "VDD-184 Secretary in... (Threat Suite) Mai Hanagari",
+      "url": "https://javtiful.com/video/68987/vdd-184-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/10/06/70df324415cef4738cc0686138204e76.jpg",
+      "duration": "02:08:19",
+      "date": "2024-10-06",
+      "actresses": [
+        "Kagari Mai"
+      ],
+      "studio": null,
       "genres": []
     }
   }
