@@ -4748,10 +4748,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/129648d9d81fd55b9ca282aecd9a1f6d.jpg",
       "total_videos": 63,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 57,
+      "last_crawled_at": 1791055007
     },
     "sakura-yuno": {
       "name": "Sakura Yuno",
