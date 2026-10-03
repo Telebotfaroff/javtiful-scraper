@@ -4304,10 +4304,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8d39ba163557f6bde706d22344364a92.jpg",
       "total_videos": 69,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 54,
+      "last_crawled_at": 1791039050
     },
     "ichikawa-riku": {
       "name": "Ichikawa Riku",
