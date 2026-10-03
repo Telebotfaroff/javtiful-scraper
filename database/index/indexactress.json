@@ -3452,10 +3452,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/f36c680449089f05a43cdd1245ba5859.jpg",
       "total_videos": 83,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 76,
+      "last_crawled_at": 1791007479
     },
     "amemiya-hibiki": {
       "name": "Amemiya Hibiki",
