@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 5,
   "videos": {
     "233BAT-121": {
       "title": "233BAT-121 Mao",
@@ -45,6 +45,18 @@
       "date": "2023-06-04",
       "actresses": [
         "Aoi Rena"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "233BAT-101": {
+      "title": "233BAT-101 Ruri",
+      "url": "https://javtiful.com/video/18877/233bat-101",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/05/21/80b0a7d9628495b71eba63bd3b69accb.jpg",
+      "duration": "00:34:45",
+      "date": "2022-05-21",
+      "actresses": [
+        "Ruri Saijo"
       ],
       "studio": null,
       "genres": []

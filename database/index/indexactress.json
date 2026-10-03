@@ -4976,10 +4976,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8a2f4f6d0043a08ca938b86a38ad1cc5.jpg",
       "total_videos": 61,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 54,
+      "last_crawled_at": 1791063059
     },
     "taki-yuina": {
       "name": "Taki Yuina",
