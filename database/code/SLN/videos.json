@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "SLN-013": {
       "title": "SLN-013 Hinako Matsui, 21 years old, a salesgirl at a small bakery in Tohoku",
@@ -11,6 +11,18 @@
         "Matsui Hinako"
       ],
       "studio": "Puramu",
+      "genres": []
+    },
+    "SLN-001": {
+      "title": "SLN-001 Arima Miku 21 Years Old",
+      "url": "https://javtiful.com/video/20278/sln-001",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/07/02/96ce0c3e9225c0b305f0dadb6c12a77b.jpg",
+      "duration": "02:23:42",
+      "date": "2022-07-02",
+      "actresses": [
+        "Arima Miku"
+      ],
+      "studio": null,
       "genres": []
     }
   }

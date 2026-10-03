@@ -4280,10 +4280,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/bd47cad6c4678dbeae1ed919dfc8ef30.jpg",
       "total_videos": 69,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 55,
+      "last_crawled_at": 1791038187
     },
     "asami-sena": {
       "name": "Asami Sena",

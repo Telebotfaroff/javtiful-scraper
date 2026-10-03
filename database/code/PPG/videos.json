@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "PPG-006": {
       "title": "PPG-006 Aya",
@@ -9,6 +9,18 @@
       "date": "2025-04-03",
       "actresses": [
         "Sazanami Aya"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "PPG-005": {
+      "title": "PPG-005 Miku",
+      "url": "https://javtiful.com/video/82074/ppg-005",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/04/03/69712c8a131306f95dbb076cde9393fd.jpg",
+      "duration": "01:15:47",
+      "date": "2025-04-03",
+      "actresses": [
+        "Arima Miku"
       ],
       "studio": null,
       "genres": []
