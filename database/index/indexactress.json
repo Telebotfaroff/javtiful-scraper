@@ -4616,10 +4616,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/977db573a71ef4805e15f01345dcdd64.jpg",
       "total_videos": 66,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 62,
+      "last_crawled_at": 1791050295
     },
     "ranka": {
       "name": "Ranka",
