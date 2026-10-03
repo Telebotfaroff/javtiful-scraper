@@ -3404,10 +3404,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6daca1ce8bde989933d81841fb5b4e25.jpg",
       "total_videos": 84,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 83,
+      "last_crawled_at": 1791005646
     },
     "marui-moeka": {
       "name": "Marui Moeka",
