@@ -3716,10 +3716,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/63772b22b874a6222d253661096c49a6.jpg",
       "total_videos": 78,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 78,
+      "last_crawled_at": 1791017464
     },
     "hinata-natsu": {
       "name": "Hinata Natsu",
