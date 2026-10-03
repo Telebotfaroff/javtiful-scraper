@@ -4736,10 +4736,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/9499bb340e53cc95920e1bfc76a96124.jpg",
       "total_videos": 63,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 54,
+      "last_crawled_at": 1791054581
     },
     "nanase-iori": {
       "name": "Nanase Iori",
