@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "NSPS-890": {
       "title": "NSPS-890 My Wife Will Never Fall",
@@ -16,6 +16,15 @@
       "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/01/07/a9d5652ccd5c77d23d7f2a2c75bbe501.jpg",
       "duration": "03:24:20",
       "date": "2023-01-07",
+      "studio": null,
+      "genres": []
+    },
+    "NANP-002": {
+      "title": "NANP-002 I Will Not Let You Say One More",
+      "url": "https://javtiful.com/video/1843/nanp-002",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/01/06/5bb64220bcfe304382ef75ae5c109d9a.jpg",
+      "duration": "03:08:59",
+      "date": "2019-01-06",
       "studio": null,
       "genres": []
     }

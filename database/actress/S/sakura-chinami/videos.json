@@ -1,5 +1,5 @@
 {
-  "total": 21,
+  "total": 22,
   "videos": {
     "GVH-128": {
       "title": "GVH-128 Plump General Hospital",
@@ -188,6 +188,15 @@
       "duration": "01:19:15",
       "date": "2019-03-23",
       "studio": null,
+      "genres": []
+    },
+    "SOSF-002": {
+      "title": "SOSF-002 What if I used an aphrodisiac CD to make an impromptu sexy hostess for justice K-sensei who purges my injustices (laughs)...",
+      "url": "https://javtiful.com/video/38646/sosf-002",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/08/02/a5add0869c1e86fdc15849b0e702889e.jpg",
+      "duration": "01:53:16",
+      "date": "2023-08-02",
+      "studio": "yama-to-sora",
       "genres": []
     }
   }
