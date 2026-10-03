@@ -4868,10 +4868,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/9b189f4aa238c452f41e2489f3e780e9.jpg",
       "total_videos": 62,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 61,
+      "last_crawled_at": 1791059243
     },
     "nami-kuroki": {
       "name": "Nami Kuroki",
