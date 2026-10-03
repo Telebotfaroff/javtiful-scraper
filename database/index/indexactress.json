@@ -2912,10 +2912,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/fd903b567d0ef5791f568f382c77f991.jpg",
       "total_videos": 95,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 90,
+      "last_crawled_at": 1790986585
     },
     "takeda-reika": {
       "name": "Takeda Reika",
