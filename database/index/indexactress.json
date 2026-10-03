@@ -4604,10 +4604,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/b6f6d674f566336ac4565b994bf6d46f.jpg",
       "total_videos": 66,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 56,
+      "last_crawled_at": 1791049861
     },
     "ogura-nanami": {
       "name": "Ogura Nanami",
