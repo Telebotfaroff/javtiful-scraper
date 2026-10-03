@@ -3968,10 +3968,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6c63c0439e3346db23e1081b62de0ece.jpg",
       "total_videos": 75,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 67,
+      "last_crawled_at": 1791026794
     },
     "sunohara-miki": {
       "name": "Sunohara Miki",
