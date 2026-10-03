@@ -3692,10 +3692,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/e1769d550395b00c9913f2ec7dc8f404.jpg",
       "total_videos": 80,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 69,
+      "last_crawled_at": 1791016566
     },
     "kano-yura": {
       "name": "Kano Yura",
