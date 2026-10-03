@@ -4184,10 +4184,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/30cca9f7f89ccdaebb1e2cbe2cd805ef.jpg",
       "total_videos": 71,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 65,
+      "last_crawled_at": 1791034689
     },
     "iori-hinano": {
       "name": "Iori Hinano",
