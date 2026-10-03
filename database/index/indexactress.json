@@ -4064,10 +4064,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/43c37b541f77618798dac84a08b68bc4.jpg",
       "total_videos": 74,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 58,
+      "last_crawled_at": 1791030313
     },
     "amamiya-kanan": {
       "name": "Amamiya Kanan",
