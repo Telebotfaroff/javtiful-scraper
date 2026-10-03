@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "SCPX-328": {
       "title": "SCPX-328 What Are You Going To Do With This Aunt?",
@@ -62,6 +62,15 @@
       "duration": "03:20:17",
       "date": "2020-02-16",
       "studio": "switch",
+      "genres": []
+    },
+    "GS-217": {
+      "title": "GS-217 I Want To Visit My Friend, But Met His Hot Sister",
+      "url": "https://javtiful.com/video/1157/gs-217",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2018/10/27/1bdf4394b6126932c860669aa5a089a3.jpg",
+      "duration": "01:59:52",
+      "date": "2018-10-27",
+      "studio": null,
       "genres": []
     }
   }

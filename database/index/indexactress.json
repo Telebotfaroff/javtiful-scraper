@@ -4460,10 +4460,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/2d29264c62c360bdc9d091111328fe08.jpg",
       "total_videos": 68,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 41,
+      "last_crawled_at": 1791044678
     },
     "satsuki-fumino": {
       "name": "Satsuki Fumino",
