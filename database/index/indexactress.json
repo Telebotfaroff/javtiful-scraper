@@ -4052,10 +4052,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/f3d2276767cdba4d3ecaa8c86759cde0.jpg",
       "total_videos": 74,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 63,
+      "last_crawled_at": 1791029873
     },
     "yuzuki-ria": {
       "name": "Yuzuki Ria",
