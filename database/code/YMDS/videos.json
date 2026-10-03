@@ -1,5 +1,5 @@
 {
-  "total": 84,
+  "total": 85,
   "videos": {
     "YMDS-124": {
       "title": "YMDS-124 The Day Yui Hatano Became Her Girlfriend",
@@ -1007,6 +1007,18 @@
         "Shiraishi Momo"
       ],
       "studio": "Momotarou Eizou Shuppan",
+      "genres": []
+    },
+    "YMDS-082": {
+      "title": "YMDS-082 The Day When Minami Momo Became Her",
+      "url": "https://javtiful.com/video/15812/ymds-082",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/03/01/08c1cb5fd5b7fca89f1754a7d7622140.jpg",
+      "duration": "02:19:59",
+      "date": "2022-03-01",
+      "actresses": [
+        "Minami Momo"
+      ],
+      "studio": null,
       "genres": []
     }
   }
