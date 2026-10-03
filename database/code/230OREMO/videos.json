@@ -1,5 +1,5 @@
 {
-  "total": 34,
+  "total": 35,
   "videos": {
     "230OREMO-055": {
       "title": "230OREMO-055 Women's 1500m walk out K",
@@ -409,6 +409,18 @@
       "actresses": [
         "Hinata Yura",
         "Sengoku Monaka"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "230OREMO-191": {
+      "title": "230OREMO-191 Kyokasan",
+      "url": "https://javtiful.com/video/60539/230oremo-191",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/06/01/56f03a86b1b96b113eb75f82e972cade.jpg",
+      "duration": "00:50:29",
+      "date": "2024-06-01",
+      "actresses": [
+        "Tachibana Kyouka"
       ],
       "studio": null,
       "genres": []
