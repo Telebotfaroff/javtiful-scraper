@@ -3896,10 +3896,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/4473278a1e6d6be113ae09da0b13788c.jpg",
       "total_videos": 76,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 74,
+      "last_crawled_at": 1791024138
     },
     "akari-nonoka": {
       "name": "Akari Nonoka",
