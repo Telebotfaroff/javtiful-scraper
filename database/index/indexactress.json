@@ -3140,10 +3140,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/d45f2bc62e4c0ee01ee7ddb96c5cbc30.jpg",
       "total_videos": 89,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 72,
+      "last_crawled_at": 1790995472
     },
     "hibino-uta": {
       "name": "Hibino uta",
