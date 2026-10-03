@@ -3764,10 +3764,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/209c1462fd0e45d9006dcc62c2c646fd.jpg",
       "total_videos": 78,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 70,
+      "last_crawled_at": 1791019246
     },
     "tachibana-kyouka": {
       "name": "Tachibana Kyouka",
