@@ -4772,10 +4772,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/952ef9c10caa6accf739b86063b9bc73.jpg",
       "total_videos": 63,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 59,
+      "last_crawled_at": 1791055853
     },
     "yoshioka-hiyori": {
       "name": "Yoshioka Hiyori",
