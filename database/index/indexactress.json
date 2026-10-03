@@ -2924,10 +2924,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/f8a9db1a2e916c1eee2161d774c5165e.jpg",
       "total_videos": 95,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 85,
+      "last_crawled_at": 1790987059
     },
     "uruki-sarara": {
       "name": "Uruki Sarara",
