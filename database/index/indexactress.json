@@ -4724,10 +4724,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/df788d00542a9c1150292e2e511aa8c4.jpg",
       "total_videos": 64,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 63,
+      "last_crawled_at": 1791054151
     },
     "june-lovejoy": {
       "name": "June Lovejoy",
