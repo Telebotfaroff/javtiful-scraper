@@ -3164,10 +3164,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/f1523a8f15f08f4c25e801967c216320.jpg",
       "total_videos": 89,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 71,
+      "last_crawled_at": 1790996403
     },
     "natsume-hibiki": {
       "name": "Natsume Hibiki",
