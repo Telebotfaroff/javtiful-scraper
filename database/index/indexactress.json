@@ -4208,10 +4208,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/b146388ebec639018a7b771c87780445.jpg",
       "total_videos": 71,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 51,
+      "last_crawled_at": 1791035557
     },
     "nagano-tsukasa": {
       "name": "Nagano Tsukasa",
