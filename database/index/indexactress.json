@@ -3212,10 +3212,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/f458326ec97c84152ca32b644b88145c.jpg",
       "total_videos": 88,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 82,
+      "last_crawled_at": 1790998266
     },
     "kuriyama-rio": {
       "name": "Kuriyama Rio",
