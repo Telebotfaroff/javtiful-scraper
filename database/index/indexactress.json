@@ -3344,10 +3344,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/133d7d6b405b9dcc7b37c064eb3633cc.jpg",
       "total_videos": 85,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 80,
+      "last_crawled_at": 1791003349
     },
     "matsushita-saeko": {
       "name": "Matsushita Saeko",
