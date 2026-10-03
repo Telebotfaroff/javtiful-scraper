@@ -4916,10 +4916,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/5f14ad4649fef2e64c9a2d9c86e5fede.jpg",
       "total_videos": 62,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 47,
+      "last_crawled_at": 1791060936
     },
     "yasui-kaoru": {
       "name": "Yasui Kaoru",
