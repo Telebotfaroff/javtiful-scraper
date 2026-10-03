@@ -3056,10 +3056,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/6af8f3720d5d10abb45ff16cd40a8247.jpg",
       "total_videos": 92,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 89,
+      "last_crawled_at": 1790992213
     },
     "kagari-mai": {
       "name": "Kagari Mai",
