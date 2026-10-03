@@ -4352,10 +4352,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/1374977933b07182fedf1d696d5915f6.jpg",
       "total_videos": 69,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 67,
+      "last_crawled_at": 1791040765
     },
     "maruishi-rea": {
       "name": "Maruishi Rea",
