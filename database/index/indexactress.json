@@ -2900,10 +2900,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/041827ec33d5cbca9df8a7191cfabae6.jpg",
       "total_videos": 95,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 88,
+      "last_crawled_at": 1790986119
     },
     "kawakita-saika": {
       "name": "Kawakita Saika",
