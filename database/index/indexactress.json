@@ -3836,10 +3836,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/16da983233e4e9c11b1d6bc9dd893227.jpg",
       "total_videos": 77,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 55,
+      "last_crawled_at": 1791021922
     },
     "maikawa-sena": {
       "name": "Maikawa Sena",
