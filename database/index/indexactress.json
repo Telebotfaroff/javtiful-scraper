@@ -4760,10 +4760,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/15a5ae6e005d9bd79dee5701f8c89afd.jpg",
       "total_videos": 63,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 58,
+      "last_crawled_at": 1791055433
     },
     "shirakami-emika": {
       "name": "Shirakami Emika",
