@@ -3092,10 +3092,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/19d07731d60d84439f287aa02956478e.jpg",
       "total_videos": 91,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 78,
+      "last_crawled_at": 1790993613
     },
     "miyajima-mei": {
       "name": "Miyajima Mei",
