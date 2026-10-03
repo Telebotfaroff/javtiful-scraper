@@ -4544,10 +4544,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8263734249c6734a292d24ce64d5c622.jpg",
       "total_videos": 67,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 34,
+      "last_crawled_at": 1791047679
     },
     "shiraishi-nagisa": {
       "name": "Shiraishi Nagisa",
