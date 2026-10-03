@@ -3392,10 +3392,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/ef8652a6d3cd18b1b9ae3f6c73697e69.jpg",
       "total_videos": 84,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 88,
+      "last_crawled_at": 1791005186
     },
     "kizaki-jessica": {
       "name": "Kizaki Jessica",

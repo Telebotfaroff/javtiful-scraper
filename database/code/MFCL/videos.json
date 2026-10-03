@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "MFCL-029": {
       "title": "MFCL-029 Riho",
@@ -21,6 +21,18 @@
       "date": "2025-04-08",
       "actresses": [
         "Shishido Riho"
+      ],
+      "studio": "DOC",
+      "genres": []
+    },
+    "MFCL-030": {
+      "title": "MFCL-030 Ren.",
+      "url": "https://javtiful.com/video/111165/mfcl-030",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/07/19/cbb18fe66129af46e3052a89e9f939de.jpg",
+      "duration": "01:27:26",
+      "date": "2026-07-18",
+      "actresses": [
+        "Hibiki Ren"
       ],
       "studio": "DOC",
       "genres": []
