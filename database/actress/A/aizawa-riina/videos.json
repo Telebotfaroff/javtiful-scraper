@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "RCON-014": {
       "title": "RCON-014 No way 01",
@@ -62,6 +62,15 @@
       "duration": "02:10:31",
       "date": "2019-03-03",
       "studio": null,
+      "genres": []
+    },
+    "HUNTA-754": {
+      "title": "HUNTA-754 I'm Having Trouble With My Eyes In The Classroom With A Sheer Transparency Of 200%!",
+      "url": "https://javtiful.com/video/24959/hunta-754",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/11/09/0a97f7fa4a5bffd10e8211ce183bba7a.jpg",
+      "duration": "02:27:25",
+      "date": "2022-11-09",
+      "studio": "hunter",
       "genres": []
     }
   }

@@ -3284,10 +3284,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7dc0b9b23fde3e6f15652694d7bea263.jpg",
       "total_videos": 86,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 61,
+      "last_crawled_at": 1791001051
     },
     "nagasaki-yukine": {
       "name": "Nagasaki Yukine",
