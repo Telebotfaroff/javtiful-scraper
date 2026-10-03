@@ -3248,10 +3248,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/29e6c9f7359c70e23ca895d7f8197033.jpg",
       "total_videos": 87,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 72,
+      "last_crawled_at": 1790999665
     },
     "komatsu-an": {
       "name": "Komatsu An",
