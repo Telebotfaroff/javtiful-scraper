@@ -4100,10 +4100,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/86a2c1948c7e319f8d9dfeb8ae6f6469.jpg",
       "total_videos": 73,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 65,
+      "last_crawled_at": 1791031643
     },
     "yoshizawa-yuki": {
       "name": "Yoshizawa Yuki",
