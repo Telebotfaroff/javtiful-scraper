@@ -4676,10 +4676,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/32f3c58f80168ecad5ea9530d597c64f.jpg",
       "total_videos": 65,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 45,
+      "last_crawled_at": 1791052424
     },
     "sakuraba-hikari": {
       "name": "Sakuraba Hikari",
