@@ -1,5 +1,5 @@
 {
-  "total": 202,
+  "total": 203,
   "videos": {
     "MUDR-255": {
       "title": "MUDR-255 Female Ninja Training: Ninja Fall - Live Action Version - Waka Misono",
@@ -2297,6 +2297,18 @@
       "actresses": [
         "Fujita Kozue",
         "Igarashi Kiyoka"
+      ],
+      "genres": []
+    },
+    "AVOP-381": {
+      "title": "AVOP-381 Summer Princess. Live-action version",
+      "url": "https://javtiful.com/video/101708/avop-381",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/01/24/3bbfcef05a0fb26803c55ee99a7aaa5a.jpg",
+      "duration": "02:39:32",
+      "date": "2026-01-24",
+      "actresses": [
+        "Abe Mikako",
+        "Miyazawa Yukari"
       ],
       "genres": []
     }
