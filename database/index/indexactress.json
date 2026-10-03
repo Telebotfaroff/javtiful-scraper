@@ -4508,10 +4508,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/731587701f14460b890094e3a3a8cde8.jpg",
       "total_videos": 67,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 35,
+      "last_crawled_at": 1791046391
     },
     "kagami-sara": {
       "name": "Kagami Sara",
