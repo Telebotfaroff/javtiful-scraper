@@ -4880,10 +4880,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/8a4b6ea7488fb4065055dffe504f82f2.jpg",
       "total_videos": 62,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 57,
+      "last_crawled_at": 1791059668
     },
     "oikawa-umi": {
       "name": "Oikawa Umi",
