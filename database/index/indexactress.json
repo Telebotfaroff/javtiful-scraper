@@ -3752,10 +3752,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/50b45a0c3fb5818d2f0fefeec908ed14.jpg",
       "total_videos": 78,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 76,
+      "last_crawled_at": 1791018803
     },
     "semei-hikari": {
       "name": "Semei Hikari",
