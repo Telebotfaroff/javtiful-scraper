@@ -4556,10 +4556,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/ca0bac44d120e6c6341746e04bdb76f4.jpg",
       "total_videos": 67,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 55,
+      "last_crawled_at": 1791048108
     },
     "suzuki-satomi": {
       "name": "Suzuki Satomi",
