@@ -1,5 +1,5 @@
 {
-  "total": 10,
+  "total": 11,
   "videos": {
     "SW-505": {
       "title": "SW-505 The First Love Woman I Met At The Reunion",
@@ -89,6 +89,15 @@
       "duration": "03:33:19",
       "date": "2025-01-02",
       "studio": null,
+      "genres": []
+    },
+    "SCOP-388": {
+      "title": "SCOP-388 Or Shine A Wrecked Likely In Trouble In Gold Married Woman To The Target!",
+      "url": "https://javtiful.com/video/21862/scop-388",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/08/14/1cb07ed993b85a28b4c4ae91152d0bf8.jpg",
+      "duration": "02:30:54",
+      "date": "2022-08-14",
+      "studio": "kmproduce",
       "genres": []
     }
   }
