@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 5,
   "videos": {
     "CPDE-064": {
       "title": "CPDE-064 Strongest Attribute 64 Kashiwagi Konatsu",
@@ -47,6 +47,18 @@
         "Yuzuki Marina"
       ],
       "studio": null,
+      "genres": []
+    },
+    "CPDE-061": {
+      "title": "CPDE-061 Strongest attribute 61 Kozue Fujita",
+      "url": "https://javtiful.com/video/42642/cpde-061",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/09/21/9237357f5228427b6cf5386d20711e3b.jpg",
+      "duration": "02:18:14",
+      "date": "2023-09-21",
+      "actresses": [
+        "Fujita Kozue"
+      ],
+      "studio": "Saikyou Zokusei",
       "genres": []
     }
   }
