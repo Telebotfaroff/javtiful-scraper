@@ -2888,10 +2888,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/6faa22b87b98ae73808f7dab3ef4cebc.jpg",
       "total_videos": 95,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 72,
+      "last_crawled_at": 1790985654
     },
     "futaba-sara": {
       "name": "Futaba Sara",
