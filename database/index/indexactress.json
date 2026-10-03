@@ -4784,10 +4784,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/80afb13bec51ce0bb8290a321303b2c1.jpg",
       "total_videos": 63,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 62,
+      "last_crawled_at": 1791056276
     },
     "akari-niimura": {
       "name": "Akari Niimura",
