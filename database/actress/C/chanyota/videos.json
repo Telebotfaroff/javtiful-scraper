@@ -1,5 +1,5 @@
 {
-  "total": 13,
+  "total": 15,
   "videos": {
     "MMPB-021": {
       "title": "MMPB-021 A dream collaboration between my favorite actresses! PREMIUM luxury double cast",
@@ -116,6 +116,24 @@
       "duration": "01:50:40",
       "date": "2022-04-06",
       "studio": "sod-create",
+      "genres": []
+    },
+    "RCTD-504-REDUCING": {
+      "title": "RCTD-504 The ultimate evolution of fantasy items: The true time-stopping watch, Part 26",
+      "url": "https://javtiful.com/video/92865/rctd-504-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/06/4080c1bf6172ed6ba64dcc00b49a2b6f.jpg",
+      "duration": "02:28:07",
+      "date": "2025-09-06",
+      "studio": "rocket",
+      "genres": []
+    },
+    "RCTD-504": {
+      "title": "RCTD-504 Delusion Item Ultimate Evolution Series True Time Stopping Watch Part 26",
+      "url": "https://javtiful.com/video/28595/rctd-504",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/02/20/6cabb06129ae0bb78df9559523fba90c.jpg",
+      "duration": "02:28:07",
+      "date": "2023-02-20",
+      "studio": "rocket",
       "genres": []
     }
   }

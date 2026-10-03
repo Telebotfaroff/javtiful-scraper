@@ -3644,10 +3644,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a0f7a70d474e11b1a6ca7678b8c34d6e.jpg",
       "total_videos": 80,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 47,
+      "last_crawled_at": 1791014754
     },
     "kaori": {
       "name": "Kaori",
