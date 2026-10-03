@@ -3944,10 +3944,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/85a4fc3cb618da9e91e7c5e5f9c91ffd.jpg",
       "total_videos": 75,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 54,
+      "last_crawled_at": 1791025915
     },
     "saeki-yumika": {
       "name": "Saeki Yumika",
