@@ -4220,10 +4220,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/c96dbb9e6126f80ccfee44c554dd3251.jpg",
       "total_videos": 71,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 52,
+      "last_crawled_at": 1791035991
     },
     "nikaidou-yume": {
       "name": "Nikaidou Yume",
