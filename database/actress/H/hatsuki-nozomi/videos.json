@@ -1,5 +1,5 @@
 {
-  "total": 6,
+  "total": 7,
   "videos": {
     "SCPX-328": {
       "title": "SCPX-328 What Are You Going To Do With This Aunt?",
@@ -53,6 +53,15 @@
       "duration": "01:50:16",
       "date": "2019-02-03",
       "studio": "fa-pro-platinum",
+      "genres": []
+    },
+    "SW-475": {
+      "title": "SW-475 Woman Of First Love Who I Met At The Reunion",
+      "url": "https://javtiful.com/video/5715/sw-475",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/16/285d93193b30097a2a6271f360ed3ba2.jpg",
+      "duration": "03:20:17",
+      "date": "2020-02-16",
+      "studio": "switch",
       "genres": []
     }
   }

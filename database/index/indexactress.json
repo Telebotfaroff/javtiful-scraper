@@ -4016,10 +4016,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/baf6e6b3ae1ad449e565de91dba2ca7e.jpg",
       "total_videos": 74,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 54,
+      "last_crawled_at": 1791028555
     },
     "morimoto-tsugumi": {
       "name": "Morimoto Tsugumi",

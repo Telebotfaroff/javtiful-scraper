@@ -1,5 +1,5 @@
 {
-  "total": 12,
+  "total": 13,
   "videos": {
     "GIRO-048": {
       "title": "GIRO-048 I Can't Make It In Time",
@@ -107,6 +107,15 @@
       "duration": "02:17:26",
       "date": "2025-10-21",
       "studio": "ie-nergy",
+      "genres": []
+    },
+    "SW-472": {
+      "title": "SW-472 Mini Skirt Frustration Woman In The Hospital",
+      "url": "https://javtiful.com/video/5714/sw-472",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2020/02/16/6ec59f5fa73c969fc7c08b7f709ae882.jpg",
+      "duration": "03:00:42",
+      "date": "2020-02-16",
+      "studio": "switch",
       "genres": []
     }
   }
