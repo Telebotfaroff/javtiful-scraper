@@ -1,5 +1,5 @@
 {
-  "total": 55,
+  "total": 56,
   "videos": {
     "RBK-063": {
       "title": "RBK-063 Secret Investigator, Until You Fall... Storm Of Violence Mizuki Yayoi",
@@ -665,6 +665,18 @@
         "Yoshioka Hiyori"
       ],
       "studio": null,
+      "genres": []
+    },
+    "RBK-096": {
+      "title": "RBK-096 Female Investigator Haruka's Final Mission Yuina Taki",
+      "url": "https://javtiful.com/video/68303/rbk-096",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/09/27/00fc047254f0ad9087bedca1a5b39506.jpg",
+      "duration": "01:42:34",
+      "date": "2024-09-27",
+      "actresses": [
+        "Taki Yuina"
+      ],
+      "studio": "Attackers",
       "genres": []
     }
   }
