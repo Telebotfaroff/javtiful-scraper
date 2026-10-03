@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 9,
   "videos": {
     "RCTD-500-REDUCING": {
       "title": "RCTD-500 Werewolf Game: Who is really in the trap?",
@@ -62,6 +62,24 @@
       "duration": "04:01:54",
       "date": "2022-04-27",
       "studio": null,
+      "genres": []
+    },
+    "RCTD-486-REDUCING": {
+      "title": "RCTD-486 The True Time-Stopping Watch Part 25",
+      "url": "https://javtiful.com/video/92479/rctd-486-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/09/01/8cecddae911cf1b5ad1ed38bb3394cc6.jpg",
+      "duration": "02:07:43",
+      "date": "2025-09-01",
+      "studio": "rocket",
+      "genres": []
+    },
+    "RCTD-486": {
+      "title": "RCTD-486 True Time Stops Watch Part 25",
+      "url": "https://javtiful.com/video/22264/rctd-486",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/08/25/c85cd5ce63a62f19d7f034176245295d.jpg",
+      "duration": "02:07:43",
+      "date": "2022-08-25",
+      "studio": "rocket",
       "genres": []
     }
   }
