@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "739ASKJ-001": {
       "title": "739ASKJ-001 An",
@@ -9,6 +9,18 @@
       "date": "2023-04-12",
       "actresses": [
         "Saitou Amiri"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "739ASKJ-002": {
+      "title": "739ASKJ-002 Yuka",
+      "url": "https://javtiful.com/video/43926/739askj-002",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/10/07/299125f232b045196f41d0bd9ff4d4f6.jpg",
+      "duration": "00:47:17",
+      "date": "2023-10-07",
+      "actresses": [
+        "Komatsu An"
       ],
       "studio": null,
       "genres": []

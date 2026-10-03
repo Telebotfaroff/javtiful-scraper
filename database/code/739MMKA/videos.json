@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "739MMKA-007": {
       "title": "739MMKA-007 Hitomi",
@@ -21,6 +21,18 @@
       "date": "2023-06-25",
       "actresses": [
         "Saitou Amiri"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "739MMKA-009": {
+      "title": "739MMKA-009 Ami",
+      "url": "https://javtiful.com/video/49755/739mmka-009",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/12/28/e58e2fd5bee968dd69f98e243ca2490b.jpg",
+      "duration": "00:45:25",
+      "date": "2023-12-28",
+      "actresses": [
+        "Komatsu An"
       ],
       "studio": null,
       "genres": []

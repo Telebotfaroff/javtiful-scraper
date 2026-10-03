@@ -3260,10 +3260,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/ad836079b404f50c416c5aab573654b7.jpg",
       "total_videos": 87,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 80,
+      "last_crawled_at": 1791000126
     },
     "eikawa-noa": {
       "name": "Eikawa Noa",
