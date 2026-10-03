@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "OREX-320": {
       "title": "OREX-320 Sarina-san 4",
@@ -9,6 +9,18 @@
       "date": "2022-01-03",
       "actresses": [
         "Momonaga Sarina"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "OREX-319": {
+      "title": "OREX-319 Sakura-san",
+      "url": "https://javtiful.com/video/14246/orex-319",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/12/23/208b63b90c60d277a3ebb2bfe5e0d63b.jpg",
+      "duration": "01:08:06",
+      "date": "2021-12-23",
+      "actresses": [
+        "Tsuji Sakura"
       ],
       "studio": null,
       "genres": []

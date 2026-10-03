@@ -3200,10 +3200,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/30a29002981cc675c1203cab135cdc68.jpg",
       "total_videos": 89,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 75,
+      "last_crawled_at": 1790997798
     },
     "hiiragi-yuuki": {
       "name": "Hiiragi Yuuki",
