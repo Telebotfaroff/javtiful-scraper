@@ -1,5 +1,5 @@
 {
-  "total": 16,
+  "total": 17,
   "videos": {
     "420POW-046": {
       "title": "420POW-046 Techi Ultimate Weapon Of The Raccoon Face World",
@@ -189,6 +189,18 @@
       "date": "2021-10-25",
       "actresses": [
         "Hoshizora Moa"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "420POW-080": {
+      "title": "420POW-080 Amimero",
+      "url": "https://javtiful.com/video/46876/420pow-080",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/11/18/b90037fc83c4a785264a61a89b792cf6.jpg",
+      "duration": "02:00:39",
+      "date": "2023-11-18",
+      "actresses": [
+        "Honoka Airi"
       ],
       "studio": null,
       "genres": []
