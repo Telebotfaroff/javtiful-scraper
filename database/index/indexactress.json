@@ -3320,10 +3320,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/cfc89bd67a29f977a93f0fc12a39eb85.jpg",
       "total_videos": 86,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 68,
+      "last_crawled_at": 1791002429
     },
     "tomiyasu-reona": {
       "name": "Tomiyasu Reona",
