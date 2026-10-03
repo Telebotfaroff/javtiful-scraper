@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "HUNTC-508-REDUCING": {
       "title": "HUNTC-508 A fruit parlor where you can share a table with female students has opened at a mock store at the school festival! The ripe and vibrant female students will sit on your l",
@@ -62,6 +62,15 @@
       "duration": "04:04:31",
       "date": "2023-01-12",
       "studio": null,
+      "genres": []
+    },
+    "DVMM-279": {
+      "title": "DVMM-279 The World of Sex in University Entrance Exams - 2026 Nationwide Unified Sex Test",
+      "url": "https://javtiful.com/video/91113/dvmm-279",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/08/14/3eb58476ccd200ac711f01454c7befc4.jpg",
+      "duration": "02:38:20",
+      "date": "2025-08-14",
+      "studio": "deeps",
       "genres": []
     }
   }
