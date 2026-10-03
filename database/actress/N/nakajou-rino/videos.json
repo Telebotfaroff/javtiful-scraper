@@ -1,5 +1,5 @@
 {
-  "total": 5,
+  "total": 6,
   "videos": {
     "HUNTC-067-REDUCING": {
       "title": "HUNTC-067 Alone in the office late at night with my colleague who becomes a monster when he gets drunk! My colleague who usually makes fun of me for not being able to do my job, wi",
@@ -44,6 +44,15 @@
       "duration": "02:12:43",
       "date": "2023-08-11",
       "studio": "e-body",
+      "genres": []
+    },
+    "SAN-470Z": {
+      "title": "SAN-470z Even A Single Rice Ball At The Convenience Store Costs About 200 Yen, It's Just Impossible",
+      "url": "https://javtiful.com/video/110297/san-470z",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/06/30/9eec6d68acb2c339b7c6d24497c3f644.jpg",
+      "duration": "01:41:12",
+      "date": "2026-06-29",
+      "studio": "maza",
       "genres": []
     }
   }
