@@ -3980,10 +3980,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7a022da279b6491e2d7aa56ea0cc678e.jpg",
       "total_videos": 75,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 65,
+      "last_crawled_at": 1791027232
     },
     "ayana-rina": {
       "name": "Ayana Rina",
