@@ -3680,10 +3680,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/35dcd519fc39c216712a29affb15cbe9.jpg",
       "total_videos": 80,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 55,
+      "last_crawled_at": 1791016119
     },
     "shouda-chisato": {
       "name": "Shouda Chisato",
