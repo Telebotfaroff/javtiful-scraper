@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "MDTM-588": {
       "title": "MDTM-588 Let's do it at school - Farewell to the Light of Youth BEST Selection - Snapshot of the mind and body",
@@ -62,6 +62,15 @@
       "duration": "03:23:53",
       "date": "2019-01-20",
       "studio": "hunter",
+      "genres": []
+    },
+    "MDTM-471": {
+      "title": "MDTM-471 Farewell to the Light of Youth - School life and sex with classmates - Ai Hoshina, Yua Nanami, Aya Miyazaki",
+      "url": "https://javtiful.com/video/41388/mdtm-471",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/09/05/ded84db56b50e33e1803ec3dc55e0041.jpg",
+      "duration": "02:30:11",
+      "date": "2023-09-05",
+      "studio": "kmproduce",
       "genres": []
     }
   }
