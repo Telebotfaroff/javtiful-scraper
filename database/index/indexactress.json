@@ -3872,10 +3872,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/15a438fc0b282101c833699955744507.jpg",
       "total_videos": 76,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 72,
+      "last_crawled_at": 1791023254
     },
     "honoka-ashina": {
       "name": "Honoka Ashina",
