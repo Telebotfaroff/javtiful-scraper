@@ -1,5 +1,5 @@
 {
-  "total": 1,
+  "total": 2,
   "videos": {
     "SKSK-002": {
       "title": "SKSK-002 Summer Sail",
@@ -9,6 +9,18 @@
       "date": "2019-05-05",
       "actresses": [
         "Imai Kaho"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "SKSK-014": {
+      "title": "SKSK-014 Visual SUKESUKE Gakuen",
+      "url": "https://javtiful.com/video/4241/sksk-014",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/11/02/5c275d9e2580b4b872d93e6ad9417737.jpg",
+      "duration": "02:03:20",
+      "date": "2019-11-02",
+      "actresses": [
+        "Morimoto Tsugumi"
       ],
       "studio": null,
       "genres": []
