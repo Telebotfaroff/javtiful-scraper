@@ -3308,10 +3308,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7497fae62cde4e6bf0a1dd818e15b5ba.jpg",
       "total_videos": 86,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 86,
+      "last_crawled_at": 1791001976
     },
     "shiraishi-momo": {
       "name": "Shiraishi Momo",
