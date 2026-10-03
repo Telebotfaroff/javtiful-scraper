@@ -1,5 +1,5 @@
 {
-  "total": 15,
+  "total": 16,
   "videos": {
     "420POW-046": {
       "title": "420POW-046 Techi Ultimate Weapon Of The Raccoon Face World",
@@ -177,6 +177,18 @@
       "date": "2021-05-29",
       "actresses": [
         "Kisaragi Natsuki"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "420POW-044": {
+      "title": "420POW-044 Echi Reverse Bunny Kos",
+      "url": "https://javtiful.com/video/13001/420pow-044",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2021/10/25/8cba2a0ea16f4307df3d5823f94753be.jpg",
+      "duration": "02:10:32",
+      "date": "2021-10-25",
+      "actresses": [
+        "Hoshizora Moa"
       ],
       "studio": null,
       "genres": []
