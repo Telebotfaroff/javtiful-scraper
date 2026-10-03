@@ -1,5 +1,5 @@
 {
-  "total": 10,
+  "total": 11,
   "videos": {
     "FTHTD-075": {
       "title": "FTHTD-075 The Book of XX: Fallen Swimming Club Members - Ruthless Psychopaths - A live-action adaptation of a light novel",
@@ -89,6 +89,15 @@
       "duration": "01:44:08",
       "date": "2024-06-07",
       "studio": "hsoda",
+      "genres": []
+    },
+    "VOTAN-096": {
+      "title": "VOTAN-096 I became",
+      "url": "https://javtiful.com/video/58416/votan-096",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2024/05/04/96abf1ca88061bfd190e656c41d341db.jpg",
+      "duration": "01:49:46",
+      "date": "2024-05-04",
+      "studio": "botan",
       "genres": []
     }
   }
