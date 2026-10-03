@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 9,
   "videos": {
     "ZMAR-063": {
       "title": "ZMAR-063 Marutto! Nagisa Mitsuki",
@@ -93,6 +93,18 @@
       "date": "2022-06-21",
       "actresses": [
         "Mihara Honoka"
+      ],
+      "studio": null,
+      "genres": []
+    },
+    "ZMAR-077": {
+      "title": "ZMAR-077 Marutto! Nina Nishimura",
+      "url": "https://javtiful.com/video/25789/zmar-077",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2022/12/05/e928d1c554bf677e8e940a83fccc062d.jpg",
+      "duration": "04:15:10",
+      "date": "2022-12-05",
+      "actresses": [
+        "Nishimura Nina"
       ],
       "studio": null,
       "genres": []

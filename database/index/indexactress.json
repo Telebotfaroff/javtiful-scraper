@@ -2972,10 +2972,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/0f81c2a22835a7a979f7d7a298c9c6a5.jpg",
       "total_videos": 94,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 69,
+      "last_crawled_at": 1790988932
     },
     "azuma-rin": {
       "name": "Azuma Rin",
