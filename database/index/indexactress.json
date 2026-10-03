@@ -2996,10 +2996,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/74b34765ff8dfdc5146cedfadd5dcb21.jpg",
       "total_videos": 93,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 81,
+      "last_crawled_at": 1790989865
     },
     "minamo": {
       "name": "MINAMO",
