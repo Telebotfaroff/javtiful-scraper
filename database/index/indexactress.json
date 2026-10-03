@@ -4400,10 +4400,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/8349ab3bdc7b8f4e6ea6adb1a8f6d8bf.jpg",
       "total_videos": 69,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 57,
+      "last_crawled_at": 1791042496
     },
     "ueha-aya": {
       "name": "Ueha Aya",
