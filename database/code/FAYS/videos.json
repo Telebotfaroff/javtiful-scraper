@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 4,
   "videos": {
     "FAYS-014": {
       "title": "FAYS-014 My Personal Cosplay Photoshoot",
@@ -21,6 +21,30 @@
       "date": "2025-09-01",
       "actresses": [
         "Aizuki Himari"
+      ],
+      "studio": "Tma",
+      "genres": []
+    },
+    "FAYS-008-REDUCING": {
+      "title": "FAYS-008 My very own cosplay photoshoot with EMILY",
+      "url": "https://javtiful.com/video/99920/fays-008-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/12/24/654a6a35fc2cfb96a071c6150dc0fec3.jpg",
+      "duration": "01:19:17",
+      "date": "2025-12-24",
+      "actresses": [
+        "Sakuraba Hikari"
+      ],
+      "studio": "Tma",
+      "genres": []
+    },
+    "FAYS-008": {
+      "title": "FAYS-008 My very own cosplay photoshoot with EMILY",
+      "url": "https://javtiful.com/video/99886/fays-008",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2025/12/22/33cb0899ce891a6d6b34b204a8d04b0d.jpg",
+      "duration": "01:19:17",
+      "date": "2025-12-22",
+      "actresses": [
+        "Sakuraba Hikari"
       ],
       "studio": "Tma",
       "genres": []
