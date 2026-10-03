@@ -4592,10 +4592,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/41b736855445998d45d6a7b6f50780c2.jpg",
       "total_videos": 66,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 37,
+      "last_crawled_at": 1791049435
     },
     "natsuki-kaoru": {
       "name": "Natsuki Kaoru",
