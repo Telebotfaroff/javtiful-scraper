@@ -3656,10 +3656,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/7444cd39ac6ab6a1c16cb5470e04dcc9.jpg",
       "total_videos": 80,
       "total_pages": 4,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 4,
+      "videos_crawled": 79,
+      "last_crawled_at": 1791015214
     },
     "mitake-yuuna": {
       "name": "Mitake Yuuna",
