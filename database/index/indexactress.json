@@ -4568,10 +4568,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/04/27/a2321e7aa0e036eadf5c9b67b15ecdb3.jpg",
       "total_videos": 67,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 45,
+      "last_crawled_at": 1791048543
     },
     "suzune-kyouka": {
       "name": "Suzune Kyouka",

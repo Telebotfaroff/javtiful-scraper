@@ -1,5 +1,5 @@
 {
-  "total": 8,
+  "total": 9,
   "videos": {
     "RCON-014": {
       "title": "RCON-014 No way 01",
@@ -71,6 +71,15 @@
       "duration": "02:27:25",
       "date": "2022-11-09",
       "studio": "hunter",
+      "genres": []
+    },
+    "AMA-043": {
+      "title": "AMA-043 Amateurs Who Came By Letting Go Of The Sexual Habits",
+      "url": "https://javtiful.com/video/3179/ama-043",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/06/23/e83e692a951766c22ee1bf08784645cc.jpg",
+      "duration": "02:05:40",
+      "date": "2019-06-23",
+      "studio": null,
       "genres": []
     }
   }

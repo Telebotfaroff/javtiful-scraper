@@ -1,5 +1,5 @@
 {
-  "total": 7,
+  "total": 8,
   "videos": {
     "MIRD-187": {
       "title": "MIRD-187 A King Who Lives With Ten Obedient Maids",
@@ -62,6 +62,15 @@
       "duration": "03:34:23",
       "date": "2019-03-10",
       "studio": null,
+      "genres": []
+    },
+    "SCOP-589": {
+      "title": "SCOP-589 Yariman OL 3 People Who Participated In A Wedding Party Hot-spring Trip For 2 Days / 1 Night",
+      "url": "https://javtiful.com/video/107431/scop-589",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/05/07/a3edd3cbd6df5bb2df46a93664730878.jpg",
+      "duration": "02:33:00",
+      "date": "2026-05-07",
+      "studio": "kmproduce",
       "genres": []
     }
   }
