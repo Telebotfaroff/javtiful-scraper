@@ -4448,10 +4448,10 @@
       "thumbnail": "https://javtiful.com/uploads/uploads/collections/actresses/2026/05/03/16b4c4eda16cf920985b89901d966a86.jpg",
       "total_videos": 68,
       "total_pages": 3,
-      "status": "pending",
-      "last_crawled_page": 0,
-      "videos_crawled": 0,
-      "last_crawled_at": null
+      "status": "completed",
+      "last_crawled_page": 3,
+      "videos_crawled": 64,
+      "last_crawled_at": 1791044241
     },
     "sakura-chinami": {
       "name": "Sakura Chinami",
