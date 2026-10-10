@@ -1,25 +1,21 @@
-name: Inspect Javtiful Channel
+name: Start JAVDL Telegram Bot
 
 on:
   workflow_dispatch:
-    inputs:
-      channel_url:
-        description: "Javtiful channel or studio URL (for example https://javtiful.com/channel/s1-no1-style)"
-        required: true
-        type: string
 
 permissions:
   contents: read
 
 concurrency:
-  group: inspect-javtiful-channel
+  group: javdl-telegram-bot
   cancel-in-progress: false
 
 jobs:
-  inspect-channel:
-    name: Inspect channel metadata
+  telegram-bot:
+    name: Run Telegram bot
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # GitHub-hosted jobs have a maximum runtime; restart the workflow when it ends.
+    timeout-minutes: 350
     steps:
       - name: Check out javdl branch
         uses: actions/checkout@v4
@@ -33,50 +29,50 @@ jobs:
           cache: pip
           cache-dependency-path: requirements.txt
 
-      - name: Install inspection dependencies
-        run: python -m pip install --upgrade pip requests beautifulsoup4
+      - name: Install FFmpeg and dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
 
-      - name: Inspect channel
+      - name: Validate Telegram secrets
         env:
-          CHANNEL_URL: ${{ inputs.channel_url }}
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
         run: |
           python - <<'PY'
           import os
           import sys
-          from urllib.parse import urlparse
 
-          from app.extractor.channel import JavtifulChannelExtractor
-
-          url = os.environ.get("CHANNEL_URL", "").strip()
-          parsed = urlparse(url)
-          if parsed.scheme not in ("http", "https") or parsed.hostname not in ("javtiful.com", "www.javtiful.com"):
-              print("ERROR: Enter a valid https://javtiful.com/... URL.")
-              sys.exit(2)
-
-          print(f"Inspecting: {url}")
-          extractor = JavtifulChannelExtractor(timeout=30, retries=2)
-          try:
-              result = extractor.inspect(url)
-          except Exception as exc:
-              print(f"ERROR: Channel inspection failed: {type(exc).__name__}: {exc}")
+          required = ("TELEGRAM_API_ID", "TELEGRAM_API_HASH", "TELEGRAM_BOT_TOKEN")
+          missing = [name for name in required if not os.getenv(name, "").strip()]
+          if missing:
+              print("Missing GitHub Actions secrets: " + ", ".join(missing))
+              print("Open repository Settings > Secrets and variables > Actions and add them.")
               sys.exit(1)
-          finally:
-              extractor.session.close()
 
-          print("\\n========== CHANNEL SUMMARY ==========")
-          print(f"Channel: {result.get('channel_name') or 'Not detected'}")
-          total = result.get("total_videos")
-          print(f"Total videos: {total if total is not None else 'Not detected'}")
-          print(f"Available pages: {result.get('total_pages') or 'Not detected'}")
-          items = result.get("first_page_items") or []
-          print(f"Videos found on page 1: {len(items)}")
+          try:
+              int(os.environ["TELEGRAM_API_ID"])
+          except ValueError:
+              print("TELEGRAM_API_ID must be a numeric value.")
+              sys.exit(1)
 
-          if items:
-              print("\\n========== FIRST-PAGE PREVIEW ==========")
-              for index, item in enumerate(items, 1):
-                  print(f"{index}. {item.get('title') or 'Untitled'}")
-                  print(f"   Code: {item.get('code') or 'Not detected'}")
-                  print(f"   Post: {item.get('post_url') or 'Not detected'}")
-
-          print("\\nInspection complete. This workflow only inspects metadata; it does not download or upload videos.")
+          print("Telegram secrets are configured.")
           PY
+
+      - name: Start bot and accept messages
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_SESSION: javdl_actions
+          TELEGRAM_UPLOAD_SESSION: javdl_actions_uploads
+          TELEGRAM_UPLOAD_CLIENTS: "2"
+          TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS: "8"
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python -m compileall -q app main.py
+          python main.py
