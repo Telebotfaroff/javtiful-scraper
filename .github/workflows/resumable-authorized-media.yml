@@ -1,0 +1,88 @@
+name: Resumable Authorized Media Batch
+
+on:
+  workflow_dispatch:
+    inputs:
+      manifest_path:
+        description: "Repository-relative JSON manifest"
+        required: true
+        default: "database/authorized_media.json"
+        type: string
+      checkpoint_path:
+        description: "Repository-relative checkpoint JSON"
+        required: true
+        default: "database/processed.json"
+        type: string
+  schedule:
+    - cron: "17 * * * *"
+
+permissions:
+  contents: write
+
+# Prevent two runs from editing/pushing the same JSON database at once.
+concurrency:
+  group: resumable-authorized-media-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Validate manifest and checkpoint files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          for name in (
+              "${{ inputs.manifest_path || 'database/authorized_media.json' }}",
+              "${{ inputs.checkpoint_path || 'database/processed.json' }}",
+          ):
+              path = Path(name)
+              if not path.is_file():
+                  raise SystemExit(f"Required file not found: {name}")
+              with path.open(encoding="utf-8") as handle:
+                  json.load(handle)
+              print(f"Validated JSON: {name}")
+          PY
+
+      - name: Run resumable batch
+        env:
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_POST_CHANNEL_ID: ${{ secrets.TELEGRAM_POST_CHANNEL_ID }}
+          TELEGRAM_UPLOAD_SESSION: javdl_ci_uploads
+          TELEGRAM_UPLOAD_CLIENTS: "1"
+          TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS: "4"
+          MAX_ITEM_ATTEMPTS: "5"
+          CHECKPOINT_GIT_PUSH: "1"
+          MANIFEST_PATH: ${{ inputs.manifest_path || 'database/authorized_media.json' }}
+          CHECKPOINT_PATH: ${{ inputs.checkpoint_path || 'database/processed.json' }}
+        run: |
+          python app/jobs/resumable_manifest_runner.py \
+            --manifest "$MANIFEST_PATH" \
+            --checkpoint "$CHECKPOINT_PATH"
