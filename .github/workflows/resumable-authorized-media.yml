@@ -72,10 +72,10 @@ jobs:
 
       - name: Run resumable batch
         env:
-          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
-          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
-          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-          TELEGRAM_POST_CHANNEL_ID: ${{ secrets.TELEGRAM_POST_CHANNEL_ID }}
+          API_ID: ${{ secrets.API_ID }}
+          API_HASH: ${{ secrets.API_HASH }}
+          BOT_TOKEN: ${{ secrets.BOT_TOKEN }}
+          TELEGRAM_TARGET: ${{ secrets.TELEGRAM_TARGET }}
           TELEGRAM_UPLOAD_SESSION: javdl_ci_uploads
           TELEGRAM_UPLOAD_CLIENTS: "1"
           TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS: "4"
