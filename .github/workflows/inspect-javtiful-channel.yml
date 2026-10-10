@@ -1,0 +1,82 @@
+name: Inspect Javtiful Channel
+
+on:
+  workflow_dispatch:
+    inputs:
+      channel_url:
+        description: "Javtiful channel or studio URL (for example https://javtiful.com/channel/s1-no1-style)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: inspect-javtiful-channel
+  cancel-in-progress: false
+
+jobs:
+  inspect-channel:
+    name: Inspect channel metadata
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out javdl branch
+        uses: actions/checkout@v4
+        with:
+          ref: javdl
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install inspection dependencies
+        run: python -m pip install --upgrade pip requests beautifulsoup4
+
+      - name: Inspect channel
+        env:
+          CHANNEL_URL: ${{ inputs.channel_url }}
+        run: |
+          python - <<'PY'
+          import os
+          import sys
+          from urllib.parse import urlparse
+
+          from app.extractor.channel import JavtifulChannelExtractor
+
+          url = os.environ.get("CHANNEL_URL", "").strip()
+          parsed = urlparse(url)
+          if parsed.scheme not in ("http", "https") or parsed.hostname not in ("javtiful.com", "www.javtiful.com"):
+              print("ERROR: Enter a valid https://javtiful.com/... URL.")
+              sys.exit(2)
+
+          print(f"Inspecting: {url}")
+          extractor = JavtifulChannelExtractor(timeout=30, retries=2)
+          try:
+              result = extractor.inspect(url)
+          except Exception as exc:
+              print(f"ERROR: Channel inspection failed: {type(exc).__name__}: {exc}")
+              sys.exit(1)
+          finally:
+              extractor.session.close()
+
+          print("\\n========== CHANNEL SUMMARY ==========")
+          print(f"Channel: {result.get('channel_name') or 'Not detected'}")
+          total = result.get("total_videos")
+          print(f"Total videos: {total if total is not None else 'Not detected'}")
+          print(f"Available pages: {result.get('total_pages') or 'Not detected'}")
+          items = result.get("first_page_items") or []
+          print(f"Videos found on page 1: {len(items)}")
+
+          if items:
+              print("\\n========== FIRST-PAGE PREVIEW ==========")
+              for index, item in enumerate(items, 1):
+                  print(f"{index}. {item.get('title') or 'Untitled'}")
+                  print(f"   Code: {item.get('code') or 'Not detected'}")
+                  print(f"   Post: {item.get('post_url') or 'Not detected'}")
+
+          print("\\nInspection complete. This workflow only inspects metadata; it does not download or upload videos.")
+          PY
