@@ -127,10 +127,10 @@ async def _run_channel_sequential(message, state, page_number, items, status):
                 destination="telegram", message_ids=_message_ids(upload_results),
             )
             completed += 1
-            code = item.get("code") or ""
+            display_code = item.get("code") or ""
             sent = await status.reply_text(
                 f"✅ **Uploaded successfully to channel**\n\n"
-                f"🎬 **{code + ' ' if code else ''}{title}**"
+                f"🎬 **{display_code + ' ' if display_code else ''}{title}**"
             )
             _schedule_delete(sent)
         except Exception as exc:
@@ -223,10 +223,10 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 completed += 1
                 progress.mark_upload_complete()
                 progress.set_queue(queue.qsize())
-                code = item.get("code") or ""
+                display_code = item.get("code") or ""
                 sent = await status.reply_text(
                     f"✅ **Uploaded successfully to channel**\n\n"
-                    f"🎬 **{code + ' ' if code else ''}{title}**"
+                    f"🎬 **{display_code + ' ' if display_code else ''}{title}**"
                 )
                 _schedule_delete(sent)
             except Exception as exc:
