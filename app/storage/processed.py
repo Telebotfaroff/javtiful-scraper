@@ -143,16 +143,19 @@ class ProcessedStore:
     def claim(self, url, code=None):
         """Prevent duplicate work inside this bot process."""
         key = self.key_for(url, code)
+        url_key = self.key_for(url)
+        keys = {key, url_key}
         with self._lock:
             self._ensure_loaded()
-            if self.is_completed(url, code) or key in self._in_progress:
+            if self.is_completed(url, code) or any(item in self._in_progress for item in keys):
                 return False
-            self._in_progress.add(key)
+            self._in_progress.update(keys)
             return True
 
     def release(self, url, code=None):
         with self._lock:
             self._in_progress.discard(self.key_for(url, code))
+            self._in_progress.discard(self.key_for(url))
 
     def mark_completed(self, url, code=None, title=None, destination="telegram", message_ids=None):
         key = self.key_for(url, code)
@@ -176,6 +179,7 @@ class ProcessedStore:
             if self.token:
                 self._write_remote(key, record)
             self._in_progress.discard(key)
+            self._in_progress.discard(self.key_for(url))
             logger.info("ProcessedStore: recorded completed upload key=%s", key)
 
     def _write_remote(self, key, record):
