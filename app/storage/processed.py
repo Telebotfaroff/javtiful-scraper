@@ -217,3 +217,37 @@ class ProcessedStore:
                 last_error = str(exc)
                 time.sleep(0.5 * (attempt + 1))
         raise ProcessedStoreError(f"Could not persist upload history after retries: {last_error}")
+
+
+    def summary(self):
+        """Return upload-history counts without exposing stored URLs or credentials."""
+        with self._lock:
+            self._ensure_loaded()
+            records = self._data.get("uploaded", {})
+            completed = sum(
+                1 for record in records.values()
+                if isinstance(record, dict) and record.get("status") == "completed"
+            )
+            return {"total": len(records), "completed": completed, "other": len(records) - completed}
+
+    def recent_completed(self, limit=5):
+        """Return a bounded list of recent completed uploads for admin reporting."""
+        limit = max(1, min(int(limit), 20))
+        with self._lock:
+            self._ensure_loaded()
+            records = [
+                dict(record)
+                for record in self._data.get("uploaded", {}).values()
+                if isinstance(record, dict) and record.get("status") == "completed"
+            ]
+        records.sort(key=lambda item: str(item.get("uploaded_at", "")), reverse=True)
+        # Do not expose source URLs or Telegram message IDs in the admin summary.
+        return [
+            {
+                "title": item.get("title") or "Untitled",
+                "code": item.get("code"),
+                "uploaded_at": item.get("uploaded_at"),
+                "destination": item.get("destination") or "unknown",
+            }
+            for item in records[:limit]
+        ]
