@@ -68,6 +68,7 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_POST_CHANNEL_ID: ${{ secrets.TELEGRAM_POST_CHANNEL_ID }}
           ADMIN_USER_IDS: ${{ secrets.ADMIN_USER_IDS }}
           TELEGRAM_SESSION: javdl_actions
           TELEGRAM_UPLOAD_SESSION: javdl_actions_uploads
