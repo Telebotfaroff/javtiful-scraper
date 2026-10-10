@@ -31,7 +31,7 @@ class ProcessedStore:
     def __init__(self):
         self.repo = os.getenv("GITHUB_REPOSITORY", "").strip()
         self.branch = os.getenv("PROCESSED_DB_BRANCH", os.getenv("GITHUB_REF_NAME", "javdl")).strip()
-        self.path = os.getenv("PROCESSED_DB_PATH", "database/processed.json").strip().strip("/")
+        self.path = os.getenv("PROCESSED_DB_PATH", "database/telegram_upload_history.json").strip().strip("/")
         self.token = (os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN") or "").strip()
         self.local_path = Path(self.path)
         self._lock = threading.RLock()
