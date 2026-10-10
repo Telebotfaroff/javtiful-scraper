@@ -101,6 +101,20 @@ The upload worker count and download buffer can be configured through environmen
 
 ---
 
+## 🧾 Persistent Duplicate Protection
+
+Telegram uploads are tracked in `database/telegram_upload_history.json` on the `javdl` branch.
+
+- Before a Telegram upload, JAVDL checks the saved history by video code and canonical post URL.
+- Videos already marked `completed` are skipped.
+- After a successful upload, the record stores the code, title, canonical URL, Telegram message IDs when available, destination, and timestamp.
+- The manual GitHub Actions bot workflow uses its built-in `GITHUB_TOKEN` with repository-content write permission to save the history. No extra personal access token is needed.
+- This history is separate from `database/processed.json`, which is used by the resumable-manifest runner.
+
+If Telegram accepts an upload but the runner stops before the history commit succeeds, that upload may not be recorded; Telegram and GitHub cannot be updated as one atomic transaction.
+
+---
+
 ## ⚡ Telegram Upload Performance
 
 JAVDL supports a Telegram upload-client pool.
