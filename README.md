@@ -101,6 +101,27 @@ The upload worker count and download buffer can be configured through environmen
 
 ---
 
+## 📢 Telegram Channel Destination and Chat Fallback
+
+You can configure a channel from the bot instead of editing code:
+
+- `/setchannel @channelusername` — save the destination channel.
+- `/channel` — show the currently configured destination.
+- `/unsetchannel` — clear the saved setting (a configured `TELEGRAM_POST_CHANNEL_ID` environment secret remains a fallback configuration).
+
+When you choose **📢 Channel**, JAVDL attempts to upload there. If the channel upload fails, it attempts the complete upload again in the chat where the request was sent. Any partial video messages are deleted when Telegram permits it. The normal **📱 Telegram** destination remains available and uploads directly to the requesting chat.
+
+### One-time setup
+
+1. Add your numeric Telegram user ID to the GitHub Actions repository secret `ADMIN_USER_IDS`. For multiple admins, use comma-separated IDs.
+2. Add the bot to your target channel and grant it permission to post videos.
+3. Start the workflow and send the bot `/setchannel @yourchannel`.
+4. Use `/channel` to confirm the setting.
+
+The channel setting is stored in `database/bot_settings.json` on the `javdl` branch, so it survives workflow restarts. Keep the bot token and GitHub token private.
+
+---
+
 ## 🧾 Persistent Duplicate Protection
 
 Telegram uploads are tracked in `database/telegram_upload_history.json` on the `javdl` branch.
