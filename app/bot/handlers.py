@@ -524,7 +524,7 @@ def register_handlers(app: Client):
             return await message.reply_text(
                 f"✅ Upload channel saved: {target}\n\n"
                 "Video uploads will go to this channel when you choose 📢 Channel. "
-                "If channel upload fails before any video part is sent, the bot will fall back to this chat."
+                "If channel upload fails, the bot will attempt to send the video to this chat instead."
             )
 
         if command == "unsetchannel":
@@ -546,6 +546,8 @@ def register_handlers(app: Client):
     @app.on_message(filters.private & filters.text)
     async def link_handler(client, message):
         text = message.text.strip()
+        if text.split(maxsplit=1)[0].lower() in {"/setchannel", "/unsetchannel", "/channel"}:
+            return
         state = pending.get(message.from_user.id)
 
         if state and state.get("channel_waiting_page"):
