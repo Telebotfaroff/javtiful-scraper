@@ -24,10 +24,7 @@ pending = {}
 async def _reply_and_delete_later(message, text, reply_markup=None, delay=30):
     """Reply to a user's message and remove the reply after a short delay."""
     reply = await message.reply_text(text, reply_markup=reply_markup)
-    try:
-        await message.delete()
-    except Exception:
-        pass
+    asyncio.create_task(_delete_message_later(message, delay))
     asyncio.create_task(_delete_message_later(reply, delay))
     return reply
 
