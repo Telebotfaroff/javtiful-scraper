@@ -543,6 +543,16 @@ class TelegramUploader:
                 )
         except Exception:
             logger.exception("TELEGRAM UPLOAD: send_video failed")
+            # Remove any parts already sent to this destination so a caller can
+            # safely retry the complete video in its fallback chat.
+            for sent_message in results:
+                try:
+                    client.delete_messages(chat_id, sent_message.id)
+                except Exception:
+                    logger.exception(
+                        "TELEGRAM UPLOAD: could not delete partial message id=%s",
+                        getattr(sent_message, "id", None),
+                    )
             raise
         finally:
             if (
@@ -555,6 +565,20 @@ class TelegramUploader:
         cleanup([path for path in paths if Path(path) != Path(file_path)])
         logger.info("TELEGRAM UPLOAD: completed successfully")
         return results
+
+    def delete_uploaded_messages(self, chat_id, nested_results):
+        """Delete message results from earlier parts before a whole-job fallback."""
+        for result_group in nested_results:
+            values = result_group if isinstance(result_group, (list, tuple)) else [result_group]
+            for message in values:
+                message_id = getattr(message, "id", None)
+                if message_id is not None:
+                    index, client = self._acquire_client()
+                    try:
+                        self._ensure_started(client, getattr(client, "name", f"client-{index + 1}"))
+                        client.delete_messages(chat_id, int(message_id))
+                    finally:
+                        self._release_client(index)
 
     @property
     def client_count(self):
