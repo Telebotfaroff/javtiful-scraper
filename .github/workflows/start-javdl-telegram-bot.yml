@@ -43,12 +43,13 @@ jobs:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
           TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
         run: |
           python - <<'PY'
           import os
           import sys
 
-          required = ("TELEGRAM_API_ID", "TELEGRAM_API_HASH", "TELEGRAM_BOT_TOKEN")
+          required = ("TELEGRAM_API_ID", "TELEGRAM_API_HASH", "TELEGRAM_BOT_TOKEN", "DATABASE_URL")
           missing = [name for name in required if not os.getenv(name, "").strip()]
           if missing:
               print("Missing GitHub Actions secrets: " + ", ".join(missing))
@@ -61,7 +62,7 @@ jobs:
               print("TELEGRAM_API_ID must be a numeric value.")
               sys.exit(1)
 
-          print("Telegram secrets are configured.")
+          print("Telegram and Neon secrets are configured.")
           PY
 
       - name: Start bot and accept messages
@@ -78,7 +79,6 @@ jobs:
           TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS: "8"
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
           PROCESSED_DB_BRANCH: javdl
           PROCESSED_DB_PATH: database/telegram_upload_history.json
           PYTHONUNBUFFERED: "1"
