@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: javdl-telegram-bot
@@ -72,6 +72,10 @@ jobs:
           TELEGRAM_UPLOAD_SESSION: javdl_actions_uploads
           TELEGRAM_UPLOAD_CLIENTS: "2"
           TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS: "8"
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PROCESSED_DB_BRANCH: javdl
+          PROCESSED_DB_PATH: database/processed.json
           PYTHONUNBUFFERED: "1"
         run: |
           python -m compileall -q app main.py
