@@ -17,6 +17,8 @@ class Job:
     caption: Optional[str] = None
     # Send the thumbnail as a separate Telegram photo before the video.
     separate_thumbnail: bool = False
+    # Retry a failed channel upload to the requesting chat when possible.
+    fallback_target: str | int | None = None
 
 
 class JobQueue:
