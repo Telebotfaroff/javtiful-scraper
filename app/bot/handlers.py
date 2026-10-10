@@ -515,7 +515,7 @@ def register_handlers(app: Client):
                     "Make sure the bot is an administrator of that channel with permission to post."
                 )
             target = message.command[1].strip()
-            if not (target.startswith("@") and len(target) > 1 or re.fullmatch(r"-?\\d+", target)):
+            if not (target.startswith("@") and len(target) > 1 or re.fullmatch(r"-?\d+", target)):
                 return await message.reply_text("Invalid channel. Use @channelusername or a numeric channel ID.")
             try:
                 await asyncio.to_thread(bot_settings.set_channel, target)
