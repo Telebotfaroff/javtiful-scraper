@@ -56,9 +56,9 @@ class TelegramUploader:
         for upload_session in sessions:
             client = Client(
                 upload_session,
-                api_id=int(api_id or os.environ["TELEGRAM_API_ID"]),
-                api_hash=api_hash or os.environ["TELEGRAM_API_HASH"],
-                bot_token=bot_token or os.getenv("TELEGRAM_BOT_TOKEN"),
+                api_id=int(api_id or os.getenv("API_ID") or os.environ["TELEGRAM_API_ID"]),
+                api_hash=api_hash or os.getenv("API_HASH") or os.environ["TELEGRAM_API_HASH"],
+                bot_token=bot_token or os.getenv("BOT_TOKEN") or os.getenv("TELEGRAM_BOT_TOKEN"),
                 max_concurrent_transmissions=concurrency,
             )
             self._clients.append(client)
