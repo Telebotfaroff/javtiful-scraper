@@ -11,13 +11,14 @@ from app.jobs.queue import Job
 from app.uploaders.manager import UploadManager
 from app.extractor.javtiful import JavtifulExtractor
 from app.extractor.channel import JavtifulChannelExtractor
-from app.storage.processed import ProcessedStore, ProcessedStoreError
+from app.storage.processed import ProcessedStoreError
+from app.storage.neon_processed import create_processed_store
 from app.storage.bot_settings import BotSettings
 
 
 extractor = JavtifulExtractor()
 channel_extractor = JavtifulChannelExtractor()
-processed_store = ProcessedStore()
+processed_store = create_processed_store()
 bot_settings = BotSettings()
 uploads = UploadManager()
 telegram_uploader = uploads.get("telegram")
