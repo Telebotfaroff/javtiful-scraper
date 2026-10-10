@@ -85,12 +85,36 @@ class Pipeline:
                 if job.target is not None:
                     kwargs["chat_id"] = job.target
 
-                result = uploader.upload(path, **kwargs)
+                try:
+                    result = uploader.upload(path, **kwargs)
+                    if hasattr(uploader, "verify") and not uploader.verify(result):
+                        raise RuntimeError(
+                            f"{job.uploader} upload verification failed for {path}"
+                        )
+                except Exception as channel_error:
+                    fallback = getattr(job, "fallback_target", None)
+                    if job.uploader != "telegram" or fallback is None or fallback == kwargs.get("chat_id"):
+                        raise
 
-                if hasattr(uploader, "verify") and not uploader.verify(result):
-                    raise RuntimeError(
-                        f"{job.uploader} upload verification failed for {path}"
+                    logger.warning(
+                        "PIPELINE: Telegram channel upload failed for %s; falling back to chat %s: %s",
+                        path, fallback, channel_error,
                     )
+                    # If earlier split parts were already returned, remove them before
+                    # retrying the complete upload in the fallback chat.
+                    if results and hasattr(uploader, "delete_uploaded_messages"):
+                        try:
+                            uploader.delete_uploaded_messages(kwargs.get("chat_id"), results)
+                        except Exception:
+                            logger.exception("PIPELINE: unable to clean partial channel upload")
+                    results.clear()
+                    fallback_kwargs = dict(kwargs)
+                    fallback_kwargs["chat_id"] = fallback
+                    result = uploader.upload(path, **fallback_kwargs)
+                    if hasattr(uploader, "verify") and not uploader.verify(result):
+                        raise RuntimeError(
+                            f"Telegram fallback upload verification failed for {path}"
+                        )
 
                 results.append(result)
 
