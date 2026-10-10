@@ -109,9 +109,9 @@ def _message_ids(results: Any) -> list[str]:
 def run(manifest_path: Path, checkpoint_path: Path) -> int:
     items = load_manifest(manifest_path)
     store = CheckpointStore(checkpoint_path)
-    destination = (os.getenv("TELEGRAM_TARGET") or os.getenv("TELEGRAM_POST_CHANNEL_ID") or "").strip()
+    destination = os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
     if not destination:
-        raise RuntimeError("Set TELEGRAM_TARGET to your destination channel ID or @username")
+        raise RuntimeError("Set TELEGRAM_POST_CHANNEL_ID to your destination channel ID or @username")
 
     max_attempts = max(1, int(os.getenv("MAX_ITEM_ATTEMPTS", "5")))
     uploader = TelegramUploader()
