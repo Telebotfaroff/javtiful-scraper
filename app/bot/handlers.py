@@ -143,8 +143,9 @@ async def _run_channel_sequential(message, state, page_number, items, status):
             )
             completed += 1
             display_code = item.get("code") or ""
+            delivery = "chat (channel fallback)" if getattr(job, "used_fallback", False) else "configured channel" if _configured_channel() else "chat"
             sent = await status.reply_text(
-                f"✅ **Uploaded successfully to channel**\n\n"
+                f"✅ **Uploaded successfully to {delivery}**\n\n"
                 f"🎬 **{display_code + ' ' if display_code else ''}{title}**"
             )
             _schedule_delete(sent)
@@ -239,8 +240,9 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 progress.mark_upload_complete()
                 progress.set_queue(queue.qsize())
                 display_code = item.get("code") or ""
+                delivery = "chat (channel fallback)" if getattr(job, "used_fallback", False) else "configured channel" if _configured_channel() else "chat"
                 sent = await status.reply_text(
-                    f"✅ **Uploaded successfully to channel**\n\n"
+                    f"✅ **Uploaded successfully to {delivery}**\n\n"
                     f"🎬 **{display_code + ' ' if display_code else ''}{title}**"
                 )
                 _schedule_delete(sent)
@@ -464,8 +466,9 @@ async def _run_job(message, state):
 
         upload_word = "upload" if len(results) == 1 else "uploads"
         destination_name = (
-            "Telegram Channel" if destination == "telegram_channel"
-            else ("Telegram" if destination == "telegram" else "GoFile")
+            "Telegram Chat (fallback)" if getattr(job, "used_fallback", False)
+            else ("Telegram Channel" if destination == "telegram_channel"
+            else ("Telegram" if destination == "telegram" else "GoFile"))
         )
         lines = [
             "✅ **Upload Complete**",
