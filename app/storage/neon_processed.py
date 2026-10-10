@@ -16,12 +16,9 @@ from urllib.parse import urlsplit, urlunsplit
 
 import psycopg
 from psycopg.rows import dict_row
+from app.storage.processed import ProcessedStoreError
 
 logger = logging.getLogger(__name__)
-
-
-class ProcessedStoreError(RuntimeError):
-    """Raised when persistent upload history cannot be read or saved."""
 
 
 class NeonProcessedStore:
