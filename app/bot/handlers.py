@@ -501,6 +501,8 @@ async def _run_job(message, state):
 
 
 def register_handlers(app: Client):
+    from app.bot.admin import register_admin_handlers
+    register_admin_handlers(app, processed_store, bot_settings, _is_admin)
     @app.on_message(filters.private & filters.command(["setchannel", "unsetchannel", "channel"]))
     async def channel_settings_handler(client, message):
         if not _is_admin(message.from_user.id):
