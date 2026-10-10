@@ -465,7 +465,8 @@ def register_handlers(app: Client):
                 info = await asyncio.to_thread(channel_extractor.inspect, text)
                 total_pages = int(info.get("total_pages") or 1)
                 total_videos = info.get("total_videos")
-                total_videos_text = str(total_videos) if total_videos is not None else "Unknown"
+                total_videos_text = str(total_videos) if total_videos is not None else "Not detected"
+                first_page_items = info.get("first_page_items") or []
                 pending[message.from_user.id] = {
                     "type": "channel",
                     "url": text,
@@ -475,8 +476,9 @@ def register_handlers(app: Client):
                 }
                 await status.edit_text(
                     f"📺 **Channel:** {info.get('channel_name') or 'Channel'}\n"
-                    f"🎬 **Total videos:** {total_videos_text}\n"
-                    f"📄 **Total pages:** {total_pages}\n\n"
+                    f"🎬 **Total videos in channel:** {total_videos_text}\n"
+                    f"📄 **Available pages:** {total_pages}\n"
+                    f"📌 **Videos found on page 1:** {len(first_page_items)}\n\n"
                     "Choose an option:",
                     reply_markup=_channel_keyboard(),
                 )
