@@ -52,15 +52,16 @@ jobs:
           python -m pip install -r requirements.txt
 
       - name: Validate manifest and checkpoint files
+        env:
+          MANIFEST_PATH: ${{ inputs.manifest_path || 'database/authorized_media.json' }}
+          CHECKPOINT_PATH: ${{ inputs.checkpoint_path || 'database/processed.json' }}
         run: |
           python - <<'PY'
           import json
+          import os
           from pathlib import Path
 
-          for name in (
-              "${{ inputs.manifest_path || 'database/authorized_media.json' }}",
-              "${{ inputs.checkpoint_path || 'database/processed.json' }}",
-          ):
+          for name in (os.environ["MANIFEST_PATH"], os.environ["CHECKPOINT_PATH"]):
               path = Path(name)
               if not path.is_file():
                   raise SystemExit(f"Required file not found: {name}")
