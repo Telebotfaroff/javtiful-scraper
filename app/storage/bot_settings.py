@@ -7,10 +7,12 @@ import os
 from pathlib import Path
 
 import requests
+import psycopg
 
 
 class BotSettings:
     def __init__(self):
+        self.database_url = os.getenv("DATABASE_URL", "").strip()
         self.repo = os.getenv("GITHUB_REPOSITORY", "").strip()
         self.branch = os.getenv("BOT_SETTINGS_BRANCH", "javdl").strip()
         self.path = os.getenv("BOT_SETTINGS_PATH", "database/bot_settings.json").strip().strip("/")
@@ -50,12 +52,43 @@ class BotSettings:
             raise ValueError("Bot settings must be a JSON object.")
         return data, None
 
+    def _neon_connection(self):
+        return psycopg.connect(self.database_url, connect_timeout=10)
+
+    def _ensure_neon_settings(self):
+        with self._neon_connection() as conn:
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS javdl_settings (
+                    setting_key TEXT PRIMARY KEY,
+                    setting_value TEXT,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+                )
+            """)
+
     def get_channel(self):
-        data, _ = self._load()
-        value = data.get("telegram_channel") or os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
+        if self.database_url:
+            self._ensure_neon_settings()
+            with self._neon_connection() as conn:
+                row = conn.execute(
+                    "SELECT setting_value FROM javdl_settings WHERE setting_key = 'telegram_channel'"
+                ).fetchone()
+            value = row[0] if row and row[0] else os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
+        else:
+            data, _ = self._load()
+            value = data.get("telegram_channel") or os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
         return str(value).strip() if value else None
 
     def set_channel(self, channel):
+        if self.database_url:
+            self._ensure_neon_settings()
+            with self._neon_connection() as conn:
+                conn.execute("""
+                    INSERT INTO javdl_settings (setting_key, setting_value, updated_at)
+                    VALUES ('telegram_channel', %s, NOW())
+                    ON CONFLICT (setting_key) DO UPDATE SET
+                        setting_value = EXCLUDED.setting_value, updated_at = NOW()
+                """, (str(channel).strip(),))
+            return
         data, sha = self._load()
         data["schema_version"] = 1
         data["telegram_channel"] = channel
@@ -80,6 +113,16 @@ class BotSettings:
             )
 
     def clear_channel(self):
+        if self.database_url:
+            self._ensure_neon_settings()
+            with self._neon_connection() as conn:
+                conn.execute("""
+                    INSERT INTO javdl_settings (setting_key, setting_value, updated_at)
+                    VALUES ('telegram_channel', NULL, NOW())
+                    ON CONFLICT (setting_key) DO UPDATE SET
+                        setting_value = NULL, updated_at = NOW()
+                """)
+            return
         data, sha = self._load()
         data["schema_version"] = 1
         data["telegram_channel"] = None
