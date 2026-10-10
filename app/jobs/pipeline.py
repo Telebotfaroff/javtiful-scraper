@@ -108,13 +108,23 @@ class Pipeline:
                         except Exception:
                             logger.exception("PIPELINE: unable to clean partial channel upload")
                     results.clear()
-                    fallback_kwargs = dict(kwargs)
-                    fallback_kwargs["chat_id"] = fallback
-                    result = uploader.upload(path, **fallback_kwargs)
-                    if hasattr(uploader, "verify") and not uploader.verify(result):
-                        raise RuntimeError(
-                            f"Telegram fallback upload verification failed for {path}"
+                    for fallback_index, fallback_path in enumerate(upload_paths, 1):
+                        fallback_kwargs = dict(kwargs)
+                        fallback_kwargs["chat_id"] = fallback
+                        fallback_kwargs["caption"] = (
+                            job.caption or video.title
                         )
+                        fallback_result = uploader.upload(fallback_path, **fallback_kwargs)
+                        if hasattr(uploader, "verify") and not uploader.verify(fallback_result):
+                            raise RuntimeError(
+                                f"Telegram fallback upload verification failed for {fallback_path}"
+                            )
+                        results.append(fallback_result)
+                        if progress:
+                            progress(fallback_index, len(upload_paths), "upload")
+                    setattr(job, "used_fallback", True)
+                    # The complete video has now been retried to chat.
+                    break
 
                 results.append(result)
 
