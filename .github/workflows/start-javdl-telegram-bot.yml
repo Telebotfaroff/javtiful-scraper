@@ -85,5 +85,7 @@ jobs:
           AUTO_RESTART_WORKFLOW: start-javdl-telegram-bot.yml
           AUTO_RESTART_REF: main
         run: |
-          python -m compileall -q app main.py scripts
+          python -m pip install pytest
+          python -m compileall -q app main.py scripts tests
+          python -m pytest -q
           python scripts/run_bot_with_restart.py
