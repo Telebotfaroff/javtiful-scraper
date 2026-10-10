@@ -484,6 +484,24 @@ class TelegramUploader:
                         logger.exception("TELEGRAM UPLOAD: separate thumbnail post failed")
                         raise
 
+                # Always derive duration from the exact file being uploaded.
+                # Extractor metadata can be missing or refer to the original video
+                # rather than a clipped/split part, which makes Telegram show 0:00.
+                try:
+                    upload_duration = max(1, int(round(self._duration(Path(path)))))
+                    logger.info(
+                        "TELEGRAM UPLOAD: ffprobe duration for %s is %ss",
+                        path,
+                        upload_duration,
+                    )
+                except Exception:
+                    upload_duration = max(0, int(duration or 0))
+                    logger.exception(
+                        "TELEGRAM UPLOAD: ffprobe duration failed for %s; using supplied duration=%s",
+                        path,
+                        upload_duration,
+                    )
+
                 while True:
                     try:
                         results.append(
@@ -492,7 +510,7 @@ class TelegramUploader:
                                 path,
                                 caption=part_caption,
                                 thumb=prepared_thumbnail,
-                                duration=int(duration or 0),
+                                duration=upload_duration,
                                 supports_streaming=True,
                                 progress=upload_progress,
                             )
