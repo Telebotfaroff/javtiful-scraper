@@ -41,15 +41,17 @@ Add these under **Colab → Secrets**:
 | **TELEGRAM_API_ID** | ✅ |
 | **TELEGRAM_API_HASH** | ✅ |
 | **TELEGRAM_BOT_TOKEN** | ✅ |
+| **DATABASE_URL** | ✅ — Neon PostgreSQL connection string |
 
 The notebook automatically:
 
 1. Clones the javdl branch.
 2. Installs FFmpeg, Python dependencies and Playwright Chromium.
 3. Loads Telegram credentials from Colab Secrets.
-4. Configures the Telegram upload client pool.
-5. Runs a syntax/import pre-flight check.
-6. Starts the Telegram bot.
+4. Connects to Neon and initializes persistent upload history.
+5. Configures the Telegram upload client pool.
+6. Runs the syntax/import pre-flight check and test suite.
+7. Starts the Telegram bot.
 
 ---
 
@@ -113,24 +115,24 @@ When you choose **📢 Channel**, JAVDL attempts to upload there. If the channel
 
 ### One-time setup
 
-1. Add your numeric Telegram user ID to the GitHub Actions repository secret `ADMIN_USER_IDS`. For multiple admins, use comma-separated IDs.
+1. Configure the admin user IDs using the bot's supported admin configuration.
 2. Add the bot to your target channel and grant it permission to post videos.
-3. Start the workflow and send the bot `/setchannel @yourchannel`.
+3. Start the bot from the Colab notebook and send `/setchannel @yourchannel`.
 4. Use `/channel` to confirm the setting.
 
-The channel setting is stored in `database/bot_settings.json` on the `javdl` branch, so it survives workflow restarts. Keep the bot token and GitHub token private.
+With `DATABASE_URL` configured, bot settings and upload history use Neon PostgreSQL. Keep all credentials in Colab Secrets; do not store tokens or API hashes in Neon tables.
 
 ---
 
 ## 🧾 Persistent Duplicate Protection
 
-Telegram uploads are tracked in `database/telegram_upload_history.json` on the `javdl` branch.
+Telegram uploads are tracked in Neon PostgreSQL when `DATABASE_URL` is configured.
 
 - Before a Telegram upload, JAVDL checks the saved history by video code and canonical post URL.
 - Videos already marked `completed` are skipped.
 - After a successful upload, the record stores the code, title, canonical URL, Telegram message IDs when available, destination, and timestamp.
-- The manual GitHub Actions bot workflow uses its built-in `GITHUB_TOKEN` with repository-content write permission to save the history. No extra personal access token is needed.
-- This history is separate from `database/processed.json`, which is used by the resumable-manifest runner.
+- The Colab runner connects directly to Neon to persist upload history; GitHub Actions is not used to run the bot.
+- The history is separate from `database/processed.json`, which is used by the resumable-manifest runner.
 
 If Telegram accepts an upload but the runner stops before the history commit succeeds, that upload may not be recorded; Telegram and GitHub cannot be updated as one atomic transaction.
 
@@ -239,13 +241,9 @@ Then start the application using the project's normal bot entry point.
 
 ## 📁 Google Colab
 
-The maintained Colab runner is:
+**[🚀 Open JAVDL in Google Colab](https://colab.research.google.com/github/Telebotfaroff/javtiful-scraper/blob/javdl/colab/javdl.ipynb)**
 
-**colab/javdl.ipynb**
-
-It is intentionally kept minimal and contains only the setup, configuration, pre-flight check and bot startup flow.
-
-[**Open javdl.ipynb →**](https://github.com/Telebotfaroff/javtiful-scraper/blob/javdl/colab/javdl.ipynb)
+Notebook source: [colab/javdl.ipynb](https://github.com/Telebotfaroff/javtiful-scraper/blob/javdl/colab/javdl.ipynb). The notebook clones the latest `javdl` branch, loads credentials from Colab Secrets, verifies Neon, runs pre-flight checks, and starts the bot.
 
 ---
 
