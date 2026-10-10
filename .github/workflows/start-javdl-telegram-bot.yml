@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
 
 permissions:
+  actions: write
   contents: write
 
 concurrency:
@@ -79,6 +80,10 @@ jobs:
           PROCESSED_DB_BRANCH: javdl
           PROCESSED_DB_PATH: database/telegram_upload_history.json
           PYTHONUNBUFFERED: "1"
+          AUTO_RESTART_AFTER_SECONDS: "14400"
+          AUTO_RESTART_RETRY_SECONDS: "60"
+          AUTO_RESTART_WORKFLOW: start-javdl-telegram-bot.yml
+          AUTO_RESTART_REF: main
         run: |
-          python -m compileall -q app main.py
-          python main.py
+          python -m compileall -q app main.py scripts
+          python scripts/run_bot_with_restart.py
