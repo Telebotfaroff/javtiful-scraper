@@ -39,10 +39,10 @@ placeholders and will not work as media sources.
 
 In **Settings → Secrets and variables → Actions**, add:
 
-- `API_ID`
-- `API_HASH`
-- `BOT_TOKEN`
-- `TELEGRAM_TARGET`
+- `TELEGRAM_API_ID`
+- `TELEGRAM_API_HASH`
+- `TELEGRAM_BOT_TOKEN`
+- `TELEGRAM_POST_CHANNEL_ID`
 
 The bot must have permission to post in the destination channel. The workflow
 uses the repository's `GITHUB_TOKEN` to commit checkpoint changes; the workflow
