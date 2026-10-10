@@ -12,11 +12,13 @@ from app.uploaders.manager import UploadManager
 from app.extractor.javtiful import JavtifulExtractor
 from app.extractor.channel import JavtifulChannelExtractor
 from app.storage.processed import ProcessedStore, ProcessedStoreError
+from app.storage.bot_settings import BotSettings
 
 
 extractor = JavtifulExtractor()
 channel_extractor = JavtifulChannelExtractor()
 processed_store = ProcessedStore()
+bot_settings = BotSettings()
 uploads = UploadManager()
 telegram_uploader = uploads.get("telegram")
 pipeline = Pipeline(extractor=extractor, uploaders={"telegram": telegram_uploader, "gofile": uploads.get("gofile")})
@@ -87,6 +89,18 @@ def _message_ids(value):
     return found
 
 
+def _configured_channel():
+    return bot_settings.get_channel()
+
+
+def _admin_ids():
+    return {value.strip() for value in os.getenv("ADMIN_USER_IDS", "").split(",") if value.strip()}
+
+
+def _is_admin(user_id):
+    return str(user_id) in _admin_ids()
+
+
 def _make_channel_job(item, chat_id):
     title = item.get("title") or "Video"
     code = item.get("code")
@@ -99,7 +113,8 @@ def _make_channel_job(item, chat_id):
         url=item["post_url"],
         quality="720p",
         uploader="telegram",
-        target=chat_id,
+        target=_configured_channel() or chat_id,
+        fallback_target=chat_id if _configured_channel() else None,
         caption=caption,
     )
 
@@ -388,13 +403,13 @@ async def _run_job(message, state):
     destination = state.get("destination", "telegram")
 
     if destination == "telegram_channel":
-        target = os.getenv("TELEGRAM_POST_CHANNEL_ID", "").strip()
+        target = _configured_channel()
         if not target:
             await status.edit_text(
-                "❌ Channel posting is not configured.\n\n"
-                "Set **TELEGRAM_POST_CHANNEL_ID** to your channel username "
-                "(for example `@mychannel`) or numeric channel ID, then restart the bot."
+                "❌ No upload channel is configured yet.\n\n"
+                "An administrator can set one with /setchannel @channelname."
             )
+            await _delete_status_later(status)
             return
         uploader = "telegram"
     else:
@@ -422,6 +437,7 @@ async def _run_job(message, state):
         target=target,
         clips=state.get("clips"),
         caption=state.get("caption"),
+        fallback_target=(message.chat.id if destination == "telegram_channel" else None),
     )
     try:
         video, results = await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
@@ -482,6 +498,51 @@ async def _run_job(message, state):
 
 
 def register_handlers(app: Client):
+    @app.on_message(filters.private & filters.command(["setchannel", "unsetchannel", "channel"]))
+    async def channel_settings_handler(client, message):
+        if not _is_admin(message.from_user.id):
+            return await message.reply_text(
+                "⛔ Only configured bot admins can change the upload channel. "
+                "Set the GitHub Actions secret ADMIN_USER_IDS to your numeric Telegram user ID."
+            )
+
+        command = (message.command or ["/channel"])[0].lower().lstrip("/")
+        if command == "setchannel":
+            if len(message.command or []) < 2:
+                return await message.reply_text(
+                    "Usage: /setchannel @channelusername\n"
+                    "You can also use a numeric channel ID such as -1001234567890.\n\n"
+                    "Make sure the bot is an administrator of that channel with permission to post."
+                )
+            target = message.command[1].strip()
+            if not (target.startswith("@") and len(target) > 1 or re.fullmatch(r"-?\\d+", target)):
+                return await message.reply_text("Invalid channel. Use @channelusername or a numeric channel ID.")
+            try:
+                await asyncio.to_thread(bot_settings.set_channel, target)
+            except Exception as exc:
+                return await message.reply_text(f"❌ Could not save channel setting: {type(exc).__name__}: {exc}")
+            return await message.reply_text(
+                f"✅ Upload channel saved: {target}\n\n"
+                "Video uploads will go to this channel when you choose 📢 Channel. "
+                "If channel upload fails before any video part is sent, the bot will fall back to this chat."
+            )
+
+        if command == "unsetchannel":
+            try:
+                await asyncio.to_thread(bot_settings.clear_channel)
+            except Exception as exc:
+                return await message.reply_text(f"❌ Could not clear channel setting: {type(exc).__name__}: {exc}")
+            return await message.reply_text("✅ Upload channel cleared. Telegram chat uploads remain available.")
+
+        try:
+            target = await asyncio.to_thread(_configured_channel)
+        except Exception as exc:
+            return await message.reply_text(f"❌ Could not read channel setting: {type(exc).__name__}: {exc}")
+        return await message.reply_text(
+            f"📢 **Upload channel:** {target or 'Not configured'}\n\n"
+            "Commands:\n/setchannel @channelusername\n/unsetchannel"
+        )
+
     @app.on_message(filters.private & filters.text)
     async def link_handler(client, message):
         text = message.text.strip()
