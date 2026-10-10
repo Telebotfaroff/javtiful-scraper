@@ -11,10 +11,12 @@ from app.jobs.queue import Job
 from app.uploaders.manager import UploadManager
 from app.extractor.javtiful import JavtifulExtractor
 from app.extractor.channel import JavtifulChannelExtractor
+from app.storage.processed import ProcessedStore, ProcessedStoreError
 
 
 extractor = JavtifulExtractor()
 channel_extractor = JavtifulChannelExtractor()
+processed_store = ProcessedStore()
 uploads = UploadManager()
 telegram_uploader = uploads.get("telegram")
 pipeline = Pipeline(extractor=extractor, uploaders={"telegram": telegram_uploader, "gofile": uploads.get("gofile")})
@@ -63,6 +65,28 @@ def _channel_mode_keyboard():
     ])
 
 
+def _video_code(url, title=None):
+    return channel_extractor._extract_code(title or "", url)
+
+
+def _message_ids(value):
+    """Collect Telegram message IDs from nested uploader results."""
+    found = []
+    if isinstance(value, (list, tuple)):
+        for item in value:
+            found.extend(_message_ids(item))
+    elif isinstance(value, dict):
+        for key in ("message_id", "id"):
+            item = value.get(key)
+            if isinstance(item, int):
+                found.append(item)
+    else:
+        item = getattr(value, "id", None)
+        if isinstance(item, int):
+            found.append(item)
+    return found
+
+
 def _make_channel_job(item, chat_id):
     title = item.get("title") or "Video"
     code = item.get("code")
@@ -87,6 +111,9 @@ async def _run_channel_sequential(message, state, page_number, items, status):
         title = item.get("title") or "Video"
         job = _make_channel_job(item, message.chat.id)
         progress = TelegramProgress(status, min_interval=2.0)
+        code = item.get("code") or _video_code(item.get("post_url"), title)
+        if not processed_store.claim(item.get("post_url"), code):
+            continue
         try:
             await status.edit_text(
                 f"⬇️ **Downloading:** {title}\n"
@@ -94,7 +121,11 @@ async def _run_channel_sequential(message, state, page_number, items, status):
                 f"📄 **Page:** {page_number}\n"
                 f"🎬 **Video:** {completed + failed + 1}/{len(items)}"
             )
-            await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
+            _, upload_results = await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
+            processed_store.mark_completed(
+                item.get("post_url"), code, title,
+                destination="telegram", message_ids=_message_ids(upload_results),
+            )
             completed += 1
             code = item.get("code") or ""
             sent = await status.reply_text(
@@ -103,6 +134,7 @@ async def _run_channel_sequential(message, state, page_number, items, status):
             )
             _schedule_delete(sent)
         except Exception as exc:
+            processed_store.release(item.get("post_url"), code)
             failed += 1
             await status.edit_text(
                 f"📥 **Channel:** {channel_name}\n"
@@ -136,6 +168,10 @@ async def _run_channel_parallel(message, state, page_number, items, status):
         for index, item in enumerate(items):
             title = item.get("title") or "Video"
             job = _make_channel_job(item, message.chat.id)
+            code = item.get("code") or _video_code(item.get("post_url"), title)
+            if not processed_store.claim(item.get("post_url"), code):
+                await queue.put(("skip", index, item, job, None))
+                continue
             try:
                 progress.set_download_title(title)
                 video = await asyncio.to_thread(
@@ -147,6 +183,7 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 await queue.put(("ok", index, item, job, video))
                 progress.set_queue(queue.qsize())
             except Exception as exc:
+                processed_store.release(item.get("post_url"), code)
                 await queue.put(("error", index, item, job, exc))
         for _ in range(upload_workers):
             await queue.put(("done",))
@@ -160,6 +197,9 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 break
             kind, index, item, job, payload = entry
             title = item.get("title") or "Video"
+            if kind == "skip":
+                queue.task_done()
+                continue
             if kind == "error":
                 failed += 1
                 progress.mark_failed()
@@ -169,11 +209,16 @@ async def _run_channel_parallel(message, state, page_number, items, status):
             try:
                 progress.set_upload_title(title)
                 progress.set_queue(queue.qsize())
-                await asyncio.to_thread(
+                upload_results = await asyncio.to_thread(
                     pipeline.upload_prepared,
                     job,
                     payload,
                     _progress_callback(progress, worker_id=f"upload-{worker_id}"),
+                )
+                code = item.get("code") or _video_code(item.get("post_url"), title)
+                processed_store.mark_completed(
+                    item.get("post_url"), code, title,
+                    destination="telegram", message_ids=_message_ids(upload_results),
                 )
                 completed += 1
                 progress.mark_upload_complete()
@@ -185,6 +230,8 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 )
                 _schedule_delete(sent)
             except Exception as exc:
+                code = item.get("code") or _video_code(item.get("post_url"), title)
+                processed_store.release(item.get("post_url"), code)
                 failed += 1
                 progress.mark_failed()
                 progress.set_queue(queue.qsize())
@@ -236,6 +283,23 @@ async def _run_channel_page(message, state, page_number, requested_count, parall
         if not items:
             await status.edit_text(
                 f"❌ No videos found on page {page_number}.\n\nChannel: {channel_name}"
+            )
+            await _delete_status_later(status)
+            return
+
+        already_completed = 0
+        remaining = []
+        for item in items:
+            code = item.get("code") or _video_code(item.get("post_url"), item.get("title"))
+            if processed_store.is_completed(item.get("post_url"), code):
+                already_completed += 1
+            else:
+                remaining.append(item)
+        items = remaining
+        if not items:
+            await status.edit_text(
+                f"✅ All {already_completed} video(s) on this page are already recorded as uploaded.\n\n"
+                f"📺 **Channel:** {channel_name}\n📄 **Page:** {page_number}"
             )
             await _delete_status_later(status)
             return
@@ -337,6 +401,19 @@ async def _run_job(message, state):
         target = message.chat.id if destination == "telegram" else None
         uploader = destination
 
+    track_upload = uploader == "telegram"
+    code = _video_code(state["url"])
+    if track_upload:
+        try:
+            if not processed_store.claim(state["url"], code):
+                await status.edit_text("⏭️ This video is already uploaded or currently being processed. Skipping duplicate.")
+                await _delete_status_later(status)
+                return
+        except ProcessedStoreError as exc:
+            await status.edit_text(f"❌ Cannot access upload history; refusing to risk a duplicate.\n{exc}")
+            await _delete_status_later(status)
+            return
+
     job = Job(
         id=f"TG-{uuid.uuid4().hex[:10]}",
         url=state["url"],
@@ -349,6 +426,12 @@ async def _run_job(message, state):
     try:
         video, results = await asyncio.to_thread(pipeline.run, job, _progress_callback(progress))
         mode = "clip" if state.get("clips") else "full"
+        if track_upload:
+            code = code or _video_code(state["url"], video.title)
+            processed_store.mark_completed(
+                state["url"], code, video.title or "Video",
+                destination=destination, message_ids=_message_ids(results),
+            )
         quality = video.selected_quality or state["quality"]
         title = video.title or "Video"
         duration = video.duration
@@ -392,7 +475,9 @@ async def _run_job(message, state):
         await status.edit_text("\n".join(lines))
         await _delete_status_later(status)
     except Exception as exc:
-        await status.edit_text(f"❌ Pipeline failed\n\n{type(exc).__name__}: {exc}")
+        if track_upload:
+            processed_store.release(state["url"], code)
+        await status.edit_text(f"❌ Pipeline failed or upload history could not be saved\n\n{type(exc).__name__}: {exc}")
         await _delete_status_later(status)
 
 
@@ -489,6 +574,19 @@ def register_handlers(app: Client):
                 )
                 await _delete_status_later(status)
             return
+        code = _video_code(text)
+        try:
+            if processed_store.is_completed(text, code):
+                return await _reply_and_delete_later(
+                    message,
+                    "⏭️ This video is already recorded as uploaded. Skipping duplicate.",
+                )
+        except ProcessedStoreError as exc:
+            return await _reply_and_delete_later(
+                message,
+                f"❌ Cannot check upload history, so I won't risk a duplicate.\n{exc}",
+            )
+
         status = await message.reply_text("🔎 Extracting video information…")
         try:
             video = extractor.extract(text)
