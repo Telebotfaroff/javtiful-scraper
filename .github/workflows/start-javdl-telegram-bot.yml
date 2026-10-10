@@ -75,7 +75,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PROCESSED_DB_BRANCH: javdl
-          PROCESSED_DB_PATH: database/processed.json
+          PROCESSED_DB_PATH: database/telegram_upload_history.json
           PYTHONUNBUFFERED: "1"
         run: |
           python -m compileall -q app main.py
