@@ -3,6 +3,7 @@
 This module deliberately reports counts and sanitized titles only; it never
 prints source URLs, tokens, API hashes, or raw GitHub API responses.
 """
+import asyncio
 from datetime import datetime, timezone
 
 from pyrogram import filters
@@ -44,7 +45,7 @@ def register_admin_handlers(app, processed_store, bot_settings, is_admin):
         command = (message.command or ["status"])[0].lower().lstrip("/")
         if command == "status":
             try:
-                stats = await __import__("asyncio").to_thread(processed_store.summary)
+                stats = await asyncio.to_thread(processed_store.summary)
                 channel = await __import__("asyncio").to_thread(bot_settings.get_channel)
                 text = (
                     "🩺 JAVDL STATUS\n\n"
