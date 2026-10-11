@@ -598,7 +598,7 @@ def register_handlers(app: Client):
             )
         except Exception as exc:
             await status.edit_text(
-                f"❌ Could not load the studio directory.\\n{type(exc).__name__}: {exc}"
+                f"❌ Could not load the studio directory.\n{type(exc).__name__}: {exc}"
             )
 
     @app.on_callback_query(filters.regex(r"^dl\|noop$"))
@@ -620,7 +620,7 @@ def register_handlers(app: Client):
             )
         except Exception as exc:
             await query.message.edit_text(
-                f"❌ Could not load the studio directory.\\n{type(exc).__name__}: {exc}"
+                f"❌ Could not load the studio directory.\n{type(exc).__name__}: {exc}"
             )
 
     @app.on_message(filters.private & filters.command(["setchannel", "unsetchannel", "channel"]))
