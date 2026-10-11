@@ -1,0 +1,193 @@
+name: Extract Javtiful Channel URLs
+
+on:
+  workflow_dispatch:
+    inputs:
+      start_page:
+        description: "Directory page to start from"
+        required: true
+        default: "1"
+        type: string
+      max_pages:
+        description: "Maximum directory pages to scan (safety limit)"
+        required: true
+        default: "500"
+        type: string
+      delay:
+        description: "Delay between directory requests in seconds"
+        required: true
+        default: "1"
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: extract-javtiful-channels
+  cancel-in-progress: false
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Extract all channel URLs
+        env:
+          START_PAGE: ${{ inputs.start_page }}
+          MAX_PAGES: ${{ inputs.max_pages }}
+          REQUEST_DELAY: ${{ inputs.delay }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import time
+          from datetime import datetime, timezone
+          from pathlib import Path
+          from urllib.parse import urlparse
+
+          from providers.javtiful import JavtifulProvider
+
+          BASE_URL = "https://javtiful.com"
+          directory_url = f"{BASE_URL}/channels"
+          start_page = max(1, int(os.environ.get("START_PAGE", "1")))
+          max_pages = max(1, min(2000, int(os.environ.get("MAX_PAGES", "500"))))
+          delay = max(0.0, min(30.0, float(os.environ.get("REQUEST_DELAY", "1"))))
+
+          provider = JavtifulProvider(timeout=30, retries=3)
+          channels = {}
+          pages_scanned = 0
+          consecutive_empty = 0
+          errors = []
+
+          # Preserve any previously saved records, so a partial run can be resumed
+          # without losing channels discovered by earlier runs.
+          output_json = Path("data/channels.json")
+          if output_json.exists():
+              try:
+                  previous = json.loads(output_json.read_text(encoding="utf-8"))
+                  for item in previous.get("channels", []):
+                      url = item.get("url")
+                      if url:
+                          channels[url.rstrip("/").lower()] = item
+              except (OSError, json.JSONDecodeError, AttributeError):
+                  print("Existing data/channels.json was unreadable; rebuilding it.")
+
+          for page in range(start_page, min(start_page + max_pages, 2001)):
+              print(f"Scanning {directory_url} page {page}...", flush=True)
+              try:
+                  result = provider.scrape_studios(directory_url, page=page)
+              except Exception as exc:
+                  errors.append({"page": page, "error": f"{type(exc).__name__}: {exc}"})
+                  print(f"ERROR on page {page}: {exc}", flush=True)
+                  # Don't silently claim a complete scan after a network or parsing error.
+                  raise
+
+              pages_scanned += 1
+              entries = result.get("studios", [])
+              page_new = 0
+
+              for entry in entries:
+                  slug = (entry.get("slug") or "").strip().strip("/")
+                  if not slug or slug.lower() == "channels":
+                      continue
+
+                  raw_url = entry.get("url") or f"{BASE_URL}/channel/{slug}"
+                  parsed = urlparse(raw_url)
+                  if parsed.netloc.lower() not in {"javtiful.com", "www.javtiful.com"}:
+                      continue
+                  if not re.fullmatch(r"/channel/[^/]+/?", parsed.path, re.I):
+                      continue
+
+                  canonical_url = f"{BASE_URL}{parsed.path.rstrip('/')}"
+                  key = canonical_url.lower()
+                  record = {
+                      "name": (entry.get("name") or slug).strip(),
+                      "slug": slug,
+                      "url": canonical_url,
+                      "video_count": entry.get("video_count"),
+                      "thumbnail": entry.get("thumbnail"),
+                  }
+                  if key not in channels:
+                      page_new += 1
+                  # Update metadata for known channels while keeping URL uniqueness.
+                  channels[key] = record
+
+              print(
+                  f"Page {page}: found {len(entries)} entries, "
+                  f"{page_new} new, {len(channels)} unique total.",
+                  flush=True,
+              )
+
+              pagination = result.get("pagination", {})
+              if not entries:
+                  consecutive_empty += 1
+              else:
+                  consecutive_empty = 0
+
+              if consecutive_empty >= 1:
+                  print("Directory returned no entries; stopping.")
+                  break
+              if not pagination.get("has_next"):
+                  print("Pagination reports no next page; stopping.")
+                  break
+              time.sleep(delay)
+
+          sorted_channels = sorted(
+              channels.values(),
+              key=lambda item: (item.get("name", "").casefold(), item.get("url", "")),
+          )
+          if not sorted_channels:
+              raise SystemExit("No channel URLs were extracted; refusing to overwrite output.")
+
+          Path("data").mkdir(parents=True, exist_ok=True)
+          payload = {
+              "source": directory_url,
+              "updated_at": datetime.now(timezone.utc).isoformat(),
+              "pages_scanned_this_run": pages_scanned,
+              "total_channels": len(sorted_channels),
+              "channels": sorted_channels,
+              "errors": errors,
+          }
+          output_json.write_text(
+              json.dumps(payload, ensure_ascii=False, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          Path("data/channel_urls.txt").write_text(
+              "\n".join(item["url"] for item in sorted_channels) + "\n",
+              encoding="utf-8",
+          )
+          print(f"Saved {len(sorted_channels)} unique channel URLs.")
+          print(f"JSON: {output_json}")
+          print("Text: data/channel_urls.txt")
+          PY
+
+      - name: Commit extracted channel list
+        if: success()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/channels.json data/channel_urls.txt
+          if git diff --cached --quiet; then
+            echo "Channel list is unchanged; no commit needed."
+            exit 0
+          fi
+          git commit -m "Update extracted Javtiful channel URLs"
+          git push
