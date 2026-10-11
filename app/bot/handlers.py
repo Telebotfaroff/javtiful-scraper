@@ -739,6 +739,24 @@ def register_handlers(app: Client):
             await _delete_status_later(status)
 
 
+    @app.on_callback_query(filters.regex(r"^channel\|all$"))
+    async def channel_all_handler(client, query):
+        state = pending.get(query.from_user.id)
+        if not state or state.get("type") != "channel":
+            return await query.answer("Session expired. Send the channel URL again.", show_alert=True)
+        state["channel_all"] = True
+        state["channel_waiting_mode"] = True
+        await query.answer("Choose download mode")
+        await query.message.edit_text(
+            f"📥 **Download all videos**\n"
+            f"📺 **Channel:** {state.get('channel_name', 'Channel')}\n"
+            f"📄 **Pages:** {state.get('total_pages') or 1}\n\n"
+            "Previously uploaded video codes/URLs will be skipped. "
+            "Choose how to process the remaining videos:",
+            reply_markup=_channel_mode_keyboard(),
+        )
+
+
     @app.on_callback_query(filters.regex(r"^channel\|download$"))
     async def channel_download_handler(client, query):
         state = pending.get(query.from_user.id)
@@ -764,23 +782,31 @@ def register_handlers(app: Client):
         if not state or state.get("type") != "channel":
             return await query.answer("Session expired. Send the channel URL again.", show_alert=True)
         if not state.get("channel_waiting_mode"):
-            return await query.answer("Choose the page first.", show_alert=True)
+            return await query.answer("Choose the page or all-videos option first.", show_alert=True)
 
         mode = query.data.split("|", 1)[1]
-        page_number = int(state["channel_page"])
-        requested_count = int(state.get("channel_requested_count") or 0)
+        download_all = bool(state.pop("channel_all", False))
         state.pop("channel_waiting_mode", None)
-        state.pop("channel_page", None)
-        state.pop("channel_requested_count", None)
         await query.answer("Starting " + mode + " mode")
         try:
-            await _run_channel_page(
-                query.message,
-                state,
-                page_number,
-                requested_count,
-                parallel=(mode == "parallel"),
-            )
+            if download_all:
+                await _run_channel_all(
+                    query.message,
+                    state,
+                    parallel=(mode == "parallel"),
+                )
+            else:
+                page_number = int(state["channel_page"])
+                requested_count = int(state.get("channel_requested_count") or 0)
+                state.pop("channel_page", None)
+                state.pop("channel_requested_count", None)
+                await _run_channel_page(
+                    query.message,
+                    state,
+                    page_number,
+                    requested_count,
+                    parallel=(mode == "parallel"),
+                )
         finally:
             pending.pop(query.from_user.id, None)
 
