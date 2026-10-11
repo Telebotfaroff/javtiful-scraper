@@ -90,11 +90,18 @@ class NeonProcessedStore:
     def is_completed(self, url, code=None):
         self.initialize()
         keys = {self.key_for(url, code), self.key_for(url)}
+        canonical_url = self.canonical_url(url)
         try:
             with self._connect() as conn:
                 row = conn.execute(
-                    "SELECT 1 FROM javdl_upload_history WHERE source_key = ANY(%s) AND status = 'completed' LIMIT 1",
-                    (list(keys),),
+                    """
+                    SELECT 1
+                    FROM javdl_upload_history
+                    WHERE status = 'completed'
+                      AND (source_key = ANY(%s) OR canonical_url = %s)
+                    LIMIT 1
+                    """,
+                    (list(keys), canonical_url),
                 ).fetchone()
             return row is not None
         except Exception as exc:
