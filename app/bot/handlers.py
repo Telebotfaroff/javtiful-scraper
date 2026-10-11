@@ -304,7 +304,25 @@ async def _run_channel_page(message, state, page_number, requested_count, parall
                 f"❌ No videos found on page {page_number}.\n\nChannel: {channel_name}"
             )
             await _delete_status_later(status)
-            return
+            return {"uploaded": 0, "failed": 0, "skipped": 0}
+
+        # Deduplicate repeated cards within this page before checking saved history.
+        seen_keys = set()
+        page_unique = []
+        duplicate_in_page = 0
+        for item in items:
+            code = item.get("code") or _video_code(item.get("post_url"), item.get("title"))
+            normalized_code = processed_store.normalize_code(code) if code else ""
+            canonical_url = processed_store.canonical_url(item.get("post_url"))
+            keys = {f"code:{normalized_code}"} if normalized_code else set()
+            if canonical_url:
+                keys.add(f"url:{canonical_url}")
+            if keys.intersection(seen_keys):
+                duplicate_in_page += 1
+                continue
+            seen_keys.update(keys)
+            page_unique.append(item)
+        items = page_unique
 
         already_completed = 0
         remaining = []
@@ -316,15 +334,17 @@ async def _run_channel_page(message, state, page_number, requested_count, parall
                 remaining.append(item)
         items = remaining
         if not items:
+            skipped = already_completed + duplicate_in_page
             await status.edit_text(
-                f"✅ All {already_completed} video(s) on this page are already recorded as uploaded.\n\n"
+                f"⏭️ Skipped {skipped} duplicate/already-uploaded video(s).\n\n"
                 f"📺 **Channel:** {channel_name}\n📄 **Page:** {page_number}"
             )
             await _delete_status_later(status)
-            return
+            return {"uploaded": 0, "failed": 0, "skipped": skipped}
 
         available = len(items)
-        if requested_count < 1 or requested_count > available:
+        # requested_count=0 means all remaining videos on this page.
+        if requested_count != 0 and (requested_count < 1 or requested_count > available):
             await status.edit_text(
                 f"❌ Invalid video count.\n\n"
                 f"📄 **Page:** {page_number}\n"
@@ -333,9 +353,10 @@ async def _run_channel_page(message, state, page_number, requested_count, parall
                 f"Enter a number from 1 to {available}."
             )
             await _delete_status_later(status)
-            return
+            return {"uploaded": 0, "failed": 0, "skipped": already_completed + duplicate_in_page}
 
-        items = items[:requested_count]
+        if requested_count > 0:
+            items = items[:requested_count]
         mode_name = "Parallel" if parallel else "Sequential"
         await status.edit_text(
             f"📥 **{mode_name} mode**\n"
