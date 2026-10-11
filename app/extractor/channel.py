@@ -181,6 +181,7 @@ class JavtifulChannelExtractor:
                 parsed.scheme.lower(),
                 parsed.netloc.lower(),
                 parsed.path.rstrip("/"),
+                parsed.params,
                 "",
                 "",
             )) if parsed.scheme and parsed.netloc else post_url.rstrip("/")
