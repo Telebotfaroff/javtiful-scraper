@@ -221,18 +221,19 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 continue
             if kind == "error":
                 failed += 1
-                progress.mark_failed()
+                progress.mark_failed(upload_id=f"video-{index}")
                 progress.set_queue(queue.qsize())
                 queue.task_done()
                 continue
             try:
-                progress.set_upload_title(title)
+                upload_id = f"video-{index}"
+                progress.set_upload_title(title, upload_id=upload_id)
                 progress.set_queue(queue.qsize())
                 upload_results = await asyncio.to_thread(
                     pipeline.upload_prepared,
                     job,
                     payload,
-                    _progress_callback(progress, worker_id=f"upload-{worker_id}"),
+                    _progress_callback(progress, worker_id=upload_id),
                 )
                 code = item.get("code") or _video_code(item.get("post_url"), title)
                 processed_store.mark_completed(
@@ -240,7 +241,7 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                     destination="telegram", message_ids=_message_ids(upload_results),
                 )
                 completed += 1
-                progress.mark_upload_complete()
+                progress.mark_upload_complete(upload_id=upload_id)
                 progress.set_queue(queue.qsize())
                 display_code = item.get("code") or ""
                 delivery = "chat (channel fallback)" if getattr(job, "used_fallback", False) else "configured channel" if _configured_channel() else "chat"
