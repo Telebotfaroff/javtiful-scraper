@@ -14,6 +14,7 @@ from app.extractor.channel import JavtifulChannelExtractor
 from app.storage.processed import ProcessedStoreError
 from app.storage.neon_processed import create_processed_store
 from app.storage.bot_settings import BotSettings
+from app.catalog.studio_index import fetch_studios, page_studios, PAGE_SIZE
 
 
 extractor = JavtifulExtractor()
@@ -406,6 +407,34 @@ async def _run_channel_all(message, state, parallel=False):
     await _delete_status_later(summary, delay=120)
 
 
+def _dl_keyboard(page, total_pages):
+    buttons = []
+    if page > 1:
+        buttons.append(InlineKeyboardButton("⬅️ Previous", callback_data=f"dl|{page - 1}"))
+    buttons.append(InlineKeyboardButton(f"📄 {page}/{total_pages}", callback_data="dl|noop"))
+    if page < total_pages:
+        buttons.append(InlineKeyboardButton("Next ➡️", callback_data=f"dl|{page + 1}"))
+    return InlineKeyboardMarkup([buttons])
+
+
+def _format_dl_page(studios, page, total_pages):
+    from html import escape
+
+    start = (page - 1) * PAGE_SIZE
+    lines = [
+        "<b>📚 Studio Directory</b>",
+        f"Total studios: <b>{len(studios)}</b>",
+        f"Page <b>{page}/{total_pages}</b>",
+        "",
+    ]
+    for index, studio in enumerate(studios[start:start + PAGE_SIZE], start=start + 1):
+        name = escape(studio["name"])
+        url = escape(studio["url"], quote=True)
+        lines.extend([f"<b>{index}. {name}</b>", f"<code>{url}</code>", ""])
+    lines.append("Use <code>/dl 2</code> to open a specific page.")
+    return "\n".join(lines)
+
+
 def _destination_keyboard():
     return InlineKeyboardMarkup([
         [
@@ -548,6 +577,52 @@ async def _run_job(message, state):
 def register_handlers(app: Client):
     from app.bot.admin import register_admin_handlers
     register_admin_handlers(app, processed_store, bot_settings, _is_admin)
+    @app.on_message(filters.private & filters.command(["dl"]))
+    async def dl_handler(client, message):
+        page = 1
+        command = message.command or []
+        if len(command) > 1:
+            if not command[1].isdigit():
+                return await message.reply_text("Usage: /dl or /dl 2")
+            page = max(1, int(command[1]))
+
+        status = await message.reply_text("🔎 Loading studio directory…")
+        try:
+            studios = await asyncio.to_thread(fetch_studios)
+            _, page, total_pages = page_studios(studios, page, PAGE_SIZE)
+            await status.edit_text(
+                _format_dl_page(studios, page, total_pages),
+                reply_markup=_dl_keyboard(page, total_pages),
+                parse_mode="html",
+                disable_web_page_preview=True,
+            )
+        except Exception as exc:
+            await status.edit_text(
+                f"❌ Could not load the studio directory.\\n{type(exc).__name__}: {exc}"
+            )
+
+    @app.on_callback_query(filters.regex(r"^dl\\|noop$"))
+    async def dl_noop_handler(client, query):
+        await query.answer("Choose Previous or Next to change pages.")
+
+    @app.on_callback_query(filters.regex(r"^dl\\|[0-9]+$"))
+    async def dl_page_handler(client, query):
+        page = int(query.data.split("|", 1)[1])
+        await query.answer("Loading page…")
+        try:
+            studios = await asyncio.to_thread(fetch_studios)
+            _, page, total_pages = page_studios(studios, page, PAGE_SIZE)
+            await query.message.edit_text(
+                _format_dl_page(studios, page, total_pages),
+                reply_markup=_dl_keyboard(page, total_pages),
+                parse_mode="html",
+                disable_web_page_preview=True,
+            )
+        except Exception as exc:
+            await query.message.edit_text(
+                f"❌ Could not load the studio directory.\\n{type(exc).__name__}: {exc}"
+            )
+
     @app.on_message(filters.private & filters.command(["setchannel", "unsetchannel", "channel"]))
     async def channel_settings_handler(client, message):
         if not _is_admin(message.from_user.id):
@@ -596,7 +671,7 @@ def register_handlers(app: Client):
     @app.on_message(filters.private & filters.text)
     async def link_handler(client, message):
         text = message.text.strip()
-        if text.split(maxsplit=1)[0].lower() in {"/setchannel", "/unsetchannel", "/channel"}:
+        if text.split(maxsplit=1)[0].lower() in {"/dl", "/setchannel", "/unsetchannel", "/channel"}:
             return
         state = pending.get(message.from_user.id)
 
