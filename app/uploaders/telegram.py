@@ -44,24 +44,19 @@ class TelegramUploader:
 
         requested_concurrency = int(
             max_concurrent_transmissions
-            or os.getenv("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS", "1")
+            if max_concurrent_transmissions is not None
+            else os.getenv("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS", "4")
         )
-        if requested_concurrency < 1:
-            raise ValueError("TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS must be >= 1")
-
-        # Telegram can return "A wait of 2 seconds is required" from
-        # Upload.SaveBigFilePart when multiple parts are sent concurrently.
-        # Use one MTProto transmission at a time for reliable large-file
-        # uploads. Keep accepting the setting for backwards compatibility,
-        # but do not let a stale value such as 8 re-enable the failing path.
-        concurrency = 1
-        if requested_concurrency != concurrency:
-            logger.warning(
-                "TELEGRAM UPLOAD: requested transmission concurrency=%d; "
-                "forcing %d to avoid big-file Upload.SaveBigFilePart flood waits",
-                requested_concurrency,
-                concurrency,
+        if not 1 <= requested_concurrency <= 8:
+            raise ValueError(
+                "TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS must be between 1 and 8"
             )
+
+        # Keep transmission concurrency configurable: Telegram's own file API
+        # recommends tuning parallel part queues for throughput. Short FloodWaits
+        # are handled by Pyrogram's sleep_threshold, avoiding a failed send_video
+        # call bubbling up and causing our outer retry loop to restart the upload.
+        concurrency = requested_concurrency
 
         self.max_concurrent_transmissions = concurrency
         self._clients = []
