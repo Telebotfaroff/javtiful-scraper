@@ -65,6 +65,15 @@ Javtiful URL → Preview → Download → Full / Clip → Telegram upload
 
 Channel/studio URLs can also be sent to the bot for batch downloading.
 
+### Studio directory command
+
+Use `/dl` to fetch the current studio index from
+`database/index/indexstudio.json` on the repository's `main` branch.
+The bot displays each studio's name and URL, 10 entries per page, with
+Previous/Next buttons. You can also open a page directly with `/dl 2`.
+The index is fetched from GitHub at request time; it is not copied into the
+running bot's local files.
+
 ### Clip mode
 
 You can provide ranges such as:
