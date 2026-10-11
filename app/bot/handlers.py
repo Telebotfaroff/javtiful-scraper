@@ -55,7 +55,8 @@ async def _delete_status_later(message, delay=30):
 
 def _channel_keyboard():
     return InlineKeyboardMarkup([
-        [InlineKeyboardButton("⬇️ Download Page", callback_data="channel|download")]
+        [InlineKeyboardButton("⬇️ Download Selected Page", callback_data="channel|download")],
+        [InlineKeyboardButton("📥 Download All Videos", callback_data="channel|all")],
     ])
 
 
