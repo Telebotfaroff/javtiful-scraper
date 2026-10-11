@@ -1,5 +1,5 @@
 {
-  "total": 2,
+  "total": 3,
   "videos": {
     "ZIZG-001-REDUCING": {
       "title": "ZIZG-001 Taimanin Yukikaze",
@@ -17,6 +17,15 @@
       "duration": "02:30:15",
       "date": "2023-12-13",
       "studio": "moodyz",
+      "genres": []
+    },
+    "JUC-961-REDUCING": {
+      "title": "JUC-961 Married Woman's Office Affair Even though I decided not to shed any more tears... Yuki Natsume",
+      "url": "https://javtiful.com/video/43200/juc-961-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2023/09/28/a2e50bcbd32ba12043d32559b308c542.jpg",
+      "duration": "01:55:36",
+      "date": "2023-09-28",
+      "studio": "madonna",
       "genres": []
     }
   }

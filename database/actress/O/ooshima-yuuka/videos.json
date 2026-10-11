@@ -1,5 +1,5 @@
 {
-  "total": 113,
+  "total": 114,
   "videos": {
     "JUQ-511-REDUCING": {
       "title": "JUQ-511 The world's most luxurious commemorative production!! Madonna's 20th anniversary celebration: A moving and climaxing finale. The first ever all-exclusive bus tour with unli",
@@ -1016,6 +1016,15 @@
       "duration": "01:59:25",
       "date": "2018-10-23",
       "studio": null,
+      "genres": []
+    },
+    "ROE-570": {
+      "title": "ROE-570 When I Returned To My Hometown To Visit My Remarried Father, I Was Greeted By Four Stepmothers...",
+      "url": "https://javtiful.com/video/114294/roe-570",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/10/09/a0bce22bca894041429c27bb6f53aeb0.jpg",
+      "duration": "03:18:24",
+      "date": "2026-10-08",
+      "studio": "madonna",
       "genres": []
     }
   }

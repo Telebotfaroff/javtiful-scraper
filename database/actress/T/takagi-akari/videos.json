@@ -1,5 +1,5 @@
 {
-  "total": 4,
+  "total": 6,
   "videos": {
     "HQIS-071-REDUCING": {
       "title": "HQIS-071 Raw Milk: Two Fruits that Drive Men Crazy",
@@ -35,6 +35,24 @@
       "duration": "02:00:03",
       "date": "2020-05-21",
       "studio": null,
+      "genres": []
+    },
+    "JUY-066-REDUCING": {
+      "title": "JUY-066 She Cheated Behind Her Husband",
+      "url": "https://javtiful.com/video/107695/juy-066-reducing-mosaic",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2026/05/10/aa048171bf2237832aad1d1834696bb8.jpg",
+      "duration": "01:55:22",
+      "date": "2026-05-09",
+      "studio": "madonna",
+      "genres": []
+    },
+    "JUY-066": {
+      "title": "JUY-066 She Cheated Behind Her Husband",
+      "url": "https://javtiful.com/video/2186/juy-066",
+      "thumb": "https://javtiful.com/uploads/uploads/videos/thumbs/2019/02/16/49d46f900f86f3cb1b112ca96054cd8c.jpg",
+      "duration": "01:55:20",
+      "date": "2019-02-16",
+      "studio": "madonna",
       "genres": []
     }
   }
