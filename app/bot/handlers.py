@@ -430,7 +430,7 @@ def _format_dl_page(studios, page, total_pages):
     for index, studio in enumerate(studios[start:start + PAGE_SIZE], start=start + 1):
         name = escape(studio["name"])
         url = escape(studio["url"], quote=True)
-        lines.extend([f"<b>{index}. {name}</b>", f"<code>{url}</code>", ""])
+        lines.extend([f"<b>{index}. {name}</b>", f"URL: <a href=\"{url}\">{url}</a>", ""])
     lines.append("Use <code>/dl 2</code> to open a specific page.")
     return "\n".join(lines)
 
