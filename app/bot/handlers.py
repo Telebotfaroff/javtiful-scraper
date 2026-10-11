@@ -221,7 +221,7 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 continue
             if kind == "error":
                 failed += 1
-                progress.mark_failed(upload_id=f"video-{index}")
+                progress.mark_failed()
                 progress.set_queue(queue.qsize())
                 queue.task_done()
                 continue
@@ -254,7 +254,7 @@ async def _run_channel_parallel(message, state, page_number, items, status):
                 code = item.get("code") or _video_code(item.get("post_url"), title)
                 processed_store.release(item.get("post_url"), code)
                 failed += 1
-                progress.mark_failed()
+                progress.mark_failed(upload_id=upload_id)
                 progress.set_queue(queue.qsize())
                 await status.edit_text(
                     f"⚡ **Parallel mode**\n"
