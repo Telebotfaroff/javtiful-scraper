@@ -128,17 +128,27 @@ class ProcessedStore:
 
     def is_completed(self, url, code=None):
         key = self.key_for(url, code)
+        canonical_url = self.canonical_url(url)
         with self._lock:
             self._ensure_loaded()
             record = self._data["uploaded"].get(key)
             if record and record.get("status") == "completed":
                 return True
-            # If the code was not supplied by the caller, also check the URL key.
+
+            # Older records may be keyed by code only. Check their canonical URL
+            # too, so a later scrape that fails to detect the code still skips it.
             url_key = self.key_for(url)
             if url_key != key:
                 record = self._data["uploaded"].get(url_key)
-                return bool(record and record.get("status") == "completed")
-            return False
+                if record and record.get("status") == "completed":
+                    return True
+
+            return any(
+                isinstance(saved, dict)
+                and saved.get("status") == "completed"
+                and saved.get("url") == canonical_url
+                for saved in self._data["uploaded"].values()
+            )
 
     def claim(self, url, code=None):
         """Prevent duplicate work inside this bot process."""
