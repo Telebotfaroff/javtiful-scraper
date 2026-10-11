@@ -164,6 +164,39 @@ class JavtifulChannelExtractor:
             return re.sub(r"[\s_]+", "-", match.group(1).upper())
         return None
 
+    @classmethod
+    def deduplicate_items(cls, items):
+        """Remove duplicate cards by normalized video code, then canonical URL."""
+        seen = set()
+        unique = []
+        duplicate_count = 0
+
+        for item in items:
+            post_url = str(item.get("post_url") or "").strip()
+            title = str(item.get("title") or "")
+            code = item.get("code") or cls._extract_code(title, post_url)
+            normalized_code = re.sub(r"[-_ ]+", "-", str(code).strip()).upper() if code else ""
+            parsed = urlparse(post_url)
+            canonical_url = urlunparse((
+                parsed.scheme.lower(),
+                parsed.netloc.lower(),
+                parsed.path.rstrip("/"),
+                "",
+                "",
+            )) if parsed.scheme and parsed.netloc else post_url.rstrip("/")
+            keys = {f"code:{normalized_code}"} if normalized_code else set()
+            if canonical_url:
+                keys.add(f"url:{canonical_url}")
+
+            if keys.intersection(seen):
+                duplicate_count += 1
+                continue
+
+            seen.update(keys)
+            unique.append(item)
+
+        return unique, duplicate_count
+
     def _parse_cards(self, html, base):
         soup = self._soup(html)
         items = []
