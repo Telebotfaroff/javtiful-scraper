@@ -81,13 +81,21 @@ Send a Javtiful channel or studio URL to the bot.
 
 The bot can:
 
-1. 🔎 Inspect the channel/studio.
-2. 📊 Show the total video count and available pages.
-3. 📄 Ask which page to process.
-4. 📥 Download videos from that page.
-5. 📤 Upload them to Telegram.
+1. 🔎 Inspect a channel.
+2. 📊 Show the detected video count and available pages.
+3. 📄 Download a selected page, or choose **📥 Download All Videos**.
+4. 🐢 Process videos sequentially or ⚡ use parallel download/upload workers.
+5. 📤 Upload videos to the configured Telegram channel, falling back to the requesting chat when appropriate.
 6. 🖼️ Include the video's thumbnail.
 7. 📝 Generate a caption containing the video code and title.
+8. ⏭️ Filter duplicate cards and previously completed video codes or canonical URLs.
+9. 🧾 Save the normalized video code, source URL, title, Telegram message IDs, destination, and upload timestamp in persistent history.
+
+### Download all videos
+
+After sending a channel URL, choose **📥 Download All Videos**, then select Sequential or Parallel. JAVDL scans each detected page and processes items not already present in completed upload history. Running the same channel again skips recorded codes/URLs and attempts newly discovered videos. The final summary reports uploaded, skipped, and failed counts.
+
+Video codes are the primary deduplication key when available. If no code can be detected, JAVDL falls back to the canonical source URL. The history backend is Neon when `DATABASE_URL` is configured; otherwise the existing GitHub-backed/local JSON store is selected according to its configuration.
 
 ### Page numbering
 
