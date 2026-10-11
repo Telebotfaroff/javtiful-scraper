@@ -601,11 +601,11 @@ def register_handlers(app: Client):
                 f"❌ Could not load the studio directory.\\n{type(exc).__name__}: {exc}"
             )
 
-    @app.on_callback_query(filters.regex(r"^dl\\|noop$"))
+    @app.on_callback_query(filters.regex(r"^dl\|noop$"))
     async def dl_noop_handler(client, query):
         await query.answer("Choose Previous or Next to change pages.")
 
-    @app.on_callback_query(filters.regex(r"^dl\\|[0-9]+$"))
+    @app.on_callback_query(filters.regex(r"^dl\|[0-9]+$"))
     async def dl_page_handler(client, query):
         page = int(query.data.split("|", 1)[1])
         await query.answer("Loading page…")
