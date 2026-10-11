@@ -377,11 +377,48 @@ async def _run_channel_page(message, state, page_number, requested_count, parall
             f"❌ **Failed:** {failed}"
         )
         await _delete_status_later(status)
+        return {
+            "uploaded": completed,
+            "failed": failed,
+            "skipped": already_completed + duplicate_in_page,
+        }
     except Exception as exc:
         await status.edit_text(
             f"❌ Channel page download failed\n\n{type(exc).__name__}: {exc}"
         )
         await _delete_status_later(status)
+        return {"uploaded": 0, "failed": 1, "skipped": 0}
+
+
+async def _run_channel_all(message, state, parallel=False):
+    """Process all detected pages and skip previously completed codes/URLs."""
+    channel_name = state.get("channel_name", "Channel")
+    total_pages = max(1, int(state.get("total_pages") or 1))
+    totals = {"uploaded": 0, "failed": 0, "skipped": 0}
+
+    for page_number in range(total_pages):
+        result = await _run_channel_page(
+            message,
+            state,
+            page_number,
+            requested_count=0,
+            parallel=parallel,
+        )
+        if result:
+            for key in totals:
+                totals[key] += int(result.get(key, 0))
+
+    summary = await message.reply_text(
+        f"🏁 **Channel download finished**\n\n"
+        f"📺 **Channel:** {channel_name}\n"
+        f"📄 **Pages scanned:** {total_pages}\n"
+        f"✅ **Uploaded:** {totals['uploaded']}\n"
+        f"⏭️ **Duplicates/already uploaded:** {totals['skipped']}\n"
+        f"❌ **Failed:** {totals['failed']}\n\n"
+        "Completed video codes and URLs are saved to upload history. "
+        "Run this again later to process new videos without re-uploading completed ones."
+    )
+    await _delete_status_later(summary, delay=120)
 
 
 def _destination_keyboard():
