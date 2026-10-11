@@ -15,6 +15,7 @@ JAVDL extracts available Javtiful video streams, downloads them, optionally clip
 - 📥 Stream downloading with retries and Referer handling
 - ✂️ Optional time-range clipping
 - 🤖 Telegram bot interface with progress updates
+- 📊 Independent per-video progress sections for parallel uploads (size, speed, ETA)
 - 📺 Channel/studio batch downloading
 - ⚡ Parallel batch downloading and Telegram uploads
 - 👥 Multiple Telegram upload clients
@@ -115,6 +116,8 @@ Video codes are the primary deduplication key when available. If no code can be 
 ### Parallel mode
 
 Parallel batch processing can download the next video while Telegram uploads are running.
+
+Each active Telegram upload now has its own notification section with its own video title, progress bar, uploaded/total size, speed, and ETA. Finishing or failing one upload clears only that video's section, so two files are never displayed as one combined size.
 
 The upload worker count and download buffer can be configured through environment variables.
 
