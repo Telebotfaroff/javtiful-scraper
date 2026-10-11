@@ -229,16 +229,16 @@ class ParallelTelegramProgress:
         if total > 0:
             percent = min(100.0, max(0.0, current / total * 100))
             return (
-                f"{icon} **{label}**\\n"
-                f"Title - {title}\\n"
-                f"{self._bar(percent)} {percent:.1f}%\\n"
-                f"📦 {self._size(current)} / {self._size(total)}\\n"
+                f"{icon} **{label}**\n"
+                f"Title - {title}\n"
+                f"{self._bar(percent)} {percent:.1f}%\n"
+                f"📦 {self._size(current)} / {self._size(total)}\n"
                 f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
             )
         return (
-            f"{icon} **{label}**\\n"
-            f"Title - {title}\\n"
-            f"📦 {self._size(current)}\\n"
+            f"{icon} **{label}**\n"
+            f"Title - {title}\n"
+            f"📦 {self._size(current)}\n"
             f"⚡ {self._speed(speed)}"
         )
 
@@ -251,15 +251,15 @@ class ParallelTelegramProgress:
                     self._section("⬆️", "Uploading", title, state)
                 )
         else:
-            sections.append("⬆️ **Uploading**\\nWaiting for an active upload…")
+            sections.append("⬆️ **Uploading**\nWaiting for an active upload…")
 
         sections.append(
-            f"Download complete - {self.download_complete}\\n"
-            f"Upload complete - {self.upload_complete}\\n"
-            f"Failed - {self.failed}\\n"
+            f"Download complete - {self.download_complete}\n"
+            f"Upload complete - {self.upload_complete}\n"
+            f"Failed - {self.failed}\n"
             f"Queue - {self.queue}"
         )
-        return "\\n\\n".join(sections)
+        return "\n\n".join(sections)
 
     def _schedule_render(self):
         if self._closed:
