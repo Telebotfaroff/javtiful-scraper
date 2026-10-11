@@ -306,23 +306,8 @@ async def _run_channel_page(message, state, page_number, requested_count, parall
             await _delete_status_later(status)
             return {"uploaded": 0, "failed": 0, "skipped": 0}
 
-        # Deduplicate repeated cards within this page before checking saved history.
-        seen_keys = set()
-        page_unique = []
-        duplicate_in_page = 0
-        for item in items:
-            code = item.get("code") or _video_code(item.get("post_url"), item.get("title"))
-            normalized_code = processed_store.normalize_code(code) if code else ""
-            canonical_url = processed_store.canonical_url(item.get("post_url"))
-            keys = {f"code:{normalized_code}"} if normalized_code else set()
-            if canonical_url:
-                keys.add(f"url:{canonical_url}")
-            if keys.intersection(seen_keys):
-                duplicate_in_page += 1
-                continue
-            seen_keys.update(keys)
-            page_unique.append(item)
-        items = page_unique
+        # Filter repeated cards by normalized video code and canonical URL.
+        items, duplicate_in_page = channel_extractor.deduplicate_items(items)
 
         already_completed = 0
         remaining = []
