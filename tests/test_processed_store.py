@@ -35,3 +35,13 @@ def test_recent_completed_is_bounded_and_sanitized(tmp_path, monkeypatch):
     assert recent[0]["code"] == "CODE-1"
     assert "url" not in recent[0]
     assert "telegram_message_ids" not in recent[0]
+
+
+def test_completed_upload_is_found_by_url_when_code_is_unavailable(tmp_path, monkeypatch):
+    store = make_store(tmp_path, monkeypatch)
+    url = "https://example.test/video/123?tracking=first"
+    store.mark_completed(url, "ABW-123", "Sample title")
+
+    assert store.is_completed("https://EXAMPLE.test/video/123#player")
+    assert store.is_completed("https://example.test/video/123?tracking=second", None)
+
