@@ -153,11 +153,11 @@ JAVDL supports a Telegram upload-client pool.
 ### Current Colab defaults
 
     TELEGRAM_UPLOAD_CLIENTS=2
-    TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS=8
+    TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS=1
 
 Two upload clients allow multiple batch uploads to progress independently.
 
-TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS controls Pyrogram's transmission concurrency inside an upload. It is **not** the number of videos uploaded simultaneously.
+TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS is currently forced to **1** inside each client. This avoids Telegram's short `Upload.SaveBigFilePart` FloodWait errors (for example, “a wait of 2 seconds is required”) during large-file uploads. A stale value such as `8` is logged and safely capped. This setting is **not** the number of videos uploaded simultaneously.
 
 For batch uploads, the application also supports multiple upload workers.
 
