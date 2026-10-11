@@ -33,5 +33,8 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt pytest
 
+      - name: Compile application modules
+        run: python -m compileall -q app main.py
+
       - name: Run full test suite
         run: python -m pytest -q
