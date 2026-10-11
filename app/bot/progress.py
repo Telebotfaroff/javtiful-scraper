@@ -117,15 +117,15 @@ class TelegramProgress:
 
 
 class ParallelTelegramProgress:
-    """Render download and upload progress together for batch mode."""
+    """Render download progress and independent per-video upload progress."""
 
     def __init__(self, message, min_interval=5.0):
         self.message = message
         self.min_interval = min_interval
-        self.last = 0.0
         self.download = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
+        # Keyed by a unique upload ID for each video, not by reusable worker ID.
         self.uploads = {}
-        self.upload = {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0}
+        self.upload_titles = {}
         self.download_title = "Video"
         self.upload_title = "Video"
         self.download_complete = 0
@@ -144,20 +144,34 @@ class ParallelTelegramProgress:
     def set_download_title(self, title):
         self.download_title = title or "Video"
 
-    def set_upload_title(self, title):
-        self.upload_title = title or "Video"
+    def set_upload_title(self, title, upload_id=None):
+        title = title or "Video"
+        self.upload_title = title
+        if upload_id is not None:
+            self.upload_titles[str(upload_id)] = title
 
     def set_queue(self, count):
         self.queue = max(0, int(count or 0))
+        self._schedule_render()
 
     def mark_download_complete(self):
         self.download_complete += 1
+        self._schedule_render()
 
-    def mark_upload_complete(self):
+    def mark_upload_complete(self, upload_id=None):
         self.upload_complete += 1
+        self.clear_upload(upload_id)
 
-    def mark_failed(self):
+    def mark_failed(self, upload_id=None):
         self.failed += 1
+        self.clear_upload(upload_id)
+
+    def clear_upload(self, upload_id=None):
+        if upload_id is not None:
+            key = str(upload_id)
+            self.uploads.pop(key, None)
+            self.upload_titles.pop(key, None)
+        self._schedule_render()
 
     @staticmethod
     def _bar(percent, width=14):
@@ -208,57 +222,51 @@ class ParallelTelegramProgress:
         state["last"] = current
         state["time"] = now
 
-    def _render(self):
-        def section(icon, label, title, state):
-            current = state["current"]
-            total = state["total"]
-            speed = state["speed"]
-            if total > 0:
-                percent = min(100.0, max(0.0, current / total * 100))
-                return (
-                    f"{icon} **{label}**\n"
-                    f"Title - {title}\n"
-                    f"{self._bar(percent)} {percent:.1f}%\n"
-                    f"📦 {self._size(current)} / {self._size(total)}\n"
-                    f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
-                )
+    def _section(self, icon, label, title, state):
+        current = state["current"]
+        total = state["total"]
+        speed = state["speed"]
+        if total > 0:
+            percent = min(100.0, max(0.0, current / total * 100))
             return (
-                f"{icon} **{label}**\n"
-                f"Title - {title}\n"
-                f"📦 {self._size(current)}\n"
-                f"⚡ {self._speed(speed)}"
+                f"{icon} **{label}**\\n"
+                f"Title - {title}\\n"
+                f"{self._bar(percent)} {percent:.1f}%\\n"
+                f"📦 {self._size(current)} / {self._size(total)}\\n"
+                f"⚡ {self._speed(speed)}  •  ⏳ {self._eta(current, total, speed)}"
             )
+        return (
+            f"{icon} **{label}**\\n"
+            f"Title - {title}\\n"
+            f"📦 {self._size(current)}\\n"
+            f"⚡ {self._speed(speed)}"
+        )
 
+    def _render(self):
+        sections = [self._section("⬇️", "Downloading", self.download_title, self.download)]
         if self.uploads:
-            total_current = sum(v["current"] for v in self.uploads.values())
-            total_total = sum(v["total"] for v in self.uploads.values())
-            total_speed = sum(v["speed"] for v in self.uploads.values())
-            upload_state = {
-                "current": total_current,
-                "total": total_total,
-                "speed": total_speed,
-            }
-            upload_text = section(
-                "⬆️",
-                f"Uploading ({len(self.uploads)} workers)",
-                self.upload_title,
-                upload_state,
-            )
+            for upload_id, state in self.uploads.items():
+                title = self.upload_titles.get(upload_id, self.upload_title)
+                sections.append(
+                    self._section("⬆️", "Uploading", title, state)
+                )
         else:
-            upload_text = section("⬆️", "Uploading", self.upload_title, self.upload)
+            sections.append("⬆️ **Uploading**\\nWaiting for an active upload…")
 
-        counts = (
-            f"Download complete - {self.download_complete}\n"
-            f"Upload complete - {self.upload_complete}\n"
+        sections.append(
+            f"Download complete - {self.download_complete}\\n"
+            f"Upload complete - {self.upload_complete}\\n"
+            f"Failed - {self.failed}\\n"
             f"Queue - {self.queue}"
         )
-        return (
-            section("⬇️", "Downloading", self.download_title, self.download)
-            + "\n\n"
-            + upload_text
-            + "\n\n"
-            + counts
-        )
+        return "\\n\\n".join(sections)
+
+    def _schedule_render(self):
+        if self._closed:
+            return
+        if self._worker is None or self._worker.done():
+            self._worker = asyncio.create_task(self._send_loop())
+        self._pending = True
 
     async def _send_loop(self):
         while not self._closed:
@@ -274,17 +282,22 @@ class ParallelTelegramProgress:
                 continue
 
     async def update(self, current, total, stage):
+        try:
+            current = float(current or 0)
+            total = float(total or 0)
+        except (TypeError, ValueError):
+            return
+
         stage_text = str(stage)
         if stage_text.startswith("telegram_upload"):
-            worker = "default"
+            upload_id = "default"
             if ":" in stage_text:
-                worker = stage_text.split(":", 1)[1] or "default"
+                upload_id = stage_text.split(":", 1)[1] or "default"
             state = self.uploads.setdefault(
-                worker,
+                upload_id,
                 {"current": 0.0, "total": 0.0, "time": time.monotonic(), "last": 0.0, "speed": 0.0},
             )
             self._update_state(state, current, total)
-            self.upload = state
         elif stage not in {"extract", "clip"}:
             self._update_state(self.download, current, total)
         else:
