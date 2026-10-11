@@ -153,11 +153,11 @@ JAVDL supports a Telegram upload-client pool.
 ### Current Colab defaults
 
     TELEGRAM_UPLOAD_CLIENTS=2
-    TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS=1
+    TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS=4
 
 Two upload clients allow multiple batch uploads to progress independently.
 
-TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS is currently forced to **1** inside each client. This avoids Telegram's short `Upload.SaveBigFilePart` FloodWait errors (for example, “a wait of 2 seconds is required”) during large-file uploads. A stale value such as `8` is logged and safely capped. This setting is **not** the number of videos uploaded simultaneously.
+TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS is configurable from **1 to 8** per client; JAVDL defaults to **4** as a starting point for Colab. Pyrogram automatically waits and retries short FloodWaits (up to the configured 60-second threshold) inside the request, which helps avoid restarting a whole upload after a two-second `Upload.SaveBigFilePart` wait. If waits continue, compare settings `2`, `4`, and `8` with the same file and choose the fastest stable value. Higher concurrency is not guaranteed to be faster. This setting is **not** the number of videos uploaded simultaneously.
 
 For batch uploads, the application also supports multiple upload workers.
 
@@ -266,7 +266,7 @@ Notebook source: [colab/javdl.ipynb](https://github.com/Telebotfaroff/javtiful-s
     TELEGRAM_SESSION=javdl_colab
     TELEGRAM_UPLOAD_SESSION=javdl_uploads
     TELEGRAM_UPLOAD_CLIENTS=2
-    TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS=8
+    TELEGRAM_MAX_CONCURRENT_TRANSMISSIONS=4
 
 ### Batch processing
 
