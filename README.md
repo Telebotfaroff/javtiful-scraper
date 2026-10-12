@@ -143,16 +143,17 @@ Open **Actions → Export Javtiful Video Codes → Run workflow** and provide a 
 - `https://javtiful.com/channel/CHANNEL-SLUG`
 - `https://javtiful.com/category/CATEGORY-SLUG`
 
-The workflow visits listing pages until it reaches an empty or repeated page, extracts unique video codes, and commits JSON files into `Javcode/<url-slug>/`. Each JSON file contains **only an array of code strings**—no titles or other metadata—and contains at most 100 codes.
+The workflow visits listing pages until it reaches an empty or repeated page, extracts unique video codes, and commits plain-text files into `Javcode/<url-slug>/`. Each `.txt` file contains **one clean video code per line**—no JSON formatting, titles, or other metadata—and contains at most 100 codes.
 
 Example:
 
 ```
 Javcode/
 └── ACTRESS-SLUG/
-    ├── codes-001.json
-    ├── codes-002.json
-    └── codes-003.json
+    ├── codes-001.txt
+    ├── codes-002.txt
+    ├── codes-003.txt
+    └── ...
 ```
 
 Run the exporter locally:
@@ -161,7 +162,7 @@ Run the exporter locally:
 python export_javcodes.py --url "https://javtiful.com/actress/ACTRESS-SLUG"
 ```
 
-The output folder is derived from the URL slug. The exporter deduplicates codes and removes stale numbered JSON chunks when refreshing the same slug.
+The output folder is derived from the URL slug. The exporter deduplicates codes and removes stale numbered `.json` and `.txt` chunks when refreshing the same slug.
 
 ## Notes
 
