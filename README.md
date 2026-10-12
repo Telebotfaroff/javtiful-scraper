@@ -162,7 +162,7 @@ Run the exporter locally:
 python export_javcodes.py --url "https://javtiful.com/actress/ACTRESS-SLUG"
 ```
 
-The output folder is derived from the URL slug. The exporter deduplicates codes and removes stale numbered `.json` and `.txt` chunks when refreshing the same slug.
+The output folder is derived from the URL slug. The exporter normalizes codes, removes duplicates within the scraped listing, and skips codes already stored in other `Javcode/` folders (including legacy JSON chunks). It removes stale numbered `.json` and `.txt` chunks when refreshing the same slug.
 
 ## Notes
 
