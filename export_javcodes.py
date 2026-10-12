@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Export video codes from a Javtiful actress, channel, or category listing.
 
-Output files contain JSON arrays of code strings only, with at most 100 codes
-per file. Titles and other metadata are intentionally omitted.
+Output files are plain text: one clean video code per line, with at most 100
+codes per file. Titles and other metadata are intentionally omitted.
 """
 
 import argparse
@@ -127,7 +127,7 @@ def main():
     parser = argparse.ArgumentParser(description="Export video codes from a Javtiful listing URL.")
     parser.add_argument("--url", required=True, help="Actress, channel, or category URL")
     parser.add_argument("--output-root", default="Javcode", help="Output root folder (default: Javcode)")
-    parser.add_argument("--chunk-size", type=int, default=100, help="Codes per JSON file (maximum 100)")
+    parser.add_argument("--chunk-size", type=int, default=100, help="Codes per TXT file (maximum 100)")
     parser.add_argument("--delay", type=float, default=0.5, help="Delay between page requests in seconds")
     parser.add_argument("--timeout", type=int, default=30, help="HTTP timeout in seconds")
     parser.add_argument("--retries", type=int, default=2, help="HTTP retries")
