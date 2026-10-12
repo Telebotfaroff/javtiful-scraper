@@ -31,11 +31,62 @@ def url_slug(url):
     return slug
 
 
+def normalize_code(value):
+    if not isinstance(value, str):
+        return None
+    code = re.sub(r"\\s+", "-", value.strip().upper())
+    if re.fullmatch(r"[A-Z0-9]{2,8}-[A-Z0-9]{2,8}(?:-[A-Z0-9]{1,8})?", code):
+        return code
+    return None
+
+
+def load_existing_codes(output_root, exclude_dir):
+    """Read codes from other export folders to prevent cross-folder duplicates."""
+    existing = set()
+    excluded = os.path.abspath(exclude_dir)
+
+    if not os.path.isdir(output_root):
+        return existing
+
+    for root, _, filenames in os.walk(output_root):
+        if os.path.abspath(root) == excluded:
+            continue
+        for filename in filenames:
+            if not re.fullmatch(r"codes-\\d{3,}\\.(?:txt|json)", filename):
+                continue
+            path = os.path.join(root, filename)
+            try:
+                with open(path, "r", encoding="utf-8") as handle:
+                    content = handle.read()
+                if filename.endswith(".json"):
+                    try:
+                        values = json.loads(content)
+                        if isinstance(values, list):
+                            for value in values:
+                                code = normalize_code(value)
+                                if code:
+                                    existing.add(code)
+                            continue
+                    except json.JSONDecodeError:
+                        pass
+                for line in content.splitlines():
+                    code = normalize_code(line)
+                    if code:
+                        existing.add(code)
+            except (OSError, UnicodeError) as exc:
+                print(f"WARNING: Could not read existing code file {path}: {exc}", flush=True)
+
+    return existing
+
+
 def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retries=2, max_pages=10000):
     provider = JavtifulProvider(timeout=timeout, retries=retries)
     slug = url_slug(url)
+    output_dir = os.path.join(output_root, slug)
+    seen_codes = load_existing_codes(output_root, output_dir)
     codes = []
-    seen_codes = set()
+    valid_codes_found = 0
+    duplicates_skipped = 0
     previous_page_signature = None
     pages_scraped = 0
 
@@ -84,12 +135,19 @@ def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retrie
         else:
             raise RuntimeError(f"Reached safety limit of {max_pages} pages.")
 
-        if not codes:
+        if valid_codes_found == 0:
             raise RuntimeError(
-                "No video codes were extracted. Check the URL and the page's listing structure."
+                "No valid video codes were extracted. Check the URL and the page's listing structure."
             )
 
-        output_dir = os.path.join(output_root, slug)
+        if not codes:
+            print(
+                f"All {duplicates_skipped} valid codes already exist in other Javcode folders; "
+                "nothing new to save.",
+                flush=True,
+            )
+            return
+
         os.makedirs(output_dir, exist_ok=True)
 
         # Remove old numbered chunks so a shorter refresh cannot leave stale codes.
@@ -110,7 +168,8 @@ def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retrie
                     "url": url,
                     "slug": slug,
                     "pages_scraped": pages_scraped,
-                    "total_unique_codes": len(codes),
+                    "total_new_unique_codes": len(codes),
+                    "duplicates_skipped": duplicates_skipped,
                     "files_written": (len(codes) + chunk_size - 1) // chunk_size,
                     "output_dir": output_dir,
                 },
