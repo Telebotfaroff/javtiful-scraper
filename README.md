@@ -143,7 +143,7 @@ Open **Actions → Export Javtiful Video Codes → Run workflow** and provide a 
 - `https://javtiful.com/channel/CHANNEL-SLUG`
 - `https://javtiful.com/category/CATEGORY-SLUG`
 
-The workflow visits listing pages until it reaches an empty or repeated page, extracts unique video codes, and commits plain-text files into `Javcode/<url-slug>/`. Each `.txt` file contains **one clean video code per line**—no JSON formatting, titles, or other metadata—and contains at most 100 codes.
+The workflow accepts a **Page Limit** input (1–10,000; default 10,000). For example, set it to `25` to scrape at most the first 25 listing pages. The run also stops early if it reaches an empty or repeated page. It extracts unique video codes and commits plain-text files into `Javcode/<url-slug>/`. Each `.txt` file contains **one clean video code per line**—no JSON formatting, titles, or other metadata—and contains at most 100 codes.
 
 Example:
 
@@ -159,7 +159,7 @@ Javcode/
 Run the exporter locally:
 
 ```bash
-python export_javcodes.py --url "https://javtiful.com/actress/ACTRESS-SLUG"
+python export_javcodes.py --url "https://javtiful.com/actress/ACTRESS-SLUG" --max-pages 25
 ```
 
 The output folder is derived from the URL slug. The exporter normalizes codes, removes duplicates within the scraped listing, and skips codes already stored in other `Javcode/` folders (including legacy JSON chunks). It removes stale numbered `.json` and `.txt` chunks when refreshing the same slug.
