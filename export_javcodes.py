@@ -34,7 +34,7 @@ def url_slug(url):
 def normalize_code(value):
     if not isinstance(value, str):
         return None
-    code = re.sub(r"\\s+", "-", value.strip().upper())
+    code = re.sub(r"\s+", "-", value.strip().upper())
     if re.fullmatch(r"[A-Z0-9]{2,8}-[A-Z0-9]{2,8}(?:-[A-Z0-9]{1,8})?", code):
         return code
     return None
@@ -52,7 +52,7 @@ def load_existing_codes(output_root, exclude_dir):
         if os.path.abspath(root) == excluded:
             continue
         for filename in filenames:
-            if not re.fullmatch(r"codes-\\d{3,}\\.(?:txt|json)", filename):
+            if not re.fullmatch(r"codes-\d{3,}\.(?:txt|json)", filename):
                 continue
             path = os.path.join(root, filename)
             try:
@@ -112,13 +112,12 @@ def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retrie
 
             added_this_page = 0
             for item in items:
-                code = item.get("code")
-                if not isinstance(code, str):
+                code = normalize_code(item.get("code"))
+                if not code:
                     continue
-                code = re.sub(r"\s+", "-", code.strip().upper())
-                if not re.fullmatch(r"[A-Z0-9]{2,8}-[A-Z0-9]{2,8}(?:-[A-Z0-9]{1,8})?", code):
-                    continue
+                valid_codes_found += 1
                 if code in seen_codes:
+                    duplicates_skipped += 1
                     continue
                 seen_codes.add(code)
                 codes.append(code)
