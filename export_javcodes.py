@@ -94,15 +94,14 @@ def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retrie
 
         # Remove old numbered chunks so a shorter refresh cannot leave stale codes.
         for name in os.listdir(output_dir):
-            if re.fullmatch(r"codes-\d{3,}\.json", name):
+            if re.fullmatch(r"codes-\d{3,}\.(?:json|txt)", name):
                 os.remove(os.path.join(output_dir, name))
 
         for offset in range(0, len(codes), chunk_size):
             chunk_number = offset // chunk_size + 1
-            path = os.path.join(output_dir, f"codes-{chunk_number:03d}.json")
-            with open(path, "w", encoding="utf-8") as handle:
-                json.dump(codes[offset:offset + chunk_size], handle, ensure_ascii=False, indent=2)
-                handle.write("\n")
+            path = os.path.join(output_dir, f"codes-{chunk_number:03d}.txt")
+            with open(path, "w", encoding="utf-8", newline="\n") as handle:
+                handle.write("\n".join(codes[offset:offset + chunk_size]) + "\n")
             print(f"Saved {min(chunk_size, len(codes) - offset)} codes -> {path}", flush=True)
 
         print(
