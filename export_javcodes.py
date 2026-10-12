@@ -141,8 +141,8 @@ def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retrie
 
         if not codes:
             print(
-                f"All {duplicates_skipped} valid codes already exist in other Javcode folders; "
-                "nothing new to save.",
+                f"No new codes to save; skipped {duplicates_skipped} duplicate occurrences "
+                "from existing folders or repeated listing entries.",
                 flush=True,
             )
             return
