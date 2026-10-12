@@ -84,12 +84,12 @@ python javtiful_scraper.py "https://javtiful.com/actress/ACTRESS-SLUG"
 python javtiful_scraper.py "https://javtiful.com/channels"
 python javtiful_scraper.py "https://javtiful.com/channel/CHANNEL-SLUG"
 python javtiful_scraper.py "https://javtiful.com/video/12345/example-code"
+```
 
 Force a provider explicitly:
 
 ```bash
 python javtiful_scraper.py "https://javtiful.com/main" --provider javtiful
-```
 ```
 
 Save JSON:
@@ -129,26 +129,43 @@ The top-level `type` field identifies the parser used:
 - `actress_directory` — `/actresses`
 - `studio_directory` — `/channels`
 
-Listing results include:
-
-- `items`
-- `total_found`
-- `page`
-- `pagination.current_page`
-- `pagination.total_pages`
-- `pagination.has_next`
-- `pagination.has_prev`
+Listing results include `items`, `total_found`, `page`, and pagination information.
 
 ## GitHub Actions
 
-Open **Actions → Test scraper → Run workflow** and enter a Javtiful URL.
+Open **Actions → Test scraper → Run workflow** and enter a Javtiful URL. The workflow accepts optional enrichment controls and validates the result according to its detected page type. The generated JSON is uploaded as the `scraper-result` artifact.
 
-The workflow accepts optional enrichment controls and validates the result according to its detected page type. The generated JSON is uploaded as the `scraper-result` artifact.
+### Export video codes to Javcode
+
+Open **Actions → Export Javtiful Video Codes → Run workflow** and provide a listing URL such as:
+
+- `https://javtiful.com/actress/ACTRESS-SLUG`
+- `https://javtiful.com/channel/CHANNEL-SLUG`
+- `https://javtiful.com/category/CATEGORY-SLUG`
+
+The workflow visits listing pages until it reaches an empty or repeated page, extracts unique video codes, and commits JSON files into `Javcode/<url-slug>/`. Each JSON file contains **only an array of code strings**—no titles or other metadata—and contains at most 100 codes.
+
+Example:
+
+```
+Javcode/
+└── ACTRESS-SLUG/
+    ├── codes-001.json
+    ├── codes-002.json
+    └── codes-003.json
+```
+
+Run the exporter locally:
+
+```bash
+python export_javcodes.py --url "https://javtiful.com/actress/ACTRESS-SLUG"
+```
+
+The output folder is derived from the URL slug. The exporter deduplicates codes and removes stale numbered JSON chunks when refreshing the same slug.
 
 ## Notes
 
 The scraper extracts metadata present in the fetched HTML. It does not persist temporary/IP-locked player URLs. If a future provider needs JavaScript for metadata, that provider can implement its own extraction layer.
-
 
 ## Full crawler
 
@@ -158,98 +175,59 @@ The scraper extracts metadata present in the fetched HTML. It does not persist t
 2. Crawl the `/actresses` directory and every actress video page
 3. Crawl the `/channels` directory and every studio video page
 4. Open each discovered video page for complete metadata
-5. Deduplicate using **video ID → normalized code → canonical URL**
+5. Deduplicate using video ID, normalized code, and canonical URL
 6. Write the compact grouped JSON database
 7. Rebuild database indexes and run statistics
 
 Run locally in interactive single-URL mode:
 
-    python crawler.py
+```bash
+python crawler.py
+```
 
-The crawler will ask:
+The crawler asks for an actress/studio/category/listing URL, then a start page and optional end page. Non-interactive mode is also supported:
 
-    Enter actress/studio/category/listing URL:
-    Start page [1]:
-    End page [auto]:
-
-Examples:
-
-    https://javtiful.com/actress/ACTRESS-SLUG
-    https://javtiful.com/channel/CHANNEL-SLUG
-    https://javtiful.com/category/CATEGORY-SLUG
-
-If the real last page is 31, you can enter:
-
-    Start page [1]: 1
-    End page [auto]: 31
-
-Or let the crawler detect the end automatically by stopping when a page
-contains only entries/posts already seen. This protects against sites that
-return the last valid page again for out-of-range page numbers.
-
-Non-interactive mode is also supported:
-
-    python crawler.py --url "https://javtiful.com/actress/ACTRESS-SLUG" --start-page 1 --end-page 31 --delay 1
+```bash
+python crawler.py --url "https://javtiful.com/actress/ACTRESS-SLUG" --start-page 1 --end-page 31 --delay 1
+```
 
 Legacy full-scope mode remains available:
 
-    python crawler.py --scope all --delay 1
-    python crawler.py --scope main
-    python crawler.py --scope actresses
-    python crawler.py --scope studios
+```bash
+python crawler.py --scope all --delay 1
+python crawler.py --scope main
+python crawler.py --scope actresses
+python crawler.py --scope studios
+```
 
 ### Database layout
 
-    database/
-    ├── actress/<A-Z>/<slug>/videos.json
-    ├── studio/<slug>/videos.json
-    ├── code/<CODE>/videos.json
-    └── index/
-        ├── indexactress.json
-        ├── indexstudio.json
-        ├── indexcode.json
-        └── database.json
+```
+database/
+├── actress/<A-Z>/<slug>/videos.json
+├── studio/<slug>/videos.json
+├── code/<CODE>/videos.json
+└── index/
+    ├── indexactress.json
+    ├── indexstudio.json
+    ├── indexcode.json
+    └── database.json
+```
 
 Video records contain persistent metadata only. Temporary/IP-locked video-source URLs are never stored.
 
 ### GitHub Actions crawler
 
-All crawler workflows are **manual-only** (`workflow_dispatch`).
+All crawler workflows are manual-only (`workflow_dispatch`). Available workflows:
 
-Available workflows:
-
-- **Actress Index** — refreshes the actress directory and stores `total_pages`, status, and crawl progress.
-- **Crawl Actress** — processes one actress by slug, or the next pending/failed/in-progress actress when no slug is supplied. It uses `total_pages` as the hard page boundary and checkpoints after each completed page.
+- **Actress Index** — refreshes the actress directory and crawl progress.
+- **Crawl Actress** — processes one actress or the next pending/failed actress, with checkpoints.
 - **Crawl Main** — crawls `/main`.
 - **Crawl Studios** — crawls the studio/channel directory and listings.
-- **Crawl Categories** — crawls the category directory and listings.
+- **Crawl Categories** — crawls category listings.
 - **Test scraper** — manual scraper validation.
+- **Export Javtiful Video Codes** — exports unique codes from a supplied actress, channel, or category URL.
 
-The actress crawler uses a dedicated concurrency group so two actress-crawler runs do not execute simultaneously.
+The workflows commit and push their respective output files automatically. The actress queue is stored in `database/index/indexactress.json`.
 
-The workflows commit and push changed `database/` files automatically. The actress queue is stored in:
-
-    database/index/indexactress.json
-
-Each actress record tracks:
-
-    status
-    total_pages
-    last_crawled_page
-    videos_crawled
-    last_crawled_at
-
-#### Resume and checkpointing
-
-The GitHub Actions crawler supports resumable runs:
-
-- Enter a **Specific URL** to crawl one actress, studio/channel, category, or listing.
-- Enable **Resume** to continue from `database/crawler_state.json`.
-- A checkpoint is saved after each successfully completed listing page.
-- Failed video-detail requests are retried before being recorded as errors.
-- Progress is printed after every completed page.
-- The final workflow step uses `always()` and commits both database and checkpoint changes, so a failed run can be continued by running the workflow again.
-
-For a fresh crawl, disable **Resume** or remove the saved checkpoint.
-
-For the first test, use a small `max_pages` value. A full `all` crawl can make a large number of detail-page requests.
+The GitHub Actions crawler supports resumable runs through `database/crawler_state.json`. A checkpoint is saved after each successfully completed listing page; failed video-detail requests are retried before being recorded as errors. For a fresh crawl, disable Resume or remove the saved checkpoint. For an initial test, use a small `max_pages` value because a full crawl can make many detail-page requests.
