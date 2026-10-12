@@ -80,7 +80,7 @@ jobs:
           git commit -m "Export video codes from Javtiful listing"
           git push
 
-      - name: Upload exported JSON as artifact
+      - name: Upload exported TXT files as artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
