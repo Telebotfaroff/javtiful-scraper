@@ -7,6 +7,11 @@ on:
         description: "Javtiful actress, channel, or category URL"
         required: true
         type: string
+      page_limit:
+        description: "Maximum listing pages to scrape (1-10000)"
+        required: false
+        default: "10000"
+        type: string
       delay:
         description: "Delay between listing-page requests (seconds)"
         required: false
@@ -53,9 +58,19 @@ jobs:
       - name: Validate Python files
         run: python -m py_compile export_javcodes.py providers/*.py
 
+      - name: Validate page limit
+        env:
+          PAGE_LIMIT: ${{ inputs.page_limit }}
+        run: |
+          if ! [[ "$PAGE_LIMIT" =~ ^[0-9]+$ ]] || (( PAGE_LIMIT < 1 || PAGE_LIMIT > 10000 )); then
+            echo "Page limit must be a whole number between 1 and 10000."
+            exit 1
+          fi
+
       - name: Export video codes
         env:
           JAVTIFUL_URL: ${{ inputs.javtiful_url }}
+          PAGE_LIMIT: ${{ inputs.page_limit }}
           PAGE_DELAY: ${{ inputs.delay }}
           HTTP_TIMEOUT: ${{ inputs.timeout }}
           HTTP_RETRIES: ${{ inputs.retries }}
@@ -64,6 +79,7 @@ jobs:
             --url "$JAVTIFUL_URL" \
             --output-root Javcode \
             --chunk-size 100 \
+            --max-pages "$PAGE_LIMIT" \
             --delay "$PAGE_DELAY" \
             --timeout "$HTTP_TIMEOUT" \
             --retries "$HTTP_RETRIES"
