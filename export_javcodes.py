@@ -132,7 +132,11 @@ def export_codes(url, output_root, chunk_size=100, delay=0.5, timeout=30, retrie
             if delay > 0:
                 time.sleep(delay)
         else:
-            raise RuntimeError(f"Reached safety limit of {max_pages} pages.")
+            # Reaching the user-selected page limit is an intentional successful stop.
+            print(
+                f"Reached page limit of {max_pages}; saving collected codes.",
+                flush=True,
+            )
 
         if valid_codes_found == 0:
             raise RuntimeError(
@@ -188,7 +192,7 @@ def main():
     parser.add_argument("--delay", type=float, default=0.5, help="Delay between page requests in seconds")
     parser.add_argument("--timeout", type=int, default=30, help="HTTP timeout in seconds")
     parser.add_argument("--retries", type=int, default=2, help="HTTP retries")
-    parser.add_argument("--max-pages", type=int, default=10000, help="Safety limit for pagination")
+    parser.add_argument("--max-pages", type=int, default=10000, help="Maximum number of listing pages to scrape")
     args = parser.parse_args()
 
     parsed = urlparse(args.url)
