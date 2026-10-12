@@ -97,12 +97,32 @@ jobs:
         if: ${{ success() && inputs.chain }}
         env:
           GH_TOKEN: ${{ github.token }}
+          DELAY: ${{ inputs.delay }}
+          TIMEOUT: ${{ inputs.timeout }}
+          RETRIES: ${{ inputs.retries }}
         run: |
-          echo "Starting next actress crawl..."
-          gh workflow run crawl-actress.yml \
-            --ref main \
-            -f actress="" \
-            -f delay="${{ inputs.delay }}" \
-            -f timeout="${{ inputs.timeout }}" \
-            -f retries="${{ inputs.retries }}" \
-            -f chain="true"
+          # GitHub's workflow-dispatch API can temporarily return 5xx errors.
+          # Retry dispatch rather than ending the actress chain after one transient failure.
+          for attempt in 1 2 3 4; do
+            echo "Dispatching next actress crawl (attempt $attempt/4)..."
+            if gh workflow run crawl-actress.yml \
+              --repo "$GITHUB_REPOSITORY" \
+              --ref main \
+              -f actress="" \
+              -f delay="$DELAY" \
+              -f timeout="$TIMEOUT" \
+              -f retries="$RETRIES" \
+              -f chain="true"; then
+              echo "Next actress crawl queued successfully."
+              exit 0
+            fi
+
+            if [ "$attempt" -lt 4 ]; then
+              sleep_seconds=$((attempt * 15))
+              echo "Dispatch failed; retrying in ${sleep_seconds}s."
+              sleep "$sleep_seconds"
+            fi
+          done
+
+          echo "::error::Could not queue the next actress crawl after 4 attempts."
+          exit 1
